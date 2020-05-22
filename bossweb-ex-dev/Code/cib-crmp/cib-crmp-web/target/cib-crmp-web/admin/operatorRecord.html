@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="referrer" content="no-referrer">
+<title>操作日志查询</title>
+<meta charset="utf-8">
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style>
+body {
+	padding: 0px 20px 10px 10px;
+}
+table tr {
+    height: 30px;
+}
+</style>
+</head>
+<body ng-app="operRecord" ng-controller="operRecordCtrl" ng-init="url='../rest/loadOperatorRecordByParam'" ng-cloak>
+<div style="display: inline-block; width: 100%; text-align: right;">
+	单位名称：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<div class="form-group" style="min-width:160px;">
+			<div align="left" ng-dropdown-multiselect="" id="org" options="orgs" ng-model="data.unitName" selected-model="selectedOrg" extra-settings="orgsSettings" translation-texts="orgTexts"></div>
+		</div>
+	</div>
+	notes登录名：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<input type="text" class="input-text" ng-model="data.notesId">
+	</div>
+	同步状态：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<select class="input-text" style="cursor: pointer;" ng-model="data.logStatusType">
+			<option value="" selected="selected">全部</option>
+			<option ng-repeat="snycTypeObj in syncStatusTypes" value="{{snycTypeObj.entryId}}">{{snycTypeObj.entryName}}</option>
+		</select>
+	</div>
+	查询月份：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<input type="text" onfocus="WdatePicker({dateFmt:'yyyyMM', maxDate:'\'3000-01-01\'}'})" id="beginDate" class="input-text Wdate" style="cursor: pointer;" ng-model="beginDate" onChange=""> 
+		<!-- -
+		<input type="text" onfocus="WdatePicker({dateFmt:'yyyyMM', minDate:'#F{$dp.$D(\'beginDate\')}',maxDate:'3000-01-01'})" id="endDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange=""> -->
+	</div>
+	<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe709;</i>&nbsp;查询</button></span>
+	<span>&nbsp;<button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe68f;</i>&nbsp;重置</button></span>
+</div>
+<div style="height: 335px;" class="mt-10">
+<table style="width: 100%;" class="table-border table-condensed table-hover">
+<thead>
+	<tr>
+		<th>用户名</th>
+		<th>notes登录名</th>
+		<!-- <th>单位名称</th> -->
+		<th>归属月份</th>
+		<th>原专线电话</th>
+		<th>现专线电话</th>
+		<th>状态</th>
+		<th>创建时间</th>
+		<th>修改时间</th>
+	</tr>
+</thead>
+<tr ng-repeat="o in list">
+	<td>{{o.operatorId}}</td>
+	<td>{{o.notesId}}</td>
+	<!-- <td>{{o.orgName}}</td> -->
+	<td>{{o.month}}</td>
+	<td>{{o.directNumber}}</td>
+	<td>{{o.directNumberModify}}</td>
+	<td><span ng-repeat="snycTypeObj in syncStatusTypes"
+					ng-if="snycTypeObj.entryId == o.syncStatus">{{snycTypeObj.entryName}}</span></td>
+	<td>{{o.createTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+	<td>{{o.modifyTime | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+</tr>
+</table>
+</div>
+<div page-directive style="margin-top: 10px;"></div>
+<script charset="utf-8" type="text/javascript" src="../resources/admin/controller/operatorRecord.js"></script>
+<script type="text/javascript" src="../skeleton/lib/page-bar.js"></script>
+</body>
+</html>

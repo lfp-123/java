@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.dao.OrgDao">
+	
+	<resultMap type="com.newland.boss.kpi.entity.Organization" id="orgResultMap">
+		<id column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<result column="SUPER_ORG_ID" property="superOrgId" jdbcType="INTEGER" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+		<result column="ORG_STATUS" property="orgStatus" jdbcType="INTEGER" />
+		<result column="ORG_DESC" property="orgDesc" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_OPERATOR_ID" property="modifyOperatorId" jdbcType="INTEGER" />
+		<result column="ORG_NAME_FULL" property="orgNameFull" jdbcType="VARCHAR" />
+		<result column="IS_SYNC" property="isSync" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getAllOrganization" resultMap="orgResultMap">
+		SELECT ORG_ID,SUPER_ORG_ID,ORG_NAME,ORG_NAME_FULL,ORG_STATUS,ORG_DESC,TO_CHAR(CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') as CREATE_TIME,IS_SYNC FROM T_ORGANIZATION ORDER BY ORG_ID
+	</select>
+</mapper>

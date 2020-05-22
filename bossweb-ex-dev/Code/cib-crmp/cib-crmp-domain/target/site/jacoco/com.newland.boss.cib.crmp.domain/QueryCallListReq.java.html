@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueryCallListReq.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">QueryCallListReq.java</span></div><h1>QueryCallListReq.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.List;
+
+<span class="fc" id="L5">public class QueryCallListReq {</span>
+	
+	private String resourceType;//资源类型
+	private String orgName;//单位名称
+	private String operatorId;//员工号码(用于查询)
+	private String operatorName;
+	private String callNumber;
+	private String calledNumber;
+	private String ip;
+	private String beginDate;
+	private String endDate; //beginDate~endDate 查询周期
+	private Integer orgId; //单位Id
+	private Integer operatorLevel; //岗位级别
+	private Integer userOperatorId; //操作员员工号码
+	private String userLoginName; //操作员notes名
+	private String loginName;
+	private String roomId;
+	private List&lt;String&gt; unitName;
+	private String billMonth;  // 月份
+	private String callType;
+	private String realCallTypes;
+	private String[] callTypes;
+	private String confUuid;
+	private String cdrId;
+	private Long fee;
+	private Long holdingTime;
+	private boolean addFlag;
+	private String startTime;
+	private String endTime;
+	private String feeType;
+	private Integer partCount;
+	private String startBillMonth;
+	private String endBillMonth;
+	private String cdrType;
+	
+	public String getStartBillMonth() {
+<span class="fc" id="L41">		return startBillMonth;</span>
+	}
+	public void setStartBillMonth(String startBillMonth) {
+<span class="fc" id="L44">		this.startBillMonth = startBillMonth;</span>
+<span class="fc" id="L45">	}</span>
+	public String getEndBillMonth() {
+<span class="fc" id="L47">		return endBillMonth;</span>
+	}
+	public void setEndBillMonth(String endBillMonth) {
+<span class="fc" id="L50">		this.endBillMonth = endBillMonth;</span>
+<span class="fc" id="L51">	}</span>
+	public Integer getPartCount() {
+<span class="fc" id="L53">		return partCount;</span>
+	}
+	public void setPartCount(Integer partCount) {
+<span class="fc" id="L56">		this.partCount = partCount;</span>
+<span class="fc" id="L57">	}</span>
+	public String getUserLoginName() {
+<span class="fc" id="L59">		return userLoginName;</span>
+	}
+	public void setUserLoginName(String userLoginName) {
+<span class="fc" id="L62">		this.userLoginName = userLoginName;</span>
+<span class="fc" id="L63">	}</span>
+	public String getCdrId() {
+<span class="fc" id="L65">		return cdrId;</span>
+	}
+	public void setCdrId(String cdrId) {
+<span class="fc" id="L68">		this.cdrId = cdrId;</span>
+<span class="fc" id="L69">	}</span>
+	public String getConfUuid() {
+<span class="fc" id="L71">		return confUuid;</span>
+	}
+	public void setConfUuid(String confUuid) {
+<span class="fc" id="L74">		this.confUuid = confUuid;</span>
+<span class="fc" id="L75">	}</span>
+	public Integer getUserOperatorId() {
+<span class="fc" id="L77">		return userOperatorId;</span>
+	}
+	public void setUserOperatorId(Integer userOperatorId) {
+<span class="fc" id="L80">		this.userOperatorId = userOperatorId;</span>
+<span class="fc" id="L81">	}</span>
+	public String getOperatorName() {
+<span class="fc" id="L83">		return operatorName;</span>
+	}
+	public void setOperatorName(String operatorName) {
+<span class="fc" id="L86">		this.operatorName = operatorName;</span>
+<span class="fc" id="L87">	}</span>
+	public String getCallNumber() {
+<span class="fc" id="L89">		return callNumber;</span>
+	}
+	public void setCallNumber(String callNumber) {
+<span class="fc" id="L92">		this.callNumber = callNumber;</span>
+<span class="fc" id="L93">	}</span>
+	public String getCalledNumber() {
+<span class="fc" id="L95">		return calledNumber;</span>
+	}
+	public void setCalledNumber(String calledNumber) {
+<span class="fc" id="L98">		this.calledNumber = calledNumber;</span>
+<span class="fc" id="L99">	}</span>
+	public Integer getOrgId() {
+<span class="fc" id="L101">		return orgId;</span>
+	}
+	public void setOrgId(Integer orgId) {
+<span class="fc" id="L104">		this.orgId = orgId;</span>
+<span class="fc" id="L105">	}</span>
+	public Integer getOperatorLevel() {
+<span class="fc" id="L107">		return operatorLevel;</span>
+	}
+	public void setOperatorLevel(Integer operatorLevel) {
+<span class="fc" id="L110">		this.operatorLevel = operatorLevel;</span>
+<span class="fc" id="L111">	}</span>
+	public String getResourceType() {
+<span class="fc" id="L113">		return resourceType;</span>
+	}
+	public void setResourceType(String resourceType) {
+<span class="fc" id="L116">		this.resourceType = resourceType;</span>
+<span class="fc" id="L117">	}</span>
+	public String getOrgName() {
+<span class="fc" id="L119">		return orgName;</span>
+	}
+	public void setOrgName(String orgName) {
+<span class="fc" id="L122">		this.orgName = orgName;</span>
+<span class="fc" id="L123">	}</span>
+	public String getOperatorId() {
+<span class="fc" id="L125">		return operatorId;</span>
+	}
+	public void setOperatorId(String operatorId) {
+<span class="fc" id="L128">		this.operatorId = operatorId;</span>
+<span class="fc" id="L129">	}</span>
+	public String getIp() {
+<span class="fc" id="L131">		return ip;</span>
+	}
+	public void setIp(String ip) {
+<span class="fc" id="L134">		this.ip = ip;</span>
+<span class="fc" id="L135">	}</span>
+	public String getBeginDate() {
+<span class="fc" id="L137">		return beginDate;</span>
+	}
+	public void setBeginDate(String beginDate) {
+<span class="fc" id="L140">		this.beginDate = beginDate;</span>
+<span class="fc" id="L141">	}</span>
+	public String getEndDate() {
+<span class="fc" id="L143">		return endDate;</span>
+	}
+	public void setEndDate(String endDate) {
+<span class="fc" id="L146">		this.endDate = endDate;</span>
+<span class="fc" id="L147">	}</span>
+	public String getLoginName() {
+<span class="fc" id="L149">		return loginName;</span>
+	}
+	public void setLoginName(String loginName) {
+<span class="fc" id="L152">		this.loginName = loginName;</span>
+<span class="fc" id="L153">	}</span>
+	public String getRoomId() {
+<span class="fc" id="L155">		return roomId;</span>
+	}
+	public void setRoomId(String roomId) {
+<span class="fc" id="L158">		this.roomId = roomId;</span>
+<span class="fc" id="L159">	}</span>
+	public List&lt;String&gt; getUnitName() {
+<span class="fc" id="L161">		return unitName;</span>
+	}
+	public void setUnitName(List&lt;String&gt; unitName) {
+<span class="fc" id="L164">		this.unitName = unitName;</span>
+<span class="fc" id="L165">	}</span>
+	public String getBillMonth() {
+<span class="fc" id="L167">		return billMonth;</span>
+	}
+	public void setBillMonth(String billMonth) {
+<span class="fc" id="L170">		this.billMonth = billMonth;</span>
+<span class="fc" id="L171">	}</span>
+	
+	public String getCallType() {
+<span class="fc" id="L174">		return callType;</span>
+	}
+	public void setCallType(String callType) {
+<span class="fc" id="L177">		this.callType = callType;</span>
+<span class="fc" id="L178">	}</span>
+	public String[] getCallTypes() {
+<span class="fc" id="L180">		return callTypes;</span>
+	}
+	public void setCallTypes(String[] strings) {
+<span class="fc" id="L183">		this.callTypes = strings;</span>
+<span class="fc" id="L184">	}</span>
+	public String getRealCallTypes() {
+<span class="fc" id="L186">		return realCallTypes;</span>
+	}
+	public void setRealCallTypes(String realCallTypes) {
+<span class="fc" id="L189">		this.realCallTypes = realCallTypes;</span>
+<span class="fc" id="L190">	}</span>
+	public Long getFee() {
+<span class="fc" id="L192">		return fee;</span>
+	}
+	public void setFee(Long fee) {
+<span class="fc" id="L195">		this.fee = fee;</span>
+<span class="fc" id="L196">	}</span>
+	public Long getHoldingTime() {
+<span class="fc" id="L198">		return holdingTime;</span>
+	}
+	public void setHoldingTime(Long holdingTime) {
+<span class="fc" id="L201">		this.holdingTime = holdingTime;</span>
+<span class="fc" id="L202">	}</span>
+	public boolean isAddFlag() {
+<span class="nc" id="L204">		return addFlag;</span>
+	}
+	public void setAddFlag(boolean addFlag) {
+<span class="fc" id="L207">		this.addFlag = addFlag;</span>
+<span class="fc" id="L208">	}</span>
+	public String getStartTime() {
+<span class="fc" id="L210">		return startTime;</span>
+	}
+	public void setStartTime(String startTime) {
+<span class="fc" id="L213">		this.startTime = startTime;</span>
+<span class="fc" id="L214">	}</span>
+	public String getEndTime() {
+<span class="fc" id="L216">		return endTime;</span>
+	}
+	public void setEndTime(String endTime) {
+<span class="fc" id="L219">		this.endTime = endTime;</span>
+<span class="fc" id="L220">	}</span>
+	
+	public String getFeeType() {
+<span class="fc" id="L223">		return feeType;</span>
+	}
+	public void setFeeType(String feeType) {
+<span class="fc" id="L226">		this.feeType = feeType;</span>
+<span class="fc" id="L227">	}</span>
+	
+	public String getCdrType() {
+<span class="fc" id="L230">		return cdrType;</span>
+	}
+	public void setCdrType(String cdrType) {
+<span class="fc" id="L233">		this.cdrType = cdrType;</span>
+<span class="fc" id="L234">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

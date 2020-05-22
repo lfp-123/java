@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.settle.dao.RatedDmaDao">
+
+	<resultMap type="com.newland.boss.cib.crmp.domain.RatedDma" id="RatedDmaResultMap">
+		<result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="PART_COUNT" property="partCount" jdbcType="VARCHAR" />
+		<result column="ROOM_ID" property="roomId" jdbcType="VARCHAR" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="DURATION" property="holdingTime" jdbcType="INTEGER" />
+		<result column="FEE" property="fee" jdbcType="INTEGER" />
+		<result column="OTHER_FEE" property="otherFee" jdbcType="INTEGER" />
+		<result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+		<result column="ORG_NAME_FULL" property="orgName" jdbcType="VARCHAR" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<result column="COUNT" property="count" jdbcType="INTEGER" />
+		<result column="BILL_MONTH" property="billMonth" jdbcType="INTEGER" />
+		<result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<result column="CONF_UUID" property="confUuid" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 查询话单详单列表 -->
+	<select id="queryDmaCallListResult" resultMap="RatedDmaResultMap">
+		select a.user_id,
+				       a.part_count,
+				       a.room_id,
+				       a.start_time,
+				       a.end_time,
+				       a.duration,
+				       a.fee,
+				       nvl(a.other_fee, 0) other_fee,
+				       a.operator_id,
+				       a.bill_month,
+				       a.org_id,
+				       a.conf_uuid,
+				       nvl(b.org_name_full,'黑户') org_name_full,
+				       nvl(c.operator_name,'黑户') operator_name
+                  from dmacdr a, t_organization b, t_operator c
+				 where a.org_id = b.org_id(+)
+				   and a.operator_id = c.operator_id(+)
+		<if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.userOperatorId} 
+		</if>
+		<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="req.unitName != null and req.unitName.size() > 0">
+			and a.org_id in 
+				<foreach item="item" index="index" collection="req.unitName" open="(" separator="," close=")">
+        			${item}
+  				</foreach>
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "1"'>
+		and a.part_count = 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "2"'>
+		and a.part_count > 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "3"'>
+		and a.part_count > 5
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "4"'>
+		and a.part_count > 10
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "5"'>
+		and a.part_count > 20
+		</if>
+		<if test="req.operatorId != null and req.operatorId != ''">
+		and a.operator_id = #{req.operatorId}
+		</if>
+		<if test="req.operatorName != null and req.operatorName != ''">
+		and c.operator_name like '%'||#{req.operatorName}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		<!-- 按月份查询 -->
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<!-- 判断是否是保障费 -->
+		<if test="req.feeType == 9 ">
+		and a.other_fee >= 1
+		</if>
+		order by a.start_time
+	</select>
+	
+	<!-- 查询话单详单列表总数 -->
+	<select id="queryDmaCallListCount" resultType="INTEGER">
+		select count(1) 
+		   from dmacdr a, t_organization b, t_operator c
+				 where a.org_id = b.org_id(+)
+				   and a.operator_id = c.operator_id(+)
+		<if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.userOperatorId} 
+		</if>
+		<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id) 
+		</if> 
+		<if test="req.unitName != null and req.unitName.size() > 0">
+			and a.org_id in 
+				<foreach item="item" index="index" collection="req.unitName" open="(" separator="," close=")">
+        			${item}
+  				</foreach>
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "1"'>
+		and a.part_count = 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "2"'>
+		and a.part_count > 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "3"'>
+		and a.part_count > 5
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "4"'>
+		and a.part_count > 10
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "5"'>
+		and a.part_count > 20
+		</if>
+		<if test="req.operatorId != null and req.operatorId != ''">
+		and a.operator_id = #{req.operatorId}
+		</if>
+		<if test="req.operatorName != null and req.operatorName != ''">
+		and c.operator_name like '%'||#{req.operatorName}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		<!-- 按月份查询 -->
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<!-- 判断是否是保障费 -->
+		<if test="req.feeType == 9 ">
+		and a.other_fee >= 1
+		</if>
+		order by a.start_time 
+	</select>
+	
+	<!-- 话单详单查询用于Excel下载 -->
+	<select id="ratedDmaQuery" resultMap="RatedDmaResultMap">
+		select a.user_id,
+		       a.part_count,
+		       a.room_id,
+		       a.start_time,
+		       a.end_time,
+		       a.duration,
+		       a.fee,
+		       nvl(a.other_fee, 0) other_fee,
+		       a.operator_id,
+		       a.bill_month,
+		       a.org_id,
+		       a.conf_uuid,
+		       nvl(b.org_name_full,'黑户') org_name_full,
+		       nvl(c.operator_name,'黑户') operator_name
+		   from dmacdr a, t_organization b, t_operator c
+				 where a.org_id = b.org_id(+)
+				   and a.operator_id = c.operator_id(+)
+		<if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.userOperatorId} 
+		</if>
+		<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.unitName != null and req.unitName.size() > 0">
+			and a.org_id in 
+				<foreach item="item" index="index" collection="req.unitName" open="(" separator="," close=")">
+        			${item}
+  				</foreach>
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "1"'>
+		and a.part_count = 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "2"'>
+		and a.part_count > 1
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "3"'>
+		and a.part_count > 5
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "4"'>
+		and a.part_count > 10
+		</if>
+		<if test='req.partCount != null and req.partCount != "" and req.partCount == "5"'>
+		and a.part_count > 20
+		</if>
+		<if test="req.operatorId != null and req.operatorId != ''">
+		and a.operator_id = #{req.operatorId}
+		</if>
+		<if test="req.operatorName != null and req.operatorName != ''">
+		and c.operator_name like '%'||#{req.operatorName}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		order by a.start_time 
+	</select>
+    
+    
+	<!-- 查询黑户话单详单列表 -->
+	<select id="queryDmaBlackCallListResult" resultMap="RatedDmaResultMap">
+		select a.user_id,
+				       a.part_count,
+				       a.room_id,
+				       a.start_time,
+				       a.end_time,
+				       a.duration,
+				       a.fee,
+				       nvl(a.other_fee, 0) other_fee,
+				       a.operator_id,
+				       a.bill_month,
+				       a.org_id,
+				       a.conf_uuid
+                  from dmacdr a
+                 where a.cdr_flag = 2
+        <if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		order by a.start_time
+	</select>
+	
+	<!-- 查询黑户话单详单列表总数 -->
+	<select id="queryDmaBlackCallListCount" resultType="INTEGER">
+		select count(1) from dmacdr a where a.cdr_flag = 2 
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		order by a.start_time
+	</select>
+	
+	<!-- 话单详单查询用于Excel下载 -->
+	<select id="ratedDmaBlackQuery" resultMap="RatedDmaResultMap">
+		select a.user_id,
+		       a.part_count,
+		       a.room_id,
+		       a.start_time,
+		       a.end_time,
+		       a.duration,
+		       a.fee,
+		       nvl(a.other_fee, 0) other_fee,
+		       a.operator_id,
+		       a.bill_month,
+		       a.org_id,
+		       a.conf_uuid
+		  from dmacdr a 
+		 where a.cdr_flag = 2
+        <if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		order by a.start_time
+	</select> 
+	
+	<!-- 黑户查询 -->
+	<select id="queryDmaBlackUsersResult" resultMap="RatedDmaResultMap">
+		select a.room_id, a.bill_month, count(*) count, sum(a.fee) fee
+				  from dmacdr a
+				 where a.cdr_flag = 2
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+			group by a.room_id, a.bill_month
+ 			order by a.room_id
+	</select> 
+	
+	<!-- 查询黑户话单详单列表总数 -->
+	<select id="queryDmaBlackUsersCount" resultType="INTEGER">
+		select count(*) from (select a.room_id, a.bill_month, count(*), sum(a.fee)
+				  from dmacdr a
+				 where a.cdr_flag = 2
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+			group by a.room_id, a.bill_month
+ 			order by a.room_id
+		)t
+	</select>
+	
+	<!-- 导出黑户 -->
+	<select id="queryAllBlackDmaUser" resultMap="RatedDmaResultMap">
+		select a.room_id, a.bill_month, count(*) count, sum(a.fee) fee
+		  from dmacdr a
+		 where a.cdr_flag = 2
+		<if test="req.billMonth != null and req.billMonth != ''">
+		and a.bill_month = #{req.billMonth, jdbcType=INTEGER}
+		</if>
+		<if test="req.roomId != null and req.roomId != ''">
+		and a.room_id like '%'||#{req.roomId}||'%'
+		</if>
+		<if test="req.endDate != null and req.endDate != ''">
+		and a.start_time &lt;= to_date(#{req.endDate}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="req.beginDate != null and req.beginDate != ''">
+		and a.start_time &gt;= to_date(#{req.beginDate},'yyyy-MM-dd')
+		</if>
+		group by a.room_id, a.bill_month
+		order by a.room_id
+	</select>
+	
+	<!-- 黑户用户编辑 -->
+	<update id="updateOrgInfo">
+		update dmacdr a
+		   set a.org_id = #{req.orgId}, a.cdr_flag = 0
+		 where a.bill_month = #{req.billMonth}
+		   and a.room_id = #{req.roomId}
+	</update>
+	
+	<!-- 黑户用户编辑 -->
+	<update id="updateOrgInfoForDetail">
+		update dmacdr a
+		   set a.org_id = #{req.orgId}
+		   <if test="req.orgId != 0 ">
+		   , a.cdr_flag = 0
+		   </if>
+		 where a.bill_month = #{req.billMonth}
+		   and a.room_id = #{req.roomId}
+		   and a.conf_uuid = #{req.confUuid}
+	</update>
+	
+	<!-- 黑户用户编辑 -->
+	<update id="addInsuranceFee">
+		update dmacdr a
+		   set a.other_fee = #{req.fee}, a.org_id = #{req.orgId}
+		 where a.conf_uuid = #{req.confUuid}
+	</update>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoleAuth.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.model</a> &gt; <span class="el_source">RoleAuth.java</span></div><h1>RoleAuth.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.model;
+
+import java.util.Date;
+/**
+ * 角色资源关系
+ * @author ZJUNE
+ *
+ */
+public class RoleAuth {
+	
+	private Integer roleId;
+	private Integer resourceId;
+	private Integer status;
+	private Date createTime;
+	private Date modifyTime;
+	private Integer modifyOperatorId;
+	
+	public RoleAuth() {
+<span class="nc" id="L19">		super();</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L21">	}</span>
+
+	public Integer getRoleId() {
+<span class="nc" id="L24">		return roleId;</span>
+	}
+
+	public void setRoleId(Integer roleId) {
+<span class="nc" id="L28">		this.roleId = roleId;</span>
+<span class="nc" id="L29">	}</span>
+
+	public Integer getResourceId() {
+<span class="nc" id="L32">		return resourceId;</span>
+	}
+
+	public void setResourceId(Integer resourceId) {
+<span class="nc" id="L36">		this.resourceId = resourceId;</span>
+<span class="nc" id="L37">	}</span>
+
+	public Integer getStatus() {
+<span class="nc" id="L40">		return status;</span>
+	}
+
+	public void setStatus(Integer status) {
+<span class="nc" id="L44">		this.status = status;</span>
+<span class="nc" id="L45">	}</span>
+
+	public Date getCreateTime() {
+<span class="nc" id="L48">		return createTime;</span>
+	}
+
+	public void setCreateTime(Date createTime) {
+<span class="nc" id="L52">		this.createTime = createTime;</span>
+<span class="nc" id="L53">	}</span>
+
+	public Date getModifyTime() {
+<span class="nc" id="L56">		return modifyTime;</span>
+	}
+
+	public void setModifyTime(Date modifyTime) {
+<span class="nc" id="L60">		this.modifyTime = modifyTime;</span>
+<span class="nc" id="L61">	}</span>
+
+	public Integer getModifyOperatorId() {
+<span class="nc" id="L64">		return modifyOperatorId;</span>
+	}
+
+	public void setModifyOperatorId(Integer modifyOperatorId) {
+<span class="nc" id="L68">		this.modifyOperatorId = modifyOperatorId;</span>
+<span class="nc" id="L69">	}</span>
+
+	
+	@Override
+	public String toString() {
+<span class="nc" id="L74">		return &quot;RoleAuth [roleId=&quot; + roleId + &quot;, resourceId=&quot; + resourceId + &quot;, status=&quot; + status + &quot;, createTime=&quot;</span>
+				+ createTime + &quot;, modifyTime=&quot; + modifyTime + &quot;, modifyOperatorId=&quot; + modifyOperatorId + &quot;]&quot;;
+	} 
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

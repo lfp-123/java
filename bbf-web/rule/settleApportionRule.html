@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="ruleManage">
+<meta name="referrer" content="no-referrer">
+<head>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>结算摊分规则配置</title>
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style type="text/css">
+body {
+	padding: 0px 10px;
+}
+
+.modal {
+	background-color: rgba(102, 102, 102, 0.85);
+}
+
+.container {
+	margin-top: 10px;
+	width: 830px;
+	box-shadow: 0 0 20px #888888;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.input-group {
+	height: 50px;
+	width: 300px;
+	padding: 10px;
+	margin: 0 10px;
+	float: left;
+}
+
+.desc {
+	width: 620px;
+	text-align: left;
+}
+
+.sp-long {
+	width: 125px;
+}
+
+.modal-div-form {
+	width: 800px;
+	align-items: center;
+	padding: 0 65px;
+}
+
+.btn-y, .btn-n {
+	width: 135px;
+}
+
+.btn-y {
+	margin-right: 10px;
+}
+
+.ng-isolate-scope {
+	float: left;
+	margin-top: 10px;
+}
+
+.table-border td, .table-border th {
+	width: auto;
+}
+
+#mybutton {
+	border: 1px solid #ccc;
+	background: #fff;
+	color: #000;
+	padding: 5px 15px;
+	height: 30px;
+}
+
+.bgImage {
+	background: #fff url(../skeleton/lib/My97DatePicker/skin/datePicker.gif)
+		no-repeat right;
+}
+</style>
+</head>
+<body ng-controller="saRController as saRule" ng-cloak>
+	<div
+		style="display: inline-block; width: 100%; text-align: right; padding-bottom: 5px">
+		摊分规则名称:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<input type="text" class="input-text"
+				ng-model="search.apportionRuleName" maxlength="32">
+		</div>
+		资源类型:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<select class="input-text" ng-model="search.cdrType">
+				<option value="">全部</option>
+				<option ng-repeat="feeTypeObj in feeTypes"
+					value="{{feeTypeObj.entryId}}">{{feeTypeObj.entryName}}</option>
+			</select>
+		</div>
+		规则状态:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<select class="input-text" placeholder="" ng-model="search.status">
+				<option value="">全部</option>
+				<option ng-repeat="statusTypeObj in statusTypes"
+					value="{{statusTypeObj.entryId}}">{{statusTypeObj.entryName}}</option>
+			</select>
+		</div>
+		生失效时间:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 21%; height: 24px;">
+			<input type="text" onChange=""
+				onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')}',maxDate:'3000-01-01'})"
+				id="logmin" class="input-text Wdate" style="width: 45%;">- <input
+				type="text" onChange=""
+				onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'3000-01-01'})"
+				id="logmax" class="input-text Wdate" style="width: 45%;">
+		</div>
+		<div style="display: inline-block;">
+			<button class="btn btn-primary btn-sm" type="button"
+				ng-click="searchByParam()">
+				<i class="Hui-iconfont">&#xe709;</i>&nbsp;查询
+			</button>
+			<button class="btn btn-primary btn-sm" type="button"
+				ng-click="reset()">
+				<i class="Hui-iconfont">&#xe68f;</i>&nbsp;重置
+			</button>
+		</div>
+	</div>
+
+	<div class="feature-content">
+		<table ng-table="saRule.tableParams"
+			class="table-condensed table-border table-hover">
+			<tr ng-repeat="rule in $data" ng-model="ruleInfos"
+				ng-click="selectRule(rule)">
+				<td style="height: 30px; width: 38px"><input type="checkbox"
+					ng-checked="choiceRule(rule)" ng-if="rule.apportionItemId"
+					id="{{rule.apportionItemId}}"
+					style="margin-top: 2px; margin-left: 3px;"></td>
+				<td title="'摊分规则ID'">{{rule.apportionItemId}}</td>
+				<td title="'摊分规则名称'">{{rule.apportionRuleName}}</td>
+				<td title="'资源类型'"><span ng-repeat="fee in feeTypes"
+					ng-if="fee.entryId == rule.cdrType">{{fee.entryName}}</span></td>
+				<td title="'规则范围'"><span ng-repeat="scope in ruleScope"
+					ng-if="scope.entryId == rule.scope">{{scope.entryName}}</span></td>
+				<td title="'摊分比例'">{{rule.ratio * 100 | number:0 }}{{rule.ratio ? '%' : ''}}</td>
+				<td title="'生效时间'">{{rule.inureDate | date:'yyyy-MM-dd' }}</td>
+				<td title="'失效时间'">{{rule.expireDate | date:'yyyy-MM-dd'}}</td>
+				<td title="'规则状态'"><span ng-repeat="status in statusTypes"
+					ng-if="status.entryId == rule.status">{{status.entryName}}</span></td>
+				<td title="'操作工号ID'">{{rule.operatorId}}</td>
+				<td title="'创建时间'">{{rule.createTime | date:'yyyy-MM-dd'}}</td>
+				<td title="'备注说明'">{{rule.apportionDesc | lengthFilter}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div style="float: right; margin-top: 10px;">
+		<button class="btn btn-primary btn-sm search-btn" data-toggle="modal"
+			data-target="#addModal">
+			<i class="Hui-iconfont">&#xe604;</i>&nbsp;添加
+		</button>
+		<button class="btn btn-primary btn-sm search-btn"
+			ng-click="preUpdRule()">
+			<i class="Hui-iconfont">&#xe60c;</i>&nbsp;修改
+		</button>
+		<button class="btn btn-primary btn-sm search-btn"
+			ng-click="deleteRule()">
+			<i class="Hui-iconfont">&#xe60b;</i>&nbsp;删除
+		</button>
+		<button class="btn btn-primary btn-sm search-btn"
+			ng-click="startRule()">
+			<i class="Hui-iconfont">&#xe615;</i>&nbsp;启用
+		</button>
+		<button class="btn btn-primary btn-sm search-btn"
+			ng-click="stopRule()">
+			<i class="Hui-iconfont">&#xe631;</i>&nbsp;禁用
+		</button>
+		<button class="btn btn-primary btn-sm" data-toggle="modal"
+			data-target="#importModal">
+			<i class="Hui-iconfont">&#xe645;</i>&nbsp;导入
+		</button>
+		<button class="btn btn-primary btn-sm" ng-click="exportRule()">
+			<i class="Hui-iconfont">&#xe644;</i>&nbsp;导出
+		</button>
+		<button class="btn btn-primary " ng-click="downloadRuleTemplate()">
+			<i class="Hui-iconfont">&#xe641;</i>模板下载
+		</button>
+	</div>
+
+	<!-- 模态编辑窗口 -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-dialog container">
+			<h3 align="center"
+				style="border-bottom: 1px solid #ccc; padding: 14px;">修改结算摊分规则</h3>
+			<div class="modal-div-form">
+				<div class="input-group desc" style="display: none">
+					<span class="input-group-addon sp-long">摊分规则Id</span> <input
+						type="text" class="form-control"
+						ng-model="updData.apportionItemId" disabled>
+				</div>
+
+				<div class="input-group" style="width: 520px;">
+					<span class="input-group-addon sp-long">摊分规则名称</span> <input
+						type="text" class="form-control"
+						ng-model="updData.apportionRuleName" placeholder="必填"
+						maxlength="32">
+				</div>
+
+				<div class="input-group" style="width: 100px;">
+					<label class="am-checkbox"> <input type="checkbox"
+						ng-checked="scope" data-am-ucheck disabled>全局
+					</label>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资源类型</span> <select
+						class="form-control" ng-model="updData.cdrType"
+						ng-options="o.entryId as o.entryName for o in feeTypes" disabled>
+					</select>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">摊分比例</span> <input
+						type="number" class="form-control" ng-model="updData.ratio"
+						min="0" max="1" step="0.01" placeholder="必填" maxlength="4">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">规则状态：</span> <select
+						class="form-control" ng-model="updData.status"
+						ng-options="s.entryId as s.entryName for s in statusTypes">
+					</select>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">生效时间</span> <input
+						type="text" ng-model="updData.inureDate" onChange=""
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'updmax\')}',maxDate:'3000-01-01'})"
+						id="updmin" class="form-control bgImage" placeholder="必填">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">失效时间</span> <input
+						type="text" ng-model="updData.expireDate" onChange=""
+						onfocus="WdatePicker({minDate:'#F{$dp.$D(\'updmin\')}',maxDate:'3000-01-01'})"
+						id="updmax" class="form-control bgImage" placeholder="必填">
+				</div>
+
+				<div class="input-group desc">
+					<label for="name">备注说明</label>
+					<textarea class="form-control" rows="3" style="width: 620px;"
+						ng-model="updData.apportionDesc" maxlength="512">
+   					</textarea>
+				</div>
+
+				<div class="input-group" style="width: 100%">
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-y"
+							style="float: right; margin-right: 50px" ng-click="updRule()">
+							<i class="Hui-iconfont">&#xe6a7;</i>&nbsp;确定
+						</button>
+					</div>
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-default btn-n"
+							data-dismiss="modal">
+							<i class="Hui-iconfont">&#xe6a6;</i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--模态增加窗口-->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-dialog container">
+			<h3 align="center"
+				style="border-bottom: 1px solid #ccc; padding: 14px;">新增结算摊分规则</h3>
+			<div class="modal-div-form">
+
+				<div class="input-group" style="width: 520px;">
+					<span class="input-group-addon sp-long ">摊分规则名称</span> <input
+						type="text" class="form-control" ng-model="data.apportionRuleName"
+						placeholder="必填" maxlength="32">
+				</div>
+
+				<div class="input-group" style="width: 100px;">
+					<label class="am-checkbox"> <input type="checkbox"
+						ng-model="data.scope" data-am-ucheck>全局
+					</label>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资源类型</span> <select
+						class="form-control" ng-model="data.cdrType"
+						ng-options="o.entryId as o.entryName for o in feeTypes">
+					</select>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">摊分比例</span> <input
+						type="number" class="form-control" ng-model="data.ratio" min="0"
+						max="1" step="0.01" placeholder="必填">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">规则状态：</span> <select
+						class="form-control" ng-model="data.status"
+						ng-options="s.entryId as s.entryName for s in statusTypes">
+					</select>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">生效时间</span> <input
+						type="text" ng-model="data.inureDate" onChange=""
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'addmax\')}',maxDate:'3000-01-01'})"
+						id="addmin" class="form-control bgImage" placeholder="必填">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">失效时间</span> <input
+						type="text" ng-model="data.expireDate" onChange=""
+						onfocus="WdatePicker({minDate:'#F{$dp.$D(\'addmin\')}',maxDate:'3000-01-01'})"
+						id="addmax" class="form-control bgImage" ng-init='3000-01-01'
+						placeholder="必填">
+				</div>
+
+				<div class="input-group desc">
+					<label for="name">备注说明</label>
+					<textarea class="form-control" rows="3" style="width: 620px;"
+						ng-model="data.apportionDesc" maxlength="512">
+   					</textarea>
+				</div>
+
+
+				<div class="input-group" style="width: 100%">
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-y"
+							style="float: right; margin-right: 50px" ng-click="addRule()">
+							<i class="Hui-iconfont">&#xe6a7;</i>&nbsp;确定
+						</button>
+					</div>
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-default btn-n"
+							data-dismiss="modal" ng-click="cancelAdd()">
+							<i class="Hui-iconfont">&#xe6a6;</i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 导入模态框 -->
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog container"
+			style="width: 400px; margin-top: 200px">
+			<h4 style="text-align: center; border-bottom: 1px solid #ccc;">导入规则Excel文件</h4>
+			<div style="width: 100%; margin: 20px">
+				<input type="file" id="fileUpload" name="fileUpload"
+					onchange="doChange(this)" style="display: none;" /> <input
+					type="button" onclick="$('input[id=fileUpload]').click();"
+					id="mybutton" value="浏览" /> <input id="upfile" type="text"
+					style="height: 30px; width: 200px; margin-left: -8px; border: 1px solid #ccc"
+					disabled>
+				<!-- <input id="fileUpload" type="file" style="width:76%;float:left"/> -->
+				<button ng-click="importRule()" class="btn btn-primary">
+					<i class="Hui-iconfont">&#xe642;</i>&nbsp;上传
+				</button>
+				<div style="margin-top:10px">请上传<=10M的Excel文件</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="../resources/statement/controller/common.js"></script>
+	<script type="text/javascript"
+		src="../resources/rule/controller/settleApportionRule.js"></script>
+</body>
+</html>

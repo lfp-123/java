@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="RateRuleConfigurate">
+<meta name="referrer" content="no-referrer">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>资费规则管理页面</title>
+
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<script type="text/javascript" src="../resources/statement/controller/common.js"></script>
+<script type="text/javascript" src="../resources/rule/controller/rateRuleConfigurate.js"></script>
+<style type="text/css">
+body {
+	padding: 0 10px 0 0 ;
+}
+
+.modal {
+	background-color: rgba(102, 102, 102, 0.85);
+}
+
+.container {
+	margin-top: 5px;
+	width: 830px;
+	box-shadow: 0 0 20px #888888;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.input-group {
+	height: 50px;
+	width: 300px;
+	padding: 10px;
+	margin: 0 10px;
+	float: left;
+}
+
+.m-title {
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+}
+
+.m-name {
+	width: 620px;
+	margin-top: 10px;
+}
+
+.desc {
+	width: 620px;
+	text-align: left;
+}
+
+.sp-long {
+	width: 125px;
+}
+
+.modal-div-form {
+	width: 800px;
+	align-items: center;
+	padding: 0 65px;
+}
+
+.btn-y, .btn-n {
+	width: 135px;
+}
+
+.ng-isolate-scope {
+	float: left;
+}
+.ng-isolate-scope {
+	float:left;
+	margin-top: 10px;
+}
+
+.table-border td,.table-border th{
+	width: auto;
+}
+#mybutton{ 
+    border:1px solid #ccc; 
+    background:#fff; 
+    color:#000; 
+    padding:5px 15px;
+    height:30px;
+}
+
+.bgImage {
+    background:#fff url(../skeleton/lib/My97DatePicker/skin/datePicker.gif) no-repeat right;
+}
+</style>
+</head>
+<body ng-controller="RateRuleConfigurateCtrl as rrcc" ng-cloak>
+	<div
+		style="display: inline-block; width: 100%; text-align: right; padding-bottom: 5px">
+		<!-- 资费规则名称、资费类型、启用状态、规则生失效日期 -->
+		资费规则名称:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<input type="text" class="input-text" ng-model="search.rateRuleName"  maxlength="32">
+		</div>
+		资源类型:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<select class="input-text" ng-model="search.cdrType">
+				<option value="" selected="selected">全部</option>
+				<option ng-repeat="feeTypeObj in feeTypes"
+					value="{{feeTypeObj.entryId}}">{{feeTypeObj.entryName}}</option>
+			</select>
+		</div>
+		规则状态:
+		<div
+			style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+			<select class="input-text" placeholder="" ng-model="search.rateStatus">
+				<option value="" selected="selected">全部</option>
+				<option ng-repeat="statusTypeObj in statusTypes"
+					value="{{statusTypeObj.entryId}}">{{statusTypeObj.entryName}}</option>
+			</select>
+		</div>
+		生失效时间：
+		<div
+			style="display: inline-block;width: 21%; height: 24px;">
+			<input type="text" ng-model="search.inureDate" onChange=""
+				onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'searchlogmax\')}'&&'3000-01-01'})"
+				id="searchlogmin" class="input-text Wdate" style="width: 45%;">
+			- <input type="text" ng-model="search.expireDate" onChange=""
+				onfocus="WdatePicker({minDate:'#F{$dp.$D(\'searchlogmin\')}',maxDate:'3000-01-01'})"
+				id="searchlogmax" class="input-text Wdate" style="width: 45%;">
+		</div>
+		<div style="display: inline-block;">
+			<button class="btn btn-primary " type="button"
+				ng-click="searchCostRule()">
+				<i class="Hui-iconfont">&#xe665;</i>查询
+			</button>
+			<button class="btn btn-primary" type="button" ng-click="reset()">
+				<i class="Hui-iconfont">&#xe68f;</i> 重置
+			</button>
+		</div>
+	</div>
+
+	<div style="width: 100%;">
+		<table ng-table="rrcc.tableParams"
+			class="table-condensed table-border table-hover">
+			<tr ng-repeat="rateRule in $data" ng-model="rateRuleInfos" name="info" ng-click="selectARateRule(rateRule)">
+				<td style="height:34px;width:38px;"><input type="checkbox"
+					id="{{rateRule.rateItemId}}" ng-checked="isSelected(rateRule)" ng-if="rateRule.rateItemId"
+					style="margin-top: 2px; margin-left: 3px"></td>
+				<td title="'资费规则ID'">{{rateRule.rateItemId}}</td>
+				<td title="'资费规则名称'">{{rateRule.rateRuleName}}</td>
+				<td title="'资源类型'"><span
+					ng-repeat="fee in feeTypes" ng-if="fee.entryId == rateRule.cdrType">{{fee.entryName}}</span></td>
+				<td title="'资费类型'"><span
+							ng-repeat="rateType in rateTypesAll" ng-if="rateType.entryId == rateRule.rateType">{{rateType.entryName}}</span></td>
+				<td title="'规则使用范围'"><span
+                            ng-repeat="scopeType in scopeTypes" ng-if="scopeType.entryId == rateRule.scope">{{scopeType.entryName}}</span></td>
+				<td title="'资费（元）'">{{rateRule.fee==undefined?rateRule.fee :rateRule.fee/1000}}</td>
+				<td title="'其他费用（元）'">{{rateRule.otherFee==undefined ?rateRule.otherFee :rateRule.otherFee/1000}}</td>
+				<td title="'规则状态'">
+				<span ng-repeat="statusType in statusTypes" ng-if="statusType.entryId == rateRule.rateStatus">{{statusType.entryName}}</span></td>
+				<td title="'资费生效时间'">{{rateRule.inureDate|
+					date:'yyyy-MM-dd'}}</td>
+				<td title="'资费失效时间'">{{rateRule.expireDate|
+					date:'yyyy-MM-dd'}}</td>
+				<td title="'详情显示'"><button class="btn btn-primary size-MINI" ng-click="loadDetail(rateRule)" ng-if="rateRule.rateItemId">显示详情</button></td>
+			</tr>
+		</table>
+	</div>
+	<div style="float: right; margin-top: 10px;">
+		<button class="btn btn-primary "
+			ng-click="openAddModel()">
+			<i class="Hui-iconfont">&#xe604;</i>添加
+		</button>
+		<button class="btn btn-primary "
+			ng-click="updateload()">
+			<i class="Hui-iconfont">&#xe60c;</i>修改
+		</button>
+		<button class="btn btn-primary " 
+			ng-click="deleteRateRule()">
+			<i class="Hui-iconfont">&#xe60b;</i>删除	</button>
+		<button class="btn btn-primary "
+			ng-click="startUsing()">
+			<i class="Hui-iconfont">&#xe615;</i>启用
+		</button>
+		<button class="btn btn-primary "
+			ng-click="forbidden()">
+			<i class="Hui-iconfont">&#xe631;</i>禁用
+		</button>
+		<button class="btn btn-primary "
+			ng-click="importExcel()">
+			<i class="Hui-iconfont">&#xe645;</i>导入
+		</button>
+		<button class="btn btn-primary "
+			ng-click="ruleExport()">
+			<i class="Hui-iconfont">&#xe644;</i>导出
+		</button>
+		<button class="btn btn-primary "
+			ng-click="downloadRuleTemplate()">
+			<i class="Hui-iconfont">&#xe641;</i>模板下载
+		</button>
+	</div>
+
+	<!--模态详情 窗口-->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog container">
+			<h3 class="m-title">资费规则详情</h3>
+			<div class="modal-div-form">
+				<table class="table table-hover">
+					<tbody ng-model="rateRuleDetail">
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资费规则ID：</span></td>
+							<td>{{rateRuleDetail.rateItemId}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资费规则名称：</span></td>
+							<td>{{rateRuleDetail.rateRuleName}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资源类型：</span></td>
+							<td class="am-text-middle"><span
+							ng-repeat="fee in feeTypes" ng-if="fee.entryId == rateRuleDetail.cdrType">{{fee.entryName}}</span></td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资费类型：</span></td>
+							<td><span
+							ng-repeat="rateType in rateTypesAll" ng-if="rateType.entryId == rateRuleDetail.rateType">{{rateType.entryName}}</span></td>
+						</tr>
+						<tr>
+                            <td style="width: 130px; text-align: right;"><span>规则使用范围：</span></td>
+                           <td><span ng-repeat="scopeType in scopeTypes" ng-if="scopeType.entryId == rateRuleDetail.scope">{{scopeType.entryName}}</span></td>
+                        </tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资费(元)：</span></td>
+							<td>{{rateRuleDetail.fee == undefined ?rateRuleDetail.fee :rateRuleDetail.fee/1000}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>其他费用(元)：</span></td>
+							<td>{{rateRuleDetail.otherFee == undefined ?rateRuleDetail.otherFee :rateRuleDetail.otherFee/1000}}</td>
+						</tr>
+						<!-- 字段需求要求存在，但系统暂无使用处，预留备用
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>起始时间段：</span></td>
+							<td>{{rateRuleDetail.startTime}}至{{rateRuleDetail.endTime}}</td>
+						</tr> 
+						-->
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>规则状态：</span></td>
+							<td><span ng-repeat="statusType in statusTypes" ng-if="statusType.entryId == rateRuleDetail.rateStatus">{{statusType.entryName}}</span></td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>规则有效期：</span></td>
+							<td>{{rateRuleDetail.inureDate|date:'yyyy-MM-dd'}}至{{rateRuleDetail.expireDate|date:'yyyy-MM-dd'}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>资费介绍：</span></td>
+							<td>{{rateRuleDetail.rateDesc}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>操作员ID：</span></td>
+							<td>{{rateRuleDetail.operatorId}}</td>
+						</tr>
+						<tr>
+							<td style="width: 130px; text-align: right;"><span>创建时间：</span></td>
+							<td>{{rateRuleDetail.createTime|date:'yyyy-MM-dd'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!--模态增加窗口-->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-dialog container">
+			<h3 class="m-title">添加资费规则</h3>
+			<div class="modal-div-form">
+				<div class="input-group" style="width: 520px;">
+					<span class="input-group-addon sp-long">资费规则名称：</span> <input
+						type="text" class="form-control" maxlength="32"
+						ng-model="addmdata.rateRuleName" placeholder="必填">
+				</div>
+				<div class="input-group" style="width: 100px;">
+                    <label class="am-checkbox">
+                        <!--type="checkbox" ng-model="addmdata.scope" ng-checked="addmdata.scope" data-am-ucheck 
+                         -->
+                        <input type="checkbox" id="addscope"ng-model="addscope" ng-checked="addscope" data-am-ucheck> 全局
+                    </label>
+                </div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资源类型：</span> <select
+						class="form-control" ng-model="addmdata.cdrType" ng-change="setType(addmdata.cdrType)"
+						ng-options="a.entryId as a.entryName for a in feeTypes">
+					</select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资费类型：</span> <select
+						class="form-control" ng-model="addmdata.rateType" ng-change="setRateType(addmdata.cdrType,addmdata.rateType)"
+						ng-options="a.entryId as a.entryName for a in rateTypes">
+					</select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">规则状态：</span><select
+                        class="form-control" ng-model="addmdata.rateStatus"
+                        ng-options="s.entryId as s.entryName for s in statusTypes">
+                    </select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资费(元)：</span> <input
+						type="number" class="form-control"  oninput="if(value.length>8)value=value.slice(0,8)" id="fee"
+						ng-model="addmdata.fee" placeholder="必填">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">{{otherFeeName}}</span> <input
+						type="number" class="form-control"  oninput="if(value.length>8)value=value.slice(0,8)" id="otherFee" disabled="disabled"
+						ng-model="addmdata.otherFee" placeholder="必填">
+				</div>
+				<!-- 字段需求要求存在，但系统暂无使用处，预留备用
+				<div class="input-group">
+					<span class="input-group-addon sp-long">开始时间(月-日:时)：</span> <input
+						type="text" ng-model="addmdata.startTime" onChange=""
+						onfocus="WdatePicker({dateFmt:'MM-dd:HH'})"
+						id="addStartTime" class="form-control bgImage" 
+						style="width: 125px;" style="float: left;">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">结束时间(月-日:时)：</span> <input
+						type="text" ng-model="addmdata.endTime" onChange=""
+						onfocus="WdatePicker({dateFmt:'MM-dd:HH'})"
+						id="addEndTime" class="form-control bgImage" 
+						style="width: 125px;">
+				</div>
+                -->
+				<div class="input-group">
+					<span class="input-group-addon sp-long">生效时间：</span> <input
+						type="text" ng-model="addmdata.inureDate" onChange=""
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'addlogmax\')}'&&'3000-01-01'})"
+						id="addlogmin" class="form-control bgImage" 
+						style="width: 160px;" style="float: left;" placeholder="必填">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">失效时间：</span> <input
+						type="text" ng-model="addmdata.expireDate" onChange=""
+						onfocus="WdatePicker({minDate:'#F{$dp.$D(\'addlogmin\')}',maxDate:'3000-01-01'})"
+						id="addlogmax" class="form-control bgImage" 
+						style="width: 160px;" placeholder="必填">
+				</div>
+                
+				<div class="input-group desc">
+					<label for="name">资费说明</label>
+					<textarea class="form-control" rows="3" ng-model="addmdata.rateDesc" maxlength="526">
+    					</textarea>
+				</div>
+
+				<div class="input-group" style="width: 100%">
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-y" style="float: right;margin-right:50px"
+							  ng-click="addCostRule()">
+							<i class="Hui-iconfont">&#xe6a7;</i>&nbsp;确定
+						</button>
+					</div>
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-n"
+							 data-dismiss="modal">
+							<i class="Hui-iconfont">&#xe6a6;</i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 模态-资费规则编辑窗口 -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-dialog container">
+			<h3 class="m-title">编辑资费规则</h3>
+			<div class="modal-div-form">
+				<div class="input-group" style="width: 520px;">
+					<span class="input-group-addon sp-long">资费规则名称：</span> <input
+						type="text" class="form-control" maxlength="32"
+						ng-model="editmdata.rateRuleName" placeholder="必填">
+				</div>
+				<div class="input-group" style="width: 100px;">
+                    <label class="am-checkbox">
+                        <input type="checkbox" ng-checked="scope" data-am-ucheck disabled>全局
+                    </label>
+                </div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资源类型：</span> <select
+						class="form-control" ng-model="editmdata.cdrType" ng-change="setType(editmdata.cdrType)"
+						ng-options="f.entryId as f.entryName for f in feeTypes" disabled="disabled">
+					</select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资费类型：</span> <select
+						class="form-control" ng-model="editmdata.rateType" ng-change="setRateType(editmdata.cdrType,editmdata.rateType)"
+						ng-options="a.entryId as a.entryName for a in rateTypes" disabled="disabled">
+					</select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">规则状态：</span> <select
+						class="form-control" ng-model="editmdata.rateStatus"
+						ng-options="s.entryId as s.entryName for s in statusTypes">
+					</select>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">资费(元)：</span> <input
+						type="number" class="form-control" oninput="if(value.length>8)value=value.slice(0,8)" id="mFee" ng-model="editmdata.fee" placeholder="必填">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon sp-long">{{otherFeeName}}</span> <input
+						type="number" class="form-control" oninput="if(value.length>8)value=value.slice(0,8)" id="mOtherFee" disabled="disabled"
+						ng-model="editmdata.otherFee">
+				</div>
+				<!-- 字段需求要求存在，但系统暂无使用处，预留备用
+				<div class="input-group">
+					<span class="input-group-addon sp-long">开始时间(月-日:时)：</span> <input
+						type="text" ng-model="editmdata.startTime" onChange=""
+						onfocus="WdatePicker({dateFmt:'MM-dd:HH'})"
+						id="startTime" class="form-control bgImage" 
+						style="width: 125px;" style="float: left;">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">结束时间(月-日:时)：</span> <input
+						type="text" ng-model="editmdata.endTime" onChange=""
+						onfocus="WdatePicker({dateFmt:'MM-dd:HH'})"
+						id="endTime" class="form-control bgImage" 
+						style="width: 125px;" style="float: left;">
+				</div>
+                -->
+				<div class="input-group">
+					<span class="input-group-addon sp-long">生效时间：</span> <input
+						type="text" ng-model="editmdata.inureDate" onChange=""
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'editlogmax\')}'&&'3000-01-01'})"
+						id="editlogmin" class="form-control bgImage" style="width: 160px;"
+						placeholder="必填">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon sp-long">失效时间：</span> <input
+						type="text" ng-model="editmdata.expireDate" onChange=""
+						onfocus="WdatePicker({minDate:'#F{$dp.$D(\'editlogmin\')}',maxDate:'3000-01-01'})"
+						id="editlogmax" class="form-control bgImage" style="width: 160px;"
+						placeholder="必填">
+				</div>
+				<div class="input-group desc">
+					<label for="name">资费说明</label>
+					<textarea class="form-control" rows="3" ng-model="editmdata.rateDesc" maxlength="526">
+    					</textarea>
+				</div>
+
+				<div class="input-group" style="width: 100%">
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-y" style="float: right;margin-right:50px"
+							ng-click="editRateRule()">
+							<i class="Hui-iconfont">&#xe6a7;</i>&nbsp;确定
+						</button>
+					</div>
+					<div style="width: 50%; float: left;">
+						<button type="button" class="btn btn-primary btn-n"
+							data-dismiss="modal">
+							<i class="Hui-iconfont">&#xe6a6;</i>&nbsp;取消
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 导入模态框 -->
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog container" style="width:400px;margin-top:200px">
+			<h4 style="text-align: center;border-bottom: 1px solid #ccc;">导入规则Excel文件</h4>
+			<div style="width:100%;margin:20px">
+				<input type="file" id="fileUpload" name="fileUpload" onchange="doChange(this)" style="display:none;"/>
+				<input type="button" onclick="$('input[id=fileUpload]').click();" id="mybutton" value="浏览"/>
+				<input id="upfile" type="text" style="height:30px;width:200px;margin-left:-8px;border:1px solid #ccc" disabled="disabled">
+					<!-- <input id="fileUpload" type="file" style="width:76%;float:left"/> -->
+				<button  ng-click="uploadFile()" class="btn btn-primary"><i class="Hui-iconfont">&#xe642;</i>上传</button>
+				<div style="margin-top: 10px;">请上传<=10M的Excel文件</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

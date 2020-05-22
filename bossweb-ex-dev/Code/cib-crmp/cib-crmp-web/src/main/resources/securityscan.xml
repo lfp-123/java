@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="gb2312"?>
+<config>
+   <!--本配置描述名称-->
+   <desc_name> BOSSWEB安全过滤器配置文件 </desc_name>
+   
+  
+   <!-- 绕过过滤的文件-->
+   <extPattern></extPattern>
+
+   <!--必须过滤的文件-->
+   <doPattern>*.jsp|*.jsf|*.html|*.do|*.action|rest/*</doPattern>
+
+   <!--是否过滤特殊的文件-->
+   <isOpenSpecialFilter>true</isOpenSpecialFilter>
+
+   <!--是否开启xss过滤-->
+   <isOpenXssFilter>true</isOpenXssFilter>
+
+   <!--是否开启sql过滤-->
+   <isOpenSqlFilter>true</isOpenSqlFilter>
+   
+   <!--xss过滤规则 prompt(||href=||src=||confirm(||expression=||style=||onlond=||||alert(||<script>||document.||<img||<a||onerror-->
+   <rule4XssRegEx><![CDATA[[pP][rR][oO][mM][pP][tT]\s*\(||[hH][rR][eE][fF]\s*=||[sS][rR][cC]\s*=||[cC][oO][nN][fF][iI][rR][mM]\s*\(||[eE][xX][pP][rR][eE][sS][sS][iI][oO][nN]\s*=||[sS][tT][yY][lL][eE]\s*=||[oO][nN][lL][oO][aA][dD]\s*=||(a|\u0061|\x61|\141)(l|\u006c|\x6c|\154)(e|\u0065|\x65|\145)(r|\u0072|\x72|\162)(t|\u0074|\x74|\164)\s*\(||(<|\u003c|\x3c)\s*(s|\u0073|\x73|\163)(c|\u0063|\x63|\143)(r|\u0072|\x72|\162)(i|\u0069|\x69|\151)(p|\u0070|\x70|\160)(t|\u0074|\x74|\164)\s*(>|\u003e|\x3e)||(d|\u0064|\x64|\144)(o|\u006f|\x6f|\157)(c|\u0063|\x63|\143)(u|\u0075|\x75|\165)(m|\u006d|\x6d|\155)(e|\u0065|\x65|\145)(n|\u006e|\x6e|\156)(t|\u0074|\x74|\164)\s*.||(<|\u003c|\x3c)\s*[iI][mM][gG]\s+||(<|\u003c|\x3c)\s*[aA]\s+||[oO][nN][eE][rR][rR][oO][rR]\s*=]]></rule4XssRegEx>
+   <rule4XssRegResult>ｐｒｏｍｐｔ（||ｈｒｅｆ＝||ｓｒｃ＝||ｃｏｎｆｉｒｍ（||ｅｘｐｒｅｓｓｉｏｎ＝||ｓｔｙｌｅ＝||ｏｎｌｏａｄ＝||ａｌｅｒｔ（||＜ｓｃｒｉｐｔ＞||ｄｏｃｕｍｅｎｔ．||＜ｉｍｇ||＜ａ||ｏｎｅｒｒｏｒ＝</rule4XssRegResult>
+   <!--sql过滤规有效-->
+   <rule4SqlRegEx>truncate|drop|or|alert</rule4SqlRegEx>
+   
+   <!--有效的url前缀-->
+    <validUrlPre>http://10.0.1.206|http://168.1.63.104</validUrlPre>
+   
+ </config>

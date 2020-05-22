@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DictDefServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-server-impl</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.server.impl</a> &gt; <span class="el_source">DictDefServiceImpl.java</span></div><h1>DictDefServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.server.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.newland.boss.kpi.dao.DictDefDao;
+import com.newland.boss.kpi.entity.DictDef;
+import com.newland.boss.kpi.server.DictDefService;
+
+/**
+ * @author jwk
+ */
+@Component
+<span class="fc" id="L19">public class DictDefServiceImpl implements DictDefService {</span>
+
+    @Autowired
+    private DictDefDao dictDefDao;
+<span class="fc" id="L23">    private static final Object LOCK = new Object();</span>
+    /**
+     * 数据字典缓存对象
+     */
+<span class="fc" id="L27">    private static volatile Map&lt;Integer, List&lt;DictDef&gt;&gt; dictMapCache = null;</span>
+
+    /**
+     * 查询字典中所有内容
+     *
+     * @return List&lt;DictDef&gt;
+     */
+    public List&lt;DictDef&gt; selectAllDictDef() {
+<span class="nc" id="L35">        checkCache();</span>
+<span class="nc" id="L36">        List&lt;DictDef&gt; dictDefs = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (Map.Entry&lt;Integer, List&lt;DictDef&gt;&gt; entry : dictMapCache.entrySet()) {</span>
+<span class="nc" id="L38">            List&lt;DictDef&gt; value = entry.getValue();</span>
+<span class="nc" id="L39">            dictDefs.addAll(value);</span>
+<span class="nc" id="L40">        }</span>
+<span class="nc" id="L41">        return dictDefs;</span>
+    }
+
+    /**
+     * 检查缓存对象
+     */
+    private void checkCache() {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (dictMapCache == null) {</span>
+<span class="fc" id="L49">            synchronized (LOCK) {</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">                if (dictMapCache == null) {</span>
+<span class="fc" id="L51">                    initCache();</span>
+                }
+<span class="fc" id="L53">            }</span>
+        }
+<span class="fc" id="L55">    }</span>
+
+    /**
+     * 初始化数据字典缓存
+     */
+    public void initCache() {
+<span class="fc" id="L61">        Map&lt;Integer, List&lt;DictDef&gt;&gt; dictMapCacheTemp = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L62">        List&lt;DictDef&gt; dictDefs = dictDefDao.selectAllDictDef();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (DictDef dictDef : dictDefs) {</span>
+<span class="fc" id="L64">            Integer dictClass = dictDef.getDictClass();</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            if (dictMapCacheTemp.containsKey(dictClass)) {</span>
+<span class="fc" id="L66">                List&lt;DictDef&gt; dictDefs1 = dictMapCacheTemp.get(dictClass);</span>
+<span class="fc" id="L67">                dictDefs1.add(dictDef);</span>
+<span class="fc" id="L68">            } else {</span>
+<span class="fc" id="L69">                List&lt;DictDef&gt; dictDefs1 = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L70">                dictDefs1.add(dictDef);</span>
+<span class="fc" id="L71">                dictMapCacheTemp.put(dictClass, dictDefs1);</span>
+            }
+<span class="fc" id="L73">        }</span>
+<span class="fc" id="L74">        dictMapCache = dictMapCacheTemp;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * 根据字典类别和字典条目ID查询字典条目名称
+     *
+     * @param dictClass 字典类别
+     * @param entryId   字典条目id
+     * @return 字典条目名称
+     */
+    public String getEntryNameByDictClassAndEntryId(Integer dictClass, Integer entryId) {
+<span class="nc" id="L85">        checkCache();</span>
+<span class="nc" id="L86">        List&lt;DictDef&gt; dictDefs = dictMapCache.get(dictClass);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (DictDef dictDef : dictDefs) {</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            if (entryId.equals(dictDef.getEntryId())) {</span>
+<span class="nc" id="L89">                return dictDef.getEntryName();</span>
+            }
+<span class="nc" id="L91">        }</span>
+<span class="nc" id="L92">        return null;</span>
+    }
+
+    /**
+     * 查询一个类数据字典下的所有定义
+     *
+     * @param dictClass 字典类别
+     * @return list&lt;字典表&gt;
+     */
+    public List&lt;DictDef&gt; getDictDefByDictClass(Integer dictClass) {
+<span class="fc" id="L102">        checkCache();</span>
+<span class="fc" id="L103">        return dictMapCache.get(dictClass);</span>
+    }
+
+    /**
+     * 根据字典类别和字典条目ID查询字典条目定义javabean
+     *
+     * @param dictClass 字典类别
+     * @param entryId   字典条目id
+     * @return 字典条目定义javabean
+     */
+    public DictDef getDictDefByDictClassAndEntryId(Integer dictClass, Integer entryId) {
+<span class="fc" id="L114">        checkCache();</span>
+<span class="fc" id="L115">        List&lt;DictDef&gt; dictDefs = dictMapCache.get(dictClass);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">        for (DictDef dictDef : dictDefs) {</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">            if (entryId.equals(dictDef.getEntryId())) {</span>
+<span class="fc" id="L118">                return dictDef;</span>
+            }
+<span class="nc" id="L120">        }</span>
+<span class="nc" id="L121">        return null;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

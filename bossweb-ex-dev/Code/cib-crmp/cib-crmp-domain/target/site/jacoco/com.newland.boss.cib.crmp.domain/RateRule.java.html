@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RateRule.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">RateRule.java</span></div><h1>RateRule.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+public class RateRule {
+	private Integer rateItemId;
+	private String rateRuleName;
+	private Integer cdrType;
+	private Integer rateType;
+	private Integer priority;
+	private Long fee;
+	private Long otherFee;
+	private Integer bandwidth;
+	private String startTime;
+	private String endTime;
+	private Integer rateStatus;
+	private String inureDate;
+	private String expireDate;
+	private String rateDesc;
+	private Integer operatorId;
+	private String createTime;
+	private Integer scope;
+	private Integer orgId;
+	
+	public RateRule() {
+<span class="fc" id="L24">		super();</span>
+<span class="fc" id="L25">	}</span>
+
+	public Integer getRateItemId() {
+<span class="fc" id="L28">		return rateItemId;</span>
+	}
+
+	public void setRateItemId(Integer rateItemId) {
+<span class="fc" id="L32">		this.rateItemId = rateItemId;</span>
+<span class="fc" id="L33">	}</span>
+
+	public String getRateRuleName() {
+<span class="fc" id="L36">		return rateRuleName;</span>
+	}
+
+	public void setRateRuleName(String rateRuleName) {
+<span class="fc" id="L40">		this.rateRuleName = rateRuleName;</span>
+<span class="fc" id="L41">	}</span>
+
+	public Integer getCdrType() {
+<span class="fc" id="L44">		return cdrType;</span>
+	}
+
+	public void setCdrType(Integer cdrType) {
+<span class="fc" id="L48">		this.cdrType = cdrType;</span>
+<span class="fc" id="L49">	}</span>
+
+	public Integer getRateType() {
+<span class="fc" id="L52">		return rateType;</span>
+	}
+
+	public void setRateType(Integer rateType) {
+<span class="fc" id="L56">		this.rateType = rateType;</span>
+<span class="fc" id="L57">	}</span>
+
+	public Integer getPriority() {
+<span class="fc" id="L60">		return priority;</span>
+	}
+
+	public void setPriority(Integer priority) {
+<span class="fc" id="L64">		this.priority = priority;</span>
+<span class="fc" id="L65">	}</span>
+
+	public Long getFee() {
+<span class="fc" id="L68">		return fee;</span>
+	}
+
+	public void setFee(Long fee) {
+<span class="fc" id="L72">		this.fee = fee;</span>
+<span class="fc" id="L73">	}</span>
+
+	public Long getOtherFee() {
+<span class="fc" id="L76">		return otherFee;</span>
+	}
+
+	public void setOtherFee(Long otherFee) {
+<span class="fc" id="L80">		this.otherFee = otherFee;</span>
+<span class="fc" id="L81">	}</span>
+
+	public Integer getBandwidth() {
+<span class="fc" id="L84">		return bandwidth;</span>
+	}
+
+	public void setBandwidth(Integer bandwidth) {
+<span class="fc" id="L88">		this.bandwidth = bandwidth;</span>
+<span class="fc" id="L89">	}</span>
+
+	public String getStartTime() {
+<span class="fc" id="L92">		return startTime;</span>
+	}
+
+	public void setStartTime(String startTime) {
+<span class="fc" id="L96">		this.startTime = startTime;</span>
+<span class="fc" id="L97">	}</span>
+
+	public String getEndTime() {
+<span class="fc" id="L100">		return endTime;</span>
+	}
+
+	public void setEndTime(String endTime) {
+<span class="fc" id="L104">		this.endTime = endTime;</span>
+<span class="fc" id="L105">	}</span>
+
+	public Integer getRateStatus() {
+<span class="fc" id="L108">		return rateStatus;</span>
+	}
+
+	public void setRateStatus(Integer rateStatus) {
+<span class="fc" id="L112">		this.rateStatus = rateStatus;</span>
+<span class="fc" id="L113">	}</span>
+
+	public String getInureDate() {
+<span class="fc" id="L116">		return inureDate;</span>
+	}
+
+	public void setInureDate(String inureDate) {
+<span class="fc" id="L120">		this.inureDate = inureDate;</span>
+<span class="fc" id="L121">	}</span>
+
+	public String getExpireDate() {
+<span class="fc" id="L124">		return expireDate;</span>
+	}
+
+	public void setExpireDate(String expireDate) {
+<span class="fc" id="L128">		this.expireDate = expireDate;</span>
+<span class="fc" id="L129">	}</span>
+
+	public String getRateDesc() {
+<span class="fc" id="L132">		return rateDesc;</span>
+	}
+
+	public void setRateDesc(String rateDesc) {
+<span class="fc" id="L136">		this.rateDesc = rateDesc;</span>
+<span class="fc" id="L137">	}</span>
+
+	public Integer getOperatorId() {
+<span class="fc" id="L140">		return operatorId;</span>
+	}
+
+	public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L144">		this.operatorId = operatorId;</span>
+<span class="fc" id="L145">	}</span>
+
+	public String getCreateTime() {
+<span class="fc" id="L148">		return createTime;</span>
+	}
+
+	public void setCreateTime(String createTime) {
+<span class="fc" id="L152">		this.createTime = createTime;</span>
+<span class="fc" id="L153">	}</span>
+
+	
+	public Integer getScope() {
+<span class="fc" id="L157">        return scope;</span>
+    }
+
+    public void setScope(Integer scope) {
+<span class="fc" id="L161">        this.scope = scope;</span>
+<span class="fc" id="L162">    }</span>
+
+    public Integer getOrgId() {
+<span class="fc" id="L165">		return orgId;</span>
+	}
+
+	public void setOrgId(Integer orgId) {
+<span class="fc" id="L169">		this.orgId = orgId;</span>
+<span class="fc" id="L170">	}</span>
+
+	@Override
+    public String toString() {
+<span class="fc" id="L174">        return &quot;RateRule [rateItemId=&quot; + rateItemId + &quot;, rateRuleName=&quot; + rateRuleName + &quot;, cdrType=&quot; + cdrType</span>
+                + &quot;, rateType=&quot; + rateType + &quot;, priority=&quot; + priority + &quot;, fee=&quot; + fee + &quot;, otherFee=&quot; + otherFee
+                + &quot;, bandwidth=&quot; + bandwidth + &quot;, startTime=&quot; + startTime + &quot;, endTime=&quot; + endTime + &quot;, rateStatus=&quot;
+                + rateStatus + &quot;, inureDate=&quot; + inureDate + &quot;, expireDate=&quot; + expireDate + &quot;, rateDesc=&quot; + rateDesc
+                + &quot;, operatorId=&quot; + operatorId + &quot;, createTime=&quot; + createTime + &quot;, scope=&quot; + scope + &quot;]&quot;;
+    }
+
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

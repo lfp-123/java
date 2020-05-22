@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+      ">
+
+	<mvc:annotation-driven />
+	
+	<bean id="analysisController" class="com.newland.boss.cib.crmp.settle.controller.AnalysisController" />
+	<bean id="callListController" class="com.newland.boss.cib.crmp.settle.controller.CallListController" />
+	<bean id="reportController" class="com.newland.boss.cib.crmp.settle.controller.ReportController" />
+	<!-- 被依赖的服务 -->
+    <bean id="billSummingOrgDayService" class="com.newland.boss.cib.crmp.settle.service.impl.BillSummingOrgDayServiceImpl"></bean>
+    <bean id="billSummingUsrDayService" class="com.newland.boss.cib.crmp.settle.service.impl.BillSummingUsrDayServiceImpl"></bean>
+    <bean id="queryCallListService" class="com.newland.boss.cib.crmp.settle.service.impl.QueryCallListServiceImpl"></bean>
+    <bean id="queryFeeListService" class="com.newland.boss.cib.crmp.settle.service.impl.QueryFeeListServiceImpl"></bean>
+    <bean id="appSession" class="com.newland.boss.kpi.server.impl.AppSessionImpl"></bean>
+    <bean id="orgService" class="com.newland.boss.kpi.server.impl.OrgServiceImpl"></bean>
+    <bean id="operatorService" class="com.newland.boss.kpi.admin.service.impl.OperatorServiceImpl"></bean>
+    <bean id="dictDefService" class="com.newland.boss.kpi.server.impl.DictDefServiceImpl"></bean>
+<!--    <bean id="session" class="javax.servlet.http.HttpSession"></bean> -->
+	
+	<!-- 被依赖的服务 -->
+    <bean id="billSummingOrgDayDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.BillSummingOrgDayDao" />
+    </bean>
+    <bean id="billSummingUsrDayDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.BillSummingUsrDayDao" />
+    </bean>
+    
+    <bean id="ratedCdrDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.RatedCdrDao" />
+    </bean>
+    <bean id="ratedDmaDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.RatedDmaDao" />
+    </bean>
+    <bean id="ratedNetworkDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.RatedNetworkDao" />
+    </bean>
+    <bean id="operatorDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OperatorDao" />
+    </bean>
+    <bean id="queryFeeListDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.settle.dao.QueryFeeListDao" />
+    </bean>
+	<bean id="session" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="javax.servlet.http.HttpSession" />
+    </bean>
+    <bean id="request" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="javax.servlet.http.HttpServletRequest" />
+    </bean>
+    <bean id="response" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="javax.servlet.http.HttpServletResponse" />
+    </bean>
+  	<bean id="orgDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.dao.OrgDao" />
+    </bean>
+    <bean id="organizationDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OrganizationDao" />
+    </bean>
+  	<bean id="dictDefDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.dao.DictDefDao" />
+    </bean>
+  	<bean id="rateRuleDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.cib.crmp.dao.RateRuleDao" />
+    </bean>
+</beans>

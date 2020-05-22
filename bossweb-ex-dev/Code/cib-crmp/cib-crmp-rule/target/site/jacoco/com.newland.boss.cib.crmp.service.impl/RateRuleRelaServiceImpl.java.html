@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RateRuleRelaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-rule</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.service.impl</a> &gt; <span class="el_source">RateRuleRelaServiceImpl.java</span></div><h1>RateRuleRelaServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.service.impl;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.cib.crmp.common.JxlTool;
+import com.newland.boss.cib.crmp.dao.RateRuleRelaDao;
+import com.newland.boss.cib.crmp.domain.RateRuleRela;
+import com.newland.boss.cib.crmp.domain.RateRuleRelaView;
+import com.newland.boss.cib.crmp.service.RateRuleRelaService;
+import com.newland.boss.kpi.entity.DictDef;
+import com.newland.boss.kpi.server.DictDefService;
+
+import jxl.write.WriteException;
+
+@Component
+<span class="fc" id="L33">public class RateRuleRelaServiceImpl implements RateRuleRelaService {</span>
+<span class="fc" id="L34">    private SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+<span class="fc" id="L35">    private SimpleDateFormat filesdf = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);</span>
+    @Autowired
+    private RateRuleRelaDao rateRuleRelaDao;
+
+    @Autowired
+    private DictDefService dictDefService;
+
+<span class="fc" id="L42">    private static final Logger log = LogManager.getLogger(RateRuleRelaServiceImpl.class);</span>
+    private static final String STATUS = &quot;status&quot;;
+    private static final String INFO = &quot;info&quot;;
+    private static final String FILENAME = &quot;filename&quot;;
+    private static final String SUCCESS = &quot;success&quot;;
+    private static final String FAIL = &quot;fail&quot;;
+
+    /**
+     * 根据ID查询数据字典
+     * 
+     * @return Map
+     */
+    public Map&lt;Integer, String&gt; getDicMap(Integer dicId) {
+<span class="fc" id="L55">        Map&lt;Integer, String&gt; dicMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L56">        List&lt;DictDef&gt; dicList = dictDefService.getDictDefByDictClass(dicId);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (DictDef dictDef : dicList) {</span>
+<span class="fc" id="L58">            dicMap.put(dictDef.getEntryId(), dictDef.getEntryName());</span>
+<span class="fc" id="L59">        }</span>
+<span class="fc" id="L60">        return dicMap;</span>
+    }
+
+    @Override
+    public Map&lt;String, String&gt; addRateRuleRela(RateRuleRelaView rateRuleRelaView) {
+<span class="fc" id="L65">        Map&lt;String, String&gt; resultMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L66">        resultMap.put(&quot;ID&quot;, rateRuleRelaView.getRateItemId().toString());</span>
+<span class="fc" id="L67">        RateRuleRela rateRuleRela = viewToRela(changeDateFormat(rateRuleRelaView));</span>
+        // 检查规则是否存在
+<span class="fc" id="L69">        RateRuleRela rela = rateRuleRelaDao.selectRateRuleRela(rateRuleRela);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (rela != null) {</span>
+<span class="fc" id="L71">            rateRuleRela.setRateRuleRelaId(rela.getRateRuleRelaId());</span>
+<span class="fc" id="L72">            rateRuleRelaDao.deleteRateRuleRela(rela.getRateRuleRelaId());</span>
+<span class="fc" id="L73">            rateRuleRelaDao.insertRateRuleRela(rateRuleRela);</span>
+<span class="fc" id="L74">            resultMap.put(STATUS, &quot;配置更新成功。&quot;);</span>
+        } else {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (rateRuleRelaDao.selectRuleRelaCross(changeDateFormat(rateRuleRelaView)).isEmpty()) {</span>
+                // 规则不存在同类型时间交叉性
+<span class="nc" id="L78">                rateRuleRelaDao.insertRateRuleRela(rateRuleRela);</span>
+<span class="nc" id="L79">                resultMap.put(STATUS, &quot;添加成功。&quot;);</span>
+            } else {
+<span class="nc" id="L81">                resultMap.put(STATUS, &quot;存在同种规则，添加失败&quot;);</span>
+            }
+        }
+<span class="fc" id="L84">        return resultMap;</span>
+    }
+
+    @Override
+    public void removeRateRuleRela(String rateRuleRelaJson) {
+<span class="fc" id="L89">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L90">        JsonElement jsonEl = jsonParser.parse(rateRuleRelaJson);</span>
+<span class="fc" id="L91">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L92">        JsonArray rateRuleRelaArray = jsonObj.get(&quot;rateRuleRelaIdArray&quot;).getAsJsonArray(); // 选中的资费规则分配</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (int i = 0; i &lt; rateRuleRelaArray.size(); i++) {</span>
+<span class="fc" id="L94">            Integer rateRuleRelaId = rateRuleRelaArray.get(i).getAsInt();</span>
+<span class="fc" id="L95">            rateRuleRelaDao.deleteRateRuleRela(rateRuleRelaId);</span>
+        }
+
+<span class="fc" id="L98">    }</span>
+
+    @Override
+    public List&lt;RateRuleRelaView&gt; selectRateRuleRelaByObjectId(RateRuleRelaView rateRuleRelaView) {
+<span class="fc" id="L102">        return rateRuleRelaDao.selectRateRuleRelaByObjectId(rateRuleRelaView);</span>
+    }
+
+    @Override
+    public Map&lt;String, String&gt; exportRateRuleRela(List&lt;RateRuleRelaView&gt; list) {
+<span class="fc" id="L107">        Map&lt;String, String&gt; resultMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L108">        Map&lt;Integer, String&gt; statusMap = getDicMap(1004);</span>
+<span class="fc" id="L109">        Map&lt;Integer, String&gt; cdrTypeMap = getDicMap(1001);</span>
+<span class="fc" id="L110">        String title = &quot;RateRuleRela&quot; + filesdf.format(new Date()) + &quot;.xls&quot;;</span>
+<span class="fc" id="L111">        String path = System.getProperty(&quot;user.dir&quot;) + &quot;/downloadTemp/&quot; + title;</span>
+<span class="fc" id="L112">        String[] columns = { &quot;编号&quot;, &quot;单位编号&quot;, &quot;单位名称&quot;, &quot;规则ID&quot;, &quot;规则名称&quot;, &quot;资费类型&quot;, &quot;分配生效时间&quot;, &quot;分配失效时间&quot;, &quot;启用状态&quot; };</span>
+<span class="fc" id="L113">        boolean[] numberFlag = { false, false, false, false, false, false, false, false, false };</span>
+<span class="fc" id="L114">        List&lt;String[]&gt; dataList = new ArrayList&lt;&gt;();</span>
+        String operationName;
+        String operationId;
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (RateRuleRelaView r : list) {</span>
+
+<span class="fc" id="L119">            String[] date = { String.valueOf(r.getRateRuleRelaId()), String.valueOf(r.getOrgId()),</span>
+<span class="fc" id="L120">                    String.valueOf(r.getOrgName()), String.valueOf(r.getRateItemId()),</span>
+<span class="fc" id="L121">                    String.valueOf(r.getRateRuleName()), cdrTypeMap.get(r.getCdrType()), sdf.format(r.getInureDate()),</span>
+<span class="fc" id="L122">                    sdf.format(r.getExpireDate()), statusMap.get(r.getStatus()) };</span>
+<span class="fc" id="L123">            dataList.add(date);</span>
+<span class="fc" id="L124">        }</span>
+        try {
+<span class="fc" id="L126">            JxlTool.exportExcel(path, columns, dataList, numberFlag);</span>
+<span class="fc" id="L127">            resultMap.put(STATUS, SUCCESS);</span>
+<span class="fc" id="L128">            resultMap.put(FILENAME, URLEncoder.encode(title, &quot;UTF-8&quot;));</span>
+<span class="nc" id="L129">        } catch (WriteException | IOException e) {</span>
+<span class="nc" id="L130">            log.debug(e.getMessage());</span>
+<span class="nc" id="L131">            resultMap.put(STATUS, FAIL);</span>
+<span class="nc" id="L132">            resultMap.put(INFO, e.getMessage());</span>
+<span class="fc" id="L133">        }</span>
+<span class="fc" id="L134">        return resultMap;</span>
+    }
+
+    @Override
+    public void editRateRuleRelaStatus(String rateRuleJson) {
+<span class="fc" id="L139">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L140">        JsonElement jsonEl = jsonParser.parse(rateRuleJson);</span>
+<span class="fc" id="L141">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L142">        JsonArray rateRuleRelaArray = jsonObj.get(&quot;rateRuleRelaIdArray&quot;).getAsJsonArray(); // 选中的rela</span>
+<span class="fc" id="L143">        Integer status = jsonObj.get(STATUS).getAsInt();// 要改变的规则状态</span>
+<span class="fc" id="L144">        RateRuleRela rateRuleRela = new RateRuleRela();</span>
+<span class="fc" id="L145">        rateRuleRela.setStatus(status);</span>
+        // 循环更新规则状态
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        for (int i = 0; i &lt; rateRuleRelaArray.size(); i++) {</span>
+<span class="fc" id="L148">            Integer rateRuleRelaId = rateRuleRelaArray.get(i).getAsInt();</span>
+<span class="fc" id="L149">            rateRuleRela.setRateRuleRelaId(rateRuleRelaId);</span>
+<span class="fc" id="L150">            rateRuleRelaDao.updateRateRuleRelaStatus(rateRuleRela);</span>
+        }
+<span class="fc" id="L152">    }</span>
+
+    @Override
+    public void removeRateRuleRelaByRateItemId(Integer rateItemId) {
+<span class="fc" id="L156">        rateRuleRelaDao.deleteRateRuleRelaByRateItemId(rateItemId);</span>
+<span class="fc" id="L157">    }</span>
+
+    @Override
+    public List&lt;RateRuleRela&gt; selectRateRuleRelaByRateItemId(Integer rateItemId) {
+<span class="fc" id="L161">        return rateRuleRelaDao.selectRateRuleRelaByRateItemId(rateItemId);</span>
+    }
+
+    @Override
+    public void removeRateRuleRelaByObjectId(Integer objectId) {
+<span class="fc" id="L166">        rateRuleRelaDao.deleteRateRuleRelaByObjectId(objectId);</span>
+<span class="fc" id="L167">    }</span>
+
+    @Override
+    public List&lt;RateRuleRelaView&gt; searchRateRuleRela(RateRuleRelaView rateRuleRelaView, Integer[] orgIdList) {
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (rateRuleRelaView.getRateRuleName() != null) {</span>
+<span class="fc" id="L172">            rateRuleRelaView.setRateRuleName(rateRuleRelaView.getRateRuleName().replaceAll(&quot;_&quot;, &quot;/_&quot;).replaceAll(&quot;%&quot;, &quot;/%&quot;));</span>
+        }
+<span class="fc" id="L174">        return rateRuleRelaDao.selectRateRuleRelaView(changeDateFormat(rateRuleRelaView), orgIdList);</span>
+    }
+
+    /**
+     * 该方法用于解决前台传回来的时间，默认加8小时问题
+     * 
+     * @param
+     * @return
+     */
+    private RateRuleRelaView changeDateFormat(RateRuleRelaView rateRuleRelaView) {
+
+        try {
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">            if (rateRuleRelaView.getInureDate() != null) {</span>
+<span class="fc" id="L187">                rateRuleRelaView.setInureDate(sdf.parse(sdf.format(rateRuleRelaView.getInureDate())));</span>
+            }
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">            if (rateRuleRelaView.getExpireDate() != null) {</span>
+<span class="fc" id="L190">                rateRuleRelaView.setExpireDate(sdf.parse(sdf.format(rateRuleRelaView.getExpireDate())));</span>
+            }
+<span class="nc" id="L192">        } catch (ParseException e) {</span>
+<span class="nc" id="L193">            log.debug(e.getMessage());</span>
+<span class="fc" id="L194">        }</span>
+<span class="fc" id="L195">        return rateRuleRelaView;</span>
+    }
+
+    private RateRuleRela viewToRela(RateRuleRelaView rateRuleRelaView) {
+<span class="fc" id="L199">        RateRuleRela rateRuleRela = new RateRuleRela();</span>
+<span class="fc" id="L200">        rateRuleRela.setCdrType(rateRuleRelaView.getCdrType());</span>
+<span class="fc" id="L201">        rateRuleRela.setObjectType(rateRuleRelaView.getObjectType());</span>
+<span class="fc" id="L202">        rateRuleRela.setObjectId(rateRuleRelaView.getObjectId());</span>
+<span class="fc" id="L203">        rateRuleRela.setRateItemId(rateRuleRelaView.getRateItemId());</span>
+<span class="fc" id="L204">        rateRuleRela.setStatus(rateRuleRelaView.getStatus());</span>
+<span class="fc" id="L205">        rateRuleRela.setInureDate(rateRuleRelaView.getInureDate());</span>
+<span class="fc" id="L206">        rateRuleRela.setExpireDate(rateRuleRelaView.getExpireDate());</span>
+<span class="fc" id="L207">        rateRuleRela.setOperatorId(rateRuleRelaView.getModifyOperator());</span>
+<span class="fc" id="L208">        rateRuleRela.setCreateDate(rateRuleRelaView.getCreateDate());</span>
+<span class="fc" id="L209">        return rateRuleRela;</span>
+    }
+
+    public RateRuleRelaView RelaToview(RateRuleRela rateRuleRela) {
+<span class="nc" id="L213">        RateRuleRelaView rateRuleRelaView = new RateRuleRelaView();</span>
+<span class="nc" id="L214">        rateRuleRelaView.setCdrType(rateRuleRela.getCdrType());</span>
+<span class="nc" id="L215">        rateRuleRelaView.setObjectType(rateRuleRela.getObjectType());</span>
+<span class="nc" id="L216">        rateRuleRelaView.setObjectId(rateRuleRela.getObjectId());</span>
+<span class="nc" id="L217">        rateRuleRelaView.setRateItemId(rateRuleRela.getRateItemId());</span>
+<span class="nc" id="L218">        rateRuleRelaView.setStatus(rateRuleRela.getStatus());</span>
+<span class="nc" id="L219">        rateRuleRelaView.setInureDate(rateRuleRela.getInureDate());</span>
+<span class="nc" id="L220">        rateRuleRelaView.setExpireDate(rateRuleRela.getExpireDate());</span>
+<span class="nc" id="L221">        rateRuleRelaView.setCreateDate(rateRuleRela.getCreateDate());</span>
+<span class="nc" id="L222">        return rateRuleRelaView;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

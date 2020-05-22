@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<meta name="referrer" content="no-referrer">
+<head>
+<meta charset="UTF-8">
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style>
+body {
+	padding: 10px 20px 10px 10px;
+}
+table tr {
+    height: 29px;
+}
+.modal {
+	background-color: rgba(102, 102, 102, 0.85);
+}
+.container {
+	padding: 0px 0px 0px 0px;
+	margin-top: 30px;
+	width: 598px;
+	box-shadow: 0 0 20px #888888;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+</style>
+<title>资费重算管理</title>
+</head>
+<body ng-app="recalculationApp" ng-controller="recalculationController" ng-init="url='../rest/queryRecalculation'" ng-cloak>
+<div>
+<div> 
+<div style="display: inline-block; width: 100%;" class="pd-5 mt-20">
+	资源类型：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<select class="input-text" ng-model="data.cdrType">
+			<option ng-repeat="x in resourceTypes" value="{{x.entryId}}">{{x.entryName}}</option>
+		</select>
+	</div>
+	任务类型：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<select class="input-text" ng-model="data.recalcType">
+			<option ng-repeat="x in recalcTypes" value="{{x.entryId}}">{{x.entryName}}</option>
+		</select>
+	</div>
+	重算月份：<input type="text" onfocus="WdatePicker({ dateFmt: 'yyyyMM', readOnly:true, isShowToday: false, isShowClear: false, maxDate:'%y-%M' })" class="input-text Wdate" style="display: inline-block; margin-right: 10px; width: 10%; cursor: pointer;" ng-model="data.billMonth" onChange="">
+	查询周期：<div style="display: inline-block; margin-right: 10px; width: 19%;">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')||\'%y-%M-%d\'}', readOnly:true})" id="beginDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="beginDate" onChange="">
+		-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDate\')}',maxDate:'%y-%M-%d', readOnly:true})" id="endDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange="">
+	</div>
+	<div class="r" style="display: inline-block;">
+		<!-- <span><button data-toggle="modal" data-target="#addModal" class="btn btn-primary"><i class="Hui-iconfont">&#xe604;</i> 新增</button></span> -->
+		<span><button ng-click="openModel()" class="btn btn-primary"><i class="Hui-iconfont">&#xe604;</i> 新增</button></span>
+		<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="Hui-iconfont">&#xe709;</i> 查询</button></span>
+		<span><button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="Hui-iconfont">&#xe68f;</i> 重置</button></span>
+	</div>
+</div>
+</div>
+<div class="mt-20">
+	<table id="table-cdr" class="table-condensed table-border table-hover">
+			<thead>
+				<tr class="text-c"> 
+					<th>重算月份</th>
+					<th>资源类型</th>
+					<th>任务类型</th>
+					<th>任务ID</th>
+					<th>任务进度</th>
+					<th>任务状态</th>
+					<th>发起工号</th>
+					<th>任务插入时间</th>
+					<th>任务完成时间</th>
+				</tr>
+			</thead>
+			<tbody id="main01">
+				<tr class="text-c" ng-repeat="x in list">
+					<td>{{x.billMonth}}</td>
+					<td>{{x.cdrType}}</td>
+					<td>{{x.recalcType}}</td>
+					<td>{{x.recalcTaskId}}</td>
+					<td>{{x.recalcProgress}}</td>
+					<td>{{x.status}}</td>
+					<td>{{x.operatorId}}</td>
+					<td>{{x.createTime}}</td>
+					<td>{{x.endTime}}</td>
+				</tr>
+			</tbody>
+		</table>
+</div>
+<div page-directive style="margin-top: 10px;"></div>
+<div style="margin-top: 10px; width: 598px;">
+</div>
+	<!--模态增加窗口-->
+ 	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-content container">
+			<div class="ng-scope">
+			<div class="modal-header" style="width:100%">
+				<h4 class="modal-title" align="center">添加重算任务</h4>
+			</div>
+			<div class="modal-body">
+        		<div align="center">
+					<div class="form-horizontal">
+  					<div class="form-group">
+    					<label for="roleName" class="col-sm-3 control-label">资源类型：</label>
+    					<div class="col-sm-8">
+							<select class="form-control" ng-model="data.addCdrType">
+								<option ng-repeat="x in resourceTypes" value="{{x.entryId}}">{{x.entryName}}</option>
+							</select>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="roleStatus" class="col-sm-3 control-label">任务类型：</label>
+    					<div class="col-sm-8">
+							<select class="form-control" ng-model="data.addRecalcType">
+								<option ng-repeat="x in recalcTypes" value="{{x.entryId}}">{{x.entryName}}</option>
+							</select>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="roleStatus" class="col-sm-3 control-label">重算月份：</label>
+    					<div class="col-sm-8">
+      						<input type="text" onfocus="WdatePicker({ dateFmt: 'yyyyMM', isShowToday: false, readOnly:true, isShowClear: false, maxDate:'%y-%M' })" class="form-control Wdate" style="display: inline-block; margin-right: 10px; cursor: pointer;" ng-model="data.addBillMonth" onChange="">
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="roleDesc" class="col-sm-3 control-label">备注：</label>
+    					<div id="orgTreeInput" class="col-sm-8">
+							<textarea id="roleDesc" class="form-control" rows="3" ng-model="data.addDesc"></textarea>
+						</div>
+  					</div>
+					</div>
+        		</div>
+    		</div>
+			<div class="modal-footer" style="width:100%">
+        		<button class="btn btn-primary" ng-click="recalculate()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    		</div>
+    		</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="../resources/recalculation/controller/recalculation.js"></script>
+<script type="text/javascript" src="../skeleton/lib/page-bar.js"></script>
+</body>
+</html>

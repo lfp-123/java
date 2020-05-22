@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperatorAuthController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.controller</a> &gt; <span class="el_source">OperatorAuthController.java</span></div><h1>OperatorAuthController.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.kpi.admin.model.OperatorAuth;
+import com.newland.boss.kpi.admin.service.OperatorAuthService;
+import com.newland.boss.kpi.entity.OperateLog;
+import com.newland.boss.kpi.server.OperateLogService;
+
+@RestController
+<span class="fc" id="L20">public class OperatorAuthController {</span>
+	
+	@Autowired
+	private OperatorAuthService operatorAuthService;
+	
+	@Autowired
+	private OperateLogService operateLogService;
+	
+	//根据操作员ID来查找操作员资源关系
+	@RequestMapping(value = &quot;/showOperAuthByOperId&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String showOperAuthByOperId(@RequestBody OperatorAuth operatorAuth){
+		
+<span class="fc" id="L32">		List&lt;OperatorAuth&gt; operAuthList = operatorAuthService.findResourceOfOperator(operatorAuth);</span>
+<span class="fc" id="L33">		List&lt;Integer&gt; resourceIdList = new ArrayList&lt;Integer&gt;();</span>
+		
+<span class="fc bfc" id="L35" title="All 2 branches covered.">		for(int i = 0 ; i &lt; operAuthList.size() ; i++) {</span>
+<span class="fc" id="L36">			resourceIdList.add(operAuthList.get(i).getResourceId()); </span>
+		}
+		
+<span class="fc" id="L39">		Gson gson = new Gson();</span>
+<span class="fc" id="L40">		String respJson = gson.toJson(resourceIdList);</span>
+<span class="fc" id="L41">		return respJson;</span>
+	}
+	
+	//编辑操作员资源关系
+	@RequestMapping(value = &quot;/editOperatorAuth&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String editOperatorAuth(@RequestBody String operAuthJson){
+		
+<span class="fc" id="L48">		operatorAuthService.addOperatorAuth(operAuthJson);</span>
+		
+<span class="fc" id="L50">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L51">		JsonElement jsonEl = jsonParser.parse(operAuthJson);</span>
+<span class="fc" id="L52">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L53">		Integer modifyOperatorId = jsonObj.get(&quot;modifyOperatorId&quot;).getAsInt();</span>
+		
+		//添加操作日志到记录
+<span class="fc" id="L56">		OperateLog operateLog = new OperateLog();</span>
+<span class="fc" id="L57">		operateLog.setOperatorId(modifyOperatorId);</span>
+<span class="fc" id="L58">		operateLog.setOperateModule(12);</span>
+<span class="fc" id="L59">		operateLog.setOperateType(3);</span>
+<span class="fc" id="L60">		operateLog.setOperateDesc(&quot;update operAuth&quot;);</span>
+<span class="fc" id="L61">		operateLogService.addLog(operateLog);</span>
+		
+<span class="fc" id="L63">		return null;</span>
+	}
+	
+	//显示一组操作员资源关系 
+	@RequestMapping(value = &quot;/showAnOperatorAuth&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String showAnOperatorAuth(@RequestBody OperatorAuth operatorAuth){
+		
+<span class="fc" id="L70">		OperatorAuth operAuth = operatorAuthService.findAnOperatorAuth(operatorAuth);</span>
+		
+<span class="fc" id="L72">		Gson gson = new Gson(); </span>
+<span class="fc" id="L73">		String respJson = gson.toJson(operAuth);</span>
+<span class="fc" id="L74">		return respJson;</span>
+	}
+	
+	//删除一组操作员资源关系 
+	@RequestMapping(value = &quot;/removeOperatorAuth&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String removeOperatorAuth(@RequestBody String operAuthJson){
+		
+<span class="fc" id="L81">		operatorAuthService.removeOperatorAuth(operAuthJson); </span>
+		
+<span class="fc" id="L83">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L84">		JsonElement jsonEl = jsonParser.parse(operAuthJson);</span>
+<span class="fc" id="L85">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L86">		Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+		
+<span class="fc" id="L88">		OperatorAuth operAuth = new OperatorAuth();</span>
+<span class="fc" id="L89">		operAuth.setOperatorId(operatorId);</span>
+<span class="fc" id="L90">		List&lt;OperatorAuth&gt; operAuthList = operatorAuthService.findResourceOfOperator(operAuth);</span>
+<span class="fc" id="L91">		Gson gson = new Gson();</span>
+<span class="fc" id="L92">		String respJson = gson.toJson(operAuthList);</span>
+<span class="fc" id="L93">		return respJson;	</span>
+		
+	}
+		
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

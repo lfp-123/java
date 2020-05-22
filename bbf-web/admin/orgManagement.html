@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="orgManage">
+<head>
+	<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>机构管理页面</title>
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+</head>
+<body ng-controller="orgController as orgCtrl" style="padding-right: 10px;" ng-cloak>
+	<div class="col-xs-12 col-md-12 col-md-offset-1">
+
+	<div class="row" style="margin-bottom: 20px;">
+		<div class="col-xs-12 col-sm-6 col-md-5">
+			<div style="border: 1px solid #ccc; border-radius: 5px;">
+				<div class="modal-header">
+					<div class="form-inline" align="right">
+						<label for="dept">过滤条件：</label> 
+						<div class="form-group">
+							<input type="text" id="predicate" class="input-text" ng-model="predicate">
+						</div>
+						<button class="btn btn-primary" type="button" ng-click="resetFilter()"><i class="Hui-iconfont">&#xe68f;</i> 重置</button>
+					</div>
+				</div>
+				<div style="height: 350px; overflow-y: auto;">
+			  		<treecontrol class="tree-classic"  
+						tree-model="orgData"  
+		 				options="treeOptions"  
+		 				on-selection="showSelected(node)"  
+						selected-node="node"
+						expanded-nodes="expandedNodes"
+						filter-expression="predicate" 
+						filter-comparator="comparator">  
+						{{node.orgName}}
+					</treecontrol>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="openModel('add')"><i class="Hui-iconfont">&#xe604;</i> 添加</button>
+       				<button class="btn btn-primary" ng-click="openModel('modify')"><i class="Hui-iconfont">&#xe60c;</i> 修改</button>
+       				<button class="btn btn-primary" data-toggle="modal" ng-click="organizationDelete()"><i class="Hui-iconfont">&#xe60b;</i> 删除</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-5">
+			<div style="border: 1px solid #ccc; border-radius: 5px;">
+				<div class="modal-header">
+					<h3 class="modal-title" align="center">机构信息</h3>
+				</div>
+				<div class="modal-body">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">机构编号：</label>
+							<div class="col-sm-8">
+						    	<input type="text" class="form-control" ng-model="node.orgId" disabled="disabled">
+						    </div>
+						</div>
+										
+						<div class="form-group">
+							<label class="col-sm-3 control-label">机构名称：</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="node.orgName" disabled="disabled">
+							</div>
+						</div>
+					
+						<div class="form-group">
+							<label class="col-sm-3 control-label">机构状态：</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="node.orgStatusName" disabled="disabled">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">创建时间：</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" ng-model="node.createTime" disabled="disabled">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">机构描述：</label>
+							<div class="col-sm-8">
+								<textarea class="form-control" rows="3" ng-model="node.orgDesc" disabled="disabled">
+		    					</textarea>
+		    				</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    </div>
+    
+	<script type="text/ng-template" id="modify.html"> 
+		<div>
+			<div class="modal-header">
+				<h4 class="modal-title" align="center">修改机构</h4>
+			</div>
+			<div class="modal-body">
+        		<div align="center">
+					<div class="form-horizontal">
+ 					<div class="form-group">
+    					<label for="orgId" class="col-sm-3 control-label">机构编号：</label>
+    					<div class="col-sm-8">
+      						<input type="text" id="orgId" class="form-control" ng-model="orgInfo.orgId" disabled="disabled">
+    					</div>
+  					</div>
+  					<div class="form-group">
+    					<label for="orgName" class="col-sm-3 control-label">机构名称：</label>
+    					<div class="col-sm-8">
+      						<input type="text" id="orgName" class="form-control" ng-model="orgInfo.orgName" placeholder="必填" maxlength="32">
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgStatus" class="col-sm-3 control-label">机构状态：</label>
+    					<div class="col-sm-8">
+      						<select ng-model="orgInfo.orgStatus" id="orgStatus" class="form-control" ng-options='x.entryId as x.entryName for x in orgStatusDict'>
+							</select>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgDesc" class="col-sm-3 control-label">机构描述：</label>
+    					<div id="orgTreeInput" class="col-sm-8">
+							<textarea id="orgDesc" class="form-control" rows="3" ng-model="orgInfo.orgDesc" maxlength="256"></textarea>
+						</div>
+  					</div>
+					</div>
+        		</div>
+    		</div>
+			<div class="modal-footer">
+        		<button class="btn btn-primary" ng-click="organizationUpdate()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    		</div>
+		</div>
+	</script>
+	
+	<script type="text/ng-template" id="add.html"> 
+		<div>
+			<div class="modal-header">
+				<h4 class="modal-title" align="center">添加机构</h4>
+			</div>
+			<div class="modal-body">
+        		<div align="center">
+					<div class="form-horizontal">
+  					<div class="form-group">
+    					<label for="orgName" class="col-sm-3 control-label">机构名称：</label>
+    					<div class="col-sm-8">
+      						<input type="text" id="orgName" class="form-control" ng-model="newOrgInfo.orgName" placeholder="必填">
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgStatus" class="col-sm-3 control-label">机构状态：</label>
+    					<div class="col-sm-8">
+      						<select ng-model="newOrgInfo.orgStatus" id="orgStatus" class="form-control" ng-options='x.entryId as x.entryName for x in orgStatusDict'>
+							</select>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgDesc" class="col-sm-3 control-label">机构描述：</label>
+    					<div id="orgTreeInput" class="col-sm-8">
+							<textarea id="orgDesc" class="form-control" rows="3" ng-model="newOrgInfo.orgDesc" maxlength="256"></textarea>
+						</div>
+  					</div>
+					</div>
+        		</div>
+    		</div>
+			<div class="modal-footer">
+        		<button class="btn btn-primary" ng-click="addOrg()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    		</div>
+		</div>
+	</script>
+	<script type="text/javascript" src="../resources/admin/controller/manageOrg.js"></script>
+</body>
+</html>

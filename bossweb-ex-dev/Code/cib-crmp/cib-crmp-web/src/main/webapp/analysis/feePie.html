@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>费用饼状图</title>
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style type="text/css">
+.blankDiv {
+	margin-right: 20px;
+	display: inline;
+}
+.echarsMainDiv {
+	margin: 40px auto;
+}
+</style>
+</head>
+<body ng-app="pieApp" ng-controller="pieCtrl" style="margin-right: 10px;" ng-cloak>
+	<div class="form-inline" align="right">
+		<label for="org" ng-show="operatorLevel == 3">单位名称:</label> 
+		<div class="form-group" style="min-width:100px;" ng-show="operatorLevel == 3">
+			<div align="left" ng-dropdown-multiselect="" id="org" options="orgs" selected-model="selectedOrg" extra-settings="orgsSettings" translation-texts="orgTexts"></div>
+		</div>
+		<div class="blankDiv"></div>
+		<label for="startDate">分析周期:</label>
+		<div class="form-group">
+			<input id="startDate" type="text" class="input-text Wdate" readonly="readonly" ng-model="startDate" onclick="WdatePicker()" onchange="">
+		</div>
+		<label for="endDate"> - </label>
+		<div class="form-group">
+			<input id="endDate" type="text"	class="input-text Wdate" ng-model="endDate" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd', isShowClear:false, readOnly:true, minDate:'#F{$dp.$D(\'startDate\')}'})" onchange="">
+		</div>
+		<div class="blankDiv"></div>
+		<button id="searchBtn" type="button" class="btn btn-primary" ng-click="analysis()"><i class="Hui-iconfont">&#xe709;</i> 分析</button>
+		<button id="resetBtn" type="button" class="btn btn-primary" ng-click="reset()"><i class="Hui-iconfont">&#xe68f;</i> 重置</button>
+	</div>
+	<div style="height: 400px" class="echarsMainDiv">
+		<feepie id="pieMain" legend="legend" sdata="sdata"></feepie>
+	</div>
+	<script type="text/javascript" src="../resources/analysis/controller/common.js"></script>
+	<script type="text/javascript" src="../resources/analysis/controller/feePie.js"></script>
+</body>
+</html>

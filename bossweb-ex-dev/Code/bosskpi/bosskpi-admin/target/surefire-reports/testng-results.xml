@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="5" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="4536" started-at="2020-05-13T08:31:35Z" finished-at="2020-05-13T08:31:39Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="4536" started-at="2020-05-13T08:31:35Z" finished-at="2020-05-13T08:31:39Z">
+      <class name="com.newland.boss.kpi.admin.util.MD5UtilTest">
+        <test-method status="PASS" signature="f()[pri:0, instance:com.newland.boss.kpi.admin.util.MD5UtilTest@1bf10539]" name="f" duration-ms="1" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- f -->
+      </class> <!-- com.newland.boss.kpi.admin.util.MD5UtilTest -->
+      <class name="com.newland.boss.kpi.admin.OperatorAuthControllerTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="init" is-config="true" duration-ms="35" started-at="2020-05-13T08:31:35Z" finished-at="2020-05-13T08:31:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="4" started-at="2020-05-13T08:31:35Z" finished-at="2020-05-13T08:31:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="3900" started-at="2020-05-13T08:31:35Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="setup" is-config="true" duration-ms="214" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testEditOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testEditOperatorAuth()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="testEditOperatorAuth" duration-ms="71" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEditOperatorAuth -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testEditOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="7" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testRemoveOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testRemoveOperatorAuth()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="testRemoveOperatorAuth" duration-ms="259" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRemoveOperatorAuth -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testRemoveOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testShowAnOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testShowAnOperatorAuth()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="testShowAnOperatorAuth" duration-ms="5" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowAnOperatorAuth -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testShowAnOperatorAuth()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testShowOperAuthByOperId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testShowOperAuthByOperId()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="testShowOperAuthByOperId" duration-ms="2" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowOperAuthByOperId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.kpi.admin.OperatorAuthControllerTest.testShowOperAuthByOperId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.kpi.admin.OperatorAuthControllerTest@30437e9c]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:31:39Z" finished-at="2020-05-13T08:31:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.kpi.admin.OperatorAuthControllerTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <mvc:annotation-driven />
+    
+    <bean id="operatorAuthController" class="com.newland.boss.kpi.admin.controller.OperatorAuthController" />
+    <bean id="operatorController" class="com.newland.boss.kpi.admin.controller.OperatorController" />
+    <bean id="operatorRoleController" class="com.newland.boss.kpi.admin.controller.OperatorRoleController" />
+    <bean id="operOrgRelaController" class="com.newland.boss.kpi.admin.controller.OperOrgRelaController" />
+    <bean id="organizationController" class="com.newland.boss.kpi.admin.controller.OrganizationController" />
+    <bean id="resourceController" class="com.newland.boss.kpi.admin.controller.ResourceController" />
+    <bean id="roleAuthController" class="com.newland.boss.kpi.admin.controller.RoleAuthController" />
+    <bean id="roleController" class="com.newland.boss.kpi.admin.controller.RoleController" />
+    
+    <!-- 被依赖的服务 -->
+    <bean id="operatorAuthService" class="com.newland.boss.kpi.admin.service.impl.OperatorAuthServiceImpl"></bean>
+    <bean id="operatorRoleService" class="com.newland.boss.kpi.admin.service.impl.OperatorRoleServiceImpl"></bean>
+    <bean id="operatorService" class="com.newland.boss.kpi.admin.service.impl.OperatorServiceImpl"></bean>
+	<bean id="operOrgRelaService" class="com.newland.boss.kpi.admin.service.impl.OperOrgRelaServiceImpl"></bean>
+    <bean id="organizationService" class="com.newland.boss.kpi.admin.service.impl.OrganizationServiceImpl"></bean>
+    <bean id="resourceService" class="com.newland.boss.kpi.admin.service.impl.ResourceServiceImpl"></bean>
+    <bean id="roleAuthService" class="com.newland.boss.kpi.admin.service.impl.RoleAuthServiceImpl"></bean>
+    <bean id="roleService" class="com.newland.boss.kpi.admin.service.impl.RoleServiceImpl"></bean>
+    <bean id="dictDefService" class="com.newland.boss.kpi.server.impl.DictDefServiceImpl"></bean>
+    <bean id="operateLogServiceImpl" class="com.newland.boss.kpi.server.impl.OperateLogServiceImpl"></bean>
+    <bean id="appSession" class="com.newland.boss.kpi.server.impl.AppSessionImpl"></bean>
+    <bean id="orgService" class="com.newland.boss.kpi.server.impl.OrgServiceImpl"></bean>
+    
+    <!-- 被依赖的DAO -->
+    <bean id="operatorAuthDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OperatorAuthDao" />
+    </bean>
+    <bean id="operatorDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OperatorDao" />
+    </bean>
+    <bean id="operatorRoleDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OperatorRoleDao" />
+    </bean>
+    <bean id="operOrgRelaDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OperOrgRelaDao" />
+    </bean>
+    <bean id="organizationDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.OrganizationDao" />
+    </bean>
+    <bean id="resourceDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.ResourceDao" />
+    </bean>
+    <bean id="roleAuthDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.RoleAuthDao" />
+    </bean>
+    <bean id="roleDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.admin.dao.RoleDao" />
+    </bean>
+    <bean id="dictDefDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.dao.DictDefDao" />
+    </bean>
+    <bean id="operateLogDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.dao.OperateLogDao" />
+    </bean>
+     <bean id="orgDao" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="com.newland.boss.kpi.dao.OrgDao" />
+    </bean>
+    
+    <bean id="session" class="org.mockito.Mockito" factory-method="mock">
+      <constructor-arg value="javax.servlet.http.HttpSession" />
+    </bean>
+    
+      
+</beans>

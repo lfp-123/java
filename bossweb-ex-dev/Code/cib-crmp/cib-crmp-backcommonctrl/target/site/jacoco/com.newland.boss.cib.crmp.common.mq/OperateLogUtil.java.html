@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperateLogUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-backcommonctrl</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.common.mq</a> &gt; <span class="el_source">OperateLogUtil.java</span></div><h1>OperateLogUtil.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.common.mq;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+/**
+ * 描述:
+ * 操作日志类
+ * create 2018-10-23 22:03
+ */
+public class OperateLogUtil {
+
+    private OperateLogUtil() {
+
+    }
+
+<span class="nc" id="L25">    private static Log logger = LogFactory.getLog(OperateLogUtil.class);</span>
+
+    public static String createMsg(String fileName, boolean send) {
+<span class="nc" id="L28">        SimpleDateFormat aDate = new SimpleDateFormat(&quot;yyyy-MM-dd  HH:mm:ss&quot;);</span>
+<span class="nc" id="L29">        aDate.setTimeZone(TimeZone.getTimeZone(&quot;Asia/Shanghai&quot;));</span>
+<span class="nc" id="L30">        String format = aDate.format(new Date());</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        String result = send ? &quot;成功&quot; : &quot;失败&quot;;</span>
+<span class="nc" id="L32">        return format + &quot; &quot; + fileName + &quot;,&quot; + result;</span>
+    }
+
+    /**
+     * 插入采集日志信息
+     *
+     * @param fileName 文件名称
+     */
+    public static void insert(String fileName, boolean send, String clazz, String url, String userName, String pw,
+                              int operateModule) {
+<span class="nc" id="L42">        String msg = createMsg(fileName, send);</span>
+<span class="nc" id="L43">        String sql = &quot;insert into t_operate_log (OPERATE_ID, OPERATOR_ID, OPERATE_MODULE, &quot; +</span>
+                &quot;OPERATE_TYPE, OPERATE_MONTH, OPERATE_DESC, CREATE_TIME)&quot; +
+                &quot;values (seq_operator_log.nextval,77777777,?,1,to_char(sysdate,'MM'),?,sysdate)&quot;;
+
+<span class="nc" id="L47">        Connection conn = null;</span>
+<span class="nc" id="L48">        PreparedStatement ps = null;</span>
+
+        try {
+<span class="nc" id="L51">            conn = getCon(clazz, url, userName, pw);</span>
+<span class="nc" id="L52">            ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L53">            ps.setInt(1, operateModule);</span>
+<span class="nc" id="L54">            ps.setString(2, msg);</span>
+<span class="nc" id="L55">            ps.executeUpdate();</span>
+<span class="nc" id="L56">        } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L57">            logger.error(&quot;执行插入数据库异常。请查看数据库驱动包是否正确&quot;);</span>
+<span class="nc" id="L58">        } catch (SQLException e) {</span>
+<span class="nc" id="L59">            logger.error(e);</span>
+<span class="nc" id="L60">            logger.error(&quot;执行插入数据库异常。&quot; + e.getMessage());</span>
+<span class="nc" id="L61">            rollback(conn);</span>
+        } finally {
+<span class="nc" id="L63">            close(conn, ps);</span>
+        }
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * 插入采集日志信息
+     */
+    public static void insert(String msg, String clazz, String url,
+                              String userName, String pw, int operateModule, String keyValue) {
+
+<span class="nc" id="L73">        logger.debug(keyValue);</span>
+<span class="nc" id="L74">        String sql = &quot;insert into t_operate_log (OPERATE_ID, OPERATOR_ID, OPERATE_MODULE, &quot; +</span>
+                &quot;OPERATE_TYPE, OPERATE_MONTH, OPERATE_DESC, CREATE_TIME)&quot; +
+                &quot;values (seq_operator_log.nextval,77777777,?,1,to_char(sysdate,'MM'),?,sysdate)&quot;;
+<span class="nc" id="L77">        Connection conn = null;</span>
+<span class="nc" id="L78">        PreparedStatement ps = null;</span>
+        try {
+<span class="nc" id="L80">            conn = getCon(clazz, url, userName, pw);</span>
+<span class="nc" id="L81">            conn.setAutoCommit(false);</span>
+<span class="nc" id="L82">            ps = conn.prepareStatement(sql);</span>
+<span class="nc" id="L83">            ps.setInt(1, operateModule);</span>
+<span class="nc" id="L84">            ps.setString(2, msg);</span>
+<span class="nc" id="L85">            ps.executeUpdate();</span>
+<span class="nc" id="L86">            conn.commit();</span>
+<span class="nc" id="L87">            conn.setAutoCommit(true);</span>
+<span class="nc" id="L88">        } catch (ClassNotFoundException e) {</span>
+<span class="nc" id="L89">            logger.error(&quot;执行插入数据库异常。请查看数据库驱动包是否正确&quot;);</span>
+<span class="nc" id="L90">        } catch (SQLException e) {</span>
+<span class="nc" id="L91">            logger.error(e);</span>
+<span class="nc" id="L92">            logger.error(&quot;执行插入数据库异常。&quot; + e.getMessage());</span>
+<span class="nc" id="L93">            rollback(conn);</span>
+        } finally {
+<span class="nc" id="L95">            close(conn, ps);</span>
+        }
+<span class="nc" id="L97">    }</span>
+
+    private static void rollback(Connection connection) {
+        try {
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if (connection != null) {</span>
+<span class="nc" id="L102">                connection.rollback();</span>
+            }
+<span class="nc" id="L104">        } catch (SQLException e) {</span>
+<span class="nc" id="L105">            logger.error(&quot;回滚失败&quot;);</span>
+<span class="nc" id="L106">        }</span>
+
+<span class="nc" id="L108">    }</span>
+
+    public static Connection getCon(String clazz, String url, String userName, String pw) throws SQLException, ClassNotFoundException {
+<span class="nc" id="L111">        Class.forName(clazz);</span>
+<span class="nc" id="L112">        return DriverManager.getConnection(url, userName, pw);</span>
+    }
+
+    public static void close(Connection conn, PreparedStatement preparedStatement) {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (preparedStatement != null) {</span>
+            try {
+<span class="nc" id="L118">                preparedStatement.close();</span>
+<span class="nc" id="L119">            } catch (SQLException e) {</span>
+<span class="nc" id="L120">                logger.error(&quot;关闭会话异常，&quot; + e.getMessage());</span>
+<span class="nc" id="L121">            }</span>
+        }
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (conn != null) {</span>
+            try {
+<span class="nc" id="L125">                conn.close();</span>
+<span class="nc" id="L126">            } catch (SQLException e) {</span>
+<span class="nc" id="L127">                logger.error(&quot;关闭连接异常，&quot; + e.getMessage());</span>
+<span class="nc" id="L128">            }</span>
+        }
+
+<span class="nc" id="L131">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RateRuleView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">RateRuleView.java</span></div><h1>RateRuleView.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.Date;
+
+/**
+ * Copyright (c) 2018,　新大陆软件工程公司 All rights reserved。
+ *
+ * @author cby
+ * @version V1.0
+ * @Title: RateRuleView
+ * @Package com.newland.boss.cib.crmp.model
+ * @Description: 资费规则分配关系
+ * @date 2018/7/19
+ */
+<span class="fc" id="L15">public class RateRuleView {</span>
+    private Integer rateRuleRelaId;
+    private Integer objectId;
+    private Integer objectType;
+    private Integer cdrType;
+    private Integer rateType;
+    private Integer priority;
+    private Long fee;
+    private Integer billMonth;
+
+    private Integer operatorId;
+    private Integer orgId;
+    private Long otherFee;
+    private Date inureDate;
+    private Date expireDate;
+
+    /**
+     * Getter for property 'rateRuleRelaId'.
+     *
+     * @return Value for property 'rateRuleRelaId'.
+     */
+    public Integer getRateRuleRelaId() {
+<span class="fc" id="L37">        return rateRuleRelaId;</span>
+    }
+
+    /**
+     * Setter for property 'rateRuleRelaId'.
+     *
+     * @param rateRuleRelaId Value to set for property 'rateRuleRelaId'.
+     */
+    public void setRateRuleRelaId(Integer rateRuleRelaId) {
+<span class="fc" id="L46">        this.rateRuleRelaId = rateRuleRelaId;</span>
+<span class="fc" id="L47">    }</span>
+
+    /**
+     * Getter for property 'objectId'.
+     *
+     * @return Value for property 'objectId'.
+     */
+    public Integer getObjectId() {
+<span class="fc" id="L55">        return objectId;</span>
+    }
+
+    /**
+     * Setter for property 'objectId'.
+     *
+     * @param objectId Value to set for property 'objectId'.
+     */
+    public void setObjectId(Integer objectId) {
+<span class="fc" id="L64">        this.objectId = objectId;</span>
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Getter for property 'objectType'.
+     *
+     * @return Value for property 'objectType'.
+     */
+    public Integer getObjectType() {
+<span class="fc" id="L73">        return objectType;</span>
+    }
+
+    /**
+     * Setter for property 'objectType'.
+     *
+     * @param objectType Value to set for property 'objectType'.
+     */
+    public void setObjectType(Integer objectType) {
+<span class="fc" id="L82">        this.objectType = objectType;</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Getter for property 'cdrType'.
+     *
+     * @return Value for property 'cdrType'.
+     */
+    public Integer getCdrType() {
+<span class="fc" id="L91">        return cdrType;</span>
+    }
+
+    /**
+     * Setter for property 'cdrType'.
+     *
+     * @param cdrType Value to set for property 'cdrType'.
+     */
+    public void setCdrType(Integer cdrType) {
+<span class="fc" id="L100">        this.cdrType = cdrType;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Getter for property 'rateType'.
+     *
+     * @return Value for property 'rateType'.
+     */
+    public Integer getRateType() {
+<span class="fc" id="L109">        return rateType;</span>
+    }
+
+    /**
+     * Setter for property 'rateType'.
+     *
+     * @param rateType Value to set for property 'rateType'.
+     */
+    public void setRateType(Integer rateType) {
+<span class="fc" id="L118">        this.rateType = rateType;</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Getter for property 'priority'.
+     *
+     * @return Value for property 'priority'.
+     */
+    public Integer getPriority() {
+<span class="fc" id="L127">        return priority;</span>
+    }
+
+    /**
+     * Setter for property 'priority'.
+     *
+     * @param priority Value to set for property 'priority'.
+     */
+    public void setPriority(Integer priority) {
+<span class="fc" id="L136">        this.priority = priority;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Getter for property 'fee'.
+     *
+     * @return Value for property 'fee'.
+     */
+    public Long getFee() {
+<span class="fc" id="L145">        return fee;</span>
+    }
+
+    /**
+     * Setter for property 'fee'.
+     *
+     * @param fee Value to set for property 'fee'.
+     */
+    public void setFee(Long fee) {
+<span class="fc" id="L154">        this.fee = fee;</span>
+<span class="fc" id="L155">    }</span>
+
+    /**
+     * Getter for property 'billMonth'.
+     *
+     * @return Value for property 'billMonth'.
+     */
+    public Integer getBillMonth() {
+<span class="fc" id="L163">        return billMonth;</span>
+    }
+
+    /**
+     * Setter for property 'billMonth'.
+     *
+     * @param billMonth Value to set for property 'billMonth'.
+     */
+    public void setBillMonth(Integer billMonth) {
+<span class="fc" id="L172">        this.billMonth = billMonth;</span>
+<span class="fc" id="L173">    }</span>
+
+    /**
+     * Getter for property 'operatorId'.
+     *
+     * @return Value for property 'operatorId'.
+     */
+    public Integer getOperatorId() {
+<span class="fc" id="L181">        return operatorId;</span>
+    }
+
+    /**
+     * Setter for property 'operatorId'.
+     *
+     * @param operatorId Value to set for property 'operatorId'.
+     */
+    public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L190">        this.operatorId = operatorId;</span>
+<span class="fc" id="L191">    }</span>
+
+    /**
+     * Getter for property 'orgId'.
+     *
+     * @return Value for property 'orgId'.
+     */
+    public Integer getOrgId() {
+<span class="fc" id="L199">        return orgId;</span>
+    }
+
+    /**
+     * Setter for property 'orgId'.
+     *
+     * @param orgId Value to set for property 'orgId'.
+     */
+    public void setOrgId(Integer orgId) {
+<span class="fc" id="L208">        this.orgId = orgId;</span>
+<span class="fc" id="L209">    }</span>
+
+    /**
+     * Getter for property 'otherFee'.
+     *
+     * @return Value for property 'otherFee'.
+     */
+    public Long getOtherFee() {
+<span class="fc" id="L217">        return otherFee;</span>
+    }
+
+    /**
+     * Setter for property 'otherFee'.
+     *
+     * @param otherFee Value to set for property 'otherFee'.
+     */
+    public void setOtherFee(Long otherFee) {
+<span class="fc" id="L226">        this.otherFee = otherFee;</span>
+<span class="fc" id="L227">    }</span>
+
+    /**
+     * Getter for property 'inureDate'.
+     *
+     * @return Value for property 'inureDate'.
+     */
+    public Date getInureDate() {
+<span class="fc" id="L235">        return inureDate;</span>
+    }
+
+    /**
+     * Setter for property 'inureDate'.
+     *
+     * @param inureDate Value to set for property 'inureDate'.
+     */
+    public void setInureDate(Date inureDate) {
+<span class="fc" id="L244">        this.inureDate = inureDate;</span>
+<span class="fc" id="L245">    }</span>
+
+    /**
+     * Getter for property 'expireDate'.
+     *
+     * @return Value for property 'expireDate'.
+     */
+    public Date getExpireDate() {
+<span class="fc" id="L253">        return expireDate;</span>
+    }
+
+    /**
+     * Setter for property 'expireDate'.
+     *
+     * @param expireDate Value to set for property 'expireDate'.
+     */
+    public void setExpireDate(Date expireDate) {
+<span class="fc" id="L262">        this.expireDate = expireDate;</span>
+<span class="fc" id="L263">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

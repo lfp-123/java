@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+cib-crmp-rule,com.newland.boss.cib.crmp.service.impl,SettleApportionRelaServiceImpl,177,589,11,27,25,96,14,21,4,12
+cib-crmp-rule,com.newland.boss.cib.crmp.service.impl,RateRuleRelaServiceImpl,82,515,6,12,20,86,6,18,1,14
+cib-crmp-rule,com.newland.boss.cib.crmp.service.impl,SettleApportionRuleServiceImpl,319,731,31,39,42,132,26,24,0,15
+cib-crmp-rule,com.newland.boss.cib.crmp.service.impl,RateRuleServiceImpl,395,1256,88,108,73,200,72,45,0,19
+cib-crmp-rule,com.newland.boss.cib.crmp.controller,RateRuleController,82,196,4,0,18,36,3,10,1,10
+cib-crmp-rule,com.newland.boss.cib.crmp.controller,SettleApportionRuleController,141,276,9,5,24,42,7,13,1,12
+cib-crmp-rule,com.newland.boss.cib.crmp.controller,SettleApportionRelaController,14,388,4,8,2,59,4,15,0,13
+cib-crmp-rule,com.newland.boss.cib.crmp.controller,RateRuleRelaController,20,641,22,28,6,107,23,14,1,11
+cib-crmp-rule,com.newland.boss.cib.crmp.exception,ExcelParseException,7,16,0,0,4,6,2,3,2,3

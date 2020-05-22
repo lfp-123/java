@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.dao.RateRuleDao">
+
+	<resultMap type="com.newland.boss.cib.crmp.domain.RateRule"
+		id="rateRuleResultMap">
+		<id column="RATE_ITEM_ID" property="rateItemId" jdbcType="INTEGER" />
+		<result column="RATE_RULE_NAME" property="rateRuleName"
+			jdbcType="VARCHAR" />
+		<result column="CDR_TYPE" property="cdrType" jdbcType="INTEGER" />
+		<result column="RATE_TYPE" property="rateType" jdbcType="INTEGER" />
+		<result column="PRIORITY" property="priority" jdbcType="INTEGER" />
+		<result column="FEE" property="fee" jdbcType="INTEGER" />
+		<result column="OTHER_FEE" property="otherFee" jdbcType="INTEGER" />
+		<result column="START_TIME" property="startTime" jdbcType="VARCHAR" />
+		<result column="END_TIME" property="endTime" jdbcType="VARCHAR" />
+		<result column="RATE_STATUS" property="rateStatus" jdbcType="INTEGER" />
+		<result column="INURE_DATE" property="inureDate" jdbcType="VARCHAR" />
+		<result column="EXPIRE_DATE" property="expireDate" jdbcType="VARCHAR" />
+		<result column="RATE_DESC" property="rateDesc" jdbcType="VARCHAR" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="SCOPE" property="scope" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 时间校验 -->
+	<select id="selectRuleCross" resultMap="rateRuleResultMap">
+		SELECT * FROM RATE_RULE
+		WHERE CDR_TYPE=#{cdrType}
+		AND RATE_TYPE=#{rateType}
+		AND SCOPE=1
+      	AND(
+       (to_date(#{inureDate},'yyyy-MM-dd') BETWEEN INURE_DATE AND EXPIRE_DATE) 
+       OR(to_date(#{expireDate},'yyyy-MM-dd') BETWEEN INURE_DATE AND EXPIRE_DATE)
+       OR(to_date(#{inureDate},'yyyy-MM-dd') &lt;INURE_DATE AND to_date(#{expireDate},'yyyy-MM-dd')&gt;=EXPIRE_DATE))
+       <if test="rateItemId!=null">
+        AND RATE_ITEM_ID NOT IN(#{rateItemId})
+        </if>
+	</select>
+	
+	<!-- 增加一种资费规则 -->
+	<insert id="insertRateRule" parameterType="com.newland.boss.cib.crmp.domain.RateRule">
+		<selectKey keyProperty="rateItemId" resultType="int" order="BEFORE"> 
+             select SEQ_RATE_RULE_ID.nextval from dual 
+        </selectKey>
+		INSERT INTO RATE_RULE
+		(RATE_ITEM_ID,RATE_RULE_NAME,CDR_TYPE,RATE_TYPE,PRIORITY,FEE,RATE_STATUS,INURE_DATE,EXPIRE_DATE,OPERATOR_ID,CREATE_TIME
+		<if test="otherFee!=null">
+		,OTHER_FEE
+		</if>
+		<if test="startTime!=null">
+        ,START_TIME
+        </if>
+        <if test="endTime!=null">
+        ,END_TIME
+        </if>
+        <if test="rateDesc!=null">
+        ,RATE_DESC
+        </if>
+        <if test="scope!=null">
+        ,SCOPE
+        </if>
+		)
+		VALUES(#{rateItemId},#{rateRuleName},#{cdrType},#{rateType},#{priority},#{fee},#{rateStatus},
+		to_date(#{inureDate},'yyyy-MM-dd'),to_date(#{expireDate},'yyyy-MM-dd'),#{operatorId},to_date(#{createTime},'yyyy-MM-dd')
+		<if test="otherFee!=null">
+		,#{otherFee}
+		</if>
+		<if test="startTime!=null">
+        ,#{startTime}
+        </if>
+        <if test="endTime!=null">
+        ,#{endTime}
+        </if>
+        <if test="rateDesc!=null">
+        ,#{rateDesc}
+        </if>
+        <if test="scope!=null">
+        ,#{scope}
+        </if>
+		)
+	</insert>
+
+	<!-- 删除一种资费规则 -->
+	<delete id="deleteRateRule">
+		DELETE FROM RATE_RULE WHERE RATE_ITEM_ID =
+		#{rateItemId}
+	</delete>
+	
+	<!-- 编辑资费规则 -->
+	<update id="updateRateRule" parameterType="com.newland.boss.cib.crmp.domain.RateRule">
+		UPDATE RATE_RULE SET RATE_RULE_NAME =
+		#{rateRuleName},CDR_TYPE = #{cdrType},RATE_TYPE = #{rateType},FEE =
+		#{fee},RATE_STATUS=#{rateStatus},INURE_DATE = to_date(#{inureDate},'yyyy-MM-dd'),EXPIRE_DATE =
+		to_date(#{expireDate},'yyyy-MM-dd'),RATE_DESC = #{rateDesc},OPERATOR_ID = #{operatorId}
+		<if test="otherFee!=null">
+		,OTHER_FEE = #{otherFee}
+		</if>
+		<if test="startTime!=null">
+        ,START_TIME = #{startTime}
+        </if>
+        <if test="endTime!=null">
+        ,END_TIME = #{endTime}
+        </if>
+        <if test="scope!=null">
+        ,SCOPE = #{scope}
+        </if>
+        <if test="priority!=null">
+        ,PRIORITY = #{priority}
+        </if>
+		WHERE RATE_ITEM_ID= #{rateItemId}
+	</update>
+	
+	<!-- 编辑资费规则启用状态 -->
+	<update id="updateRateRuleStatus" parameterType="com.newland.boss.cib.crmp.domain.RateRule">
+		UPDATE RATE_RULE SET RATE_STATUS = #{rateStatus}
+		WHERE RATE_ITEM_ID= #{rateItemId}
+	</update>
+	<!-- 搜索规则 -->
+	<select id="searchRateRule" resultMap="rateRuleResultMap">
+		SELECT RATE_ITEM_ID,RATE_RULE_NAME,CDR_TYPE,RATE_TYPE,PRIORITY,FEE,OTHER_FEE,
+               RATE_STATUS,SCOPE,to_char(INURE_DATE, 'yyyy-MM-dd')  INURE_DATE,to_char(EXPIRE_DATE, 'yyyy-MM-dd') EXPIRE_DATE,
+               RATE_DESC,OPERATOR_ID,to_char(CREATE_TIME, 'yyyy-MM-dd') CREATE_TIME FROM RATE_RULE WHERE 1=1
+		<if test="rateRuleName!=null">
+			AND RATE_RULE_NAME  LIKE '%'||#{rateRuleName}||'%' ESCAPE '/' 
+		</if>
+		<if test="cdrType!=null">
+			AND CDR_TYPE  =  #{cdrType}
+		</if>
+		<if test="rateType!=null">
+			AND RATE_TYPE  = #{rateType}
+		</if>
+		<if test="rateStatus!=null">
+			AND RATE_STATUS  = #{rateStatus}
+		</if>
+		<if test="inureDate!=null">
+			AND INURE_DATE &gt;= to_date(#{inureDate},'yyyy-MM-dd')
+		</if>
+		<if test="expireDate!=null">
+			AND EXPIRE_DATE  &lt;=  to_date(#{expireDate},'yyyy-MM-dd') 
+		</if>
+		ORDER BY PRIORITY
+	</select>
+	
+	<!-- 搜索可分配规则 -->
+    <select id="searchRuleToDistribute" resultMap="rateRuleResultMap">
+        SELECT RATE_ITEM_ID,RATE_RULE_NAME,CDR_TYPE,RATE_TYPE,PRIORITY,FEE,OTHER_FEE,
+               RATE_STATUS,SCOPE,to_char(INURE_DATE, 'yyyy-MM-dd')  INURE_DATE,to_char(EXPIRE_DATE, 'yyyy-MM-dd') EXPIRE_DATE,
+               RATE_DESC,OPERATOR_ID,to_char(CREATE_TIME, 'yyyy-MM-dd') CREATE_TIME
+        FROM RATE_RULE WHERE 1=1 
+        <if test="rateRuleName!=null">
+            AND RATE_RULE_NAME  LIKE '%'||#{rateRuleName}||'%'  ESCAPE '/'
+        </if>
+        <if test="cdrType!=null">
+            AND CDR_TYPE  =  #{cdrType}
+        </if>
+        <if test="rateType!=null">
+            AND RATE_TYPE  = #{rateType}
+        </if>
+        <if test="rateStatus!=null">
+            AND RATE_STATUS  = #{rateStatus}
+        </if>
+        <if test="inureDate!=null">
+            AND INURE_DATE &gt;= to_date(#{inureDate},'yyyy-MM-dd')
+        </if>
+        <if test="expireDate!=null">
+            AND EXPIRE_DATE  &lt;=  to_date(#{expireDate},'yyyy-MM-dd')
+        </if>
+        ORDER BY SCOPE DESC,PRIORITY
+    </select>
+	
+	<!-- 搜索是否存在同样的规则 -->
+    <select id="searchSameRateRule" resultMap="rateRuleResultMap">
+        SELECT * FROM RATE_RULE WHERE 1=1
+        <if test="rateRuleName!=null">
+            AND RATE_RULE_NAME  = #{rateRuleName}
+        </if>
+        <if test="cdrType!=null">
+            AND CDR_TYPE  =  #{cdrType}
+        </if>
+        <if test="rateType!=null">
+            AND RATE_TYPE  = #{rateType}
+        </if>
+        <if test="rateStatus!=null">
+            AND RATE_STATUS  = #{rateStatus}
+        </if>
+        <if test="priority!=null">
+            AND PRIORITY  =  #{priority}  
+        </if>
+        <if test="fee!=null">
+            AND FEE  =  #{fee}  
+        </if>
+        <if test="otherFee!=null">
+            AND OTHER_FEE  =  #{otherFee}  
+        </if>
+        <if test="scope!=null">
+            AND SCOPE  =  #{scope}  
+        </if>
+        <if test="inureDate!=null">
+            AND INURE_DATE = to_date(#{inureDate},'yyyy-MM-dd')  
+        </if>
+        <if test="expireDate!=null">
+            AND EXPIRE_DATE  =  to_date(#{expireDate},'yyyy-MM-dd')   
+        </if>
+         <if test="rateDesc!=null and rateDesc!=''">
+            AND RATE_DESC  =  #{rateDesc}  
+        </if>
+        ORDER BY PRIORITY
+    </select>
+    
+    <!-- 搜索个性化保障费规则 -->
+	<select id="searchPersonalInsuranceRule" resultMap="rateRuleResultMap">
+		select a.*
+		  from rate_rule a, rate_rule_rela b
+		 where a.rate_item_id = b.rate_item_id
+		   and a.cdr_type = 3
+		   and a.rate_type = 9
+		   and a.scope = 0
+		   and a.rate_status = 1
+		   and b.status = 1
+		<if test="orgId!=null">
+			AND b.object_id  = #{orgId}
+		</if>
+		<if test="inureDate!=null">
+			AND b.inure_date &lt;= to_date(#{inureDate}, 'yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="expireDate!=null">
+			AND b.expire_date  &gt;=  to_date(#{expireDate}, 'yyyy-MM-dd hh24:mi:ss') 
+		</if>
+		ORDER BY PRIORITY
+	</select>
+    
+    <!-- 搜索全局保障费规则 -->
+	<select id="searchInsuranceRule" resultMap="rateRuleResultMap">
+		select a.*
+		  from rate_rule a
+		 where a.cdr_type = 3
+		   and a.rate_type = 9
+		   and a.scope = 1
+		   and a.rate_status = 1
+		<if test="inureDate!=null">
+			AND a.inure_date &lt;= to_date(#{inureDate}, 'yyyy-MM-dd hh24:mi:ss')
+		</if>
+		<if test="expireDate!=null">
+			AND a.expire_date  &gt;=  to_date(#{expireDate}, 'yyyy-MM-dd hh24:mi:ss') 
+		</if>
+		ORDER BY PRIORITY
+	</select>
+</mapper>

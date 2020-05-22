@@ -1,0 +1,116 @@
+﻿<!DOCTYPE HTML>
+<html>
+<meta name="referrer" content="no-referrer">
+<head>
+<meta charset="utf-8">
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style>
+body {
+	overflow: hidden;
+	margin: 0px auto;
+}
+table tr {
+    height: 30px;
+}
+.nav>li>a {
+    padding: 5px 15px;
+}
+</style>
+
+<title>网络资源黑户话单查询</title>
+</head>
+<body ng-app="myApp">
+<div class="am-tabs" data-am-tabs style="width: 100%; height: 100%;">
+
+	<ul id="myTab" class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab">黑户详单查询</a></li>
+		<li><a href="#tab2" data-toggle="tab">黑户导出</a></li>
+	</ul>
+  
+<div  id="myTabContent" class="tab-content" style="width: 100%; height: 90%">
+<div ng-app="netBlackQueryApp" ng-controller="netBlackQueryController" style="width: 100%; height: 100%;padding-right: 10px;" class="tab-pane fade in active" id="tab1" ng-init="url='../rest/queryBlackNetList';p_pernum=13" ng-cloak>
+<div style="display: inline-block; width: 100%; text-align: right;padding-top: 10px;">
+	查询周期：<div style="display: inline-block; margin-right: 10px; width: 19%;">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')||\'%y-%M-%d\'}', readOnly:true})" id="beginDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="beginDate" onChange="">
+			-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDate\')}',maxDate:'%y-%M-%d', readOnly:true})" id="endDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange="">
+	</div>
+	<div style="display: inline-block;">
+		<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe709;</i>&nbsp;查询</button>&nbsp;</span>
+		<span><button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe68f;</i>&nbsp;重置</button></span>
+	</div>
+</div>
+<div >
+	<div class="mt-15" style="height: 425px; ">
+		<table id="table-network" class="table-condensed table-border table-hover">
+			<thead>
+				<tr class="text-c">
+					<th width="100">单位名称</th>
+					<th width="100">专线资源</th>
+					<th width="100">时间</th>
+				</tr>
+			</thead>
+			<tbody id="main03">
+				<tr class="text-c" ng-repeat="x in list">
+					<td>{{x.orgName}}</td>
+					<td>{{x.netResource}}</td>
+					<td>{{x.holdingTime}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		<div page-directive style="margin-top: 10px;"></div>
+		<div style="margin-top: 10px; width: 100%;">
+		<span class="r"><button name="" id="" class="cr btn btn-primary"type="" ng-click="download()" ng-show="count"><i class="Hui-iconfont">&#xe640;</i> 下载</button> &nbsp;&nbsp;</span>
+		</div>
+</div>
+</div>
+<div style="height: 100%" class="tab-pane fade" id="tab2" ng-app="netBlackUserQueryApp" ng-controller="netBlackUserQueryController" ng-init="url='../rest/queryNetrBlackUserList';p_pernum=13" ng-cloak>
+<div style="display: inline-block; width: 100%; text-align: right;padding-top: 10px;">
+	查询周期：<div style="display: inline-block; margin-right: 10px; width: 19%;">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')||\'%y-%M-%d\'}'})" id="beginDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="beginDate" onChange="">
+			-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDate\')}',maxDate:'%y-%M-%d'})" id="endDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange="">
+	</div>
+	<div style="display: inline-block;">
+		<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe709;</i>&nbsp;查询</button>&nbsp;</span>
+		<span><button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe68f;</i>&nbsp;重置</button></span>
+	</div>
+</div>
+<div >
+	<div class="mt-15" style="height: 425px; ">
+		<table id="table-network" class="table-condensed table-border table-hover">
+			<thead>
+				<tr class="text-c">
+					<th width="100">单位名称</th>
+					<th width="100">专线资源</th>
+					<th width="100">时间</th>
+				</tr>
+			</thead>
+			<tbody id="main03">
+				<tr class="text-c" ng-repeat="x in list">
+					<td>{{x.orgName}}</td>
+					<td>{{x.netResource}}</td>
+					<td>{{x.holdingTime}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		<div page-directive style="margin-top: 10px;"></div>
+		<div style="margin-top: 10px; width: 100%;">
+		<span class="r"><button name="" id="" class="cr btn btn-primary"type="" ng-click="download()" ng-show="count"><i class="Hui-iconfont">&#xe640;</i> 下载</button> &nbsp;&nbsp;</span>
+		</div>
+</div>
+</div>
+
+</div>
+</div>
+<script type="text/javascript" src="../resources/statement/controller/common.js"></script>
+<script type="text/javascript" src="../resources/statement/controller/netBlackQuery.js"></script>
+<script type="text/javascript" src="../skeleton/lib/page-bar.js"></script>
+<script type="text/javascript">
+angular.module('myApp', ['netBlackQueryApp','netBlackUserQueryApp']);
+</script>
+</body>
+</html>

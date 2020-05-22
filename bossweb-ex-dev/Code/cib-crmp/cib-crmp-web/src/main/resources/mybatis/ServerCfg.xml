@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.web.dao.ServerCfgDao">
+
+
+    <resultMap type="com.newland.boss.cib.crmp.domain.ServerCfg" id="configResultMap">
+        <id column="SERVER_ID" property="serverId" jdbcType="INTEGER"/>
+        <result column="SERVER_TYPE" property="serverType" jdbcType="INTEGER"/>
+        <result column="HOST_NAME" property="hostName" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="MAX_TIMEOUT" property="maxTimeout" jdbcType="INTEGER"/>
+        <result column="RETRY_INTERVAL" property="retryInterval" jdbcType="INTEGER"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="SRC_PATH" property="srcPath" jdbcType="VARCHAR"/>
+        <result column="DEST_PATH" property="destPath" jdbcType="VARCHAR"/>
+        <result column="BACKUP_PATH" property="backupPath" jdbcType="VARCHAR"/>
+        <result column="TRANSFER_MODE" property="transferMode" jdbcType="INTEGER"/>
+        <result column="TRANS_PROTOCOL" property="transProtocol" jdbcType="INTEGER"/>
+        <result column="FILE_TYPE" property="fileType" jdbcType="INTEGER"/>
+        <result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="select" resultMap="configResultMap">
+        SELECT * FROM SERVER_CFG
+    </select>
+
+    <insert id="insert" parameterType="com.newland.boss.cib.crmp.domain.ServerCfg">
+        <selectKey keyProperty="serverId" resultType="int" order="BEFORE">
+            SELECT SEQ_SERVER_CFG.nextval FROM dual
+        </selectKey>
+        INSERT INTO SERVER_CFG
+        (SERVER_ID,SERVER_TYPE,HOST_NAME,USER_NAME,PASSWORD,MAX_TIMEOUT,RETRY_INTERVAL,STATUS,SRC_PATH,DEST_PATH,BACKUP_PATH,TRANSFER_MODE,TRANS_PROTOCOL,FILE_TYPE,OPERATOR_ID,CREATE_TIME)
+        VALUES(#{serverId},#{serverType},#{hostName},#{userName},#{password},#{maxTimeout,jdbcType=INTEGER},#{retryInterval,jdbcType=INTEGER},#{status},#{srcPath,jdbcType=VARCHAR},#{destPath,jdbcType=VARCHAR},#{backupPath,jdbcType=VARCHAR},#{transferMode,jdbcType=INTEGER},#{transProtocol,jdbcType=INTEGER},#{fileType,jdbcType=INTEGER},#{operatorId},sysdate)
+    </insert>
+
+    <update id="update" parameterType="com.newland.boss.cib.crmp.domain.ServerCfg">
+        UPDATE SERVER_CFG SET SERVER_TYPE = #{serverType},HOST_NAME = #{hostName},USER_NAME = #{userName},
+        PASSWORD = #{password},STATUS = #{status},SRC_PATH = #{srcPath},DEST_PATH = #{destPath},BACKUP_PATH = #{backupPath,jdbcType=VARCHAR},TRANSFER_MODE = #{transferMode,jdbcType=INTEGER},TRANS_PROTOCOL = #{transProtocol},FILE_TYPE = #{fileType,jdbcType=INTEGER},OPERATOR_ID = #{operatorId}
+        WHERE SERVER_ID = #{serverId}
+    </update>
+
+    <delete id="delete" parameterType="com.newland.boss.cib.crmp.domain.ServerCfg">
+        DELETE FROM SERVER_CFG WHERE SERVER_ID = #{serverId}
+    </delete>
+
+</mapper>

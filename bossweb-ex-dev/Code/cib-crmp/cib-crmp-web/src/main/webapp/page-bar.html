@@ -1,0 +1,15 @@
+<div style="margin-right: 10px;">
+	<div style="float: left;">
+	<ul class="pagination" style="margin: 0px;">
+	     <li ng-class="{true:'disabled'}[p_current==1]"><a href="javascript:void(0);" ng-click="p_index()">首页</a></li>  
+	     <li ng-class="{true:'disabled'}[p_current==1]"><a href="javascript:void(0);" ng-click="pre_index()">上一页</a></li>
+	     <li ng-repeat="page in pages" ng-class="{true:'active'}[p_current==page]"><a href="javascript:void(0);" ng-click="load_page(page)">{{ page }}</a></li>
+	     <li ng-class="{true:'disabled'}[p_current==p_all_page || p_all_page==0]"><a href="javascript:void(0);" ng-click="next_index()">下一页</a></li>
+	     <li ng-class="{true:'disabled'}[p_current==p_all_page || p_all_page==0]"><a href="javascript:void(0);" ng-click="p_last()">尾页</a></li> 
+	</ul>
+	</div>
+	<div style="float: left; margin-left: 10px;">
+	<span><input type="text" class="input-text" style="width: 35px; height: 30px; text-align: right; border-radius: 5px;" ng-model="p_go_page" ng-disabled="p_all_page==0"> / {{p_all_page}}</span>
+	<span><button class="btn btn-primary" ng-click="go_index()" ng-disabled="p_all_page==0"><i class="icon Hui-iconfont">&#xe6ab;</i>&nbsp;跳转</button></span>
+	</div>
+</div>

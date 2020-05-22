@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.settle.dao.QueryFeeListDao">
+	<resultMap type="com.newland.boss.cib.crmp.domain.QueryFeeListResp" id="queryFeeListMap">
+		<result column="ORG_NAME" property="unitName" jdbcType="VARCHAR" />
+		<result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<result column="RATE_RULE_NAME" property="feeTypeName" jdbcType="VARCHAR" />
+		<result column="OPERATOR_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="TOTAL_FEE" property="fee" jdbcType="VARCHAR" />
+		<result column="TOTAL_NUMBER" property="callTime" jdbcType="VARCHAR" />
+		<result column="BILL_MONTH" property="month" jdbcType="VARCHAR" />
+		<result column="LOGIN_NAME" property="notesId" jdbcType="VARCHAR" />
+		<result column="ORG_NAME_FULL" property="orgNameFull" jdbcType="VARCHAR" />
+		<result column="FEE_TYPE" property="feeType" jdbcType="VARCHAR" />
+		<result column="CDR_TYPE" property="cdrType" jdbcType="VARCHAR" />
+		<result column="FEE" property="rateFee" jdbcType="VARCHAR" />
+		<result column="OTHER_FEE" property="otherFee" jdbcType="VARCHAR" />
+		<result column="TOTAL_MINUTES" property="totalMinutes" jdbcType="INTEGER" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="queryFeeListResult" resultMap="queryFeeListMap">
+		 select * from (select t.cdr_type, t.fee_type, nvl(t.org_name,'黑户') as org_name , nvl(t.rate_rule_name,'黑户') as rate_rule_name , nvl(t.operator_name,'黑户') as operator_name , t.total_fee, t.total_number, t.bill_month, nvl(t.login_name,'黑户') as login_name, 
+		       nvl (t.org_name_full, '黑户') as org_name_full , t.operator_id,
+		       rownum rownu from 
+		      (select a.cdr_type,a.fee_type,b.org_name,e.rate_rule_name,d.operator_name,a.total_fee,a.total_number,a.bill_month,d.login_name,b.org_name_full,a.operator_id 
+		      from BILL_SUMMING_USR_MONTH a, T_ORGANIZATION b, T_OPERATOR d,RATE_RULE e 
+		        where 
+		          a.org_id = b.org_id(+) 
+		        and a.operator_id = d.operator_id(+) 
+		          and a.cdr_type = e.cdr_type(+) and a.fee_type=e.rate_type(+)
+    			  and e.scope = 1
+    	<if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.operatorId, jdbcType=VARCHAR}
+		</if>
+    	<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and a.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+        <!--  
+		<if test="req.feeType != null and req.feeType != ''">
+		and a.cdr_type = #{req.feeType}
+		</if>
+		-->
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and e.rate_rule_name = #{req.feeTypeName}
+		</if>
+		<if test="req.userName != null and req.userName != ''">
+		and d.operator_name like '%'||#{req.userName}||'%'
+		</if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and a.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and a.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and a.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.notesId != '' and req.notesId != null">
+		and d.login_name = #{req.notesId, jdbcType=VARCHAR}
+		</if>
+		order by e.rate_rule_name, b.org_order, d.operator_name, rownum) t  
+        where rownum &lt;= #{page} * #{size}) tt where tt.rownu &gt; (#{page} - 1) * #{size}
+	</select>
+	
+	<!-- 查询费用清单列表总数 -->
+	<select id="queryFeeListCount" resultType="INTEGER">
+		select count(1) from 
+        BILL_SUMMING_USR_MONTH a, T_ORGANIZATION b, T_OPERATOR d,RATE_RULE e
+         where 
+         a.org_id = b.org_id(+) 
+		     and a.operator_id = d.operator_id(+) 
+         and a.cdr_type = e.cdr_type(+) and a.fee_type=e.rate_type(+)
+         and e.scope = 1
+        <if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.operatorId, jdbcType=VARCHAR}
+		</if>
+    	<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and a.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+        <if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and e.rate_rule_name = #{req.feeTypeName}
+		</if>
+		<if test="req.userName != null and req.userName != ''">
+		and d.operator_name like '%'||#{req.userName}||'%'
+		</if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and a.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and a.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and a.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.notesId != '' and req.notesId != null">
+		and d.login_name = #{req.notesId,jdbcType=VARCHAR}
+		</if>
+		<!--  
+		order by e.rate_rule_name, b.org_name, d.operator_name, rownum) t
+		-->
+	</select>
+	
+	<!-- 查询费用清单列表用于导出报表 -->
+	<select id="queryFeeListAllResult" resultMap="queryFeeListMap">
+		select * from (select fee_type, nvl(t.org_name,'黑户') as org_name , nvl(t.rate_rule_name,'黑户') as rate_rule_name , nvl(t.operator_name,'黑户') as operator_name , t.total_fee, t.total_number, t.bill_month, nvl(t.login_name,'黑户') as login_name, 
+ 			nvl (t.org_name_full, '黑户') as org_name_full , 
+ 			rownum rownu from 
+			(select a.cdr_type,a.fee_type,b.org_name,e.rate_rule_name,d.operator_name,a.total_fee,a.total_number,a.bill_month,d.login_name,b.org_name_full 
+			from BILL_SUMMING_USR_MONTH a, T_ORGANIZATION b, T_OPERATOR d,RATE_RULE e 
+    		where 
+    			a.org_id = b.org_id(+) 
+				and a.operator_id = d.operator_id(+) 
+    			and a.cdr_type = e.cdr_type(+) and a.fee_type = e.rate_type(+)
+    			and e.scope = 1
+    	<if test="req.operatorLevel == 1">
+		and a.operator_id = #{req.operatorId, jdbcType=VARCHAR}
+		</if>
+    	<if test="req.operatorLevel == 2">
+		and a.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and a.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+        <!--  
+		<if test="req.feeType != null and req.feeType != ''">
+		and a.cdr_type = #{req.feeType}
+		</if>
+		-->
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and e.rate_rule_name = #{req.feeTypeName}
+		</if>
+		<if test="req.userName != null and req.userName != ''">
+		and d.operator_name like '%'||#{req.userName}||'%'
+		</if>
+		<!--  
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and c.entry_name = #{req.feeTypeName}
+		</if>
+		-->
+		<if test="req.beginDate == null and req.endDate != null">
+		and a.bill_month &lt;= #{req.endDate, jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and a.bill_month &gt;= #{req.beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and a.bill_month between #{req.beginDate, jdbcType=INTEGER} and #{req.endDate, jdbcType=INTEGER}
+		</if>
+		<if test="req.notesId != '' and req.notesId != null">
+		and d.login_name = #{req.notesId, jdbcType=VARCHAR}
+		</if>
+		<if test="req.notesId != '' and req.notesId != null">
+		and d.login_name = #{req.notesId, jdbcType=VARCHAR}
+		</if>
+		order by e.rate_rule_name, b.org_order, d.operator_name, rownum) t)
+	</select>
+	
+	<!-- 部门费用清单列表 -->
+	<select id="queryDeptFeeListResult" resultMap="queryFeeListMap">
+		SELECT *
+  FROM (SELECT ROWNUM AS rowno, ttt.*
+          FROM (select *
+                  from (select t.*
+                          from (select nvl(y.rate_rule_name,x.rate_rule_name) rate_rule_name,
+                                       x.cdr_type,
+                                       x.fee_type,
+                                       x.org_name,
+                                       x.org_name_full,
+                                       x.total_fee,
+                                       x.total_number,
+                                       x.bill_month,
+                                       nvl(y.fee,x.fee) fee,
+                                       nvl(y.other_fee,x.other_fee) other_fee,
+                                       x.total_minutes,
+                                       x.org_id
+                                  from (select nvl(c.rate_rule_name, '无') rate_rule_name,
+                                               a.cdr_type,
+                                               a.fee_type,
+                                               a.total_fee,
+                                               a.total_number,
+                                               a.bill_month,
+                                               nvl(b.org_name, '黑户') org_name,
+                                               nvl(b.org_name_full, '黑户') org_name_full,
+                                               nvl(c.fee, -1) fee,
+                                               nvl(c.other_fee, -1) other_fee,
+                                               a.total_minutes,
+                                               nvl(b.org_id, 0) org_id,
+                                               b.org_order
+                                          from BILL_SUMMING_ORG_MONTH a,
+                                               T_ORGANIZATION         b,
+                                               RATE_RULE              c
+                                         where a.org_id = b.org_id(+)
+                                           and a.cdr_type = c.cdr_type(+)
+                                           and a.fee_type = c.rate_type(+)
+                                           and c.scope(+) = 1
+                                         order by c.rate_rule_name, b.org_order) x,
+                                       (select j.rate_rule_name,
+                                               j.fee,
+                                               j.other_fee,
+                                               j.cdr_type,
+                                               j.rate_type,
+                                               nvl(k.object_id, -1) org_id
+                                          from rate_rule j, rate_rule_rela k
+                                         where k.object_type = 1
+                                           and j.rate_item_id = k.rate_item_id
+                                           and to_date(#{req.beginDate}, 'yyyymm') between
+                                               j.inure_date and j.expire_date) y
+                                 where x.cdr_type = y.cdr_type(+)
+                                   and x.fee_type = y.rate_type(+)
+                                   and x.org_id = y.org_id(+)
+                                 order by nvl(y.rate_rule_name,x.rate_rule_name),
+                                          x.org_order) t) tt
+                                          where tt.rate_rule_name is not null
+      	<if test="req.operatorLevel == 2">
+		and tt.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and tt.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and tt.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and tt.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and tt.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if> 
+  		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+			and tt.rate_rule_name = #{req.feeTypeName}
+		</if>
+ 			) ttt
+         where ROWNUM &lt;= #{page} * #{size}) p
+ 	WHERE p.rowno &gt; (#{page} - 1) * #{size}
+	</select>
+	
+	<!-- 查询部门费用清单列表总数 -->
+	<select id="queryDeptFeeListCount" resultType="INTEGER">
+		select count(1)
+  from (select *
+          from (select t.*
+                  from (select nvl(y.rate_rule_name,x.rate_rule_name) rate_rule_name,
+                               x.cdr_type,
+                               x.fee_type,
+                               x.org_name,
+                               x.org_name_full,
+                               x.total_fee,
+                               x.total_number,
+                               x.bill_month,
+                               decode(x.fee, -1, y.fee, x.fee) fee,
+                               decode(x.other_fee,
+                                      -1,
+                                      y.other_fee,
+                                      x.other_fee) other_fee,
+                               x.total_minutes,
+                               x.org_id
+                          from (select nvl(c.rate_rule_name, '无') rate_rule_name,
+                                       a.cdr_type,
+                                       a.fee_type,
+                                       a.total_fee,
+                                       a.total_number,
+                                       a.bill_month,
+                                       nvl(b.org_name, '黑户') org_name,
+                                       nvl(b.org_name_full, '黑户') org_name_full,
+                                       nvl(c.fee, -1) fee,
+                                       nvl(c.other_fee, -1) other_fee,
+                                       a.total_minutes,
+                                       nvl(b.org_id, 0) org_id,
+                                       b.org_order
+                                  from BILL_SUMMING_ORG_MONTH a,
+                                       T_ORGANIZATION         b,
+                                       RATE_RULE              c
+                                 where a.org_id = b.org_id(+)
+                                   and a.cdr_type = c.cdr_type(+)
+                                   and a.fee_type = c.rate_type(+)
+                                   and c.scope(+) = 1
+                                 order by c.rate_rule_name, b.org_order) x,
+                               (select j.rate_rule_name,
+                                       j.fee,
+                                       j.other_fee,
+                                       j.cdr_type,
+                                       j.rate_type,
+                                       nvl(k.object_id, -1) org_id
+                                  from rate_rule j, rate_rule_rela k
+                                 where k.object_type = 1
+                                   and j.rate_item_id = k.rate_item_id
+                                   and to_date(#{req.beginDate}, 'yyyymm') between
+                                       j.inure_date and j.expire_date) y
+                         where x.cdr_type = y.cdr_type(+)
+                           and x.fee_type = y.rate_type(+)
+                           and x.org_id = y.org_id(+)
+                         order by nvl(y.rate_rule_name,x.rate_rule_name),
+                                  x.org_order) t) tt
+         where tt.rate_rule_name is not null
+      	<if test="req.operatorLevel == 2">
+		and tt.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and tt.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and tt.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and tt.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and tt.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if>
+        <if test="req.feeTypeName != null and req.feeTypeName != ''">
+   	       and tt.rate_rule_name = #{req.feeTypeName}
+        </if>
+ 	   )
+	</select>
+	
+	<!-- 查询部门费用清单列表用于导出报表 -->
+	<select id="queryDeptFeeListAllResult" resultMap="queryFeeListMap">
+				select *
+		  from (select t.*
+		          from (select nvl(y.rate_rule_name,x.rate_rule_name) rate_rule_name,
+		                       x.cdr_type,
+		                       x.fee_type,
+		                       x.org_name,
+		                       x.org_name_full,
+		                       x.total_fee,
+		                       x.total_number,
+		                       x.bill_month,
+		                       nvl(y.fee,x.fee) fee,
+		                       nvl(y.other_fee,x.other_fee) other_fee,
+		                       x.total_minutes,
+		                       x.org_id
+		                  from (select nvl(c.rate_rule_name, '无') rate_rule_name,
+		                               a.cdr_type,
+		                               a.fee_type,
+		                               a.total_fee,
+		                               a.total_number,
+		                               a.bill_month,
+		                               nvl(b.org_name, '黑户') org_name,
+		                               nvl(b.org_name_full, '黑户') org_name_full,
+		                               nvl(c.fee, -1) fee,
+		                               nvl(c.other_fee, -1) other_fee,
+		                               a.total_minutes,
+		                               nvl(b.org_id, 0) org_id,
+		                               b.org_order
+		                          from BILL_SUMMING_ORG_MONTH a,
+		                               T_ORGANIZATION         b,
+		                               RATE_RULE              c
+		                         where a.org_id = b.org_id(+)
+		                           and a.cdr_type = c.cdr_type(+)
+		                           and a.fee_type = c.rate_type(+)
+		                           and c.scope(+) = 1
+		                         order by c.rate_rule_name, b.org_order) x,
+		                       (select j.rate_rule_name,
+		                               j.fee,
+		                               j.other_fee,
+		                               j.cdr_type,
+		                               j.rate_type,
+		                               nvl(k.object_id, -1) org_id
+		                          from rate_rule j, rate_rule_rela k
+		                         where k.object_type = 1
+		                           and j.rate_item_id = k.rate_item_id
+		                           and to_date(#{req.beginDate}, 'yyyymm') between
+		                               j.inure_date and j.expire_date) y
+		                 where x.cdr_type = y.cdr_type(+)
+		                   and x.fee_type = y.rate_type(+)
+		                   and x.org_id = y.org_id(+)
+		                 order by nvl(y.rate_rule_name,x.rate_rule_name),
+		                          x.org_order) t) tt
+		 where tt.rate_rule_name is not null
+      	<if test="req.operatorLevel == 2">
+		and tt.org_id in (SELECT org_id FROM t_organization 
+ 			START WITH org_id = #{req.orgId}
+			CONNECT BY PRIOR org_id = super_org_id)
+		</if>
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and tt.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and tt.bill_month &lt;= #{req.endDate, jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and tt.bill_month &gt;= #{req.beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and tt.bill_month between #{req.beginDate, jdbcType=INTEGER} and #{req.endDate, jdbcType=INTEGER}
+		</if>
+   <if test="req.feeTypeName != null and req.feeTypeName != ''">
+   	and tt.rate_rule_name = #{req.feeTypeName}
+   </if>
+ 	
+	</select>
+	
+	<!-- TopN查询 -->
+	<select id="queryTopNListResult" resultMap="queryFeeListMap">
+		select *
+  from (select tt.*, rownum rownu
+          from (select t.org_id,
+                       nvl(b.org_name_full, '黑户') as org_name_full,
+                       t.total_fee,
+                       t.total_number,
+                       t.bill_month
+                  from (select org_id,
+                               bill_month,
+                               sum(total_fee) total_fee,
+                               sum(total_number) total_number
+                          from bill_summing_org_day
+                         group by org_id, bill_month) t,
+                       t_organization b
+                 where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if> 
+		order by t.total_fee desc) tt
+		where rownum &lt;= #{page} * #{size}
+		<if test="topN == null">
+		and rownum &lt;= 10
+		</if>
+		<if test="topN != null">
+		and rownum  &lt;= #{topN} 
+		</if>
+		) ttt  where ttt.rownu > (#{page} - 1) * #{size}
+	</select>
+	
+	<!-- TopN查询总记录数 -->
+	<select id="queryTopNListCount" resultType="INTEGER">
+		select count(1)
+   from (select tt.*, rownum rownu
+           from (select t.org_id,
+                        nvl(b.org_name_full, '黑户') as org_name_full,
+                        t.total_fee,
+                        t.total_number,
+                        t.bill_month
+                   from (select org_id,
+                                bill_month,
+                                sum(total_fee) total_fee,
+                                sum(total_number) total_number
+                           from bill_summing_org_day
+                          group by org_id, bill_month) t,
+                        t_organization b
+                  where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		 order by t.total_fee desc) tt
+		 where 1 = 1
+        <if test="topN == null">
+		and rownum &lt;= 10)
+		</if>
+		<if test="topN != null">
+		and rownum &lt;= #{topN})
+		</if>
+	</select>
+	
+	<!-- TopN查询导出报表 -->
+	<select id="queryTopNListAllResult" resultMap="queryFeeListMap">
+		select tt.*, rownum rownu
+          from (select t.org_id,
+                       nvl(b.org_name_full, '黑户') as org_name_full,
+                       t.total_fee,
+                       t.total_number,
+                       t.bill_month
+                  from (select org_id,
+                               bill_month,
+                               sum(total_fee) total_fee,
+                               sum(total_number) total_number
+                          from bill_summing_org_day
+                         group by org_id, bill_month) t,
+                       t_organization b
+                 where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by t.total_fee desc) tt
+		<if test="topN == null">
+		where rownum &lt;= 10
+		</if>
+		<if test="topN != null">
+		where rownum &lt;= #{topN}
+		</if>
+	</select>
+	
+	<!-- 超阀值查询 -->
+	<select id="queryThresholdListResult" resultMap="queryFeeListMap">
+		 select *
+  from (select tt.*, rownum rownu
+          from (select t.org_id,
+                       nvl(b.org_name_full, '黑户') as org_name_full,
+                       t.total_fee,
+                       t.total_number,
+                       t.bill_month
+                  from (select org_id,
+                               bill_month,
+                               sum(total_fee) total_fee,
+                               sum(total_number) total_number
+                          from bill_summing_org_day
+                         group by org_id, bill_month) t,
+                       t_organization b
+                 where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+        <if test="thresholdValue != null">
+		and t.total_fee &gt; #{thresholdValue} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc) tt
+		 where rownum &lt;= #{page} * #{size}) ttt
+ 			where ttt.rownu &gt; (#{page} - 1) * #{size}
+	</select>
+	
+	<!-- 超阀值查询总记录数 -->
+	<select id="queryThresholdListCount" resultType="INTEGER">
+		select count(1) from (
+ select t.org_id,
+        nvl(b.org_name_full, '黑户') as org_name_full,
+        t.total_fee,
+        t.total_number,
+        t.bill_month
+   from (select org_id,
+                bill_month,
+                sum(total_fee) total_fee,
+                sum(total_number) total_number
+           from bill_summing_org_day
+          group by org_id, bill_month) t,
+        t_organization b
+  where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+		<if test="thresholdValue != null">
+		and t.total_fee &gt; #{thresholdValue} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc)
+	</select>
+	
+	<!-- 超阀值查询导出报表 -->
+	<select id="queryThresholdListAllResult" resultMap="queryFeeListMap">
+			select t.org_id,
+         nvl(b.org_name_full, '黑户') as org_name_full,
+         t.total_fee,
+         t.total_number,
+         t.bill_month
+    from (select org_id,
+                 bill_month,
+                 sum(total_fee) total_fee,
+                 sum(total_number) total_number
+            from bill_summing_org_day
+           group by org_id, bill_month) t,
+         t_organization b
+   where t.org_id = b.org_id(+)
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+		<if test="thresholdValue != null">
+		and t.total_fee &gt; #{thresholdValue} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc
+	</select>
+	
+	<!-- 非活跃用户查询 -->
+	<select id="queryNotActiveUserListResult" resultMap="queryFeeListMap">
+		select *
+  from (select tt.*, rownum rownu
+          from (select t.org_id,
+                       nvl(b.org_name_full, '黑户') as org_name_full,
+                       t.total_fee,
+                       t.total_number,
+                       t.bill_month,
+                       t.total_minutes
+                  from (select org_id,
+                               bill_month,
+                               sum(total_fee) total_fee,
+                               sum(total_number) total_number,
+                               sum(total_minutes) total_minutes
+                          from bill_summing_org_day
+                         group by org_id, bill_month) t,
+                       t_organization b
+                 where t.org_id = b.org_id(+)
+                   and t.total_minutes = 0
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+        <if test="thresholdValue != null">
+		and t.total_fee &lt;= #{thresholdValue,jdbcType=INTEGER} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc) tt
+            where rownum &lt;= #{page} * #{size}) ttt
+            where ttt.rownu &gt; (#{page} - 1) * #{size}
+	</select>
+	
+	<!-- 非活跃用户查询总记录数 -->
+	<select id="queryNotActiveUserListCount" resultType="INTEGER">
+		select count(1)
+   from (select t.org_id,
+                nvl(b.org_name_full, '黑户') as org_name_full,
+                t.total_fee,
+                t.total_number,
+                t.bill_month,
+                t.total_minutes
+           from (select org_id,
+                        bill_month,
+                        sum(total_fee) total_fee,
+                        sum(total_number) total_number,
+                        sum(total_minutes) total_minutes
+                   from bill_summing_org_day
+                  group by org_id, bill_month) t,
+                t_organization b
+          where t.org_id = b.org_id(+)
+            and t.total_minutes = 0
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if> 
+		<if test="thresholdValue != null">
+		and t.total_fee &lt;= #{thresholdValue,jdbcType=INTEGER} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc)
+	</select>
+	
+	<!-- 非活跃用户查询报表导出 -->
+	<select id="queryNotActiveUserListAllResult" resultMap="queryFeeListMap">
+		select t.org_id,
+                 nvl(b.org_name_full, '黑户') as org_name_full,
+                 t.total_fee,
+                 t.total_number,
+                 t.bill_month,
+                 t.total_minutes
+            from (select org_id,
+                         bill_month,
+                         sum(total_fee) total_fee,
+                         sum(total_number) total_number,
+                         sum(total_minutes) total_minutes
+                    from bill_summing_org_day
+                   group by org_id, bill_month) t,
+                 t_organization b
+           where t.org_id = b.org_id(+)
+             and t.total_minutes = 0
+		<if test="orgIdArray != null and orgIdArray.length > 0">
+        and t.org_id in
+        <foreach collection="orgIdArray" item="item" index="index" open="(" close=")"  separator=",">  
+               #{item}
+        </foreach>
+        </if>
+		<if test="thresholdValue != null">
+		and t.total_fee &lt;= #{thresholdValue,jdbcType=INTEGER} * 1000
+		</if>
+		<if test="beginDate == null and endDate != null">
+		and t.bill_month &lt;= #{endDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate == null">
+		and t.bill_month &gt;= #{beginDate, jdbcType=INTEGER}
+		</if>
+		<if test="beginDate != null and endDate != null">
+		and t.bill_month between #{beginDate, jdbcType=INTEGER} and #{endDate, jdbcType=INTEGER}
+		</if>
+		order by b.org_order, t.total_fee desc
+	</select>
+	
+	
+	<!-- 批量查询 -->
+	<select id="batchQueryFeeListResult" resultMap="queryFeeListMap">
+		select * from (select fee_type, nvl(t.org_name,'黑户') as org_name , nvl(t.rate_rule_name,'黑户') as rate_rule_name , nvl(t.operator_name,'黑户') as operator_name , t.total_fee, t.total_number, t.bill_month, nvl(t.login_name,'黑户') as login_name, 
+ 			nvl (t.org_name_full, '黑户') as org_name_full , 
+ 			rownum rownu from 
+			(select * from BILL_SUMMING_USR_MONTH a, T_ORGANIZATION b, T_OPERATOR d,RATE_RULE e 
+    		where 
+    			a.org_id = b.org_id(+) 
+				and a.operator_id = d.operator_id(+) 
+    			and a.cdr_type = e.cdr_type(+) and a.fee_type = e.rate_type(+)
+    			and e.scope = 1
+		<if test="req.unitName != null and req.unitName != ''">
+		and b.org_name_full  like '%'||#{req.unitName}||'%'
+		</if>
+		<if test="req.userName != null and req.userName != ''">
+		and d.operator_name like '%'||#{req.userName}||'%'
+		</if>
+		<!--  
+		<if test="req.feeType != null and req.feeType != ''">
+		and c.cdr_type = #{req.feeType}
+		</if>
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and c.entry_name = #{req.feeTypeName}
+		</if>
+		-->
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and e.rate_rule_name = #{req.feeTypeName}
+		</if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and a.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and a.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and a.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.notesId != null and req.notesId != ''">
+		and d.login_name = #{req.notesId, jdbcType=VARCHAR}
+		</if>
+		order by e.rate_rule_name, b.org_order, d.operator_name, rownum) t )
+	</select>
+	
+	<!-- 部门批量查询 -->
+	<select id="batchQueryDeptFeeListResult" resultMap="queryFeeListMap">
+    	 select * from (select t.cdr_type, t.fee_type, nvl(t.org_name,'黑户') as org_name , nvl(t.rate_rule_name,'黑户') as rate_rule_name , nvl(t.operator_name,'黑户') as operator_name , t.total_fee, t.total_number, t.bill_month, nvl(t.login_name,'黑户') as login_name, 
+		       nvl (t.org_name_full, '黑户') as org_name_full , 
+		       rownum rownu from 
+		      (select a.cdr_type,a.fee_type,b.org_name,e.rate_rule_name,d.operator_name,a.total_fee,a.total_number,a.bill_month,d.login_name,b.org_name_full 
+		      from BILL_SUMMING_USR_MONTH a, T_ORGANIZATION b, T_OPERATOR d,RATE_RULE e 
+		        where 
+		          a.org_id = b.org_id(+) 
+		        and a.operator_id = d.operator_id(+) 
+		          and a.cdr_type = e.cdr_type(+) and a.fee_type=e.rate_type(+)
+    			and e.scope = 1
+    	<if test="req.unitName != null and req.unitName != ''">
+		and b.org_name_full like '%'||#{req.unitName}||'%'
+		</if>
+		<if test="req.feeType != null and req.feeType != ''">
+		and c.cdr_type = #{req.feeType}
+		</if>
+		<if test="req.feeTypeName != null and req.feeTypeName != ''">
+		and c.entry_name = #{req.feeTypeName}
+		</if>
+		<if test="req.beginDate == null and req.endDate != null">
+		and a.bill_month &lt;= #{req.endDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate == null">
+		and a.bill_month &gt;= #{req.beginDate,jdbcType=INTEGER}
+		</if>
+		<if test="req.beginDate != null and req.endDate != null">
+		and a.bill_month between #{req.beginDate,jdbcType=INTEGER} and #{req.endDate,jdbcType=INTEGER}
+		</if>
+		order by e.rate_rule_name, b.org_order, d.operator_name, rownum) t )
+	</select>
+	
+</mapper>

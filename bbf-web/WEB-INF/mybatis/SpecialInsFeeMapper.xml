@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.dao.SpecialInsFeeDao">
+
+	<resultMap type="com.newland.boss.cib.crmp.domain.SpecialInsFee" id="specialInsFeeMap">
+		<result column="SPECIAL_NUMBER" property="specialNumber" jdbcType="VARCHAR" />
+		<result column="START_TIME" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="END_TIME" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="JOIN_COUNT" property="joinCount" jdbcType="INTEGER" />
+		<result column="FEE" property="fee" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="OPERATE_ID" property="operateId" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 查找所有特殊号码保障费记录 -->
+	<select id="selectAllSpecialInsFee" resultMap="specialInsFeeMap">
+		SELECT SPECIAL_NUMBER, START_TIME, END_TIME, JOIN_COUNT, FEE  
+			FROM RATE_RULE_SPECIAL
+	</select>
+	
+	<!-- 增加一条特殊号码保障费记录 -->
+	<insert id="insertSpecialInsFee" parameterType="com.newland.boss.cib.crmp.domain.SpecialInsFee">
+		INSERT INTO RATE_RULE_SPECIAL (SPECIAL_NUMBER, START_TIME, END_TIME, 
+			JOIN_COUNT, FEE, CREATE_TIME, OPERATE_ID)
+       		VALUES(#{specialNumber},#{startTime},#{endTime}
+       			,#{joinCount},#{fee},sysdate,#{operateId})
+	</insert>
+	
+	<!-- 根据工单编号查找特殊号码保障费记录 -->
+	<select id="selectSpecialInsFeeByOperId" resultMap="specialInsFeeMap">
+		SELECT SPECIAL_NUMBER, START_TIME, END_TIME, JOIN_COUNT, FEE  
+			FROM RATE_RULE_SPECIAL
+			WHERE OPERATE_ID = #{operateId}
+	</select>
+	
+	<!-- 根据特殊号码查找工单信息 -->
+	<select id="selectSpecialInsFeeByNumber" resultMap="specialInsFeeMap">
+		SELECT SPECIAL_NUMBER, START_TIME, END_TIME, JOIN_COUNT, FEE  
+			FROM RATE_RULE_SPECIAL
+			WHERE SPECIAL_NUMBER = #{specialNumber}
+			AND (START_TIME BETWEEN #{startTime} AND #{endTime}
+			OR END_TIME BETWEEN #{startTime} AND #{endTime}
+			OR #{startTime} &gt; START_TIME AND #{endTime} &lt; END_TIME)
+	</select>
+	
+</mapper>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JxlTool.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-common</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.common</a> &gt; <span class="el_source">JxlTool.java</span></div><h1>JxlTool.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.common;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.NumberFormat;
+import jxl.write.NumberFormats;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+
+public class JxlTool {
+
+	private JxlTool() {
+
+	}
+<span class="fc" id="L29">	private static final Logger LOGGER = LogManager.getLogger(JxlTool.class);</span>
+<span class="fc" id="L30">	private static int sheetSize = 60000;</span>
+<span class="fc" id="L31">	private static WritableCellFormat format = new WritableCellFormat(NumberFormats.TEXT);// 设置文本格式</span>
+<span class="fc" id="L32">	private static NumberFormat nf = new NumberFormat(&quot;#0.00&quot;); // 设置数字格式</span>
+<span class="fc" id="L33">	private static WritableCellFormat wcfN = new WritableCellFormat(nf); // 设置表单格式</span>
+
+	/**
+	 * 导出Excel
+	 * 
+	 * @param path
+	 *            路径
+	 * @param xlsFull
+	 *            文件名
+	 * @param headList
+	 *            列名
+	 * @param bodyList
+	 *            数据
+	 * @param numberFlag
+	 *            是否数字格式标志
+	 * @throws IOException
+	 * @throws WriteException
+	 */
+	public static void exportExcel(String path, String[] headList, List&lt;String[]&gt; bodyList, boolean[] numberFlag)
+			throws IOException, WriteException {
+
+<span class="fc" id="L54">		WritableWorkbook wwb = null;</span>
+
+		try {
+
+<span class="fc" id="L58">			int sheetNum = 1;// 当前sheet索引</span>
+
+<span class="fc" id="L60">			int recNum = 0; // 当前记录索引</span>
+
+			// 创建excel文件
+<span class="fc" id="L63">			File file = new File(path);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">			if (!file.getParentFile().exists()) {</span>
+<span class="fc" id="L65">				boolean mkdirflag = file.getParentFile().mkdirs();</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">				if (!mkdirflag) {</span>
+<span class="nc" id="L67">					throw new IOException(&quot;文件目录创建失败&quot;);</span>
+				}
+			}
+<span class="fc" id="L70">			boolean flag = file.createNewFile();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">			if (!flag) {</span>
+<span class="fc" id="L72">				throw new IOException(&quot;文件创建失败&quot;);</span>
+			}
+
+			// 整理数据流，WritableWorkbook
+<span class="fc" id="L76">			wwb = Workbook.createWorkbook(file);</span>
+
+			// 开始分SHEET，写数据
+			while (true) {
+<span class="fc" id="L80">				int rowNum = 0;</span>
+<span class="fc" id="L81">				String sheetName = &quot;sheet&quot; + sheetNum;</span>
+				// 建立SHEET
+<span class="fc" id="L83">				WritableSheet ws = wwb.createSheet(sheetName, sheetNum);</span>
+<span class="fc" id="L84">				sheetNum++;</span>
+				
+				// 写入表头信息
+<span class="fc bfc" id="L87" title="All 2 branches covered.">				for (int i = 0; i &lt; headList.length; i++) {</span>
+<span class="fc" id="L88">					ws.addCell(new Label(i, rowNum, headList[i], format));</span>
+				}
+<span class="fc" id="L90">				rowNum++;</span>
+				
+				// 写入表数据行信息
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">				if (!bodyList.isEmpty()) {</span>
+<span class="fc" id="L94">					int sheetRecNum = 0;</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">					for (int i = recNum; i &lt; bodyList.size(); i++, recNum++, rowNum++, sheetRecNum++) {</span>
+						// 单个SHEET数据行超过SHEET应达到数据限额，则停止写入
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">						if (sheetRecNum &gt;= sheetSize)</span>
+<span class="nc" id="L98">							break;</span>
+<span class="fc" id="L99">						String[] row = bodyList.get(i);</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">						for (int j = 0; j &lt; row.length; j++) {</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">							if (numberFlag[j]) {</span>
+<span class="fc" id="L102">								ws = addNumCell(rowNum, ws, row, j);</span>
+							} else {
+<span class="fc" id="L104">								ws.addCell(new Label(j, rowNum, row[j], format));</span>
+							}
+						}
+					}
+				}
+				// 数据写完，退出
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">				if (recNum &gt;= bodyList.size())</span>
+<span class="fc" id="L111">					break;</span>
+<span class="nc" id="L112">			}</span>
+
+			// PUSH当前内容到XLS文件中
+<span class="fc" id="L115">			wwb.write();</span>
+
+<span class="fc" id="L117">		} catch (Exception e) {</span>
+<span class="fc" id="L118">			LOGGER.error(&quot;exportExcel err.&quot;, e);</span>
+		} finally {
+			// 关闭所有数据流
+<span class="fc bfc" id="L121" title="All 2 branches covered.">			if(wwb!=null){</span>
+<span class="fc" id="L122">				wwb.close();</span>
+			}
+		}
+<span class="fc" id="L125">	}</span>
+
+	private static WritableSheet addNumCell(int rowNum, WritableSheet ws, String[] row, int j)
+			throws WriteException {
+<span class="fc" id="L129">		double doubleValue = Double.parseDouble(row[j]);</span>
+<span class="fc" id="L130">		Number labelNF = new Number(j, rowNum, doubleValue, wcfN); // 格式化数值</span>
+<span class="fc" id="L131">		ws.addCell(labelNF);</span>
+<span class="fc" id="L132">		return ws;</span>
+	}
+
+	/**
+	 * Excel文件导入数据
+	 * 
+	 * @param path文件路径
+	 *            +文件名
+	 * @param sheetCode
+	 * @return
+	 * @throws BiffException
+	 * @throws IOException
+	 */
+	public static List&lt;String[]&gt; importExcel(String path, int sheetCode) throws BiffException, IOException {
+<span class="fc" id="L146">		List&lt;String[]&gt; dataList = new ArrayList&lt;String[]&gt;();</span>
+<span class="fc" id="L147">		Workbook book = null;</span>
+<span class="fc" id="L148">		book = Workbook.getWorkbook(new File(path));</span>
+		// 获得工作表对象
+<span class="fc" id="L150">		Sheet sheet = book.getSheet(sheetCode);</span>
+<span class="fc" id="L151">		int rows = sheet.getRows();</span>
+<span class="fc" id="L152">		int columns = sheet.getColumns();</span>
+
+		// 遍历每行每列的单元格
+<span class="fc bfc" id="L155" title="All 2 branches covered.">		for (int i = 0; i &lt; rows; i++) {</span>
+<span class="fc" id="L156">			String[] data = new String[columns];</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">			for (int j = 0; j &lt; columns; j++) {</span>
+<span class="fc" id="L158">				Cell cell = sheet.getCell(j, i);</span>
+<span class="fc" id="L159">				String result = cell.getContents();</span>
+<span class="fc" id="L160">				data[j] = result;</span>
+			}
+<span class="fc" id="L162">			dataList.add(data);</span>
+		}
+<span class="fc" id="L164">		book.close();</span>
+<span class="fc" id="L165">		return dataList;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

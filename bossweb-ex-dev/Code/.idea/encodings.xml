@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/bosskpi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bosskpi/bosskpi-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bosskpi/bosskpi-security" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bosskpi/bosskpi-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bosskpi/bosskpi-server-impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-backcommonctrl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-code" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-rule" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-settle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cib-crmp/cib-crmp-web/src/main/webapp/drowdown.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test-app" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.dao.UserDao">
+	<resultMap type="com.newland.boss.kpi.entity.User" id="userResultMap">
+		<id column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER"/>
+		<result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR"/>
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+		<result column="OPERATOR_STATUS" property="operatorStatus" jdbcType="INTEGER" />
+		<result column="OPERATOR_LEVEL" property="operatorLevel" jdbcType="INTEGER" />
+		<result column="ERR_COUNT" property="errCount" jdbcType="INTEGER"/>
+		<result column="LAST_ERR_TIME" property="lastErrTime" jdbcType="VARCHAR"/>
+	</resultMap>	
+	
+	<select id="selectOperatorById" resultMap="userResultMap">
+		SELECT OPERATOR_ID,OPERATOR_NAME,OPERATOR_LEVEL,PASSWORD,ERR_COUNT,TO_CHAR(LAST_ERR_TIME, 'yyyymmddhh24miss') as LAST_ERR_TIME FROM T_OPERATOR WHERE OPERATOR_ID = #{operatorId} AND OPERATOR_STATUS = 0
+	</select>
+	
+	<select id="selectOrgNameFullByOperatorId" resultType="String">
+		select b.org_name_full from t_oper_org_rela a,t_organization b where a.org_id=b.org_id and a.rela_status=0 and a.operator_id=#{operatorId}
+	</select>
+	
+	<select id="selectByFullName" resultType="Integer">
+		select a.org_id from t_organization a where a.org_name_full = #{orgNameFull}
+	</select>
+	
+	<select id="selectOperatorByLoginName" resultMap="userResultMap">
+		SELECT OPERATOR_ID,OPERATOR_NAME,OPERATOR_LEVEL,PASSWORD,ERR_COUNT,TO_CHAR(LAST_ERR_TIME, 'yyyymmddhh24miss') as LAST_ERR_TIME FROM T_OPERATOR WHERE LOGIN_NAME = #{loginName}
+	</select>
+	
+	<update id="resetErrCount" parameterType="com.newland.boss.kpi.entity.User">
+		UPDATE T_OPERATOR SET ERR_COUNT = #{errCount}, 
+		<if test="errCount == 0">
+			LAST_ERR_TIME = null 
+		</if>
+		<if test="errCount == 1">
+			LAST_ERR_TIME = sysdate
+		</if>
+		WHERE OPERATOR_ID = #{operatorId}
+	</update>
+	
+	<update id="updateErrCount" parameterType="java.lang.Integer">
+		UPDATE T_OPERATOR SET ERR_COUNT = ERR_COUNT+1, LAST_ERR_TIME = SYSDATE WHERE OPERATOR_ID = #{operatorId}
+	</update>
+</mapper>

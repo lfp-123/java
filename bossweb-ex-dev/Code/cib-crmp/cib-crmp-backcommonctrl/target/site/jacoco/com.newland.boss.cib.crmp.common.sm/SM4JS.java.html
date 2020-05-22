@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SM4JS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-backcommonctrl</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.common.sm</a> &gt; <span class="el_source">SM4JS.java</span></div><h1>SM4JS.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.common.sm;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+/**
+ * sm4实现
+ */
+<span class="nc" id="L10">public class SM4JS {</span>
+    public static final int SM4_ENCRYPT = 1;
+
+    public static final int SM4_DECRYPT = 0;
+
+    private int getUlongBe(byte[] b, int i) {
+<span class="nc" id="L16">        return (b[i] &amp; 0xff) &lt;&lt; 24 | ((b[i + 1] &amp; 0xff) &lt;&lt; 16) | ((b[i + 2] &amp; 0xff) &lt;&lt; 8) | (b[i + 3] &amp; 0xff) &amp; 0xffffffff;</span>
+    }
+
+    private void putUlongBe(long n, byte[] b, int i) {
+<span class="nc" id="L20">        b[i] = (byte) (int) (0xFF &amp; n &gt;&gt; 24);</span>
+<span class="nc" id="L21">        b[i + 1] = (byte) (int) (0xFF &amp; n &gt;&gt; 16);</span>
+<span class="nc" id="L22">        b[i + 2] = (byte) (int) (0xFF &amp; n &gt;&gt; 8);</span>
+<span class="nc" id="L23">        b[i + 3] = (byte) (int) (0xFF &amp; n);</span>
+<span class="nc" id="L24">    }</span>
+
+    private int shl(int x, int n) {
+<span class="nc" id="L27">        return (x &amp; 0xFFFFFFFF) &lt;&lt; n;</span>
+    }
+
+    private int rotl(int x, int n) {
+<span class="nc" id="L31">        return shl(x, n) | x &gt;&gt; (32 - n);</span>
+    }
+
+    private void swap(int[] sk, int i) {
+<span class="nc" id="L35">    	int t = sk[i];</span>
+<span class="nc" id="L36">        sk[i] = sk[(31 - i)];</span>
+<span class="nc" id="L37">        sk[(31 - i)] = t;</span>
+<span class="nc" id="L38">    }</span>
+
+<span class="nc" id="L40">    private static final byte[] SBOX_TABLE = SM4.SBOX_TABLE;</span>
+
+<span class="nc" id="L42">    private static final int[] FK = SM4.FK;</span>
+
+<span class="nc" id="L44">    private static final int[] CK = SM4.CK;</span>
+
+    private byte sm4Sbox(byte inch) {
+<span class="nc" id="L47">        int i = inch &amp; 0xFF;</span>
+<span class="nc" id="L48">        return SBOX_TABLE[i];</span>
+    }
+
+    private int sm4Lt(int ka) {
+    	int bb;
+    	int c;
+<span class="nc" id="L54">        byte[] a = new byte[4];</span>
+<span class="nc" id="L55">        byte[] b = new byte[4];</span>
+<span class="nc" id="L56">        putUlongBe(ka, a, 0);</span>
+<span class="nc" id="L57">        b[0] = sm4Sbox(a[0]);</span>
+<span class="nc" id="L58">        b[1] = sm4Sbox(a[1]);</span>
+<span class="nc" id="L59">        b[2] = sm4Sbox(a[2]);</span>
+<span class="nc" id="L60">        b[3] = sm4Sbox(a[3]);</span>
+<span class="nc" id="L61">        bb = getUlongBe(b, 0);</span>
+<span class="nc" id="L62">        c = bb ^ rotl(bb, 2) ^ rotl(bb, 10) ^ rotl(bb, 18) ^ rotl(bb, 24);</span>
+<span class="nc" id="L63">        return c;</span>
+    }
+
+    private int sm4F(int x0, int x1, int x2, int x3, int rk) {
+<span class="nc" id="L67">        return x0 ^ sm4Lt(x1 ^ x2 ^ x3 ^ rk);</span>
+    }
+
+    private int sm4CalciRK(int ka) {
+    	int bb;
+    	int rk;
+<span class="nc" id="L73">        byte[] a = new byte[4];</span>
+<span class="nc" id="L74">        byte[] b = new byte[4];</span>
+<span class="nc" id="L75">        putUlongBe(ka, a, 0);</span>
+<span class="nc" id="L76">        b[0] = sm4Sbox(a[0]);</span>
+<span class="nc" id="L77">        b[1] = sm4Sbox(a[1]);</span>
+<span class="nc" id="L78">        b[2] = sm4Sbox(a[2]);</span>
+<span class="nc" id="L79">        b[3] = sm4Sbox(a[3]);</span>
+<span class="nc" id="L80">        bb = getUlongBe(b, 0);</span>
+<span class="nc" id="L81">        rk = bb ^ rotl(bb, 13) ^ rotl(bb, 23);</span>
+<span class="nc" id="L82">        return rk;</span>
+    }
+
+    private void sm4Setkey(int[] sk, byte[] key) {
+<span class="nc" id="L86">    	int[] mk = new int[4];</span>
+<span class="nc" id="L87">    	int[] k = new int[36];</span>
+<span class="nc" id="L88">        int i = 0;</span>
+<span class="nc" id="L89">        mk[0] = getUlongBe(key, 0);</span>
+<span class="nc" id="L90">        mk[1] = getUlongBe(key, 4);</span>
+<span class="nc" id="L91">        mk[2] = getUlongBe(key, 8);</span>
+<span class="nc" id="L92">        mk[3] = getUlongBe(key, 12);</span>
+<span class="nc" id="L93">        k[0] = mk[0] ^ FK[0];</span>
+<span class="nc" id="L94">        k[1] = mk[1] ^ FK[1];</span>
+<span class="nc" id="L95">        k[2] = mk[2] ^ FK[2];</span>
+<span class="nc" id="L96">        k[3] = mk[3] ^ FK[3];</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for (; i &lt; 32; i++) {</span>
+<span class="nc" id="L98">            k[(i + 4)] = (k[i] ^ sm4CalciRK(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ CK[i]));</span>
+<span class="nc" id="L99">            sk[i] = k[(i + 4)];</span>
+        }
+<span class="nc" id="L101">    }</span>
+
+    private void sm4OneRound(int[] sk, byte[] input, byte[] output) {
+<span class="nc" id="L104">        int i = 0;</span>
+<span class="nc" id="L105">        int[] ulbuf = new int[36];</span>
+<span class="nc" id="L106">        ulbuf[0] = getUlongBe(input, 0);</span>
+<span class="nc" id="L107">        ulbuf[1] = getUlongBe(input, 4);</span>
+<span class="nc" id="L108">        ulbuf[2] = getUlongBe(input, 8);</span>
+<span class="nc" id="L109">        ulbuf[3] = getUlongBe(input, 12);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        while (i &lt; 32) {</span>
+<span class="nc" id="L111">            ulbuf[(i + 4)] = sm4F(ulbuf[i], ulbuf[(i + 1)], ulbuf[(i + 2)], ulbuf[(i + 3)], sk[i]);</span>
+<span class="nc" id="L112">            i++;</span>
+        }
+<span class="nc" id="L114">        putUlongBe(ulbuf[35], output, 0);</span>
+<span class="nc" id="L115">        putUlongBe(ulbuf[34], output, 4);</span>
+<span class="nc" id="L116">        putUlongBe(ulbuf[33], output, 8);</span>
+<span class="nc" id="L117">        putUlongBe(ulbuf[32], output, 12);</span>
+<span class="nc" id="L118">    }</span>
+
+    private byte[] padding(byte[] input, int mode) {
+<span class="nc bnc" id="L121" title="All 2 branches missed.">        if (input == null) {</span>
+<span class="nc" id="L122">            return new byte[0];</span>
+        }
+
+        byte[] ret;
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        if (mode == SM4_ENCRYPT) {</span>
+<span class="nc" id="L127">            int p = 16 - input.length % 16;</span>
+<span class="nc" id="L128">            ret = new byte[input.length + p];</span>
+<span class="nc" id="L129">            System.arraycopy(input, 0, ret, 0, input.length);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (int i = 0; i &lt; p; i++) {</span>
+<span class="nc" id="L131">                ret[input.length + i] = (byte) p;</span>
+            }
+<span class="nc" id="L133">        } else {</span>
+<span class="nc" id="L134">            int p = input[input.length - 1];</span>
+<span class="nc" id="L135">            ret = new byte[input.length - p];</span>
+<span class="nc" id="L136">            System.arraycopy(input, 0, ret, 0, input.length - p);</span>
+        }
+<span class="nc" id="L138">        return ret;</span>
+    }
+
+    public void sm4SetkeyDec(SM4ContextJS ctx, byte[] key) throws SM4Exception {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (ctx == null) {</span>
+<span class="nc" id="L143">            throw new SM4Exception(&quot;ctx is null!&quot;);</span>
+        }
+
+<span class="nc bnc" id="L146" title="All 4 branches missed.">        if (key == null || key.length != 16) {</span>
+<span class="nc" id="L147">            throw new SM4Exception(&quot;key error!&quot;);</span>
+        }
+
+<span class="nc" id="L150">        int i = 0;</span>
+<span class="nc" id="L151">        ctx.setMode(SM4_DECRYPT);</span>
+<span class="nc" id="L152">        sm4Setkey(ctx.getSk(), key);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        for (i = 0; i &lt; 16; i++) {</span>
+<span class="nc" id="L154">            swap(ctx.getSk(), i);</span>
+        }
+<span class="nc" id="L156">    }</span>
+
+    public byte[] sm4CryptEcb(SM4ContextJS ctx, byte[] input) throws SM4Exception, IOException {
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (input == null) {</span>
+<span class="nc" id="L161">            throw new SM4Exception(&quot;input is null!&quot;);</span>
+        }
+
+<span class="nc bnc" id="L164" title="All 4 branches missed.">        if ((ctx.isPadding()) &amp;&amp; (ctx.getMode() == SM4_ENCRYPT)) {</span>
+<span class="nc" id="L165">            input = padding(input, SM4_ENCRYPT);</span>
+        }
+
+<span class="nc" id="L168">        int length = input.length;</span>
+<span class="nc" id="L169">        byte[] output = null;</span>
+<span class="nc" id="L170">        try (ByteArrayInputStream bins = new ByteArrayInputStream(input);</span>
+<span class="nc" id="L171">             ByteArrayOutputStream bous = new ByteArrayOutputStream()) {</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            for (; length &gt; 0; length -= 16) {</span>
+<span class="nc" id="L173">                byte[] in = new byte[16];</span>
+<span class="nc" id="L174">                byte[] out = new byte[16];</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">                while (bins.read(in) &gt; 0) {</span>
+<span class="nc" id="L176">                    sm4OneRound(ctx.getSk(), in, out);</span>
+<span class="nc" id="L177">                    bous.write(out);</span>
+                }
+            }
+
+<span class="nc" id="L181">            output = bous.toByteArray();</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">            if (ctx.isPadding() &amp;&amp; ctx.getMode() == SM4_DECRYPT) {</span>
+<span class="nc" id="L183">                output = padding(output, SM4_DECRYPT);</span>
+            }
+        }
+<span class="nc" id="L186">        return output;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

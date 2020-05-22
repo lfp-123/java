@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="configuration">
+<head>
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>配置管理页面</title>
+    <script src="../skeleton/includeJs_3rd.js"></script>
+    <script src="../skeleton/includeCss_3rd.js"></script>
+    <style type="text/css">
+        .blankDiv {
+            margin-right: 20px;
+            display: inline;
+        }
+        .null_tr {
+            height: 30.2px;
+        }
+    </style>
+</head>
+<body ng-controller="appConfigController as roleCtrl" style="padding-right: 10px;" ng-cloak>
+
+<div class="form-inline" align="right">
+    <label for="dept">系统名称：</label>
+    <div style="display: inline-block; margin-right: 10px; width: 10%;">
+    <select class="input-text" style="cursor: pointer;" ng-model="dictId">
+        <option ng-repeat="dict in dictList" value="{{dict.DictName}}">{{dict.DictName}}</option>
+    </select>
+   </div>
+    <label for="dept">APP名称：</label>
+    <div class="form-group">
+        <input type="text" class="input-text" ng-model="appName">
+    </div>
+    <div class="blankDiv"></div>
+    <label for="dept">APP实例名称：</label>
+    <div class="form-group">
+        <input type="text" class="input-text" ng-model="appInstanceName">
+    </div>
+    <div class="blankDiv"></div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="button" ng-click="searchRole()"><i class="Hui-iconfont">&#xe709;</i> 查询</button>
+        <button class="btn btn-primary" type="button" ng-click="resetSearch()"><i class="Hui-iconfont">&#xe68f;</i> 重置</button>
+    </div>
+</div>
+
+<div style="margin-top: 20px;">
+    <table ng-table="roleCtrl.tableParams" class="table-condensed table-border table-hover" style="margin-bottom: 10px;">
+        <tr ng-repeat="config in $data" ng-model="roleInfos" ng-click="selectRole(config)" ng-class="config.isNull">
+            <td data-title="''"><input type="checkbox" id="{{config}}" ng-checked="isSelected(config)" ng-if="config.isNull != 'null_tr'" ></td>
+            <td data-title="'系统编号'">{{config.systemId}}</td>
+            <td data-title="'系统类型'">{{config.systemName}}</td>
+            <td data-title="'应用名'">{{config.appName}}</td>
+            <td data-title="'应用实例名'">{{config.appInstanceName}}</td>
+            <td data-title="'配置类型'">{{config.configType}}</td>
+            <td data-title="'配置键'">{{config.configKey}}</td>
+            <td data-title="'配置值'"><span title="{{config.configValue}}" ng-click="openShow(config.configValue)" ng-bind="parseRoleDesc(config.configValue)"></span></td>
+            <td data-title="'配置路径'">{{config.configPath}}</td>
+        </tr>
+    </table>
+</div>
+<div class="f-r">
+    <button class="btn btn-primary" ng-click="openModel('push')"><i class="Hui-iconfont">&#xe604;</i> 推送</button>
+    <button class="btn btn-primary" ng-click="openModel('add')"><i class="Hui-iconfont">&#xe604;</i> 添加</button>
+    <button class="btn btn-primary" ng-click="openModel('modify')"><i class="Hui-iconfont">&#xe60c;</i> 修改</button>
+    <button class="btn btn-primary" data-toggle="modal" ng-click="roleDelete()"><i class="Hui-iconfont">&#xe60b;</i> 删除</button>
+</div>
+
+<!--展示匹配列表-->
+<script type="text/ng-template" id="push.html">
+    <div class="modal-header">
+        <h4 class="modal-title" align="center">应用主机列表</h4>
+    </div>
+    <div style="margin-top: 0px;">
+        <table ng-table="roleCtrl.tableParams" class="table-condensed table-border table-hover" style="margin-bottom: 10px;">
+            <tr ng-repeat="configs in roleInfos_online" ng-model="roleInfos_online" ng-click="selectRole(configs)" ng-class="role.isNull">
+                <td data-title="''"><input type="checkbox" id="{{configs}}" ng-checked="isSelected(configs)" ng-if="configs.isNull != 'null_tr'"></td>
+                <td data-title="'系统名称'">{{configs.systemId}}</td>
+                <td data-title="'主机'">{{configs.host}}</td>
+                <td data-title="'应用名称'">{{configs.appName}}</td>
+                <td data-title="'应用实例名'">{{configs.appInsName}}</td>
+                <td data-title="'最新拉取'">{{configs.lastPullTime}}</td>
+                <td data-title="'最新推送'">{{configs.lastPushTime}}</td>
+                <td data-title="'最新心跳'">{{configs.lastHeartBeatTime}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="pushConfig()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        <button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    </div>
+</script>
+
+<!--展示过长配置-->
+<script type="text/ng-template" id="show.html">
+    <div class="modal-header">
+        <h4 class="modal-title" align="center">查看配置</h4>
+    </div>
+    <div class="modal-body">
+        <div align="center">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="roleDesc" class="col-sm-3 control-label">配置值：</label>
+                    <div class="col-sm-8">
+                      <textarea rows="20px" cols="40px" ng-model="show"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    </div>
+    </div>
+ </script>
+
+<!--模态编辑窗口 -->
+<script type="text/ng-template" id="modify.html">
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title" align="center">修改配置</h4>
+        </div>
+        <div class="modal-body">
+            <div align="center">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="roleStatus" class="col-sm-3 control-label">系统名称</label>
+                        <div class="col-sm-8">
+                            <select ng-model="roleInfos[0].systemId" id="roleStatus" class="form-control" >
+                                <option ng-repeat="x in roleStatusDict" value="{{x.DictId}}">{{x.DictName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleName" class="col-sm-3 control-label">应用名：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfos[0].appName" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">应用实例名：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfos[0].appInstanceName" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleStatus" class="col-sm-3 control-label">配置类型</label>
+                        <div class="col-sm-8">
+                            <select ng-model="roleInfos[0].configType" id="roleStatus" class="form-control" >
+
+                                <option ng-repeat="x in roleTypeDict" value="{{x.DictId}}">{{x.DictName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置键：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfos[0].configKey" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置值：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfos[0].configValue" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置路径：</label>
+                        <div id="orgTreeInput" class="col-sm-8">
+                            <textarea id="roleDesc" class="form-control" rows="3" ng-model="roleInfos[0].configPath" maxlength="128"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="roleUpdate()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+            <button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+        </div>
+    </div>
+</script>
+
+<!--模态增加窗口-->
+<script type="text/ng-template" id="add.html">
+    <div>
+        <div class="modal-header">
+            <h4 class="modal-title" align="center">新增配置</h4>
+        </div>
+        <div class="modal-body">
+            <div align="center">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="roleStatus" class="col-sm-3 control-label">系统名称</label>
+                            <div class="col-sm-8">
+                                <select ng-model="roleInfo.systemId" id="roleStatus" class="form-control" >
+                                    <option value="" selected="selected">请选择</option>
+                                    <option ng-repeat="x in roleStatusDict" value="{{x.DictId}}">{{x.DictName}}</option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleName" class="col-sm-3 control-label">应用名：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfo.appName" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">应用实例名：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfo.appInstanceName" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleStatus" class="col-sm-3 control-label">配置类型</label>
+                        <div class="col-sm-8">
+                            <select ng-model="roleInfo.configType" id="roleStatus" class="form-control" >
+                                <option value="" selected="selected">请选择</option>
+                                <option ng-repeat="x in roleTypeDict" value="{{x.DictId}}">{{x.DictName}}</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置键：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfo.configKey" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置值：</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="roleName" class="form-control" ng-model="roleInfo.configValue" placeholder="必填" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roleDesc" class="col-sm-3 control-label">配置路径：</label>
+                        <div id="orgTreeInput" class="col-sm-8">
+                            <textarea id="roleDesc" class="form-control" rows="3" ng-model="roleInfo.configPath" maxlength="128"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="addRole()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+            <button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="../resources/code/controller/configurationManagement.js"></script>
+</body>
+</html>

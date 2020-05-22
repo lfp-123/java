@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CallListController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-settle</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.settle.controller</a> &gt; <span class="el_source">CallListController.java</span></div><h1>CallListController.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.settle.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSONArray;
+import com.newland.boss.cib.crmp.domain.QueryCallListReq;
+import com.newland.boss.cib.crmp.domain.QueryCallListResp;
+import com.newland.boss.cib.crmp.settle.dao.RatedCdrDao;
+import com.newland.boss.cib.crmp.settle.service.QueryCallListService;
+import com.newland.boss.kpi.admin.dao.OperatorDao;
+import com.newland.boss.kpi.admin.model.Operator;
+import com.newland.boss.kpi.entity.DictDef;
+import com.newland.boss.kpi.server.AppSession;
+import com.newland.boss.kpi.server.DictDefService;
+
+@RestController
+<span class="fc" id="L27">public class CallListController {</span>
+
+	@Autowired
+	private QueryCallListService queryCallListService;
+	@Autowired
+	private AppSession appSession;
+	@Autowired
+	private DictDefService dictDefService;
+	@Autowired
+	private RatedCdrDao ratedCdrDao;
+	@Autowired
+	private OperatorDao operatorDao;
+
+	@RequestMapping(value = &quot;/queryCdrList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryCdrList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L42">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L43">		return queryCallList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryDmaList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryDmaList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L48">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L49">		return queryCallList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryNetList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryNetList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L54">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L55">		return queryCallList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryCallList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryCallList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L60">		initRequest(queryCallListReq);</span>
+
+<span class="fc" id="L62">		int page = Integer.parseInt(req.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L63">		int size = Integer.parseInt(req.getParameter(&quot;size&quot;));</span>
+//		List&lt;QueryCallListResp&gt; callList = queryCallListService.queryCallListResult(queryCallListReq, page, size);
+//		int cnt = queryCallListService.queryCallListCount(queryCallListReq);
+<span class="fc" id="L66">		Map&lt;String, Object&gt; map = queryCallListService.queryCallListResult(queryCallListReq, page, size);</span>
+//		map.put(&quot;list&quot;, callList);
+//		map.put(&quot;cnt&quot;, cnt);
+<span class="fc" id="L69">		return JSONArray.toJSONString(map);</span>
+	}
+
+	/**
+	 * 初始化请求信息
+	 * 
+	 * @param queryCallListReq
+	 */
+	private void initRequest(QueryCallListReq queryCallListReq) {
+<span class="fc" id="L78">		queryCallListReq.setOperatorLevel(appSession.getUser().getOperatorLevel());</span>
+<span class="fc" id="L79">		queryCallListReq.setUserOperatorId(appSession.getUser().getOperatorId());</span>
+<span class="fc" id="L80">		queryCallListReq.setUserLoginName(ratedCdrDao.queryLoginName(appSession.getUser().getOperatorId()));</span>
+<span class="fc" id="L81">		queryCallListReq.setOrgId(appSession.getUser().getOrgId());</span>
+
+<span class="pc bpc" id="L83" title="2 of 4 branches missed.">		if (!&quot;&quot;.equals(queryCallListReq.getRealCallTypes()) &amp;&amp; queryCallListReq.getRealCallTypes() != null) {</span>
+<span class="nc" id="L84">			queryCallListReq.setCallTypes(queryCallListReq.getRealCallTypes().split(&quot;,&quot;));</span>
+		}
+
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">		if (queryCallListReq.getOperatorName() != null) {</span>
+<span class="nc" id="L88">			queryCallListReq.setOperatorName(queryCallListReq.getOperatorName().replaceAll(&quot;%&quot;, &quot;/%&quot;)</span>
+<span class="nc" id="L89">					.replaceAll(&quot;_&quot;, &quot;/_&quot;));</span>
+		}
+		
+<span class="fc bfc" id="L92" title="All 2 branches covered.">		if (&quot;2&quot;.equals(queryCallListReq.getResourceType())) {</span>
+<span class="pc bpc" id="L93" title="3 of 4 branches missed.">			if (queryCallListReq.getLoginName() != null &amp;&amp; !(&quot;&quot;.equals(queryCallListReq.getLoginName()))) {</span>
+<span class="nc" id="L94">				Operator operator = operatorDao.findByLoginName(queryCallListReq.getLoginName());</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">				if (operator != null) {</span>
+<span class="nc" id="L96">					queryCallListReq.setOperatorId(String.valueOf(operator.getOperatorId()));</span>
+				} else {
+<span class="nc" id="L98">					queryCallListReq.setOperatorId(&quot;-2&quot;);</span>
+				}
+			}
+		}
+		
+<span class="fc" id="L103">		queryCallListReq.setStartBillMonth(queryCallListReq.getBeginDate().replace(&quot;-&quot;, &quot;&quot;).substring(0, 6));</span>
+<span class="fc" id="L104">		queryCallListReq.setEndBillMonth(queryCallListReq.getEndDate().replace(&quot;-&quot;, &quot;&quot;).substring(0, 6));</span>
+		
+<span class="fc" id="L106">	}</span>
+
+	@RequestMapping(value = &quot;/createCallListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String callListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L110">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L111">		Map&lt;String, String&gt; map = queryCallListService.createCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L112">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createCdrListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String cdrListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L117">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L118">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L119">		Map&lt;String, String&gt; map = queryCallListService.createCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L120">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createDmaListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String dmaListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L125">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L126">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L127">		Map&lt;String, String&gt; map = queryCallListService.createCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L128">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createNetListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String netListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L133">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L134">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L135">		Map&lt;String, String&gt; map = queryCallListService.createCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L136">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryBlackCallList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryBlackCallList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L141">		int page = Integer.parseInt(req.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L142">		int size = Integer.parseInt(req.getParameter(&quot;size&quot;));</span>
+<span class="fc" id="L143">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L144">		Map&lt;String, Object&gt; map = queryCallListService.queryBlackCallListResult(queryCallListReq, page, size);</span>
+<span class="fc" id="L145">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryBlackCdrList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryBlackCdrList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L150">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L151">		initForBlackCdr(queryCallListReq);</span>
+<span class="fc" id="L152">		return queryBlackCallList(req, queryCallListReq);</span>
+	}
+
+	/**
+	 * 黑户查询设置默认查询呼叫类型为主叫
+	 * 
+	 * @param queryCallListReq
+	 */
+	private void initForBlackCdr(QueryCallListReq queryCallListReq) {
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">		if (&quot;&quot;.equals(queryCallListReq.getCallType())) {</span>
+<span class="nc" id="L162">			queryCallListReq.setCallType(&quot;1&quot;);</span>
+<span class="nc" id="L163">			List&lt;DictDef&gt; dicList = dictDefService.getDictDefByDictClass(1021);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">			for (DictDef dictDef : dicList) {</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">				if (dictDef.getEntryId() == 1) {</span>
+<span class="nc" id="L166">					queryCallListReq.setRealCallTypes(dictDef.getEntryDesc());</span>
+				}
+<span class="nc" id="L168">			}</span>
+		}
+<span class="fc" id="L170">	}</span>
+
+	@RequestMapping(value = &quot;/queryBlackDmaList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryBlackDmaList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L174">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L175">		return queryBlackCallList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryBlackNetList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryBlackNetList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L180">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L181">		return queryBlackCallList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/createBlackCallListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackCallListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L186">		initForBlackCdr(queryCallListReq);</span>
+<span class="fc" id="L187">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L188">		Map&lt;String, String&gt; map = queryCallListService.createBlackCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L189">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createBlackCdrListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackCdrListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L194">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L195">		initForBlackCdr(queryCallListReq);</span>
+<span class="fc" id="L196">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L197">		Map&lt;String, String&gt; map = queryCallListService.createBlackCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L198">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createBlackDmaListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackDmaListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L203">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L204">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L205">		Map&lt;String, String&gt; map = queryCallListService.createBlackCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L206">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createBlackNetListExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackNetListQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L211">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L212">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L213">		Map&lt;String, String&gt; map = queryCallListService.createBlackCallListExcel(queryCallListReq);</span>
+<span class="fc" id="L214">		return JSONArray.toJSONString(map);</span>
+	}
+
+	public String queryBlackUserList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L218">		int page = Integer.parseInt(req.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L219">		int size = Integer.parseInt(req.getParameter(&quot;size&quot;));</span>
+<span class="fc" id="L220">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L221">		Map&lt;String, Object&gt; map = queryCallListService.queryBlackUserListResult(queryCallListReq, page, size);</span>
+<span class="fc" id="L222">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryCdrBlackUserList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryCdrBlackUserList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L227">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L228">		initForBlackCdr(queryCallListReq);</span>
+<span class="fc" id="L229">		return queryBlackUserList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryDmaBlackUserList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryDmaBlackUserList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L234">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L235">		return queryBlackUserList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/queryNetrBlackUserList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String queryNetBlackUserList(HttpServletRequest req, @RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L240">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L241">		return queryBlackUserList(req, queryCallListReq);</span>
+	}
+
+	@RequestMapping(value = &quot;/createCdrBlackUserExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackCdrUserQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L246">		queryCallListReq.setResourceType(&quot;1&quot;);</span>
+<span class="fc" id="L247">		initForBlackCdr(queryCallListReq);</span>
+<span class="fc" id="L248">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L249">		Map&lt;String, String&gt; map = queryCallListService.createBlackUserListExcel(queryCallListReq);</span>
+<span class="fc" id="L250">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createDmaBlackUserExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackDmaUserQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L255">		queryCallListReq.setResourceType(&quot;2&quot;);</span>
+<span class="fc" id="L256">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L257">		Map&lt;String, String&gt; map = queryCallListService.createBlackUserListExcel(queryCallListReq);</span>
+<span class="fc" id="L258">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/createNetBlackUserExcel&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String blackNetUserQueryForDownload(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L263">		queryCallListReq.setResourceType(&quot;3&quot;);</span>
+<span class="fc" id="L264">		initRequest(queryCallListReq);</span>
+<span class="fc" id="L265">		Map&lt;String, String&gt; map = queryCallListService.createBlackUserListExcel(queryCallListReq);</span>
+<span class="fc" id="L266">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/editUserInfo&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String editUserInfo(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L271">		Map&lt;String, String&gt; map = queryCallListService.editUserInfo(queryCallListReq);</span>
+<span class="fc" id="L272">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/editUserInfoForDetail&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String editUserInfoForDetail(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L277">		Map&lt;String, String&gt; map = queryCallListService.editUserInfoForDetail(queryCallListReq);</span>
+<span class="fc" id="L278">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/editOrgInfo&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String editOrgInfo(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L283">		Map&lt;String, String&gt; map = queryCallListService.editOrgInfo(queryCallListReq);</span>
+<span class="fc" id="L284">		return JSONArray.toJSONString(map);</span>
+	}
+
+	@RequestMapping(value = &quot;/addInsuranceFee&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String addInsuranceFee(@RequestBody QueryCallListReq queryCallListReq) {
+<span class="fc" id="L289">		Map&lt;String, String&gt; map = queryCallListService.addInsuranceFee(queryCallListReq);</span>
+<span class="fc" id="L290">		return JSONArray.toJSONString(map);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

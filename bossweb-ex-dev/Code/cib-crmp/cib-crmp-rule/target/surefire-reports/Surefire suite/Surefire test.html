@@ -1,0 +1,254 @@
+<html>
+<head>
+<title>TestNG:  Surefire test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Surefire test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>35/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Wed May 13 16:32:44 CST 2020</td>
+</tr>
+<tr><td>Total time:</td><td>9 seconds (9408 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.ExcelParseException()'><b>ExcelParseException</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testAddRateRule()'><b>testAddRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRela()'><b>testAddRateRuleRela</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRelaByRuleId()'><b>testAddRateRuleRelaByRuleId</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testAddSettleApportionRelaByRuleId()'><b>testAddSettleApportionRelaByRuleId</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testAddSettleApportionRule()'><b>testAddSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testCombinQuerySettleApportionRela()'><b>testCombinQuerySettleApportionRela</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testDeleteRateRule()'><b>testDeleteRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testDeleteRateRuleRela()'><b>testDeleteRateRuleRela</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testDeleteSettleApportionRule()'><b>testDeleteSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testDeleteSettleApportionRule()'><b>testDeleteSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testEditRateRule()'><b>testEditRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testEditSettleApportionRule()'><b>testEditSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testExportRateRule()'><b>testExportRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testExportRateRule()'><b>testExportRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testExportSettleApportionRelaByParam()'><b>testExportSettleApportionRelaByParam</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testExportSettleApportionRuleByParam()'><b>testExportSettleApportionRuleByParam</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testImportRateRuleForService()'><b>testImportRateRuleForService</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testImportSettleApportionRule()'><b>testImportSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadAllSettleApportionRule()'><b>testLoadAllSettleApportionRule</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testLoadRateRuleRelaByRuleItemId()'><b>testLoadRateRuleRelaByRuleItemId</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadSettleApportionRuleByParam()'><b>testLoadSettleApportionRuleByParam</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testModifySettleApportionRelaStatus()'><b>testModifySettleApportionRelaStatus</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testModifySettleApportionRuleStatus()'><b>testModifySettleApportionRuleStatus</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testRemoveRateRuleRelaByObjectIdForServiceImp()'><b>testRemoveRateRuleRelaByObjectIdForServiceImp</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectOrgSettleApportionRela()'><b>testSelectOrgSettleApportionRela</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRule()'><b>testSelectRateRule</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRuleToDistribute()'><b>testSelectRateRuleToDistribute</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectSettleApportionRela()'><b>testSelectSettleApportionRela</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testShowRateRuleRelaByObjectId()'><b>testShowRateRuleRelaByObjectId</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testShowRoleById()'><b>testShowRoleById</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testUpdateRateRuleRelaStatus()'><b>testUpdateRateRuleRelaStatus</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testUpdateRateRuleStatus()'><b>testUpdateRateRuleStatus</b><br>Test class: com.newland.boss.cib.crmp.rule.RateRuleControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByOrgId()'><b>testloadSettleApportionRelaByOrgId</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+<tr>
+<td title='com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByRuleId()'><b>testloadSettleApportionRelaByRuleId</b><br>Test class: com.newland.boss.cib.crmp.rule.settleRelaControllerTest</td>
+<td></td>
+<td>0</td>
+<td>com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4</td></tr>
+</table><p>
+</body>
+</html>

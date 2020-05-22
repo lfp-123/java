@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Resource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-server</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.entity</a> &gt; <span class="el_source">Resource.java</span></div><h1>Resource.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.entity;
+
+import java.util.List;
+
+<span class="nc" id="L5">public class Resource {</span>
+
+	private Integer operatorId;
+	private Integer roleId;
+	private Integer resourceId;
+	private Integer superResourceId;
+	private String resourceName;
+	private String resourceUrl;
+	private String resourceOrder;
+	
+	private List&lt;Resource&gt; childResourceList;
+
+	public Integer getOperatorId() {
+<span class="nc" id="L18">		return operatorId;</span>
+	}
+
+	public void setOperatorId(Integer operatorId) {
+<span class="nc" id="L22">		this.operatorId = operatorId;</span>
+<span class="nc" id="L23">	}</span>
+
+	public Integer getResourceId() {
+<span class="nc" id="L26">		return resourceId;</span>
+	}
+
+	public void setResourceId(Integer resourceId) {
+<span class="nc" id="L30">		this.resourceId = resourceId;</span>
+<span class="nc" id="L31">	}</span>
+
+	public Integer getSuperResourceId() {
+<span class="nc" id="L34">		return superResourceId;</span>
+	}
+
+	public void setSuperResourceId(Integer superResourceId) {
+<span class="nc" id="L38">		this.superResourceId = superResourceId;</span>
+<span class="nc" id="L39">	}</span>
+
+	public String getResourceName() {
+<span class="nc" id="L42">		return resourceName;</span>
+	}
+
+	public void setResourceName(String resourceName) {
+<span class="nc" id="L46">		this.resourceName = resourceName;</span>
+<span class="nc" id="L47">	}</span>
+
+	public String getResourceUrl() {
+<span class="nc" id="L50">		return resourceUrl;</span>
+	}
+
+	public void setResourceUrl(String resourceUrl) {
+<span class="nc" id="L54">		this.resourceUrl = resourceUrl;</span>
+<span class="nc" id="L55">	}</span>
+
+	public String getResourceOrder() {
+<span class="nc" id="L58">		return resourceOrder;</span>
+	}
+
+	public void setResourceOrder(String resourceOrder) {
+<span class="nc" id="L62">		this.resourceOrder = resourceOrder;</span>
+<span class="nc" id="L63">	}</span>
+
+	public List&lt;Resource&gt; getChildResourceList() {
+<span class="nc" id="L66">		return childResourceList;</span>
+	}
+
+	public void setChildResourceList(List&lt;Resource&gt; childResourceList) {
+<span class="nc" id="L70">		this.childResourceList = childResourceList;</span>
+<span class="nc" id="L71">	}</span>
+	
+	public Integer getRoleId() {
+<span class="nc" id="L74">		return roleId;</span>
+	}
+
+	public void setRoleId(Integer roleId) {
+<span class="nc" id="L78">		this.roleId = roleId;</span>
+<span class="nc" id="L79">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L83">		return &quot;Resource [operatorId=&quot; + operatorId + &quot;, roleId=&quot; + roleId + &quot;, resourceId=&quot; + resourceId</span>
+				+ &quot;, superResourceId=&quot; + superResourceId + &quot;, resourceName=&quot; + resourceName + &quot;, resourceUrl=&quot;
+				+ resourceUrl + &quot;, resourceOrder=&quot; + resourceOrder + &quot;, childResourceList=&quot; + childResourceList + &quot;]&quot;;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">		if(obj == null) {</span>
+<span class="nc" id="L91">			return false;</span>
+		}
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		if(!(obj instanceof Resource)) {</span>
+<span class="nc" id="L94">			return false;</span>
+		}
+<span class="nc" id="L96">		Resource res = (Resource) obj;</span>
+<span class="nc" id="L97">		return this.getResourceId().equals(res.getResourceId());</span>
+	}
+	
+	@Override
+	public int hashCode() {
+<span class="nc" id="L102">		return super.hashCode();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="3" total="38" passed="35">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="9408" started-at="2020-05-13T08:32:44Z" finished-at="2020-05-13T08:32:53Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="9408" started-at="2020-05-13T08:32:44Z" finished-at="2020-05-13T08:32:53Z">
+      <class name="com.newland.boss.cib.crmp.rule.settleRelaControllerTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="15" started-at="2020-05-13T08:32:51Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="setup" is-config="true" duration-ms="45" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testAddSettleApportionRelaByRuleId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testAddSettleApportionRelaByRuleId()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testAddSettleApportionRelaByRuleId" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddSettleApportionRelaByRuleId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="20" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testAddSettleApportionRelaByRuleId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testCombinQuerySettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testCombinQuerySettleApportionRela()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testCombinQuerySettleApportionRela" duration-ms="15" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCombinQuerySettleApportionRela -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="17" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testCombinQuerySettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="7" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testDeleteSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testDeleteSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testDeleteSettleApportionRule" duration-ms="4" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testDeleteSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testExportSettleApportionRelaByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportSettleApportionRelaByParam()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testExportSettleApportionRelaByParam" duration-ms="266" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportSettleApportionRelaByParam -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testExportSettleApportionRelaByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testModifySettleApportionRelaStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testModifySettleApportionRelaStatus()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testModifySettleApportionRelaStatus" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testModifySettleApportionRelaStatus -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testModifySettleApportionRelaStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectOrgSettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testSelectOrgSettleApportionRela()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testSelectOrgSettleApportionRela" duration-ms="3" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSelectOrgSettleApportionRela -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectOrgSettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectSettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testSelectSettleApportionRela()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testSelectSettleApportionRela" duration-ms="28" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSelectSettleApportionRela -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testSelectSettleApportionRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByOrgId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testloadSettleApportionRelaByOrgId()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testloadSettleApportionRelaByOrgId" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testloadSettleApportionRelaByOrgId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByOrgId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByRuleId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testloadSettleApportionRelaByRuleId()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="testloadSettleApportionRelaByRuleId" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testloadSettleApportionRelaByRuleId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRelaControllerTest.testloadSettleApportionRelaByRuleId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRelaControllerTest@5c7e55a4]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.rule.settleRelaControllerTest -->
+      <class name="com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="27" started-at="2020-05-13T08:32:51Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="setup" is-config="true" duration-ms="57" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRela() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testAddRateRuleRela()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testAddRateRuleRela" duration-ms="5" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddRateRuleRela -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRela() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRelaByRuleId() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testAddRateRuleRelaByRuleId()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testAddRateRuleRelaByRuleId" duration-ms="9" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddRateRuleRelaByRuleId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testAddRateRuleRelaByRuleId() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testDeleteRateRuleRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testDeleteRateRuleRela()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testDeleteRateRuleRela" duration-ms="7" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteRateRuleRela -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testDeleteRateRuleRela()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="18" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testExportRateRule() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testExportRateRule" duration-ms="260" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testExportRateRule() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testLoadRateRuleRelaByRuleItemId() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testLoadRateRuleRelaByRuleItemId()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testLoadRateRuleRelaByRuleItemId" duration-ms="20" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoadRateRuleRelaByRuleItemId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testLoadRateRuleRelaByRuleItemId() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testRemoveRateRuleRelaByObjectIdForServiceImp() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testRemoveRateRuleRelaByObjectIdForServiceImp()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testRemoveRateRuleRelaByObjectIdForServiceImp" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRemoveRateRuleRelaByObjectIdForServiceImp -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testRemoveRateRuleRelaByObjectIdForServiceImp() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="102" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testShowRateRuleRelaByObjectId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testShowRateRuleRelaByObjectId()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testShowRateRuleRelaByObjectId" duration-ms="22" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowRateRuleRelaByObjectId -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testShowRateRuleRelaByObjectId()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="22" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testUpdateRateRuleRelaStatus() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testUpdateRateRuleRelaStatus()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="testUpdateRateRuleRelaStatus" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdateRateRuleRelaStatus -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest.testUpdateRateRuleRelaStatus() throws java.text.ParseException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest@da67c46]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.rule.RateRuleRelaControllerTest -->
+      <class name="com.newland.boss.cib.crmp.rule.RateRuleControllerTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="init" is-config="true" duration-ms="27" started-at="2020-05-13T08:32:44Z" finished-at="2020-05-13T08:32:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="6" started-at="2020-05-13T08:32:44Z" finished-at="2020-05-13T08:32:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="4920" started-at="2020-05-13T08:32:44Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T08:32:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="setup" is-config="true" duration-ms="215" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testAddRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testAddRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testAddRateRule" duration-ms="350" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testAddRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testDeleteRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testDeleteRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testDeleteRateRule" duration-ms="266" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testDeleteRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="13" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testEditRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testEditRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testEditRateRule" duration-ms="6" started-at="2020-05-13T08:32:49Z" finished-at="2020-05-13T08:32:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEditRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testEditRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testExportRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testExportRateRule" duration-ms="347" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testExportRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testImportRateRuleForService() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testImportRateRuleForService()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testImportRateRuleForService" duration-ms="481" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testImportRateRuleForService -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testImportRateRuleForService() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="13" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testSelectRateRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testSelectRateRule" duration-ms="141" started-at="2020-05-13T08:32:50Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSelectRateRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="5" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRuleToDistribute()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testSelectRateRuleToDistribute()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testSelectRateRuleToDistribute" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSelectRateRuleToDistribute -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testSelectRateRuleToDistribute()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="7" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testUpdateRateRuleStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testUpdateRateRuleStatus()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="testUpdateRateRuleStatus" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testUpdateRateRuleStatus -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.RateRuleControllerTest.testUpdateRateRuleStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.RateRuleControllerTest@6c4786af]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:51Z" finished-at="2020-05-13T08:32:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.rule.RateRuleControllerTest -->
+      <class name="com.newland.boss.cib.crmp.rule.settleRuleControllerTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="18" started-at="2020-05-13T08:32:52Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="setup" is-config="true" duration-ms="46" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.ExcelParseException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="ExcelParseException()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="ExcelParseException" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ExcelParseException -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.ExcelParseException()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testAddSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testAddSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testAddSettleApportionRule" duration-ms="10" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testAddSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testAddSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testDeleteSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testDeleteSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testDeleteSettleApportionRule" duration-ms="3" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testDeleteSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testDeleteSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testEditSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testEditSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testEditSettleApportionRule" duration-ms="3" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEditSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testEditSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="29" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testExportSettleApportionRuleByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportSettleApportionRuleByParam()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testExportSettleApportionRuleByParam" duration-ms="165" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportSettleApportionRuleByParam -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testExportSettleApportionRuleByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:52Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testImportSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testImportSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testImportSettleApportionRule" duration-ms="885" started-at="2020-05-13T08:32:52Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testImportSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testImportSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadAllSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testLoadAllSettleApportionRule()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testLoadAllSettleApportionRule" duration-ms="5" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoadAllSettleApportionRule -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadAllSettleApportionRule()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadSettleApportionRuleByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testLoadSettleApportionRuleByParam()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testLoadSettleApportionRuleByParam" duration-ms="17" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLoadSettleApportionRuleByParam -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testLoadSettleApportionRuleByParam()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testModifySettleApportionRuleStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testModifySettleApportionRuleStatus()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testModifySettleApportionRuleStatus" duration-ms="21" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testModifySettleApportionRuleStatus -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testModifySettleApportionRuleStatus()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="13" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testShowRoleById()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testShowRoleById()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="testShowRoleById" duration-ms="1" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShowRoleById -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.rule.settleRuleControllerTest.testShowRoleById()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.rule.settleRuleControllerTest@7ae6927]" name="springTestContextAfterTestClass" is-config="true" duration-ms="2" started-at="2020-05-13T08:32:53Z" finished-at="2020-05-13T08:32:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.rule.settleRuleControllerTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

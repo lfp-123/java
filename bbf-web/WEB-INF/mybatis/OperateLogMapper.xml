@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.dao.OperateLogDao">
+	<resultMap type="com.newland.boss.kpi.entity.OperateLog" id="operateLogResultMap">
+		<id column="OPERATE_ID" property="operateId" jdbcType="VARCHAR" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER"/>
+		<result column="OPERATE_MODULE" property="operateModule" jdbcType="INTEGER"/>
+		<result column="OPERATE_TYPE" property="operateType" jdbcType="INTEGER"/>
+		<result column="OPERATE_MONTH" property="operateMonth" jdbcType="INTEGER"/>
+		<result column="OPERATE_DESC" property="operateDesc" jdbcType="VARCHAR"/>
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+		
+	<!-- 插入一组操作日志 -->
+	<insert id="insertOperateLog">
+		INSERT INTO T_OPERATE_LOG (OPERATE_ID,OPERATOR_ID,OPERATE_MODULE,OPERATE_TYPE,OPERATE_DESC,CREATE_TIME,OPERATE_MONTH)
+			VALUES(seq_operator_log.nextval, #{operatorId},#{operateModule},#{operateType},#{operateDesc},sysdate,to_number(to_char(sysdate, 'mm')))
+	</insert>
+
+	<!-- 查询日志-->
+	<select id="queryOperLogList" resultMap="operateLogResultMap">
+		SELECT *
+		  FROM (SELECT ROWNUM AS rowno, r.*
+		          FROM (select *
+		                  from T_OPERATE_LOG t
+		                 WHERE 1 = 1
+		                 <if test="req.operateModule==null">and t.OPERATE_MODULE in (19, 20)</if>
+		                 <if test="req.operateModule!=null">and t.OPERATE_MODULE = #{req.operateModule}</if>
+						 <if test="req.operateType!=null">and t.OPERATE_TYPE = #{req.operateType}</if>
+			             <if test="req.operateMonth!=null">and t.OPERATE_MONTH = #{req.operateMonth}</if>
+		                 order by t.CREATE_TIME desc) r
+		         where ROWNUM &lt;= #{page} * #{size}) p
+		WHERE p.rowno &gt; (#{page} - 1) * #{size}
+	</select>	
+			
+	<select id="countOperLogNumber" resultType="Integer">
+		SELECT COUNT(1)
+		FROM T_OPERATE_LOG t
+		WHERE t.OPERATE_MODULE in (19,20)
+		<if test="operateType!=null">and t.OPERATE_TYPE = #{operateType}</if>
+		<if test="operateMonth!=null">and t.OPERATE_MONTH = #{operateMonth}</if>
+	</select>
+</mapper>

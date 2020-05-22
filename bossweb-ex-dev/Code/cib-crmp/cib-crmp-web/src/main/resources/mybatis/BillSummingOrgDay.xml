@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.settle.dao.BillSummingOrgDayDao">
+	<resultMap type="com.newland.boss.cib.crmp.domain.BillSummingOrgDay" id="billSummingOrgDayMap">
+		<id column="CDR_TYPE" property="cdrType" jdbcType="INTEGER" />
+		<id column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<id column="BILL_MONTH" property="billMonth" jdbcType="INTEGER" />
+		<id column="BILL_DAY" property="billDay" jdbcType="INTEGER" />
+		<result column="TOTAL_NUMBER" property="totalNumber" jdbcType="BIGINT" />
+		<result column="TOTAL_MINUTES" property="totalMinutes" jdbcType="BIGINT" />
+		<result column="TOTAL_FEE" property="totalFee" jdbcType="BIGINT" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectBarResult" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.org_id, sum(a.total_fee) as total_fee
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="cdrType != null and cdrType != -1">
+			and a.cdr_type = #{cdrType}
+		   </if>
+		   <if test="orgs != null and orgs.size() > 0">
+			and a.org_id in 
+				<foreach item="item" index="index" collection="orgs" open="(" separator="," close=")">
+        			${item.orgId}
+  				</foreach>
+		   </if>
+		 group by a.org_id
+		 order by a.org_id
+	</select>
+	
+	<select id="selecPieResultByOrgId" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.cdr_type, sum(a.total_fee) total_fee
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="orgId != null and orgId != -1">
+		   and a.org_id = #{orgId}
+		   </if>
+		 group by a.cdr_type
+	</select>
+	
+	<select id="selecLineResultByOrgId" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from (
+		select a.cdr_type, sum(a.total_fee) total_fee, substr(a.bill_day, 0, 6) bill_day
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="orgId != null and orgId != -1">
+		   	 and a.org_id = #{orgId}
+		   </if>
+		 group by a.cdr_type, substr(a.bill_day, 0, 6)
+		 ) pivot (sum(total_fee) for bill_day in 
+		<foreach item="item" index="index" collection="dates" open="(" separator="," close=")">
+        	${item}
+  		</foreach>
+  		)
+	</select>
+	
+	<select id="selecTotalPieResult" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.cdr_type, sum(a.total_fee) total_fee
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="orgId != null and orgId != -1">
+		   	and a.org_id in (
+				SELECT B.ORG_ID FROM T_ORGANIZATION b
+ 				 START WITH B.ORG_ID = #{orgId}
+				CONNECT BY PRIOR B.ORG_ID = B.SUPER_ORG_ID
+		   	)
+		   </if>
+		 group by a.cdr_type
+	</select>
+	
+	<select id="selecTotalLineResult" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from (
+		select a.cdr_type, sum(a.total_fee) total_fee, substr(a.bill_day, 0, 6) bill_day
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="orgId != null and orgId != -1">
+		   	and a.org_id in (
+				SELECT B.ORG_ID FROM T_ORGANIZATION b
+ 				 START WITH B.ORG_ID = #{orgId}
+				CONNECT BY PRIOR B.ORG_ID = B.SUPER_ORG_ID
+		   	)
+		   </if>
+		 group by a.cdr_type, substr(a.bill_day, 0, 6)
+		 ) pivot (sum(total_fee) for bill_day in 
+		<foreach item="item" index="index" collection="dates" open="(" separator="," close=")">
+        	${item}
+  		</foreach>
+  		)
+	</select>
+	
+	<select id="selectSubTotalBarResult" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.org_id, sum(a.total_fee) as total_fee
+		  from bill_summing_org_day a
+		 where a.bill_day &gt;= #{startDate}
+		   and a.bill_day &lt;= #{endDate}
+		   <if test="cdrType != null and cdrType != -1">
+			and a.cdr_type = #{cdrType}
+		   </if>
+		   <if test="orgs != null and orgs.size() > 0">
+			and a.org_id in (
+				SELECT B.ORG_ID FROM T_ORGANIZATION b
+ 				 START WITH B.ORG_ID in (
+ 				 	<foreach item="item" index="index" collection="orgs" open="(" separator="," close=")">
+        			${item.orgId}
+  					</foreach>
+ 				 )
+				CONNECT BY PRIOR B.ORG_ID = B.SUPER_ORG_ID
+		   	)
+		   </if>
+		 group by a.org_id
+		 order by a.org_id
+	</select>
+</mapper>

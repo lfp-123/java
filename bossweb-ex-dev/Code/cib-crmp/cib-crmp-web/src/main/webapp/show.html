@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="myApp"> 
+<head>
+<meta charset="UTF-8">
+<title>展示所有信息</title>
+<script type="text/javascript" src="resources/skeleton/js/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="resources/skeleton/css/bootstrap.min.css"/>
+<script type="text/javascript" src="resources/skeleton/js/angular.min-1.6.5.js"></script>
+<script type="text/javascript" src="resources/skeleton/js/bootstrap.min.js"></script>
+<style type="text/css">
+	body{
+		overflow:hidden;
+		margin:0px auto;
+	}
+	.table-define{
+		margin-top:20px;
+		width:700px;
+	}
+	.input-define{
+		width:300px;
+		text-align:center;
+		margin:0px auto;
+		margin-top:20px;
+	}
+</style>
+</head>
+<body ng-controller="initController">
+	
+		<div align="center" class="input-group input-define">
+      		<input type="text" class="form-control" placeholder="根据id/部门名称查询信息" 
+      			ng-model="search_message" ng-change="inputChange()">
+      		<span class="input-group-btn">
+	        	<button class="btn btn-default" type="button" ng-click="searchOrg()">
+	        		搜索
+	        	</button>
+      		</span>
+    	</div>
+    	
+		<table align="center" class="table table-bordered table-striped table-hover table-bordered 
+		    table-define" >
+			<thead>
+				<tr>
+					<th>组织号</th>
+					<th>组织名</th>
+					<th>状态值</th>
+					<th>简介</th>
+					<th>创建时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="org in organization track by $index" >
+					<td>{{org.org_id}}</td>
+					<td>{{org.org_name}}</td>
+					<td>{{org.org_status}}</td>
+					<td>{{org.org_desc}}</td>
+					<td>{{org.create_time}}</td>
+					<td>
+						<button type="button" class="btn btn-default" ng-click="editOrg($index,organization)">
+							编辑
+						</button>
+        				<button type="button" class="btn btn-default" ng-click="deleteOrg($index,organization)">
+        					删除
+        				</button>
+        			</td>
+				</tr>
+			</tbody>
+		</table>
+		<nav aria-label="...">
+  			<ul class="pager">
+    			<li><a ng-click="previous()">上一页</a></li>
+    			<li><a ng-click="next()">下一页</a></li>
+  			</ul>
+</nav>
+	<script type="text/javascript" src="resources/biz/controller/show.js"></script>
+</body>
+</html>

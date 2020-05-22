@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestSuite" time="6.175" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl\target\test-classes;F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl\target\classes;F:\maven\junit\junit\4.12\junit-4.12.jar;F:\maven\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server\target\bosskpi-server-0.0.1-SNAPSHOT.jar;F:\maven\com\beust\jcommander\1.48\jcommander-1.48.jar;F:\maven\org\springframework\security\spring-security-core\5.0.3.RELEASE\spring-security-core-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-config\5.0.3.RELEASE\spring-security-config-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-web\5.0.3.RELEASE\spring-security-web-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-taglibs\5.0.3.RELEASE\spring-security-taglibs-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-acl\5.0.3.RELEASE\spring-security-acl-5.0.3.RELEASE.jar;F:\maven\org\springframework\spring-jdbc\5.0.4.RELEASE\spring-jdbc-5.0.4.RELEASE.jar;F:\maven\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;F:\maven\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;F:\maven\org\jboss\logging\jboss-logging\3.2.1.Final\jboss-logging-3.2.1.Final.jar;F:\maven\com\fasterxml\classmate\1.1.0\classmate-1.1.0.jar;F:\maven\org\springframework\spring-beans\5.0.4.RELEASE\spring-beans-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-context\5.0.4.RELEASE\spring-context-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-aop\5.0.4.RELEASE\spring-aop-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-expression\5.0.4.RELEASE\spring-expression-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-web\5.0.4.RELEASE\spring-web-5.0.4.RELEASE.jar;F:\maven\javax\javaee-api\7.0\javaee-api-7.0.jar;F:\maven\com\sun\mail\javax.mail\1.5.0\javax.mail-1.5.0.jar;F:\maven\javax\activation\activation\1.1\activation-1.1.jar;F:\maven\org\apache\logging\log4j\log4j-core\2.10.0\log4j-core-2.10.0.jar;F:\maven\org\apache\logging\log4j\log4j-api\2.10.0\log4j-api-2.10.0.jar;F:\maven\commons-lang\commons-lang\2.6\commons-lang-2.6.jar;F:\maven\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;F:\maven\org\testng\testng\6.11\testng-6.11.jar;F:\maven\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;F:\maven\com\alibaba\fastjson\1.2.46\fastjson-1.2.46.jar;F:\maven\org\springframework\spring-core\5.0.4.RELEASE\spring-core-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-jcl\5.0.4.RELEASE\spring-jcl-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-tx\5.0.4.RELEASE\spring-tx-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-webmvc\5.0.4.RELEASE\spring-webmvc-5.0.4.RELEASE.jar;F:\maven\org\mybatis\mybatis\3.4.5\mybatis-3.4.5.jar;F:\maven\org\mybatis\mybatis-spring\1.3.1\mybatis-spring-1.3.1.jar;F:\maven\com\oracle\ojdbc6\12.1.0.1-atlassian-hosted\ojdbc6-12.1.0.1-atlassian-hosted.jar;F:\maven\com\alibaba\druid\1.1.8\druid-1.1.8.jar;F:\maven\org\mockito\mockito-all\2.0.2-beta\mockito-all-2.0.2-beta.jar;F:\maven\org\springframework\spring-test\5.0.4.RELEASE\spring-test-5.0.4.RELEASE.jar;F:\maven\javax\servlet\javax.servlet-api\3.0.1\javax.servlet-api-3.0.1.jar;F:\maven\org\apache\maven\surefire\surefire-testng-utils\2.21.0\surefire-testng-utils-2.21.0.jar;F:\maven\org\apache\maven\surefire\surefire-grouper\2.21.0\surefire-grouper-2.21.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\asus\AppData\Local\Temp\surefire1868454789894865505\surefirebooter4139410159179430602.jar C:\Users\asus\AppData\Local\Temp\surefire1868454789894865505 2020-05-13T16-31-12_534-jvmRun1 surefire3011126510506954532tmp surefire_13459160098005820698tmp"/>
+    <property name="surefire.test.class.path" value="F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl\target\test-classes;F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl\target\classes;F:\maven\junit\junit\4.12\junit-4.12.jar;F:\maven\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server\target\bosskpi-server-0.0.1-SNAPSHOT.jar;F:\maven\com\beust\jcommander\1.48\jcommander-1.48.jar;F:\maven\org\springframework\security\spring-security-core\5.0.3.RELEASE\spring-security-core-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-config\5.0.3.RELEASE\spring-security-config-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-web\5.0.3.RELEASE\spring-security-web-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-taglibs\5.0.3.RELEASE\spring-security-taglibs-5.0.3.RELEASE.jar;F:\maven\org\springframework\security\spring-security-acl\5.0.3.RELEASE\spring-security-acl-5.0.3.RELEASE.jar;F:\maven\org\springframework\spring-jdbc\5.0.4.RELEASE\spring-jdbc-5.0.4.RELEASE.jar;F:\maven\javax\validation\validation-api\1.1.0.Final\validation-api-1.1.0.Final.jar;F:\maven\org\hibernate\hibernate-validator\5.2.4.Final\hibernate-validator-5.2.4.Final.jar;F:\maven\org\jboss\logging\jboss-logging\3.2.1.Final\jboss-logging-3.2.1.Final.jar;F:\maven\com\fasterxml\classmate\1.1.0\classmate-1.1.0.jar;F:\maven\org\springframework\spring-beans\5.0.4.RELEASE\spring-beans-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-context\5.0.4.RELEASE\spring-context-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-aop\5.0.4.RELEASE\spring-aop-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-expression\5.0.4.RELEASE\spring-expression-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-web\5.0.4.RELEASE\spring-web-5.0.4.RELEASE.jar;F:\maven\javax\javaee-api\7.0\javaee-api-7.0.jar;F:\maven\com\sun\mail\javax.mail\1.5.0\javax.mail-1.5.0.jar;F:\maven\javax\activation\activation\1.1\activation-1.1.jar;F:\maven\org\apache\logging\log4j\log4j-core\2.10.0\log4j-core-2.10.0.jar;F:\maven\org\apache\logging\log4j\log4j-api\2.10.0\log4j-api-2.10.0.jar;F:\maven\commons-lang\commons-lang\2.6\commons-lang-2.6.jar;F:\maven\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;F:\maven\org\testng\testng\6.11\testng-6.11.jar;F:\maven\org\yaml\snakeyaml\1.17\snakeyaml-1.17.jar;F:\maven\com\alibaba\fastjson\1.2.46\fastjson-1.2.46.jar;F:\maven\org\springframework\spring-core\5.0.4.RELEASE\spring-core-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-jcl\5.0.4.RELEASE\spring-jcl-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-tx\5.0.4.RELEASE\spring-tx-5.0.4.RELEASE.jar;F:\maven\org\springframework\spring-webmvc\5.0.4.RELEASE\spring-webmvc-5.0.4.RELEASE.jar;F:\maven\org\mybatis\mybatis\3.4.5\mybatis-3.4.5.jar;F:\maven\org\mybatis\mybatis-spring\1.3.1\mybatis-spring-1.3.1.jar;F:\maven\com\oracle\ojdbc6\12.1.0.1-atlassian-hosted\ojdbc6-12.1.0.1-atlassian-hosted.jar;F:\maven\com\alibaba\druid\1.1.8\druid-1.1.8.jar;F:\maven\org\mockito\mockito-all\2.0.2-beta\mockito-all-2.0.2-beta.jar;F:\maven\org\springframework\spring-test\5.0.4.RELEASE\spring-test-5.0.4.RELEASE.jar;F:\maven\javax\servlet\javax.servlet-api\3.0.1\javax.servlet-api-3.0.1.jar;F:\maven\org\apache\maven\surefire\surefire-testng-utils\2.21.0\surefire-testng-utils-2.21.0.jar;F:\maven\org\apache\maven\surefire\surefire-grouper\2.21.0\surefire-grouper-2.21.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\asus"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_91\jre"/>
+    <property name="basedir" value="F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\asus\AppData\Local\Temp\surefire1868454789894865505\surefirebooter4139410159179430602.jar;F:\\maven\\org\\jacoco\\org.jacoco.agent\\0.8.1\\org.jacoco.agent-0.8.1-runtime.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_91\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_91\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_91-b14"/>
+    <property name="user.name" value="asus"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="F:\maven"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\asus\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2017.2.4"/>
+    <property name="java.version" value="1.8.0_91"/>
+    <property name="user.dir" value="F:\lfp\bossweb-ex-dev\Code\bosskpi\bosskpi-server-impl"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_91\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;；c:\windows\system32;;JAVA_HOME%\bin;C:\Program Files\Java\jdk1.8.0_91\jre\bin;c:\windows\system32;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\PLSQL Developer;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;D:\Git\cmd;F:\apache-maven-3.2.1\apache-maven-3.2.1/bin%;F:\apache-maven-3.2.1\apache-maven-3.2.1/bin;D:\node\;C:\Program Files\TortoiseGit\bin;；c:\windows\system32;C:\Users\asus\AppData\Local\BypassRuntm;C:\Users\asus\AppData\Roaming\npm;D:\node;;E:\Microsoft VS Code\bin;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.91-b14"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_91\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="maven.repo.local" value="F:\maven"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="testGetDictDefByDictClass" classname="com.newland.boss.kpi.controller.DictDefControllerTestng" time="0.201"/>
+  <testcase name="testGetDictDefByDictClassAndEntryId" classname="com.newland.boss.kpi.controller.DictDefControllerTestng" time="0.001"/>
+  <testcase name="testApp on testApp(com.newland.boss.kpi.server.impl.AppTest)" classname="com.newland.boss.kpi.server.impl.AppTest" time="0.001"/>
+</testsuite>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecursionFindChildren.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.util</a> &gt; <span class="el_source">RecursionFindChildren.java</span></div><h1>RecursionFindChildren.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.util;
+
+import java.util.Collections;
+import java.util.List;
+
+import com.newland.boss.kpi.admin.model.Resource;
+import com.newland.boss.kpi.entity.Organization;
+
+/**
+ *循环查找子集 
+ * @author ZJUNE
+ *
+ */
+public class RecursionFindChildren {
+	
+	private RecursionFindChildren() {}
+	
+	//找出一个机构的所有下属机构
+	public static List&lt;Organization&gt; getChildOrgByAndOrg(Organization organization,List&lt;Organization&gt; orgList,List&lt;Organization&gt; newList){
+<span class="nc bnc" id="L20" title="All 2 branches missed.">		if (null == organization) {</span>
+<span class="nc" id="L21">			return Collections.emptyList();</span>
+		}else {
+<span class="nc bnc" id="L23" title="All 2 branches missed.">			for(Organization org : orgList) {</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">				if(org.getSuperOrgId() == organization.getOrgId()) {</span>
+<span class="nc" id="L25">					newList.add(org);</span>
+<span class="nc" id="L26">					getChildOrgByAndOrg(org,orgList,newList);</span>
+				}
+<span class="nc" id="L28">			}</span>
+		}
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		if (newList.isEmpty()) {</span>
+<span class="nc" id="L31">			return Collections.emptyList();</span>
+		}else {
+<span class="nc" id="L33">			return newList;</span>
+		}
+	}
+	
+	// 根据机构编号寻找出所有下属机构的机构
+	public static List&lt;Organization&gt; getChildOrg(int superOrgId ,List&lt;Organization&gt; allOrgList,List&lt;Organization&gt; orgList){
+<span class="nc bnc" id="L39" title="All 2 branches missed.">		if( null == orgList ) {</span>
+<span class="nc" id="L40">			return Collections.emptyList();</span>
+		}
+		
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		for(Organization org : allOrgList) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">			if(org.getSuperOrgId() == superOrgId) {</span>
+<span class="nc" id="L45">				orgList.add(org);</span>
+<span class="nc" id="L46">				getChildOrg(org.getOrgId(), allOrgList, orgList);</span>
+			}
+<span class="nc" id="L48">		}</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		if (orgList.isEmpty()) {</span>
+<span class="nc" id="L50">			return Collections.emptyList();</span>
+		}else {
+<span class="nc" id="L52">			return orgList;</span>
+		}
+		
+	}
+	
+	// 根据机构编号寻找出所有下属机构的机构ID
+	public static List&lt;Integer&gt; getChildOrgId(int superOrgId ,List&lt;Organization&gt; orgList,List&lt;Integer&gt; orgIdList){
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if( null == orgList ) {</span>
+<span class="nc" id="L60">			return Collections.emptyList();</span>
+		}
+		
+<span class="nc bnc" id="L63" title="All 2 branches missed.">		for(Organization org : orgList) {</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">			if(org.getSuperOrgId() == superOrgId) {</span>
+<span class="nc" id="L65">				orgIdList.add(org.getOrgId());</span>
+<span class="nc" id="L66">				getChildOrgId(org.getOrgId(), orgList, orgIdList);</span>
+			}
+<span class="nc" id="L68">		}</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">		if (orgIdList.isEmpty()) {</span>
+<span class="nc" id="L70">			return Collections.emptyList();</span>
+		}else {
+<span class="nc" id="L72">			return orgIdList;</span>
+		}
+		
+	}
+		
+	//根据资源编号找出下属所有资源
+	public static List&lt;Integer&gt; getChildResId(int superResourceId ,List&lt;Resource&gt; resList,List&lt;Integer&gt; resIdList){
+<span class="nc bnc" id="L79" title="All 2 branches missed.">		if( null == resList ) {</span>
+<span class="nc" id="L80">			return Collections.emptyList();</span>
+		}
+		
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		for(Resource res:resList) {</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">			if(res.getSuperResourceId() == superResourceId) {</span>
+<span class="nc" id="L85">				resIdList.add(res.getResourceId());</span>
+<span class="nc" id="L86">				getChildResId(res.getResourceId(), resList,resIdList);</span>
+			}
+<span class="nc" id="L88">		}</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		if (resIdList.isEmpty()) {</span>
+<span class="nc" id="L90">			return Collections.emptyList();</span>
+		}else {
+<span class="nc" id="L92">			return resIdList;</span>
+		}
+		
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

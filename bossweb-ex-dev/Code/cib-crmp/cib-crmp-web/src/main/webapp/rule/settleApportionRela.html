@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html ng-app="relaManage">
+<meta name="referrer" content="no-referrer">
+<head>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>结算摊分规则配置</title>
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	padding: 0px 10px;
+}
+
+.pagination {
+	margin: 0 0;
+}
+
+btn.size-M {
+	font-size: 10px;
+}
+
+.pagination>li>a {
+	padding: 3px 10px;
+	font-size: 15px;
+}
+
+.modal {
+	background-color: rgba(102, 102, 102, 0.85);
+}
+
+.container {
+	margin-top: 10px;
+	width: 830px;
+	box-shadow: 0 0 20px #888888;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+
+.span-text {
+	font-size: 10px;
+}
+
+.span-button {
+	font-size: 10px;
+}
+
+.input-group {
+	height: 50px;
+	width: 300px;
+	padding: 10px;
+	margin: 0 10px;
+	float: left;
+}
+
+.m-title {
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding: 14px;
+}
+
+.m-name {
+	width: 620px;
+	margin-top: 10px;
+}
+
+.m-button {
+	margin-left: 170px;
+}
+
+.desc {
+	width: 620px;
+	text-align: left;
+}
+
+.sp-long {
+	width: 125px;
+}
+
+.search-text {
+	width: 100px;
+	margin: 0 5px;
+	display: inline-block;
+	height: 24px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	padding-left: 3px;
+}
+
+.search-btn {
+	height: 28px;
+}
+
+.modal-div-form {
+	width: 800px;
+	align-items: center;
+	padding: 0 65px;
+}
+
+.btn-y, .btn-n {
+	width: 135px;
+}
+
+.btn-y {
+	margin-right: 10px;
+}
+
+.top-nav {
+	width: 100%;
+	margin: 12px 0 10px;
+}
+
+.search-div {
+	display: inline-block;
+	float: right;
+}
+
+#right-search {
+	display: inline-block;
+	float: right;
+	margin-bottom: 5px;
+}
+
+.ng-isolate-scope {
+	float: left;
+	margin-top: 10px;
+}
+
+.table-border td, .table-border th {
+	width: auto;
+}
+
+.nav>li>a {
+	padding: 5px 15px;
+}
+</style>
+
+</head>
+<body ng-controller="saRelaController as saRela"
+	style="width: 100%; height: 100%" ng-cloak>
+
+	<div class="am-tabs" data-am-tabs style="height: 100%">
+
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#relaSearch" data-toggle="tab">结算摊分规则分配查询
+			</a></li>
+			<li><a href="#rela" data-toggle="tab">结算摊分规则分配</a></li>
+			<li><a href="#orgRuleRela" data-toggle="tab">摊分规则多单位分配</a></li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content"
+			style="width: 100%; height: 90%">
+			<div class="tab-pane fade in active" id="relaSearch">
+				<div
+					style="display: inline-block; width: 100%; text-align: right; padding-top: 5px; padding-bottom: 5px">
+					单位名称:
+					<div style="display: inline-block; margin-right: 10px;min-width:120px;height: 28px;"
+						ng-show="true">
+						<div align="left" ng-dropdown-multiselect="" id="org"
+							options="orgs" selected-model="selectedOrg"
+							extra-settings="orgsSettings" translation-texts="orgTexts"></div>
+					</div>
+					摊分规则名称:
+					<div
+						style="display: inline-block; margin-right: 10px; width: 9%; height: 24px;">
+						<input type="text" class="input-text"
+							ng-model="search.apportionRuleName" maxlength="32">
+					</div>
+					规则状态:
+					<div
+						style="display: inline-block; margin-right: 10px; width: 9%; height: 24px;">
+						<select class="input-text" placeholder="" ng-model="search.status">
+							<option value="">全部</option>
+							<option ng-repeat="statusTypeObj in statusTypes"
+								value="{{statusTypeObj.entryId}}">{{statusTypeObj.entryName}}</option>
+						</select>
+					</div>
+					生失效时间:
+					<div
+						style="display: inline-block; margin-right: 10px; width: 20%; height: 24px;">
+						<input type="text" ng-model="search.inureDate" onChange=""
+							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'logmax\')}',maxDate:'3000-01-01'})"
+							id="logmin" class="input-text Wdate" style="width: 45%;">
+						- <input type="text" ng-model="search.expireDate" onChange=""
+							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'3000-01-01'})"
+							id="logmax" class="input-text Wdate" style="width: 45%;">
+					</div>
+					<div style="display: inline-block;">
+						<button class="btn btn-primary btn-xs" type="button"
+							ng-click="searchByParam()">
+							<i class="Hui-iconfont">&#xe709;</i>&nbsp;查询
+						</button>
+						<button class="btn btn-primary btn-xs" type="button"
+							ng-click="reset()">
+							<i class="Hui-iconfont">&#xe68f;</i>&nbsp;重置
+						</button>
+					</div>
+				</div>
+				<div class="feature-content">
+					<table ng-table="saRela.relaTableParams"
+						class="table-condensed table-border table-hover">
+						<tr ng-repeat="rela in  $data" style="height: 30px;">
+							<!-- <td><input type="checkbox"
+								ng-click="choiceRela($event,rela.apportionRelaId)"
+								style="margin-top: 2px; margin-left: 3px"></td> -->
+							<td title="'关系ID'">{{rela.apportionRelaId}}</td>
+							<td title="'单位ID'">{{rela.objectId}}</td>
+							<td title="'单位名称'">{{rela.orgName}}</td>
+							<td title="'摊分规则ID'">{{rela.apportionItemId}}</td>
+							<td title="'摊分规则名称'">{{rela.apportionRuleName}}</td>
+							<td title="'启用状态'"><span ng-repeat="status in statusTypes"
+								ng-if="status.entryId == rela.status">{{status.entryName}}</span>
+							</td>
+							<td title="'生效时间'">{{rela.inureDate | date:'yyyy-MM-dd' }}</td>
+							<td title="'失效时间'">{{rela.expireDate | date:'yyyy-MM-dd' }}</td>
+						</tr>
+					</table>
+				</div>
+				<div style="float: right; margin-top: 10px;">
+					<button class="btn btn-primary btn-sm" ng-click="exportRela()">
+						<i class="Hui-iconfont">&#xe644;</i>&nbsp;导出
+					</button>
+				</div>
+			</div>
+			<div style="height: 100%" class="tab-pane fade" id="rela">
+				<div style="width: 26%; height: 100%;" class="am-align-left">
+					<div
+						style="width: 100%; height: 100%; margin: 10px 5px; border: 1px solid #ccc !important; padding: 14px;">
+						<div class="form-group">
+							<label>过滤条件：</label><input type="text" id="predicate"
+								class="input-text" ng-model="predicate" style="width: 40%">
+							<button class="btn btn-primary" type="button"
+								ng-click="resetFilter()" style="margin-left: 5px; float: right">
+								<i class="Hui-iconfont">&#xe68f;</i> 重置
+							</button>
+						</div>
+						<treecontrol class="tree-classic"
+							style="width: 100%;height: 85%;margin-top:0px;overflow-y: auto;"
+							tree-model="treedata" filter-expression="predicate"
+							options="treeOptions" on-selection="showSelected(node)">
+						{{node.orgNameFull}} </treecontrol>
+					</div>
+				</div>
+
+				<div style="width: 71%; height: 100%" class="am-align-left">
+					<div style="width: 100%; height: 48%; padding-top: 10px"">
+						<div style="width: 100%; height: 15%;">
+							<span style="font-weight: bold">已分配规则</span>
+							<div style="position: relative; margin-bottom: 5px; float: right">
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="startRela()">
+									<i class="Hui-iconfont">&#xe615;</i>&nbsp;启用
+								</button>
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="stopRela()">
+									<i class="Hui-iconfont">&#xe631;</i>&nbsp;禁用
+								</button>
+							</div>
+						</div>
+						<div
+							style="height: 80%; overflow-y: scroll; overflow-x: hidden;">
+							<table ng-table="saRela.orgRuleTableParams"
+								class="table-condensed table-border table-hover">
+								<tr ng-repeat="orgRela in  $data" ng-model="relaInfos"
+									height="30px" ng-click="selectOrgRela(orgRela)">
+									<td style="width: 40px;"><input type="checkbox"
+										ng-checked="choiceOrgRela(orgRela)"
+										ng-if="orgRela.apportionRelaId"
+										id="{{orgRela.apportionRelaId}}"></td>
+									<!-- <td title="'单位ID'">{{orgRela.objectId}}</td> -->
+									<!-- td title="'摊分规则ID'">{{orgRela.apportionItemId}}</td> -->
+									<td title="'摊分规则名称'">{{orgRela.apportionRuleName}}</td>
+									<td title="'单位名称'">{{orgRela.orgName}}</td>
+									<td title="'启用状态'"><span ng-repeat="status in statusTypes"
+										ng-if="status.entryId == orgRela.status">{{status.entryName}}</span>
+									</td>
+									<td title="'生效时间'">{{orgRela.inureDate | date:'yyyy-MM-dd'
+										}}</td>
+									<td title="'失效时间'">{{orgRela.expireDate |
+										date:'yyyy-MM-dd' }}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div
+						style="width: 100%; height: 5%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+						<a href="##"
+							class="am-icon-angle-double-down am-icon-md am-primary"
+							style="width: 49%; height: 100%; text-align: center; border-right: 1px solid #ccc;"
+							ng-click="delRela()"></a> <a href="##"
+							class="am-icon-angle-double-up am-icon-md am-primary"
+							style="width: 49%; height: 100%; text-align: center;"
+							ng-click="addRela()"></a>
+					</div>
+					<div style="width: 100%; height: 46%;">
+						<span style="font-weight: bold">可分配规则</span>
+						<div
+							style="display: inline-block; width: 100%; text-align: right; padding-bottom: 5px; padding-top: 5px">
+							摊分规则名称:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+								<input type="text" class="input-text"
+									ng-model="query.apportionRuleName" maxlength="32">
+							</div>
+							资源类型:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+								<select class="input-text" ng-model="query.cdrType">
+									<option value="">全部</option>
+									<option ng-repeat="feeTypeObj in feeTypes"
+										value="{{feeTypeObj.entryId}}">{{feeTypeObj.entryName}}</option>
+								</select>
+							</div>
+							生失效时间:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 28%; height: 24px;">
+								<input type="text" ng-model="query.inureDate" onChange=""
+									onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'rulelogmax\')}',maxDate:'3000-01-01'})"
+									id="rulelogmin" class="input-text Wdate" style="width: 45%;">
+								- <input type="text" ng-model="query.expireDate" onChange=""
+									onfocus="WdatePicker({minDate:'#F{$dp.$D(\'rulelogmin\')}',maxDate:'3000-01-01'})"
+									id="rulelogmax" class="input-text Wdate" style="width: 45%;">
+							</div>
+							<div style="display: inline-block;">
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="queryByParam()">
+									<i class="Hui-iconfont">&#xe709;</i>&nbsp;查询
+								</button>
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="resetRule()">
+									<i class="Hui-iconfont">&#xe68f;</i>&nbsp;重置
+								</button>
+							</div>
+						</div>
+						<div
+							style="margin-top: 5px; height: 80%; overflow-y: scroll; overflow-x: hidden;">
+							<table ng-table="saRela.ruleTableParams"
+								class="table-condensed table-border table-hover">
+								<tr ng-repeat="rule in  $data" ng-model="ruleInfos"
+									style="height: 30px;" ng-click="selectRule(rule)">
+									<td style="width: 40px;"><input type="checkbox"
+										ng-checked="choiceRule(rule)"
+										ng-if="rule.apportionItemId && rule.scope!=1"
+										id="{{rule.apportionItemId}}"></td>
+									<td title="'摊分规则ID'">{{rule.apportionItemId}}</td>
+									<td title="'摊分规则名称'">{{rule.apportionRuleName}}</td>
+									<td title="'资源类型'"><span ng-repeat="fee in feeTypes"
+										ng-if="fee.entryId == rule.cdrType">{{fee.entryName}}</span></td>
+									<td title="'摊分比例'">{{rule.ratio}}</td>
+									<td title="'生效时间'">{{rule.inureDate | date:'yyyy-MM-dd' }}</td>
+									<td title="'失效时间'">{{rule.expireDate | date:'yyyy-MM-dd'}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="height: 100%" class="tab-pane fade" id="orgRuleRela">
+
+				<div style="width: 71%; height: 100%" class="am-align-left">
+					<div style="width: 100%; height: 100%;">
+						<div
+							style="display: inline-block; width: 100%; text-align: right; padding-bottom: 5px; padding-top: 5px">
+							摊分规则名称:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+								<input type="text" class="input-text"
+									ng-model="queryRule.apportionRuleName" maxlength="32">
+							</div>
+							资源类型:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 10%; height: 24px;">
+								<select class="input-text" ng-model="queryRule.cdrType">
+									<option value="">全部</option>
+									<option ng-repeat="feeTypeObj in feeTypes"
+										value="{{feeTypeObj.entryId}}">{{feeTypeObj.entryName}}</option>
+								</select>
+							</div>
+							生失效时间:
+							<div
+								style="display: inline-block; margin-right: 10px; width: 29%; height: 24px;">
+								<input type="text" ng-model="queryRule.inureDate" onChange=""
+									onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'startlogmax\')}',maxDate:'3000-01-01'})"
+									id="startlogmin" class="input-text Wdate" style="width: 45%;">
+								- <input type="text" ng-model="queryRule.expireDate" onChange=""
+									onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startlogmin\')}',maxDate:'3000-01-01'})"
+									id="startlogmax" class="input-text Wdate" style="width: 45%;">
+							</div>
+							<div style="display: inline-block;">
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="queryRuleByParam()">
+									<i class="Hui-iconfont">&#xe709;</i>&nbsp;查询
+								</button>
+								<button class="btn btn-primary search-btn btn-sm" type="button"
+									ng-click="resetStartRule()">
+									<i class="Hui-iconfont">&#xe68f;</i>&nbsp;重置
+								</button>
+							</div>
+						</div>
+						<div style="margin-top: 5px; height: 80%;">
+							<table ng-table="saRela.startRuleTableParams"
+								class="table-condensed table-border table-hover">
+								<tr ng-repeat="rule in  $data" ng-model="startRuleInfos"
+									style="height: 30px;" ng-click="selectStartRule(rule)">
+									<td style="width: 40px;"><input type="checkbox"
+										ng-checked="isSelected(rule)"
+										ng-if="rule.apportionItemId && rule.scope!=1"
+										id="{{rule.apportionItemId}}"></td>
+									<td title="'摊分规则ID'">{{rule.apportionItemId}}</td>
+									<td title="'摊分规则名称'">{{rule.apportionRuleName}}</td>
+									<td title="'资源类型'"><span ng-repeat="fee in feeTypes"
+										ng-if="fee.entryId == rule.cdrType">{{fee.entryName}}</span></td>
+									<td title="'摊分比例'">{{rule.ratio}}</td>
+									<td title="'生效时间'">{{rule.inureDate | date:'yyyy-MM-dd' }}</td>
+									<td title="'失效时间'">{{rule.expireDate | date:'yyyy-MM-dd'}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div style="width: 26%; height: 75%;" class="am-align-left">
+					<div
+						style="width: 100%; height: 100%; margin: 5px 5px; border: 1px solid #ccc !important; padding: 14px;">
+						<div class="form-group">
+							<label>过滤条件：</label> <input type="text" id="filterOrg"
+								class="input-text" ng-model="filterOrg" style="width: 40%">
+							<button class="btn btn-primary" type="button"
+								ng-click="resetOrgFilter()"
+								style="margin-left: 5px; float: right">
+								<i class="Hui-iconfont">&#xe68f;</i> 重置
+							</button>
+						</div>
+						<treecontrol class="tree-classic"
+							style="width: 100%;height: 80%;margin-top:0px;overflow-y: auto;"
+							tree-model="orgTree" filter-expression="filterOrg"
+							selected-nodes="nodes" options="ruleOrgTreeOptions">
+						{{node.orgNameFull}} </treecontrol>
+					</div>
+					<div style="width: 100%; height: 25%; text-align: right;">
+						<button class="btn btn-primary" ng-click="updateRuleRela()">
+							<i class="Hui-iconfont">&#xe60c;</i> 分配
+						</button>
+						<button class="btn btn-primary" ng-click="cancelSelected()">
+							<i class="Hui-iconfont">&#xe6a6;</i> 取消
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		src="../resources/statement/controller/common.js"></script>
+	<script type="text/javascript"
+		src="../resources/rule/controller/settleApportionRela.js"></script>
+</body>
+</html>

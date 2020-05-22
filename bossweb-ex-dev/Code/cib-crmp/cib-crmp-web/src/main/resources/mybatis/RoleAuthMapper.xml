@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.admin.dao.RoleAuthDao">
+	
+	<resultMap type="com.newland.boss.kpi.admin.model.RoleAuth" id="roleAuthResultMap">
+		<id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		<id column="RESOURCE_ID" property="resourceId" jdbcType="INTEGER" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_OPERATOR_ID" property="modifyOperatorId" jdbcType="INTEGER" />
+	</resultMap>
+
+	<!-- 插入一组角色资源关系 -->
+	<insert id="insertRoleAuth">
+		INSERT INTO T_ROLE_AUTH (ROLE_ID,RESOURCE_ID,STATUS,CREATE_TIME
+			,MODIFY_TIME,MODIFY_OPERATOR_ID)
+			VALUES(#{roleId},#{resourceId},#{status},sysdate
+			,#{modifyTime,jdbcType=VARCHAR},#{modifyOperatorId}) 
+	</insert>
+	
+	<!-- 查找一组角色资源关系 -->
+	<select id="selectAnRoleAuth" resultMap="roleAuthResultMap">
+		SELECT * FROM T_ROLE_AUTH WHERE ROLE_ID = #{roleId}
+			AND RESOURCE_ID = #{resourceId}
+	</select>
+	
+	<!-- 删除一组角色资源关系 -->
+	<delete id="deleteRoleAuth">
+		DELETE FROM T_ROLE_AUTH WHERE ROLE_ID = #{roleId}
+			AND RESOURCE_ID = #{resourceId}
+	</delete>
+	
+	<!-- 编辑一组角色资源关系 -->
+	<update id="updateRoleAuth">
+		UPDATE T_ROLE_AUTH SET RESOURCE_ID = #{newResourceId},STATUS = #{status}
+			,MODIFY_TIME = sysdate ,MODIFY_OPERATOR_ID = #{modifyOperatorId} 
+    	 	WHERE ROLE_ID = #{roleId} AND RESOURCE_ID = #{resourceId}
+	</update>
+	
+	<!-- 根据角色ID查找角色资源关系 -->
+	<select id="selectAuthByRoleId" resultMap="roleAuthResultMap">
+		SELECT * FROM T_ROLE_AUTH WHERE ROLE_ID = #{roleId}
+	</select>
+	
+	<!-- 根据角色ID删除角色资源关系 -->
+	<delete id="deleteAuthByRoleId">
+		DELETE FROM T_ROLE_AUTH WHERE ROLE_ID = #{roleId}
+	</delete>
+	
+</mapper>

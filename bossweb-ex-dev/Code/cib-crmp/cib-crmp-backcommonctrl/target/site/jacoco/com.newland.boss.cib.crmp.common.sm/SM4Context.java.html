@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SM4Context.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-backcommonctrl</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.common.sm</a> &gt; <span class="el_source">SM4Context.java</span></div><h1>SM4Context.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.common.sm;
+
+/**
+ *
+ */
+public class SM4Context {
+    private int mode;
+
+    private long[] sk;
+
+    private boolean isPadding;
+
+<span class="fc" id="L13">    public SM4Context() {</span>
+<span class="fc" id="L14">        this.mode = 1;</span>
+<span class="fc" id="L15">        this.isPadding = true;</span>
+<span class="fc" id="L16">        this.sk = new long[32];</span>
+<span class="fc" id="L17">    }</span>
+
+    public int getMode() {
+<span class="fc" id="L20">        return mode;</span>
+    }
+
+    public void setMode(int mode) {
+<span class="fc" id="L24">        this.mode = mode;</span>
+<span class="fc" id="L25">    }</span>
+
+    public long[] getSk() {
+<span class="fc" id="L28">        return sk;</span>
+    }
+
+    public void setSk(long[] sk) {
+<span class="nc" id="L32">        this.sk = sk;</span>
+<span class="nc" id="L33">    }</span>
+
+    public boolean isPadding() {
+<span class="fc" id="L36">        return isPadding;</span>
+    }
+
+    public void setPadding(boolean padding) {
+<span class="nc" id="L40">        isPadding = padding;</span>
+<span class="nc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

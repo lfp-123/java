@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.web.dao.OperatorRecordDao">
+	<resultMap type="com.newland.boss.cib.crmp.domain.OperatorRecord"
+		id="operatorRecordMap">
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="SYNC_STATUS" property="syncStatus" jdbcType="INTEGER" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="DIRECT_NUMBER" property="directNumber"
+			jdbcType="VARCHAR" />
+		<result column="DIRECT_NUMBER_MODIFY" property="directNumberModify"
+			jdbcType="VARCHAR" />
+		<result column="LOGIN_NAME" property="notesId" jdbcType="VARCHAR" />
+		<result column="MONTH" property="month" jdbcType="INTEGER" />
+		<result column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 查询条件 -->
+	<sql id="whereClause">
+		<where>
+			<if test="orgIdArray != null and orgIdArray.length > 0">
+				and t.ORG_ID in
+				<foreach collection="orgIdArray" item="item" index="index"
+					open="(" close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="req.month!=null and req.month!=''">and t.MONTH = #{req.month}</if>
+			<if test="req.notesId!=null and req.notesId!=''">and t.LOGIN_NAME = #{req.notesId}</if>
+			<if test="req.syncStatus!=null and req.syncStatus!=''">and t.SYNC_STATUS = #{req.syncStatus}</if>
+		</where>
+	</sql>
+	
+	<select id="queryOperRecordList" resultMap="operatorRecordMap">		
+		SELECT *
+		  FROM (SELECT ROWNUM AS rowno, r.*
+		          FROM (select t.OPERATOR_ID,
+		                       t.CREATE_TIME,
+		                       t.MODIFY_TIME,
+		                       t.SYNC_STATUS,
+		                       t.STATUS,
+		                       t.DIRECT_NUMBER,
+		                       t.DIRECT_NUMBER_MODIFY,
+		                       t.LOGIN_NAME,
+		                       t.MONTH,
+		                       t.ORG_ID,
+		                       o.org_name_full as ORG_NAME
+		                  from t_operator_record t, T_ORGANIZATION O
+		                 where t.org_id = o.org_id(+)
+		                 <if test="orgIdArray != null and orgIdArray.length > 0">
+							and t.ORG_ID in
+							<foreach collection="orgIdArray" item="item" index="index"
+								open="(" close=")" separator=",">
+								#{item}
+							</foreach>
+						 </if>
+						 <if test="req.month!=null and req.month!=''">and t.MONTH = #{req.month}</if>
+						 <if test="req.notesId!=null and req.notesId!=''">and t.LOGIN_NAME = #{req.notesId}</if>
+						 <if test="req.syncStatus!=null and req.syncStatus!=''">and t.SYNC_STATUS = #{req.syncStatus}</if>
+		                 order by t.CREATE_TIME) r
+		         where ROWNUM &lt;= #{page} * #{size}) p
+		WHERE p.rowno &gt; (#{page} - 1) * #{size}
+	</select>
+	
+	<select id="countOperRecordNumber" resultType="Integer">
+		SELECT COUNT(1)
+		FROM t_operator_record t
+		<include refid="whereClause" />
+	</select>
+
+</mapper>

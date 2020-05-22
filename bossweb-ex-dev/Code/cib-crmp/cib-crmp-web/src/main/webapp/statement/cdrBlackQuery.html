@@ -1,0 +1,306 @@
+﻿<!DOCTYPE HTML>
+<html>
+<meta name="referrer" content="no-referrer">
+<head>
+<meta charset="utf-8">
+<script src="../skeleton/includeJs_3rd.js"></script>
+<script src="../skeleton/includeCss_3rd.js"></script>
+<style>
+body {
+	overflow: hidden;
+	margin: 0px auto;
+}
+table tr {
+    height: 34px;
+}
+.nav>li>a {
+    padding: 5px 15px;
+}
+.modal {
+	background-color: rgba(102, 102, 102, 0.85);
+}
+.container {
+	padding: 0px 0px 0px 0px;
+	margin-top: 30px;
+	width: 598px;
+	box-shadow: 0 0 20px #888888;
+	z-index: 10;
+	background-color: rgba(255, 255, 255, 1);
+}
+</style>
+
+<title>CDR话单查询</title>
+</head>
+<body ng-app="myApp">
+<div class="am-tabs" data-am-tabs style="width: 100%; height: 100%;">
+
+	<ul id="myTab" class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab">黑户统计</a></li>
+		<li><a href="#tab2" data-toggle="tab">黑户详单查询</a></li>
+	</ul>
+  
+<div  id="myTabContent" class="tab-content" style="width: 100%; height: 90%">
+<div ng-app="cdrBlackQueryApp" ng-controller="cdrBlackQueryController" style="width: 100%; height: 100%;padding-right: 10px;" class="tab-pane fade" id="tab2" ng-init="url='../rest/queryBlackCdrList';p_pernum=10" ng-cloak>
+<div style="display: inline-block; width: 100%; text-align: right;padding-top: 10px;">
+	主叫：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<input type="text" class="input-text" ng-model="data.callNumber">
+	</div>
+	被叫：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<input type="text" class="input-text" ng-model="data.calledNumber">
+	</div>
+	呼叫类型：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<select id="cdrType" class="input-text" ng-model="selCallType" ng-options="x.entryName for x in callTypes"></select>
+	</div>
+	日期：<div style="display: inline-block; margin-right: 10px; width: 19%;">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate1\')||\'%y-%M-%d\'}', readOnly:true})" id="beginDate1" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="beginDate" onChange="">
+			-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDate1\')}',maxDate:'%y-%M-%d', readOnly:true})" id="endDate1" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange="">
+	</div>
+	<div style="display: inline-block;">
+		<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe709;</i>&nbsp;查询</button>&nbsp;</span>
+		<span><button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe68f;</i>&nbsp;重置</button></span>
+	</div>
+</div>
+<div >
+	<div class="mt-15" style="height: 400px; ">
+		<table id="table-cdr" class="table-condensed table-border table-hover">
+			<thead>
+				<tr class="text-c"> 
+					<th width="100">主叫号码</th>
+					<th width="100">被叫号码</th>
+					<th width="60">话单类型</th>
+					<th width="100">通话起始时间</th>
+					<th width="100">通话结束时间</th>
+					<th width="60">时长/(分)</th>
+					<th width="60">费用/(元)</th>
+					<th width="60">用户编辑</th>
+				</tr>
+			</thead>
+			<tbody id="main01">
+				<tr class="text-c" ng-repeat="x in list">
+					<td>{{x.callNumber}}</td>
+					<td>{{x.calledNumber}}</td>
+					<td>{{x.callType}}</td>
+					<td>{{x.startTime}}</td>
+					<td>{{x.endTime}}</td>
+					<td>{{x.holdingTime}}</td>
+					<td>{{x.fee}}</td>
+					<td ng-cloak>
+						<button class="btn btn-primary size-MINI" ng-click="editUserInfoForDetail(list, $index)" ng-if="x.callNumber">
+							用户编辑
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		<div page-directive style="margin-top: 10px;"></div>
+		<div style="margin-top: 10px; width: 100%;">
+		<span class="r"><button name="" id="" class="cr btn btn-primary"type="" ng-click="download()" ng-show="count"><i class="Hui-iconfont">&#xe640;</i> 下载</button> &nbsp;&nbsp;</span>
+		</div>
+</div>
+<!-- <script type="text/javascript" src="../resources/statement/controller/common.js"></script>
+<script type="text/javascript" src="../resources/statement/controller/cdrBlackQuery.js"></script> -->
+<!--模态增加窗口-->
+ 	<div class="modal fade" id="addModal2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-content container">
+			<div class="ng-scope">
+			<div class="modal-header" style="width:100%">
+				<h4 class="modal-title" align="center">黑户用户编辑</h4>
+			</div>
+			<div class="modal-body">
+        		<div align="center">
+					<div class="form-horizontal">
+  					<div class="form-group">
+    					<label for="callNumber" class="col-sm-3 control-label">主叫号码：</label>
+    					<div class="col-sm-8">
+    						<input type="text" ng-if="callType=='2'" class="input-text" ng-model="callNumber" ng-value="{{callNumber}}" readonly>
+							<input type="text" ng-if="callType=='1'" style="color:red;font-weight:900;" class="input-text" ng-model="callNumber" ng-value="{{callNumber}}" readonly>
+    					</div>
+  					</div>
+  					<div class="form-group">
+    					<label for="callNumber" class="col-sm-3 control-label">被叫号码：</label>
+    					<div class="col-sm-8">
+							<input type="text" ng-if="callType=='1'" class="input-text" ng-model="calledNumber" ng-value="{{calledNumber}}" readonly>
+							<input type="text" ng-if="callType=='2'" style="color:red;font-weight:900;" class="input-text" ng-model="calledNumber" ng-value="{{calledNumber}}" readonly>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="billMonth" class="col-sm-3 control-label">归属月份：</label>
+    					<div class="col-sm-8">
+							<input type="text" class="input-text" ng-model="billMonth" ng-value="{{billMonth}}" readonly>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="operatorName" class="col-sm-3 control-label">姓 名：</label>
+    					<div class="col-sm-8">
+							<input type="text" class="input-text" ng-model="operatorName">
+						</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgDate" class="col-sm-3 control-label">选择机构：</label>
+    					<div class="col-sm-8">
+							<div id="orgTreeInput">
+      						<input type="text" class="form-control" id="orgNames" ng-model="orgNames" ng-click="showTree()" readonly="readonly">
+							<div id="orgTreeDiv" align="left" style="display: none; position: absolute; border: 1px solid #ccc; background-color: white; height: 300px; overflow-y: auto;">
+								<input type="text" id="predicate" class="input-text" ng-model="predicate" placeholder="搜索"/>
+								<treecontrol class="tree-boot"  
+									tree-model="orgData"  
+				  					options="treeOptions"  
+				  					on-selection="showSelected(node)"  
+									selected-node="node"
+									filter-expression="predicate" 
+									filter-comparator="comparator">  
+									<label title="{{node.orgNameFull}}">{{node.orgNameFull}}</label>
+								</treecontrol>
+							</div>
+							</div>
+						</div>
+  					</div>
+					</div>
+        		</div>
+    		</div>
+			<div class="modal-footer" style="width:100%">
+        		<button class="btn btn-primary" ng-click="confirm()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    		</div>
+    		</div>
+		</div>
+	</div>
+
+</div>
+
+<div style="height: 100%" class="tab-pane fade in active" id="tab1" ng-app="cdrBlackUserQueryApp" ng-controller="cdrBlackUserQueryController" ng-init="url='../rest/queryCdrBlackUserList';p_pernum=10" ng-cloak>
+<div style="display: inline-block; width: 100%; text-align: right;padding-top: 10px;">
+	号码：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<input type="text" class="input-text" ng-model="data.callNumber">
+	</div>
+	话单类型：<div style="display: inline-block; margin-right: 10px; width: 10%;">
+		<select id="cdrType" class="input-text" ng-model="selCallType" ng-options="x.entryName for x in callTypes"></select>
+	</div>
+	日期：<div style="display: inline-block; margin-right: 10px; width: 19%;">
+		<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')||\'%y-%M-%d\'}', readOnly:true})" id="beginDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="beginDate" onChange="">
+			-
+		<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDate\')}',maxDate:'%y-%M-%d', readOnly:true})" id="endDate" class="input-text Wdate" style="width:45%; cursor: pointer;" ng-model="endDate" onChange="">
+	</div>
+	<div style="display: inline-block;">
+		<span><button ng-click="load_page(1)" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe709;</i>&nbsp;查询</button>&nbsp;</span>
+		<span><button type="reset" ng-click="resetBtn()" class="btn btn-primary"><i class="icon Hui-iconfont">&#xe68f;</i>&nbsp;重置</button></span>
+	</div>
+</div>
+<div >
+	<div class="mt-15" style="height: 400px;">
+		<table id="table-cdr" class="table-condensed table-border table-hover">
+			<thead>
+				<tr class="text-c"> 
+					<th width="100">号码</th>
+					<th width="60">话单类型</th>
+					<th width="80">话单数</th>
+					<th width="80">费用/(元)</th>
+					<th width="100">归属月份</th>
+					<th width="60">用户编辑</th>
+				</tr>
+			</thead>
+			<tbody id="main01">
+				<tr class="text-c" ng-repeat="x in list track by $index">
+					<td>{{x.callNumber}}</td>
+					<td>{{x.callType}}</td>
+					<td>{{x.count}}</td>
+					<td>{{x.fee}}</td>
+					<td>{{x.billMonth}}</td>
+					<td ng-cloak>
+						<button class="btn btn-primary size-MINI" ng-click="editUserInfo(list, $index)" ng-if="x.callNumber">
+							用户编辑
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		<div page-directive style="margin-top: 10px;"></div>
+		<div style="margin-top: 10px; width: 100%;">
+		<span class="r"><button name="" id="" class="cr btn btn-primary"type="" ng-click="download()" ng-show="count"><i class="Hui-iconfont">&#xe640;</i> 下载</button> &nbsp;&nbsp;</span>
+		</div>
+</div>
+<!-- <script type="text/javascript" src="../resources/statement/controller/common.js"></script>
+<script type="text/javascript" src="../resources/statement/controller/dmaBlackQuery.js"></script> -->
+
+<!--模态增加窗口-->
+ 	<div class="modal fade" id="addModal1" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		data-backdrop="false">
+
+		<div class="modal-content container">
+			<div class="ng-scope">
+			<div class="modal-header" style="width:100%">
+				<h4 class="modal-title" align="center">黑户用户编辑</h4>
+			</div>
+			<div class="modal-body">
+        		<div align="center">
+					<div class="form-horizontal">
+  					<div class="form-group">
+    					<label for="callNumber" class="col-sm-3 control-label" ng-if="callType=='1'">主叫号码：</label>
+    					<label for="callNumber" class="col-sm-3 control-label" ng-if="callType=='2'">被叫号码：</label>
+    					<div class="col-sm-8">
+							<input type="text" class="input-text" ng-model="callNumber" ng-value="{{callNumber}}" readonly>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="billMonth" class="col-sm-3 control-label">归属月份：</label>
+    					<div class="col-sm-8">
+							<input type="text" class="input-text" ng-model="billMonth" ng-value="{{billMonth}}" readonly>
+    					</div>
+  					</div>
+					<div class="form-group">
+    					<label for="operatorName" class="col-sm-3 control-label">姓 名：</label>
+    					<div class="col-sm-8">
+							<input type="text" class="input-text" ng-model="operatorName">
+						</div>
+  					</div>
+					<div class="form-group">
+    					<label for="orgDate" class="col-sm-3 control-label">选择机构：</label>
+    					<div class="col-sm-8">
+							<div id="orgTreeInput1">
+      						<input type="text" class="form-control" id="orgNames1" ng-model="orgNames" ng-click="showTree()" readonly="readonly">
+							<div id="orgTreeDiv1" align="left" style="display: none; position: absolute; border: 1px solid #ccc; background-color: white; height: 300px; overflow-y: auto;">
+								<input type="text" id="predicate1" class="input-text" ng-model="predicate" placeholder="搜索"/>
+								<treecontrol class="tree-boot"  
+									tree-model="orgData"  
+				  					options="treeOptions"  
+				  					on-selection="showSelected(node)"  
+									selected-node="node"
+									filter-expression="predicate" 
+									filter-comparator="comparator">  
+									<label title="{{node.orgNameFull}}">{{node.orgNameFull}}</label>
+								</treecontrol>
+							</div>
+							</div>
+						</div>
+  					</div>
+					</div>
+        		</div>
+    		</div>
+			<div class="modal-footer" style="width:100%">
+        		<button class="btn btn-primary" ng-click="confirm()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+        		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+    		</div>
+    		</div>
+		</div>
+	</div>
+
+</div>
+
+</div>
+
+</div>
+<script type="text/javascript" src="../resources/statement/controller/common.js"></script>
+<script type="text/javascript" src="../resources/statement/controller/cdrBlackQuery.js"></script>
+<script type="text/javascript" src="../skeleton/lib/page-bar.js"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

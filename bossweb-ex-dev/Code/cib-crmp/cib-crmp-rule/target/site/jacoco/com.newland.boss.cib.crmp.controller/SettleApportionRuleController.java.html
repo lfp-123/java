@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SettleApportionRuleController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-rule</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.controller</a> &gt; <span class="el_source">SettleApportionRuleController.java</span></div><h1>SettleApportionRuleController.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.newland.boss.cib.crmp.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import com.alibaba.fastjson.JSONArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.cib.crmp.domain.SettleApportionRule;
+import com.newland.boss.cib.crmp.service.SettleApportionRuleService;
+import com.newland.boss.kpi.entity.OperateLog;
+import com.newland.boss.kpi.server.OperateLogService;
+
+/**
+ * @author ylc
+ *
+ *         2018-05-14
+ */
+@RestController
+<span class="fc" id="L37">public class SettleApportionRuleController {</span>
+
+<span class="fc" id="L39">	private SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+<span class="fc" id="L40">	private static final Logger LOGGER = LogManager.getLogger(SettleApportionRuleController.class);</span>
+	@Autowired
+	private OperateLogService operateLogService;
+
+	@Autowired
+	private SettleApportionRuleService settleApportionRuleService;
+
+	// 添加结算配置
+	@RequestMapping(value = &quot;/addSettleApportionRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String addSettleApportionRule(@RequestBody SettleApportionRule settleApportionRule) {
+<span class="fc" id="L50">		Boolean isSuccess = settleApportionRuleService.addSettleApportionRule(changeDateFormat(settleApportionRule));</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">		if (isSuccess) {</span>
+<span class="fc" id="L52">			operateLogRecord(settleApportionRule.getOperatorId(), 13, 1, &quot;新增结算摊分规则：&quot; + settleApportionRule);</span>
+<span class="fc" id="L53">			return JSONArray.toJSONString(settleApportionRuleService.loadAllSettleApportionRule());</span>
+		} else {
+<span class="nc" id="L55">			operateLogRecord(settleApportionRule.getOperatorId(), 13, 1, &quot;新增结算摊分规则失败，生失效时间区间重复：&quot; + settleApportionRule);</span>
+<span class="nc" id="L56">			return &quot;[{\&quot;result\&quot;:\&quot;false\&quot;}]&quot;;</span>
+		}
+	}
+
+	// 修改结算配置
+	@RequestMapping(value = &quot;/updateSettleApportionRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String updateSettleApportionRule(@RequestBody SettleApportionRule settleApportionRule) {
+<span class="fc" id="L63">		operateLogRecord(settleApportionRule.getOperatorId(), 13, 3, &quot;更新结算摊分规则：&quot; + settleApportionRule);</span>
+<span class="fc" id="L64">		return JSONArray.toJSONString(settleApportionRuleService.editSettleApportionRule(changeDateFormat(settleApportionRule)));</span>
+	}
+
+	// 删除结算配置
+	@RequestMapping(value = &quot;/deleteSettleApportionRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String deleteSettleApportionRule(@RequestBody String ruleJson) {
+<span class="fc" id="L70">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L71">		JsonElement jsonEl = jsonParser.parse(ruleJson);</span>
+<span class="fc" id="L72">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L73">		settleApportionRuleService.removeSettleApportionRule(ruleJson);</span>
+<span class="fc" id="L74">		operateLogRecord(jsonObj.get(&quot;operatorId&quot;).getAsInt(), 13, 2, &quot;批量删除结算摊分规则，规则ID[&quot; + jsonObj.get(&quot;ruleIdJson&quot;).getAsJsonArray()+&quot;]&quot;);</span>
+<span class="fc" id="L75">		return JSONArray.toJSONString(settleApportionRuleService.loadAllSettleApportionRule());</span>
+	}
+
+	// 修改结算配置状态
+	@RequestMapping(value = &quot;/modifySettleApportionRuleStatus&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String modifySettleApportionRuleStatus(@RequestBody String ruleJson) {
+<span class="fc" id="L81">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L82">		JsonElement jsonEl = jsonParser.parse(ruleJson);</span>
+<span class="fc" id="L83">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L84">		operateLogRecord(jsonObj.get(&quot;operatorId&quot;).getAsInt(), 13, 3, &quot;修改结算摊分规则状态，规则ID[&quot;+jsonObj.get(&quot;ruleIdArray&quot;).getAsJsonArray()+&quot;],状态修改为:&quot;+jsonObj.get(&quot;ruleStatus&quot;).getAsInt());</span>
+<span class="fc" id="L85">		return JSONArray.toJSONString(settleApportionRuleService.modifySettleApportionRuleStatus(ruleJson));</span>
+	}
+
+	// 查询结算配置
+	@RequestMapping(value = &quot;/loadAllSettleApportionRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String loadAllSettleApportionRule() {
+<span class="fc" id="L91">		return JSONArray.toJSONString(settleApportionRuleService.loadAllSettleApportionRule());</span>
+	}
+
+	// 通过id查找
+	@RequestMapping(value = &quot;/getRuleById&quot;, method = RequestMethod.GET, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String showRoleById(@RequestParam Integer settleApportionRuleId) {
+<span class="fc" id="L97">		return JSONArray.toJSONString(settleApportionRuleService.getSettleApportionRuleById(settleApportionRuleId));</span>
+
+	}
+
+	// 条件查询结算配置
+	@RequestMapping(value = &quot;/loadSettleApportionRuleByParam&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String loadSettleApportionRuleByParam(@RequestBody SettleApportionRule settleApportionRule) {
+<span class="fc" id="L104">		return JSONArray.toJSONString(</span>
+<span class="fc" id="L105">				settleApportionRuleService.loadSettleApportionRuleByParam(changeDateFormat(settleApportionRule)));</span>
+	}
+
+	// 导出
+	@RequestMapping(value = &quot;/exportSettleApportionRuleByParam&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String exportSettleApportionRuleByParam(@RequestBody SettleApportionRule settleApportionRule) {
+<span class="fc" id="L111">		operateLogRecord(settleApportionRule.getOperatorId(), 13, 5, &quot;根据规则条件导出规则：&quot; + settleApportionRule);</span>
+<span class="fc" id="L112">		return JSONArray.toJSONString(</span>
+<span class="fc" id="L113">				settleApportionRuleService.exportSettleApportionRule(changeDateFormat(settleApportionRule)));</span>
+	}
+
+	// 导入
+	@RequestMapping(value = &quot;/importSettleApportionRule&quot;)
+	public Map&lt;String, String&gt; importSettleApportionRule(
+			@RequestParam(value = &quot;file&quot;, required = true) MultipartFile file,
+			@RequestParam(value = &quot;operatorId&quot;, required = true) Integer operatorId) {
+<span class="nc" id="L121">		Map&lt;String, String&gt; resultMap = new HashMap&lt;&gt;();</span>
+		// 进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
+<span class="nc" id="L123">		long size = file.getSize();</span>
+<span class="nc bnc" id="L124" title="All 4 branches missed.">		if (size &gt; 0 &amp;&amp; size &lt;= 10485760) {</span>
+<span class="nc" id="L125">			String newFileName = String.valueOf(System.currentTimeMillis()) + &quot;.xls&quot;;</span>
+			// 创建文件
+<span class="nc" id="L127">			String dir = System.getProperty(&quot;user.dir&quot;) + &quot;/upload/&quot;;</span>
+<span class="nc" id="L128">			File dest = new File(dir, newFileName);</span>
+			// 判断文件的目录是否存在，不存在则创建
+<span class="nc bnc" id="L130" title="All 2 branches missed.">			if (!dest.getParentFile().exists()) {</span>
+<span class="nc" id="L131">				dest.getParentFile().mkdirs();</span>
+			}
+			// 上传到指定目录
+			try {
+<span class="nc" id="L135">				file.transferTo(dest);</span>
+<span class="nc" id="L136">				operateLogRecord(operatorId, 13, 6, &quot;导入结算摊分规则&quot;);</span>
+<span class="nc" id="L137">				return settleApportionRuleService.importSettleApportionRule(dir + newFileName, operatorId);</span>
+<span class="nc" id="L138">			} catch (IOException e) {</span>
+<span class="nc" id="L139">				LOGGER.debug(&quot;复制文件异常&quot; + e.getMessage());</span>
+<span class="nc" id="L140">				resultMap.put(&quot;result&quot;, &quot;false&quot;);</span>
+<span class="nc" id="L141">				resultMap.put(&quot;error&quot;, e.getMessage());</span>
+<span class="nc" id="L142">				operateLogRecord(operatorId, 13, 6, &quot;导入结算摊分规则失败&quot;);</span>
+<span class="nc" id="L143">				return resultMap;</span>
+			}
+		} else {
+<span class="nc" id="L146">			resultMap.put(&quot;result&quot;, &quot;false&quot;);</span>
+<span class="nc" id="L147">			resultMap.put(&quot;error&quot;, &quot;导入文件不能为空或文件应小于10M&quot;);</span>
+<span class="nc" id="L148">			return resultMap;</span>
+		}
+	}
+
+	private void operateLogRecord(Integer operatorId, Integer operateModule, Integer operateType, String operateDesc) {
+		// 添加操作日志到记录
+<span class="fc" id="L154">		String regEx = &quot;[\\u4e00-\\u9fa5]&quot;;</span>
+<span class="fc" id="L155">		OperateLog operateLog = new OperateLog();</span>
+<span class="fc" id="L156">		operateLog.setOperatorId(operatorId);</span>
+<span class="fc" id="L157">		operateLog.setOperateModule(operateModule);</span>
+<span class="fc" id="L158">		operateLog.setOperateType(operateType);</span>
+<span class="fc" id="L159">		int zwByte = operateDesc.length()-operateDesc.replaceAll(regEx, &quot;&quot;).length();</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		operateLog.setOperateDesc(operateDesc.getBytes().length &gt; 230 ? operateDesc.substring(0, 230-2 * zwByte) : operateDesc);</span>
+<span class="fc" id="L161">		operateLogService.addLog(operateLog);</span>
+<span class="fc" id="L162">	}</span>
+
+	/**
+	 * 该方法用于解决前台传回来的时间，默认加8小时问题
+	 * 
+	 * @param settleApportionRule
+	 * @return
+	 */
+	private SettleApportionRule changeDateFormat(SettleApportionRule settleApportionRule) {
+		try {
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">			if (settleApportionRule.getInureDate() != null) {</span>
+<span class="fc" id="L173">				settleApportionRule.setInureDate(sdf.parse(sdf.format(settleApportionRule.getInureDate())));</span>
+			}
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">			if (settleApportionRule.getExpireDate() != null) {</span>
+<span class="fc" id="L176">				settleApportionRule.setExpireDate(sdf.parse(sdf.format(settleApportionRule.getExpireDate())));</span>
+			}
+<span class="nc" id="L178">		} catch (ParseException e) {</span>
+<span class="nc" id="L179">			LOGGER.debug(e.getMessage());</span>
+<span class="fc" id="L180">		}</span>
+<span class="fc" id="L181">		return settleApportionRule;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

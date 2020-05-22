@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrivateNetwork.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">PrivateNetwork.java</span></div><h1>PrivateNetwork.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.Date;
+
+/**
+ * Copyright (c) 2018,　新大陆软件工程公司 All rights reserved。
+ *
+ * @author cby
+ * @version V1.0
+ * @Title: PrivateNetwork
+ * @Package com.newland.boss.cib.crmp.model
+ * @Description: 网络专线表
+ * @date 2018/7/20
+ */
+<span class="fc" id="L15">public class PrivateNetwork {</span>
+    private Long cdrId;
+    private Integer billMonth;
+    private Integer orgId;
+    private String userId;
+    private Integer feeType;
+    private Long fee;
+    private Date createTime;
+    private Integer operatorId;
+
+    /**
+     * Getter for property 'cdrId'.
+     *
+     * @return Value for property 'cdrId'.
+     */
+    public Long getCdrId() {
+<span class="fc" id="L31">        return cdrId;</span>
+    }
+
+    /**
+     * Setter for property 'cdrId'.
+     *
+     * @param cdrId Value to set for property 'cdrId'.
+     */
+    public void setCdrId(Long cdrId) {
+<span class="fc" id="L40">        this.cdrId = cdrId;</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Getter for property 'billMonth'.
+     *
+     * @return Value for property 'billMonth'.
+     */
+    public Integer getBillMonth() {
+<span class="fc" id="L49">        return billMonth;</span>
+    }
+
+    /**
+     * Setter for property 'billMonth'.
+     *
+     * @param billMonth Value to set for property 'billMonth'.
+     */
+    public void setBillMonth(Integer billMonth) {
+<span class="fc" id="L58">        this.billMonth = billMonth;</span>
+<span class="fc" id="L59">    }</span>
+
+    /**
+     * Getter for property 'orgId'.
+     *
+     * @return Value for property 'orgId'.
+     */
+    public Integer getOrgId() {
+<span class="fc" id="L67">        return orgId;</span>
+    }
+
+    /**
+     * Setter for property 'orgId'.
+     *
+     * @param orgId Value to set for property 'orgId'.
+     */
+    public void setOrgId(Integer orgId) {
+<span class="fc" id="L76">        this.orgId = orgId;</span>
+<span class="fc" id="L77">    }</span>
+
+    /**
+     * Getter for property 'userId'.
+     *
+     * @return Value for property 'userId'.
+     */
+    public String getUserId() {
+<span class="fc" id="L85">        return userId;</span>
+    }
+
+    /**
+     * Setter for property 'userId'.
+     *
+     * @param userId Value to set for property 'userId'.
+     */
+    public void setUserId(String userId) {
+<span class="fc" id="L94">        this.userId = userId;</span>
+<span class="fc" id="L95">    }</span>
+
+    /**
+     * Getter for property 'feeType'.
+     *
+     * @return Value for property 'feeType'.
+     */
+    public Integer getFeeType() {
+<span class="fc" id="L103">        return feeType;</span>
+    }
+
+    /**
+     * Setter for property 'feeType'.
+     *
+     * @param feeType Value to set for property 'feeType'.
+     */
+    public void setFeeType(Integer feeType) {
+<span class="fc" id="L112">        this.feeType = feeType;</span>
+<span class="fc" id="L113">    }</span>
+
+    /**
+     * Getter for property 'fee'.
+     *
+     * @return Value for property 'fee'.
+     */
+    public Long getFee() {
+<span class="fc" id="L121">        return fee;</span>
+    }
+
+    /**
+     * Setter for property 'fee'.
+     *
+     * @param fee Value to set for property 'fee'.
+     */
+    public void setFee(Long fee) {
+<span class="fc" id="L130">        this.fee = fee;</span>
+<span class="fc" id="L131">    }</span>
+
+    /**
+     * Getter for property 'createTime'.
+     *
+     * @return Value for property 'createTime'.
+     */
+    public Date getCreateTime() {
+<span class="fc" id="L139">        return createTime;</span>
+    }
+
+    /**
+     * Setter for property 'createTime'.
+     *
+     * @param createTime Value to set for property 'createTime'.
+     */
+    public void setCreateTime(Date createTime) {
+<span class="fc" id="L148">        this.createTime = createTime;</span>
+<span class="fc" id="L149">    }</span>
+
+    /**
+     * Getter for property 'operatorId'.
+     *
+     * @return Value for property 'operatorId'.
+     */
+    public Integer getOperatorId() {
+<span class="fc" id="L157">        return operatorId;</span>
+    }
+
+    /**
+     * Setter for property 'operatorId'.
+     *
+     * @param operatorId Value to set for property 'operatorId'.
+     */
+    public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L166">        this.operatorId = operatorId;</span>
+<span class="fc" id="L167">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -1,0 +1,210 @@
+<style type="text/css">
+.modal-dialog {
+	width: 450px;
+	margin-top: 120px;
+}
+.head_ul {
+	margin-left: 200px;
+}
+.head_ul>li{
+	float:left;
+	display: block;
+	height: 45px;
+	margin-top: 10px;
+}
+.head_ul>li>a{
+	display: block;
+	padding: 0px 15px;
+	display: block;
+	margin: 7px 0;
+	line-height: 31px; 
+	text-decoration: none;
+	font-size: 1.1em;
+	color: #fff;
+}
+.head_ul>li>a:hover, .head_ul>li>a:active, .currMenu{
+	border-bottom: none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background-color: #fff;
+	color: #0080d8;
+}
+.item {
+	padding: 5px 0;
+}
+.item-last{
+	border-bottom: solid 1px #f2f2f2; 
+}
+.sub-dropdown-menu{
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 170px;
+	width: auto;
+	list-style: none;
+	font-size: 14px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,0.15);
+    border-top-color: rgba(0, 0, 0, 0.15);
+    border-top-style: solid;
+    border-top-width: 1px;
+	border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.sub-dropdown-menu>li{
+	height: 37px;
+	line-height: 37px;
+}
+.sub-dropdown-menu>li>a:hover, .active{
+	background-color: rgba(0,0,0,0.05);
+}
+.sub-dropdown-menu>li>a{
+	display: block;
+	text-decoration: none;
+	padding: 0 0 0 20px;
+}
+</style>
+<div class="am-topbar-brand">
+	 <strong>&nbsp;&nbsp;&nbsp;&nbsp;<big>BOSS统一资产平台</big></strong>
+</div>
+<script type="text/javascript">
+	$(function () {
+		$('.loading').animate({
+			'width' : '33%'
+		}, 50);
+		//第一个进度节点	
+		$('#admin-fullscreen').on('click', function () {
+		    if ($.AMUI.fullscreen.enabled) {
+		    $.AMUI.fullscreen.request();
+		    } else {
+		        // Ignore or do something else
+		    }
+		});
+		
+		$(".dropdown").mouseover(function () {
+	        $(this).addClass("open");
+	    });
+
+	    $(".dropdown").mouseleave(function(){
+	        $(this).removeClass("open");
+	    });
+	});
+	
+	var showMenu = function (rId, type) {
+		if(type == 0) {
+			var infoObj = $("#" + rId);
+			$("#" + rId).find('a').first().css("color", "#0080d8");
+			$("#" + rId).addClass("currMenu");
+			$("#collapse-nav" + rId).css({left: infoObj.position().left + "px"}).show();
+		} 
+		if(type == 1) {
+			var id = rId.replace("collapse-nav", "");
+			$("#" + id).find('a').first().css("color", "#0080d8");
+			$("#" + id).addClass("currMenu");
+					
+		}
+    }
+	
+	var hideMenu = function (rId, type) {
+		$("#collapse-nav" + rId).hide();
+		if(type == 0) {
+			$("#" + rId).removeClass("currMenu");
+			$("#" + rId).find('a').first().css("color", "#fff");
+		}
+		if(type == 1) {
+			var id = rId.replace("collapse-nav", "");
+			$("#" + id).find('a').first().css("color", "#fff");
+			$("#" + id).removeClass("currMenu");
+		}
+    }
+	
+	var showSubMenu = function(rId) {
+		var id = rId.replace("sub", "");
+		id = id.replace("collapse-nav", "");
+		var infoObj = $("#" + id);
+		$("#collapse-nav" + id).css({left: infoObj.position().left + infoObj.width() + "px", top: infoObj.position().top + "px"}).show();
+	}
+	
+	var hideSubMenu = function(rId) {
+		var id = rId.replace("sub", "");
+		id = id.replace("collapse-nav", "");
+		$("#collapse-nav" + id).hide();
+	}
+</script>
+<div class="am-collapse am-topbar-collapse" id="topbar-collapse" ng-controller="headerController">
+	<ul class="am-topbar-left head_ul">
+	  <li ng-repeat="x in resourceList" id="{{x.resourceId}}" onmouseover="showMenu(this.id, 0);" onmouseleave="hideMenu(this.id, 0);">
+	  	<a href="javascript:;">
+			<b>{{x.resourceName}}</b>
+		</a>
+		<ul class="sub-dropdown-menu" id="collapse-nav{{x.resourceId}}" ng-if="x.childResourceList.length" ng-init="items=x.childResourceList" 
+			style="margin: 0 -1px; border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; box-shadow: 0 0px 0px rgba(0,0,0,.175);" onmouseover="showMenu(this.id, 1);" onmouseleave="hideMenu(this.id, 1);">
+			<li ng-repeat="item in items" id="{{item.resourceId}}" ng-class="$last ? '' : 'item-last'">
+				<a ng-if="!item.childResourceList.length" id="sub{{item.resourceId}}" href='#' ng-click="changeCls(item.resourceId);addTab(item.resourceName, item.resourceUrl)" style="color: #0080d8;">{{item.resourceName}}</a>
+				<a ng-if="item.childResourceList.length" id="sub{{item.resourceId}}" href='#' style="color: #0080d8;" onmouseover="showSubMenu(this.id);" onmouseleave="hideSubMenu(this.id);">{{item.resourceName}}</a>
+				<ul class="sub-dropdown-menu" id="collapse-nav{{item.resourceId}}" ng-if="item.childResourceList.length" ng-include="'menus'" ng-init="items=item.childResourceList" onmouseover="showSubMenu(this.id);" onmouseleave="hideSubMenu(this.id);" style="margin-top: -1px;"></ul>
+			</li>
+		</ul> 
+	  </li>
+	</ul>
+	
+	<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+	  <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+				<span class="am-icon-users"></span>  {{username}} <span class="am-icon-caret-down"></span>
+			</a>
+			<ul class="dropdown-menu" style="margin: 0;">
+			  <li><a href="#" ng-click="showModifyPwd()" ng-if="loginType == 0"><span class="am-icon-cog"></span> 修改密码</a></li>
+			  <li><a href="#" ng-click="logout()"><span class="am-icon-power-off"></span> 退出</a></li>
+			</ul>
+	  </li>
+	  <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+	</ul>
+</div>
+<script id="menus" type="text/ng-template">
+	<li ng-repeat="item in items" id="{{item.resourceId}}" ng-class="$last ? '' : 'item-last'">
+		<a ng-if="!item.childResourceList.length" href='#' id="sub{{item.resourceId}}" ng-click="changeCls(item.resourceId);addTab(item.resourceName, item.resourceUrl)" style="color: #0080d8;">{{item.resourceName}}</a>
+		<a ng-if="item.childResourceList.length" href='#' id="sub{{item.resourceId}}" style="color: #0080d8;">{{item.resourceName}}</a>
+		<ul class="sub-dropdown-menu" id="collapse-nav{{item.resourceId}}" ng-if="item.childResourceList.length" ng-include="'menus'" ng-init="items=item.childResourceList"></ul>
+	</li>
+</script>
+<script type="text/ng-template" id="modify.html"> 
+	<div>
+		<div class="modal-header">
+			<h4 class="modal-title" align="center">修改密码</h4>
+		</div>
+		<div class="modal-body">
+      		<div align="center">
+				<form class="form-horizontal">
+					<div class="form-group">
+  						<label for="oldPwd" class="col-sm-3 control-label">旧密码：</label>
+  						<div class="col-sm-8">
+    						<input type="password" id="oldPwd" class="form-control" ng-model="modifyPwdInfo.oldPassword">
+  						</div>
+					</div>
+					<div class="form-group">
+  						<label for="newPwd" class="col-sm-3 control-label">新密码：</label>
+  						<div class="col-sm-8">
+    						<input type="password" id="newPwd" class="form-control" ng-model="modifyPwdInfo.password">
+  						</div>
+					</div>
+					<div class="form-group">
+  						<label for="apassword" class="col-sm-3 control-label">确认密码：</label>
+  						<div class="col-sm-8">
+							<input type="password" id="apassword" class="form-control" ng-model="modifyPwdInfo.apassword">
+						</div>
+					</div>
+				</form>
+      		</div>
+   		</div>
+		<div class="modal-footer">
+      		<button class="btn btn-primary" ng-click="modiftyPwd()"><i class="Hui-iconfont">&#xe6a7;</i> 确定</button>
+      		<button class="btn btn-primary" ng-click="cancel()"><i class="Hui-iconfont">&#xe6a6;</i> 关闭</button>
+  		</div>
+	</div>
+</script>

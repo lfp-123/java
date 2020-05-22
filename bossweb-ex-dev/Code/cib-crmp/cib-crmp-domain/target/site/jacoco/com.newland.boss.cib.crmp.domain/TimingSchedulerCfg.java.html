@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimingSchedulerCfg.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">TimingSchedulerCfg.java</span></div><h1>TimingSchedulerCfg.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.Date;
+
+/**
+ * Copyright (c) 2018,　新大陆软件工程公司 All rights reserved。
+ *
+ * @author cby
+ * @version V1.0
+ * @Title: TimingSchedulerCfg
+ * @Package com.newland.boss.cib.crmp.model
+ * @Description: 定时调度器配置表
+ * @date 2018/5/16
+ */
+<span class="fc" id="L15">public class TimingSchedulerCfg {</span>
+
+    private Integer schedulerCfgId;
+    private Integer schedulerType;
+    private Integer cdrType;
+    private String startTime;
+    private Integer syncCycle;
+    private String cycleValue;
+    private Integer status;
+    private Integer operatorId;
+    private Date createTime;
+    private Integer startupStatus;
+
+    /**
+     * Getter for property 'schedulerCfgId'.
+     *
+     * @return Value for property 'schedulerCfgId'.
+     */
+    public Integer getSchedulerCfgId() {
+<span class="fc" id="L34">        return schedulerCfgId;</span>
+    }
+
+    /**
+     * Setter for property 'schedulerCfgId'.
+     *
+     * @param schedulerCfgId Value to set for property 'schedulerCfgId'.
+     */
+    public void setSchedulerCfgId(Integer schedulerCfgId) {
+<span class="fc" id="L43">        this.schedulerCfgId = schedulerCfgId;</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Getter for property 'schedulerType'.
+     *
+     * @return Value for property 'schedulerType'.
+     */
+    public Integer getSchedulerType() {
+<span class="fc" id="L52">        return schedulerType;</span>
+    }
+
+    /**
+     * Setter for property 'schedulerType'.
+     *
+     * @param schedulerType Value to set for property 'schedulerType'.
+     */
+    public void setSchedulerType(Integer schedulerType) {
+<span class="fc" id="L61">        this.schedulerType = schedulerType;</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Getter for property 'cdrType'.
+     *
+     * @return Value for property 'cdrType'.
+     */
+    public Integer getCdrType() {
+<span class="fc" id="L70">        return cdrType;</span>
+    }
+
+    /**
+     * Setter for property 'cdrType'.
+     *
+     * @param cdrType Value to set for property 'cdrType'.
+     */
+    public void setCdrType(Integer cdrType) {
+<span class="fc" id="L79">        this.cdrType = cdrType;</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Getter for property 'startTime'.
+     *
+     * @return Value for property 'startTime'.
+     */
+    public String getStartTime() {
+<span class="fc" id="L88">        return startTime;</span>
+    }
+
+    /**
+     * Setter for property 'startTime'.
+     *
+     * @param startTime Value to set for property 'startTime'.
+     */
+    public void setStartTime(String startTime) {
+<span class="fc" id="L97">        this.startTime = startTime;</span>
+<span class="fc" id="L98">    }</span>
+
+    /**
+     * Getter for property 'syncCycle'.
+     *
+     * @return Value for property 'syncCycle'.
+     */
+    public Integer getSyncCycle() {
+<span class="fc" id="L106">        return syncCycle;</span>
+    }
+
+    /**
+     * Setter for property 'syncCycle'.
+     *
+     * @param syncCycle Value to set for property 'syncCycle'.
+     */
+    public void setSyncCycle(Integer syncCycle) {
+<span class="fc" id="L115">        this.syncCycle = syncCycle;</span>
+<span class="fc" id="L116">    }</span>
+
+    /**
+     * Getter for property 'cycleValue'.
+     *
+     * @return Value for property 'cycleValue'.
+     */
+    public String getCycleValue() {
+<span class="fc" id="L124">        return cycleValue;</span>
+    }
+
+    /**
+     * Setter for property 'cycleValue'.
+     *
+     * @param cycleValue Value to set for property 'cycleValue'.
+     */
+    public void setCycleValue(String cycleValue) {
+<span class="fc" id="L133">        this.cycleValue = cycleValue;</span>
+<span class="fc" id="L134">    }</span>
+
+    /**
+     * Getter for property 'status'.
+     *
+     * @return Value for property 'status'.
+     */
+    public Integer getStatus() {
+<span class="fc" id="L142">        return status;</span>
+    }
+
+    /**
+     * Setter for property 'status'.
+     *
+     * @param status Value to set for property 'status'.
+     */
+    public void setStatus(Integer status) {
+<span class="fc" id="L151">        this.status = status;</span>
+<span class="fc" id="L152">    }</span>
+
+    /**
+     * Getter for property 'operatorId'.
+     *
+     * @return Value for property 'operatorId'.
+     */
+    public Integer getOperatorId() {
+<span class="fc" id="L160">        return operatorId;</span>
+    }
+
+    /**
+     * Setter for property 'operatorId'.
+     *
+     * @param operatorId Value to set for property 'operatorId'.
+     */
+    public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L169">        this.operatorId = operatorId;</span>
+<span class="fc" id="L170">    }</span>
+
+    /**
+     * Getter for property 'createTime'.
+     *
+     * @return Value for property 'createTime'.
+     */
+    public Date getCreateTime() {
+<span class="fc" id="L178">        return createTime;</span>
+    }
+
+    /**
+     * Setter for property 'createTime'.
+     *
+     * @param createTime Value to set for property 'createTime'.
+     */
+    public void setCreateTime(Date createTime) {
+<span class="fc" id="L187">        this.createTime = createTime;</span>
+<span class="fc" id="L188">    }</span>
+
+    /**
+     * Getter for property 'startupStatus'.
+     *
+     * @return Value for property 'startupStatus'.
+     */
+    public Integer getStartupStatus() {
+<span class="fc" id="L196">        return startupStatus;</span>
+    }
+
+    /**
+     * Setter for property 'startupStatus'.
+     *
+     * @param startupStatus Value to set for property 'startupStatus'.
+     */
+    public void setStartupStatus(Integer startupStatus) {
+<span class="fc" id="L205">        this.startupStatus = startupStatus;</span>
+<span class="fc" id="L206">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

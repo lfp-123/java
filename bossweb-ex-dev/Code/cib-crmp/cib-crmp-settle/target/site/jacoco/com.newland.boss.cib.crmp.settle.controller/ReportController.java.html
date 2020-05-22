@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReportController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-settle</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.settle.controller</a> &gt; <span class="el_source">ReportController.java</span></div><h1>ReportController.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.settle.controller;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.cib.crmp.common.JxlTool;
+import com.newland.boss.cib.crmp.domain.QueryCallListReq;
+import com.newland.boss.cib.crmp.domain.QueryFeeListReq;
+import com.newland.boss.cib.crmp.domain.QueryFeeListResp;
+import com.newland.boss.cib.crmp.domain.QueryReportList;
+import com.newland.boss.cib.crmp.domain.RatedCdr;
+import com.newland.boss.cib.crmp.settle.service.QueryCallListService;
+import com.newland.boss.cib.crmp.settle.service.QueryFeeListService;
+import com.newland.boss.kpi.admin.dao.OrganizationDao;
+import com.newland.boss.kpi.admin.model.Operator;
+import com.newland.boss.kpi.admin.service.OperatorService;
+import com.newland.boss.kpi.entity.User;
+import com.newland.boss.kpi.server.AppSession;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.export.ExporterInput;
+import net.sf.jasperreports.export.ExporterInputItem;
+import net.sf.jasperreports.export.OutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleExporterInputItem;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+
+@RestController
+<span class="fc" id="L74">public class ReportController {</span>
+
+<span class="fc" id="L76">    private static final Logger LOGGER = LogManager.getLogger(ReportController.class);</span>
+
+    @Autowired
+    private QueryFeeListService queryFeeListService;
+    @Autowired
+    private AppSession appSession;
+    @Autowired
+    private QueryCallListService queryCallListService;
+    @Autowired
+    private OrganizationDao organizationDao;
+    @Autowired
+    private AppSession appsession;
+    @Autowired
+    private OperatorService operatorService;
+
+    private static final String TITLE = &quot;title&quot;;
+    private static final String OPERATOR_NAME = &quot;operatorName&quot;;
+    private static final String ERR_CODE = &quot;errCode&quot;;
+    private static final String ERR_MSG = &quot;errMsg&quot;;
+    private static final String FILE_NAME = &quot;fileName&quot;;
+    private static final String JASPER_PATH = &quot;/WEB-INF/jasperFiles/queryFeeListReport.jasper&quot;;
+    private static final String JASPER_PATH1 = &quot;/WEB-INF/jasperFiles/queryFeeListReport1.jasper&quot;;
+    private static final String JASPER_PATH2 = &quot;/WEB-INF/jasperFiles/queryFeeListReport2.jasper&quot;;
+    private static final String NO_CACHE = &quot;No-cache&quot;;
+    private static final String UNIT_NAME = &quot;unitName&quot;;
+    private static final String USER_NAME = &quot;userName&quot;;
+    private static final String BEGIN_DATE = &quot;beginDate&quot;;
+    private static final String END_DATE = &quot;endDate&quot;;
+    private static final String FEE_TYPE = &quot;feeType&quot;;
+    private static final String CDR_TYPE = &quot;cdrType&quot;;
+    private static final String THRESHOLD_VALUE = &quot;thresholdValue&quot;;
+    private static final String TMP = &quot;tmp = &quot;;
+    private static final String TMP1 = &quot;tmp1 = &quot;;
+    private static final String TMP2 = &quot;tmp2 = &quot;;
+    private static final String NOTES_ID = &quot;notesId&quot;;
+    private static final String TOP_N = &quot;topN&quot;;
+    private static final String PAGE_NO = &quot;pageNo&quot;;
+    private static final String PAGE_SIZE = &quot;pageSize&quot;;
+    private static final String IMPORT_MONTH = &quot;importMonth&quot;;
+    private static final String OPERATOR_ID = &quot;operatorId&quot;;
+    private static final String DOWNLOAD_PATH = &quot;/home/oracle/Oracle/Middleware/Oracle_Home/user_projects/domains/base_domain/reports/&quot;;
+
+    /**
+     * 解析传过来的机构编号数组
+     *
+     * @param json
+     * @return
+     */
+    public Integer[] jsonToIntegerArray(String json) {
+<span class="fc" id="L125">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L126">        JsonElement jsonEl = jsonParser.parse(json);</span>
+<span class="fc" id="L127">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+        JsonArray orgIdJsonArray;
+        try {
+<span class="fc" id="L130">            orgIdJsonArray = jsonObj.get(UNIT_NAME).getAsJsonArray();</span>
+<span class="fc" id="L131">        } catch (Exception e) {</span>
+<span class="fc" id="L132">            orgIdJsonArray = null;</span>
+<span class="fc" id="L133">        }</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (null != orgIdJsonArray) {</span>
+<span class="fc" id="L135">            Integer[] orgIdArray = new Integer[orgIdJsonArray.size()];</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">            for (int i = 0; i &lt; orgIdJsonArray.size(); i++) {</span>
+<span class="fc" id="L137">                Integer orgId = orgIdJsonArray.get(i).getAsInt();</span>
+<span class="fc" id="L138">                orgIdArray[i] = orgId;</span>
+            }
+<span class="fc" id="L140">            return orgIdArray;</span>
+        } else {
+<span class="fc" id="L142">            return new Integer[0];</span>
+        }
+    }
+
+    /**
+     * 转化Json的字段为值
+     */
+    public String formatJsonToValue(String json, String queryFeeListReqJson) {
+<span class="fc" id="L150">        String value = null;</span>
+<span class="fc" id="L151">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L152">        JsonElement jsonEl = jsonParser.parse(queryFeeListReqJson);</span>
+<span class="fc" id="L153">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+
+        try {
+<span class="fc" id="L156">            value = jsonObj.get(json).getAsString();</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (value.isEmpty()) {</span>
+<span class="fc" id="L158">                value = null;</span>
+            }
+<span class="fc" id="L160">        } catch (Exception e) {</span>
+<span class="fc" id="L161">            value = null;</span>
+<span class="fc" id="L162">        }</span>
+
+<span class="fc" id="L164">        return value;</span>
+    }
+
+    /**
+     * 数据处理
+     *
+     * @param feeList
+     * @return
+     */
+    public List&lt;QueryFeeListResp&gt; listToRespList(List&lt;QueryFeeListResp&gt; feeList) {
+
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        for (int i = 0; i &lt; feeList.size(); i++) {</span>
+            // 费用保留一位小数
+<span class="nc" id="L177">            String fee = String.format(&quot;%.1f&quot;, Double.parseDouble(feeList.get(i).getFee()) / 1000);</span>
+<span class="nc" id="L178">            feeList.get(i).setFee(fee);</span>
+
+            // 服务单价
+<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (null != feeList.get(i).getRateFee()) {</span>
+<span class="nc bnc" id="L182" title="All 4 branches missed.">                if (null != feeList.get(i).getOtherFee() &amp;&amp; (!feeList.get(i).getOtherFee().equals(&quot;0&quot;))) {</span>
+<span class="nc" id="L183">                    feeList.get(i).setRateFee(feeList.get(i).getOtherFee());</span>
+                }
+<span class="nc" id="L185">                String rateFee = String.format(&quot;%.1f&quot;, Double.parseDouble(feeList.get(i).getRateFee()) / 1000);</span>
+<span class="nc" id="L186">                feeList.get(i).setRateFee(rateFee);</span>
+            }
+
+            // 服务单位
+            // cdr
+<span class="nc bnc" id="L191" title="All 4 branches missed.">            if (null != feeList.get(i).getCdrType() &amp;&amp; feeList.get(i).getCdrType().equals(&quot;1&quot;)) {</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L193">                    feeList.get(i).setServerUnit(&quot;元/分钟&quot;);</span>
+                }
+<span class="nc bnc" id="L195" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;3&quot;)) {</span>
+<span class="nc" id="L196">                    feeList.get(i).setServerUnit(&quot;元/号/月&quot;);</span>
+                }
+<span class="nc bnc" id="L198" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;6&quot;)) {</span>
+<span class="nc" id="L199">                    feeList.get(i).setServerUnit(&quot;元/年&quot;);</span>
+                }
+<span class="nc bnc" id="L201" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;8&quot;)) {</span>
+<span class="nc" id="L202">                    feeList.get(i).setServerUnit(&quot;元/号/月&quot;);</span>
+                }
+<span class="nc bnc" id="L204" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;10&quot;)) {</span>
+<span class="nc" id="L205">                    feeList.get(i).setServerUnit(&quot;次&quot;);</span>
+                }
+            }
+
+            // dma
+<span class="nc bnc" id="L210" title="All 4 branches missed.">            if (null != feeList.get(i).getCdrType() &amp;&amp; feeList.get(i).getCdrType().equals(&quot;3&quot;)) { // cdr</span>
+<span class="nc bnc" id="L211" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L212">                    feeList.get(i).setServerUnit(&quot;元/终端/小时&quot;);</span>
+                }
+<span class="nc bnc" id="L214" title="All 4 branches missed.">                if (null != feeList.get(i).getFeeType() &amp;&amp; feeList.get(i).getFeeType().equals(&quot;9&quot;)) {</span>
+<span class="nc" id="L215">                    feeList.get(i).setServerUnit(&quot;元/人/小时&quot;);</span>
+                }
+            }
+
+            // 网络专线
+<span class="nc bnc" id="L220" title="All 4 branches missed.">            if (null != feeList.get(i).getCdrType() &amp;&amp; feeList.get(i).getCdrType().equals(&quot;4&quot;)) {</span>
+<span class="nc" id="L221">                feeList.get(i).setServerUnit(&quot;条&quot;);</span>
+            }
+
+        }
+<span class="fc" id="L225">        return feeList;</span>
+    }
+
+    /**
+     * 转化为报表展示的值
+     */
+    public List&lt;QueryReportList&gt; toReportList(List&lt;QueryFeeListResp&gt; feeList) {
+
+<span class="fc" id="L233">        List&lt;QueryReportList&gt; reportList = new ArrayList&lt;&gt;();</span>
+
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">        for (QueryFeeListResp resp : feeList) {</span>
+
+<span class="nc" id="L237">            QueryReportList report = new QueryReportList();</span>
+<span class="nc" id="L238">            report.setFeeTypeName(resp.getFeeTypeName());</span>
+<span class="nc" id="L239">            report.setUserName(resp.getUserName());</span>
+<span class="nc" id="L240">            report.setMonth(resp.getMonth());</span>
+<span class="nc" id="L241">            report.setNotesId(resp.getNotesId());</span>
+<span class="nc" id="L242">            report.setOrgNameFull(resp.getOrgNameFull());</span>
+<span class="nc" id="L243">            report.setServerUnit(resp.getServerUnit());</span>
+<span class="nc" id="L244">            report.setCallTime(Integer.parseInt(resp.getCallTime()));</span>
+<span class="nc" id="L245">            report.setFee(Float.parseFloat(resp.getFee()));</span>
+
+<span class="nc bnc" id="L247" title="All 2 branches missed.">            if (StringUtils.isNotEmpty(resp.getCdrType())) {</span>
+<span class="nc" id="L248">                report.setCdrType(resp.getCdrType());</span>
+            }
+
+<span class="nc bnc" id="L251" title="All 2 branches missed.">            if (StringUtils.isNotEmpty(resp.getFeeType())) {</span>
+<span class="nc" id="L252">                report.setFeeType(resp.getFeeType());</span>
+            }
+
+<span class="nc bnc" id="L255" title="All 2 branches missed.">            if (null != resp.getRateFee()) {</span>
+<span class="nc" id="L256">                report.setRateFee(Float.parseFloat(resp.getRateFee()));</span>
+            }
+<span class="nc" id="L258">            report.setTotalMinutes(resp.getTotalMinutes());</span>
+
+            // 服务数量
+<span class="nc bnc" id="L261" title="All 4 branches missed.">            if (null != report.getRateFee() &amp;&amp; report.getRateFee() != 0.0) {</span>
+<span class="nc" id="L262">                report.setCallTime((int) Math.round(report.getFee() / report.getRateFee()));</span>
+            } else {
+<span class="nc" id="L264">                report.setCallTime(Integer.parseInt(resp.getCallTime()));</span>
+            }
+
+<span class="nc" id="L267">            reportList.add(report);</span>
+
+<span class="nc" id="L269">        }</span>
+
+<span class="fc" id="L271">        return reportList;</span>
+
+    }
+
+    /**
+     * 资源使用情况查询
+     *
+     * @param req
+     * @param queryFeeListReq
+     * @return
+     */
+    @RequestMapping(value = &quot;/queryFeeList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String queryFeeList(HttpServletRequest req, @RequestBody String queryFeeListReqJson) {
+
+<span class="fc" id="L285">        User user = appsession.getUser();</span>
+
+<span class="fc" id="L287">        String userName = null;</span>
+<span class="fc" id="L288">        String feeType = null;</span>
+<span class="fc" id="L289">        String beginDate = null;</span>
+<span class="fc" id="L290">        String endDate = null;</span>
+<span class="fc" id="L291">        String notesId = null;</span>
+<span class="fc" id="L292">        int page = Integer.parseInt(req.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L293">        int size = Integer.parseInt(req.getParameter(&quot;size&quot;));</span>
+<span class="fc" id="L294">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+
+<span class="fc" id="L296">        feeType = formatJsonToValue(FEE_TYPE, queryFeeListReqJson);</span>
+<span class="fc" id="L297">        beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L298">        endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L299">        userName = formatJsonToValue(USER_NAME, queryFeeListReqJson);</span>
+<span class="fc" id="L300">        notesId = formatJsonToValue(NOTES_ID, queryFeeListReqJson);</span>
+
+<span class="fc" id="L302">        QueryFeeListReq queryFeeListReq = new QueryFeeListReq();</span>
+<span class="fc" id="L303">        queryFeeListReq.setFeeTypeName(feeType);</span>
+<span class="fc" id="L304">        queryFeeListReq.setUserName(userName);</span>
+<span class="fc" id="L305">        queryFeeListReq.setNotesId(notesId);</span>
+<span class="fc" id="L306">        queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+<span class="fc" id="L307">        queryFeeListReq.setOrgId(user.getOrgId());</span>
+<span class="fc" id="L308">        queryFeeListReq.setOperatorId(user.getOperatorId());</span>
+
+<span class="pc bpc" id="L310" title="1 of 4 branches missed.">        if (null != beginDate &amp;&amp; beginDate.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L311">            queryFeeListReq.setBeginDate(null);</span>
+        } else {
+<span class="fc" id="L313">            queryFeeListReq.setBeginDate(beginDate);</span>
+        }
+<span class="pc bpc" id="L315" title="1 of 4 branches missed.">        if (null != endDate &amp;&amp; endDate.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L316">            queryFeeListReq.setEndDate(null);</span>
+        } else {
+<span class="fc" id="L318">            queryFeeListReq.setEndDate(endDate);</span>
+        }
+
+<span class="fc" id="L321">        List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.queryFeeListResult(queryFeeListReq, orgIdArray, page,</span>
+                size);
+<span class="fc" id="L323">        feeList = listToRespList(feeList);</span>
+<span class="fc" id="L324">        int cnt = queryFeeListService.queryFeeListCount(queryFeeListReq, orgIdArray);</span>
+
+<span class="fc" id="L326">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L327">        map.put(&quot;list&quot;, feeList);</span>
+<span class="fc" id="L328">        map.put(&quot;cnt&quot;, cnt);</span>
+<span class="fc" id="L329">        return JSONArray.toJSONString(map);</span>
+    }
+
+    /**
+     * 部门资源使用情况查询
+     */
+    @RequestMapping(value = &quot;/queryDeptFeeList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String queryDeptFeeList(HttpServletRequest req, @RequestBody String queryFeeListReqJson) {
+
+<span class="fc" id="L338">        String userName = null;</span>
+<span class="fc" id="L339">        String feeType = null;</span>
+<span class="fc" id="L340">        String beginDate = null;</span>
+<span class="fc" id="L341">        String endDate = null;</span>
+<span class="fc" id="L342">        int page = Integer.parseInt(req.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L343">        int size = Integer.parseInt(req.getParameter(&quot;size&quot;));</span>
+<span class="fc" id="L344">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+
+<span class="fc" id="L346">        User user = appsession.getUser();</span>
+
+<span class="fc" id="L348">        feeType = formatJsonToValue(FEE_TYPE, queryFeeListReqJson);</span>
+<span class="fc" id="L349">        beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L350">        endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L351">        userName = formatJsonToValue(USER_NAME, queryFeeListReqJson);</span>
+
+<span class="fc" id="L353">        QueryFeeListReq queryFeeListReq = new QueryFeeListReq();</span>
+<span class="fc" id="L354">        queryFeeListReq.setFeeTypeName(feeType);</span>
+<span class="fc" id="L355">        queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+<span class="fc" id="L356">        queryFeeListReq.setUserName(userName);</span>
+<span class="fc" id="L357">        queryFeeListReq.setOrgId(user.getOrgId());</span>
+
+<span class="pc bpc" id="L359" title="1 of 4 branches missed.">        if (null != beginDate &amp;&amp; beginDate.equals(&quot;&quot;)) {</span>
+<span class="nc" id="L360">            queryFeeListReq.setBeginDate(null);</span>
+<span class="nc" id="L361">            queryFeeListReq.setEndDate(null);</span>
+        } else {
+<span class="fc" id="L363">            queryFeeListReq.setBeginDate(beginDate);</span>
+<span class="fc" id="L364">            queryFeeListReq.setEndDate(beginDate);</span>
+        }
+
+<span class="fc" id="L367">        List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.queryDeptFeeListResult(queryFeeListReq, orgIdArray, page,</span>
+                size);
+<span class="fc" id="L369">        feeList = listToRespList(feeList);</span>
+<span class="fc" id="L370">        List&lt;QueryReportList&gt; reportList = toReportList(feeList);</span>
+<span class="fc" id="L371">        int cnt = queryFeeListService.queryDeptFeeListCount(queryFeeListReq, orgIdArray);</span>
+
+<span class="fc" id="L373">        Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L374">        map.put(&quot;list&quot;, reportList);</span>
+<span class="fc" id="L375">        map.put(&quot;cnt&quot;, cnt);</span>
+<span class="fc" id="L376">        return JSONArray.toJSONString(map);</span>
+    }
+
+    /**
+     * TOP N查询
+     *
+     * @param request
+     * @param queryFeeListReq
+     * @return
+     */
+    @RequestMapping(value = &quot;/queryTopNList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String queryTopNList(HttpServletRequest request, @RequestBody String queryFeeListReqJson) {
+
+<span class="fc" id="L389">        String topN = null;</span>
+<span class="fc" id="L390">        String beginDate = null;</span>
+<span class="fc" id="L391">        String endDate = null;</span>
+<span class="fc" id="L392">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+<span class="fc" id="L393">        int page = Integer.parseInt(request.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L394">        int size = Integer.parseInt(request.getParameter(&quot;size&quot;));</span>
+
+<span class="fc" id="L396">        topN = formatJsonToValue(TOP_N, queryFeeListReqJson);</span>
+<span class="fc" id="L397">        beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L398">        endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+        try {
+<span class="fc" id="L401">            int tmp = Integer.parseInt(topN);</span>
+<span class="fc" id="L402">            LOGGER.debug(TMP + tmp);</span>
+<span class="fc" id="L403">        } catch (Exception e) {</span>
+<span class="fc" id="L404">            LOGGER.error(&quot;parseInt topN err.&quot;, e);</span>
+<span class="fc" id="L405">            topN = &quot;10&quot;;</span>
+<span class="fc" id="L406">        }</span>
+
+<span class="fc" id="L408">        List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.queryTopNListResult(orgIdArray, Integer.parseInt(topN),</span>
+                beginDate, endDate, page, size);
+<span class="fc" id="L410">        feeList = listToRespList(feeList);</span>
+<span class="fc" id="L411">        int cnt = queryFeeListService.queryTopNListCount(orgIdArray, Integer.parseInt(topN), beginDate, endDate);</span>
+
+<span class="fc" id="L413">        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L414">        map.put(&quot;list&quot;, feeList);</span>
+<span class="fc" id="L415">        map.put(&quot;cnt&quot;, cnt);</span>
+<span class="fc" id="L416">        return JSONArray.toJSONString(map);</span>
+    }
+
+    /**
+     * 超阀值查询
+     *
+     * @param request
+     * @param queryFeeListReq
+     * @return
+     */
+    @RequestMapping(value = &quot;/queryThresholdList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String queryThresholdList(HttpServletRequest request, @RequestBody String queryFeeListReqJson) {
+
+<span class="fc" id="L429">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+<span class="fc" id="L430">        String thresholdValue = null;</span>
+<span class="fc" id="L431">        String beginDate = null;</span>
+<span class="fc" id="L432">        String endDate = null;</span>
+<span class="fc" id="L433">        int page = Integer.parseInt(request.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L434">        int size = Integer.parseInt(request.getParameter(&quot;size&quot;));</span>
+
+<span class="fc" id="L436">        thresholdValue = formatJsonToValue(THRESHOLD_VALUE, queryFeeListReqJson);</span>
+<span class="fc" id="L437">        beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L438">        endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+        try {
+<span class="fc" id="L441">            double tmp = Double.parseDouble(thresholdValue);</span>
+<span class="fc" id="L442">            LOGGER.debug(TMP + tmp);</span>
+<span class="fc" id="L443">        } catch (Exception e) {</span>
+<span class="fc" id="L444">            LOGGER.error(&quot;parseDouble thresholdValue err.&quot;, e);</span>
+<span class="fc" id="L445">            thresholdValue = &quot;100&quot;;</span>
+<span class="fc" id="L446">        }</span>
+
+<span class="fc" id="L448">        List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.queryThresholdListResult(orgIdArray,</span>
+<span class="fc" id="L449">                Double.parseDouble(thresholdValue), beginDate, endDate, page, size);</span>
+<span class="fc" id="L450">        feeList = listToRespList(feeList);</span>
+<span class="fc" id="L451">        int cnt = queryFeeListService.queryThresholdListCount(orgIdArray, Double.parseDouble(thresholdValue), beginDate,</span>
+                endDate);
+<span class="fc" id="L453">        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L454">        map.put(&quot;list&quot;, feeList);</span>
+<span class="fc" id="L455">        map.put(&quot;cnt&quot;, cnt);</span>
+<span class="fc" id="L456">        return JSONArray.toJSONString(map);</span>
+
+    }
+
+    /**
+     * 非活跃用户查询
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = &quot;/queryNotActiveUserList&quot;, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String queryNotActiveUserList(HttpServletRequest request, @RequestBody String queryFeeListReqJson) {
+
+<span class="fc" id="L469">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+<span class="fc" id="L470">        String thresholdValue = null;</span>
+<span class="fc" id="L471">        String beginDate = null;</span>
+<span class="fc" id="L472">        String endDate = null;</span>
+<span class="fc" id="L473">        int page = Integer.parseInt(request.getParameter(&quot;page&quot;));</span>
+<span class="fc" id="L474">        int size = Integer.parseInt(request.getParameter(&quot;size&quot;));</span>
+
+<span class="fc" id="L476">        thresholdValue = formatJsonToValue(THRESHOLD_VALUE, queryFeeListReqJson);</span>
+<span class="fc" id="L477">        beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L478">        endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+        try {
+<span class="fc" id="L481">            double tmp = Double.parseDouble(thresholdValue);</span>
+<span class="fc" id="L482">            LOGGER.debug(TMP + tmp);</span>
+<span class="fc" id="L483">        } catch (Exception e) {</span>
+<span class="fc" id="L484">            LOGGER.error(&quot;parseDouble thresholdValue err.&quot;, e);</span>
+<span class="fc" id="L485">            thresholdValue = &quot;0&quot;;</span>
+<span class="fc" id="L486">        }</span>
+
+<span class="fc" id="L488">        List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.queryNotActiveUserListResult(orgIdArray,</span>
+<span class="fc" id="L489">                Double.parseDouble(thresholdValue), beginDate, endDate, page, size);</span>
+<span class="fc" id="L490">        feeList = listToRespList(feeList);</span>
+<span class="fc" id="L491">        int cnt = queryFeeListService.queryNotActiveUserListCount(orgIdArray, Double.parseDouble(thresholdValue),</span>
+                beginDate, endDate);
+<span class="fc" id="L493">        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();</span>
+<span class="fc" id="L494">        map.put(&quot;list&quot;, feeList);</span>
+<span class="fc" id="L495">        map.put(&quot;cnt&quot;, cnt);</span>
+<span class="fc" id="L496">        return JSONArray.toJSONString(map);</span>
+
+    }
+
+    /**
+     * 预览报表 businessType: 1:资源使用情况查询 2:TOP N查询 3:超阀值查询 4:非活跃用户查询 5:部门资源使用情况报表查询
+     *
+     * @param request
+     * @param queryFeeListReq
+     * @throws IOException
+     * @throws Exception
+     */
+    @RequestMapping(value = &quot;/previewReport&quot;)
+    public void previewReport(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession,
+                              @RequestBody String queryFeeListReqJson) throws JRException, IOException {
+
+<span class="fc" id="L512">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L513">        JsonElement jsonEl = jsonParser.parse(queryFeeListReqJson);</span>
+<span class="fc" id="L514">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+
+<span class="fc" id="L516">        String businessType = request.getParameter(&quot;businessType&quot;);</span>
+<span class="fc" id="L517">        List&lt;QueryFeeListResp&gt; feeList = null;</span>
+<span class="fc" id="L518">        List&lt;QueryReportList&gt; reportList = null;</span>
+
+<span class="fc" id="L520">        User user = appsession.getUser();</span>
+
+<span class="fc" id="L522">        String userName = null;</span>
+<span class="fc" id="L523">        String feeType = null;</span>
+<span class="fc" id="L524">        String beginDate = null;</span>
+<span class="fc" id="L525">        String endDate = null;</span>
+<span class="fc" id="L526">        String notesId = null;</span>
+<span class="fc" id="L527">        Integer[] orgIdArray = jsonToIntegerArray(queryFeeListReqJson);</span>
+<span class="fc" id="L528">        String topN = null;</span>
+        String thresholdValue;
+        String fileName;
+<span class="fc" id="L531">        QueryFeeListReq queryFeeListReq = new QueryFeeListReq();</span>
+<span class="fc" id="L532">        String importMonth = &quot;&quot;;</span>
+
+<span class="fc bfc" id="L534" title="All 6 branches covered.">        switch (businessType) {</span>
+            case &quot;1&quot;:
+
+<span class="fc" id="L537">                feeType = formatJsonToValue(FEE_TYPE, queryFeeListReqJson);</span>
+<span class="fc" id="L538">                beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L539">                endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L540">                userName = formatJsonToValue(USER_NAME, queryFeeListReqJson);</span>
+<span class="fc" id="L541">                notesId = formatJsonToValue(NOTES_ID, queryFeeListReqJson);</span>
+
+<span class="fc" id="L543">                queryFeeListReq.setFeeTypeName(feeType);</span>
+<span class="fc" id="L544">                queryFeeListReq.setBeginDate(beginDate);</span>
+<span class="fc" id="L545">                queryFeeListReq.setEndDate(endDate);</span>
+<span class="fc" id="L546">                queryFeeListReq.setNotesId(notesId);</span>
+<span class="fc" id="L547">                queryFeeListReq.setUserName(userName);</span>
+<span class="fc" id="L548">                queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+<span class="fc" id="L549">                queryFeeListReq.setOrgId(user.getOrgId());</span>
+<span class="fc" id="L550">                queryFeeListReq.setOperatorId(user.getOperatorId());</span>
+
+<span class="fc" id="L552">                feeList = queryFeeListService.queryFeeListResult(queryFeeListReq, orgIdArray, 1, 500);</span>
+<span class="fc" id="L553">                reportList = toReportList(listToRespList(feeList));</span>
+<span class="fc" id="L554">                fileName = &quot;资源使用情况查询报表&quot;;</span>
+<span class="fc" id="L555">                break;</span>
+
+            case &quot;2&quot;:
+
+<span class="fc" id="L559">                topN = formatJsonToValue(TOP_N, queryFeeListReqJson);</span>
+<span class="fc" id="L560">                beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L561">                endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+                try {
+<span class="fc" id="L564">                    int tmp = Integer.parseInt(topN);</span>
+<span class="fc" id="L565">                    LOGGER.debug(TMP1 + tmp);</span>
+<span class="fc" id="L566">                } catch (Exception e) {</span>
+<span class="fc" id="L567">                    LOGGER.error(&quot;parseInt topN err1.&quot;, e);</span>
+<span class="fc" id="L568">                    topN = &quot;10&quot;;</span>
+<span class="fc" id="L569">                }</span>
+
+<span class="fc" id="L571">                feeList = queryFeeListService.queryTopNListResult(orgIdArray, Integer.parseInt(topN), beginDate, endDate, 1,</span>
+                        500);
+<span class="fc" id="L573">                reportList = toReportList(listToRespList(feeList));</span>
+<span class="fc" id="L574">                fileName = &quot;TOP N查询报表&quot;;</span>
+<span class="fc" id="L575">                break;</span>
+
+            case &quot;3&quot;:
+
+<span class="fc" id="L579">                thresholdValue = formatJsonToValue(THRESHOLD_VALUE, queryFeeListReqJson);</span>
+<span class="fc" id="L580">                beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L581">                endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+                try {
+<span class="fc" id="L584">                    double tmp = Double.parseDouble(thresholdValue);</span>
+<span class="fc" id="L585">                    LOGGER.debug(TMP1 + tmp);</span>
+<span class="fc" id="L586">                } catch (Exception e) {</span>
+<span class="fc" id="L587">                    LOGGER.error(&quot;parseDouble thresholdValue err1.&quot;, e);</span>
+<span class="fc" id="L588">                    thresholdValue = &quot;100&quot;;</span>
+<span class="fc" id="L589">                }</span>
+
+<span class="fc" id="L591">                feeList = queryFeeListService.queryThresholdListResult(orgIdArray, Double.parseDouble(thresholdValue),</span>
+                        beginDate, endDate, 1, 500);
+<span class="fc" id="L593">                reportList = toReportList(listToRespList(feeList));</span>
+<span class="fc" id="L594">                fileName = &quot;超阀值查询报表&quot;;</span>
+<span class="fc" id="L595">                break;</span>
+
+            case &quot;4&quot;:
+
+<span class="fc" id="L599">                thresholdValue = formatJsonToValue(THRESHOLD_VALUE, queryFeeListReqJson);</span>
+<span class="fc" id="L600">                beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L601">                endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+<span class="pc bpc" id="L603" title="3 of 4 branches missed.">                if (thresholdValue == null || thresholdValue.equals(&quot;&quot;)) {</span>
+<span class="fc" id="L604">                    thresholdValue = &quot;0&quot;;</span>
+                }
+
+<span class="fc" id="L607">                feeList = queryFeeListService.queryNotActiveUserListResult(orgIdArray, Double.parseDouble(thresholdValue),</span>
+                        beginDate, endDate, 1, 500);
+<span class="fc" id="L609">                reportList = toReportList(listToRespList(feeList));</span>
+<span class="fc" id="L610">                fileName = &quot;非活跃用户报表&quot;;</span>
+<span class="fc" id="L611">                break;</span>
+
+            case &quot;5&quot;:
+
+<span class="fc" id="L615">                feeType = formatJsonToValue(FEE_TYPE, queryFeeListReqJson);</span>
+<span class="fc" id="L616">                beginDate = formatJsonToValue(BEGIN_DATE, queryFeeListReqJson);</span>
+<span class="fc" id="L617">                endDate = formatJsonToValue(END_DATE, queryFeeListReqJson);</span>
+
+<span class="fc" id="L619">                queryFeeListReq.setFeeTypeName(feeType);</span>
+<span class="fc" id="L620">                queryFeeListReq.setBeginDate(beginDate);</span>
+<span class="fc" id="L621">                queryFeeListReq.setEndDate(beginDate);</span>
+<span class="fc" id="L622">                queryFeeListReq.setOrgId(user.getOrgId());</span>
+<span class="fc" id="L623">                queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+
+<span class="fc" id="L625">                feeList = queryFeeListService.queryDeptFeeListResult(queryFeeListReq, orgIdArray, 1, 500);</span>
+<span class="fc" id="L626">                reportList = toReportList(listToRespList(feeList));</span>
+<span class="fc" id="L627">                fileName = &quot;部门资源使用情况查询报表&quot;;</span>
+<span class="fc" id="L628">                break;</span>
+            default:
+<span class="fc" id="L630">                throw new JRException(&quot;业务类型无法识别&quot;);</span>
+        }
+
+<span class="fc" id="L633">        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();</span>
+<span class="nc" id="L634">        ServletContext servletContext = webApplicationContext.getServletContext();</span>
+
+<span class="nc" id="L636">        URL url = servletContext.getResource(&quot;/&quot;);</span>
+<span class="nc" id="L637">        String weblogicPath = url.getPath().replaceAll(&quot;%20&quot;, &quot; &quot;);</span>
+
+<span class="nc" id="L639">        String jasperPath = &quot;&quot;;</span>
+<span class="nc bnc" id="L640" title="All 6 branches missed.">        if (businessType.equals(&quot;2&quot;) || businessType.equals(&quot;3&quot;) || businessType.equals(&quot;4&quot;)) {</span>
+<span class="nc" id="L641">            jasperPath = weblogicPath + JASPER_PATH2;</span>
+<span class="nc bnc" id="L642" title="All 2 branches missed.">        } else if (businessType.equals(&quot;5&quot;)) {</span>
+<span class="nc" id="L643">            jasperPath = weblogicPath + JASPER_PATH1;</span>
+        } else {
+<span class="nc" id="L645">            jasperPath = weblogicPath + JASPER_PATH;</span>
+        }
+
+<span class="nc bnc" id="L648" title="All 2 branches missed.">        if (!new File(jasperPath).exists()) {</span>
+<span class="nc" id="L649">            jasperPath = jasperPath.replaceFirst(&quot;/&quot;, &quot;&quot;);</span>
+        }
+
+<span class="nc" id="L652">        String destFileName = servletContext.getRealPath(&quot;/&quot;) + &quot;pages&quot; + File.separator + &quot;queryFeeListReport.html&quot;;</span>
+<span class="nc" id="L653">        destFileName = weblogicPath + &quot;pages&quot; + &quot;/&quot; + &quot;queryFeeListReport.html&quot;;</span>
+
+<span class="nc" id="L655">        JRDataSource dataSource = new JRBeanCollectionDataSource(reportList, true);</span>
+<span class="nc" id="L656">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</span>
+
+<span class="nc bnc" id="L658" title="All 2 branches missed.">        if (StringUtils.isNotEmpty(beginDate)) {</span>
+<span class="nc" id="L659">            importMonth = beginDate.substring(0, 4) + &quot;年&quot; + beginDate.substring(4) + &quot;月&quot;;</span>
+        }
+
+<span class="nc" id="L662">        params.put(IMPORT_MONTH, importMonth);</span>
+<span class="nc" id="L663">        params.put(TITLE, fileName);</span>
+<span class="nc" id="L664">        params.put(OPERATOR_NAME, appSession.getUser().getOperatorName());</span>
+<span class="nc" id="L665">        JasperRunManager.runReportToHtmlFile(jasperPath, destFileName, params, dataSource);</span>
+
+<span class="nc" id="L667">    }</span>
+
+    /**
+     * 导出报表
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = &quot;/exportExcel&quot;, method = RequestMethod.POST)
+    public void exportExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+<span class="fc" id="L678">        request.setCharacterEncoding(&quot;utf-8&quot;);</span>
+<span class="nc" id="L679">        List&lt;QueryFeeListResp&gt; feeList = getFeeList(request);</span>
+<span class="nc" id="L680">        List&lt;QueryReportList&gt; reportList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L681">        reportList = toReportList(listToRespList(feeList));</span>
+<span class="nc" id="L682">        String fileName = (String) request.getAttribute(FILE_NAME);</span>
+<span class="nc" id="L683">        String importMonth = (String) request.getAttribute(IMPORT_MONTH);</span>
+<span class="nc" id="L684">        String businessType = request.getParameter(&quot;businessType&quot;);</span>
+<span class="nc" id="L685">        String jasperPath = &quot;&quot;;</span>
+
+<span class="nc" id="L687">        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();</span>
+<span class="nc" id="L688">        ServletContext servletContext = webApplicationContext.getServletContext();</span>
+
+<span class="nc" id="L690">        URL url = servletContext.getResource(&quot;/&quot;);</span>
+<span class="nc" id="L691">        String weblogicPath = url.getPath().replaceAll(&quot;%20&quot;, &quot; &quot;);</span>
+
+<span class="nc bnc" id="L693" title="All 6 branches missed.">        if (businessType.equals(&quot;2&quot;) || businessType.equals(&quot;3&quot;) || businessType.equals(&quot;4&quot;)) {</span>
+<span class="nc" id="L694">            jasperPath = weblogicPath + JASPER_PATH2;</span>
+<span class="nc bnc" id="L695" title="All 2 branches missed.">        } else if (businessType.equals(&quot;5&quot;)) {</span>
+<span class="nc" id="L696">            jasperPath = weblogicPath + JASPER_PATH1;</span>
+        } else {
+<span class="nc" id="L698">            jasperPath = weblogicPath + JASPER_PATH;</span>
+        }
+
+<span class="nc bnc" id="L701" title="All 2 branches missed.">        if (!new File(jasperPath).exists()) {</span>
+<span class="nc" id="L702">            jasperPath = jasperPath.replaceFirst(&quot;/&quot;, &quot;&quot;);</span>
+        }
+
+<span class="nc" id="L705">        JRDataSource dataSource = new JRBeanCollectionDataSource(reportList, true);</span>
+<span class="nc" id="L706">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</span>
+<span class="nc" id="L707">        params.put(TITLE, fileName);</span>
+<span class="nc" id="L708">        params.put(OPERATOR_NAME, appSession.getUser().getOperatorName());</span>
+<span class="nc" id="L709">        params.put(IMPORT_MONTH, importMonth);</span>
+<span class="nc" id="L710">        JasperPrint print = JasperFillManager.fillReport(jasperPath, params, dataSource);</span>
+
+<span class="nc" id="L712">        response.setHeader(&quot;Pragma&quot;, NO_CACHE);</span>
+<span class="nc" id="L713">        response.setHeader(&quot;Cache-Control&quot;, NO_CACHE);</span>
+<span class="nc" id="L714">        response.setDateHeader(&quot;Expires&quot;, -1);</span>
+<span class="nc" id="L715">        response.setContentType(&quot;application/vnd.ms-excel&quot;);</span>
+<span class="nc" id="L716">        response.setHeader(&quot;content-disposition&quot;,</span>
+<span class="nc" id="L717">                &quot;attachment;filename=&quot; + new String((fileName + &quot;.xlsx&quot;).getBytes(&quot;GBK&quot;), &quot;ISO-8859-1&quot;));</span>
+
+<span class="nc" id="L719">        SimpleXlsxReportConfiguration conf = new SimpleXlsxReportConfiguration();</span>
+<span class="nc" id="L720">        conf.setWhitePageBackground(false);</span>
+<span class="nc" id="L721">        conf.setDetectCellType(true);</span>
+
+<span class="nc" id="L723">        JRXlsxExporter exporter = new JRXlsxExporter();</span>
+<span class="nc" id="L724">        exporter.setConfiguration(conf);</span>
+
+        // 输入
+<span class="nc" id="L727">        ExporterInput exporterInput = new SimpleExporterInput(print);</span>
+<span class="nc" id="L728">        exporter.setExporterInput(exporterInput);</span>
+
+        // 输出
+<span class="nc" id="L731">        OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(response.getOutputStream());</span>
+<span class="nc" id="L732">        exporter.setExporterOutput(exporterOutput);</span>
+
+        // 生成文件
+<span class="nc bnc" id="L735" title="All 4 branches missed.">        if (!(DOWNLOAD_PATH.contains(&quot;base_domain&quot;) || DOWNLOAD_PATH.contains(&quot;cib&quot;)</span>
+<span class="nc bnc" id="L736" title="All 2 branches missed.">                || DOWNLOAD_PATH.contains(&quot;eclipse&quot;))) {</span>
+<span class="nc" id="L737">            throw new Exception(&quot;该路径不合法&quot;);</span>
+        }
+<span class="nc" id="L739">        File file = new File(DOWNLOAD_PATH);</span>
+<span class="nc bnc" id="L740" title="All 2 branches missed.">        if (!file.exists()) {</span>
+<span class="nc" id="L741">            file.mkdirs();</span>
+        }
+
+<span class="nc" id="L744">        File reportFile = new File(DOWNLOAD_PATH + fileName + &quot;.xlsx&quot;);</span>
+
+<span class="nc" id="L746">        FileOutputStream fileOutputStream = new FileOutputStream(reportFile);</span>
+        // 输出到文件
+<span class="nc" id="L748">        OutputStreamExporterOutput exporterOutputfile = new SimpleOutputStreamExporterOutput(fileOutputStream);</span>
+<span class="nc" id="L749">        exporter.setExporterOutput(exporterOutputfile);</span>
+
+        // 导出报表
+<span class="nc" id="L752">        exporter.exportReport();</span>
+
+<span class="nc" id="L754">        exporterOutput.close();</span>
+
+<span class="nc" id="L756">    }</span>
+
+    /**
+     * 把接收到的unitName转换为orgId数组
+     */
+    public Integer[] stringToIntegerArr(String unitName) {
+<span class="fc bfc" id="L762" title="All 2 branches covered.">        if (StringUtils.isNotEmpty(unitName)) {</span>
+
+<span class="fc" id="L764">            String[] unitArray = unitName.split(&quot;,&quot;);</span>
+<span class="fc" id="L765">            List&lt;Integer&gt; orgIdList = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L766" title="1 of 2 branches missed.">            for (String orgName : unitArray) {</span>
+<span class="nc bnc" id="L767" title="All 2 branches missed.">                if (orgName.trim().isEmpty()) {</span>
+<span class="nc" id="L768">                    continue;</span>
+                } else {
+<span class="nc" id="L770">                    orgIdList.add(Integer.parseInt(orgName));</span>
+                }
+            }
+<span class="nc" id="L773">            Integer[] orgIdArray = new Integer[orgIdList.size()];</span>
+<span class="nc" id="L774">            return orgIdList.toArray(orgIdArray);</span>
+        } else {
+<span class="fc" id="L776">            return new Integer[0];</span>
+        }
+    }
+
+    /**
+     * 转化Request的字段为值
+     */
+    public String formatRequestToValue(String json, HttpServletRequest request) {
+<span class="fc" id="L784">        String value = &quot;&quot;;</span>
+        try {
+<span class="fc" id="L786">            value = request.getParameter(json);</span>
+<span class="pc bpc" id="L787" title="1 of 2 branches missed.">            if (value.isEmpty()) {</span>
+<span class="nc" id="L788">                value = null;</span>
+            }
+<span class="nc" id="L790">        } catch (Exception e) {</span>
+<span class="nc" id="L791">            value = null;</span>
+<span class="fc" id="L792">        }</span>
+<span class="fc" id="L793">        return value;</span>
+    }
+
+    /**
+     * businessType: 1:资源使用情况查询 2:TOP N查询 3:超阀值查询 4:非活跃用户查询 5:部门资源情况使用报表查询
+     *
+     * @param request
+     * @return
+     */
+    private List&lt;QueryFeeListResp&gt; getFeeList(HttpServletRequest request) throws JRException {
+
+<span class="fc" id="L804">        String businessType = request.getParameter(&quot;businessType&quot;);</span>
+<span class="fc" id="L805">        List&lt;QueryFeeListResp&gt; feeList = null;</span>
+<span class="fc" id="L806">        String thresholdValue = null;</span>
+<span class="fc" id="L807">        String beginDate = null;</span>
+<span class="fc" id="L808">        String endDate = null;</span>
+        Integer[] orgIdArray;
+<span class="fc" id="L810">        String importMonth = null;</span>
+<span class="fc" id="L811">        QueryFeeListReq queryFeeListReq = new QueryFeeListReq();</span>
+<span class="fc" id="L812">        User user = appsession.getUser();</span>
+
+<span class="pc bpc" id="L814" title="3 of 6 branches missed.">        switch (businessType) {</span>
+            case &quot;1&quot;:
+
+<span class="nc" id="L817">                Operator oper = new Operator();</span>
+<span class="nc" id="L818">                oper.setOperatorId(user.getOperatorId());</span>
+<span class="nc" id="L819">                Operator operator = operatorService.showOneOperator(oper);</span>
+
+<span class="nc" id="L821">                orgIdArray = stringToIntegerArr(request.getParameter(UNIT_NAME));</span>
+<span class="nc" id="L822">                queryFeeListReq.setUserName(formatRequestToValue(USER_NAME, request));</span>
+<span class="nc" id="L823">                queryFeeListReq.setFeeTypeName(formatRequestToValue(FEE_TYPE, request));</span>
+<span class="nc" id="L824">                queryFeeListReq.setBeginDate(formatRequestToValue(BEGIN_DATE, request));</span>
+<span class="nc" id="L825">                queryFeeListReq.setEndDate(formatRequestToValue(END_DATE, request));</span>
+<span class="nc" id="L826">                queryFeeListReq.setNotesId(formatRequestToValue(NOTES_ID, request));</span>
+<span class="nc" id="L827">                queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+<span class="nc" id="L828">                queryFeeListReq.setOrgId(user.getOrgId());</span>
+<span class="nc" id="L829">                queryFeeListReq.setOperatorId(user.getOperatorId());</span>
+
+<span class="nc" id="L831">                feeList = queryFeeListService.queryFeeListAllResult(queryFeeListReq, orgIdArray);</span>
+<span class="nc" id="L832">                request.setAttribute(FILE_NAME, &quot;资源使用情况查询报表&quot;);</span>
+<span class="nc" id="L833">                break;</span>
+            case &quot;2&quot;:
+<span class="fc" id="L835">                String topN = formatRequestToValue(TOP_N, request);</span>
+<span class="fc" id="L836">                beginDate = formatRequestToValue(BEGIN_DATE, request);</span>
+<span class="fc" id="L837">                endDate = formatRequestToValue(END_DATE, request);</span>
+<span class="nc" id="L838">                orgIdArray = stringToIntegerArr(request.getParameter(UNIT_NAME));</span>
+
+                try {
+<span class="nc" id="L841">                    int tmp = Integer.parseInt(topN);</span>
+<span class="nc" id="L842">                    LOGGER.debug(TMP2 + tmp);</span>
+<span class="nc" id="L843">                } catch (Exception e) {</span>
+<span class="nc" id="L844">                    LOGGER.error(&quot;parseInt topN err2.&quot;, e);</span>
+<span class="nc" id="L845">                    topN = &quot;10&quot;;</span>
+<span class="nc" id="L846">                }</span>
+
+<span class="nc" id="L848">                feeList = queryFeeListService.queryTopNListAllResult(orgIdArray, Integer.parseInt(topN), beginDate,</span>
+                        endDate);
+<span class="nc" id="L850">                request.setAttribute(FILE_NAME, &quot;TOP N查询报表&quot;);</span>
+<span class="nc" id="L851">                break;</span>
+            case &quot;3&quot;:
+<span class="fc" id="L853">                thresholdValue = formatRequestToValue(THRESHOLD_VALUE, request);</span>
+<span class="nc" id="L854">                orgIdArray = stringToIntegerArr(request.getParameter(UNIT_NAME));</span>
+<span class="nc" id="L855">                beginDate = formatRequestToValue(BEGIN_DATE, request);</span>
+<span class="nc" id="L856">                endDate = formatRequestToValue(END_DATE, request);</span>
+
+                try {
+<span class="nc" id="L859">                    double tmp = Double.parseDouble(thresholdValue);</span>
+<span class="nc" id="L860">                    LOGGER.debug(TMP2 + tmp);</span>
+<span class="nc" id="L861">                } catch (Exception e) {</span>
+<span class="nc" id="L862">                    LOGGER.error(&quot;parseDouble thresholdValue err2.&quot;, e);</span>
+<span class="nc" id="L863">                    thresholdValue = &quot;100&quot;;</span>
+<span class="nc" id="L864">                }</span>
+
+<span class="nc" id="L866">                feeList = queryFeeListService.queryThresholdListAllResult(orgIdArray, Double.parseDouble(thresholdValue),</span>
+                        beginDate, endDate);
+<span class="nc" id="L868">                request.setAttribute(FILE_NAME, &quot;超阀值查询报表&quot;);</span>
+<span class="nc" id="L869">                break;</span>
+            case &quot;4&quot;:
+<span class="fc" id="L871">                thresholdValue = formatRequestToValue(THRESHOLD_VALUE, request);</span>
+<span class="nc" id="L872">                orgIdArray = stringToIntegerArr(request.getParameter(UNIT_NAME));</span>
+<span class="nc" id="L873">                beginDate = formatRequestToValue(BEGIN_DATE, request);</span>
+<span class="nc" id="L874">                endDate = formatRequestToValue(END_DATE, request);</span>
+
+                try {
+<span class="nc" id="L877">                    double tmp = Double.parseDouble(thresholdValue);</span>
+<span class="nc" id="L878">                    LOGGER.debug(TMP2 + tmp);</span>
+<span class="nc" id="L879">                } catch (Exception e) {</span>
+<span class="nc" id="L880">                    LOGGER.error(&quot;parseDouble thresholdValue err2.&quot;, e);</span>
+<span class="nc" id="L881">                    thresholdValue = &quot;0&quot;;</span>
+<span class="nc" id="L882">                }</span>
+
+<span class="nc" id="L884">                feeList = queryFeeListService.queryNotActiveUserListAllResult(orgIdArray,</span>
+<span class="nc" id="L885">                        Double.parseDouble(thresholdValue), beginDate, endDate);</span>
+<span class="nc" id="L886">                request.setAttribute(FILE_NAME, &quot;非活跃用户报表&quot;);</span>
+<span class="nc" id="L887">                break;</span>
+            case &quot;5&quot;:
+<span class="nc" id="L889">                orgIdArray = stringToIntegerArr(request.getParameter(UNIT_NAME));</span>
+<span class="nc" id="L890">                queryFeeListReq.setFeeTypeName(formatRequestToValue(FEE_TYPE, request));</span>
+<span class="nc" id="L891">                queryFeeListReq.setBeginDate(formatRequestToValue(BEGIN_DATE, request));</span>
+<span class="nc" id="L892">                queryFeeListReq.setEndDate(formatRequestToValue(BEGIN_DATE, request));</span>
+<span class="nc" id="L893">                queryFeeListReq.setOrgId(user.getOrgId());</span>
+<span class="nc" id="L894">                queryFeeListReq.setOperatorLevel(user.getOperatorLevel());</span>
+
+<span class="nc" id="L896">                feeList = queryFeeListService.queryDeptFeeListAllResult(queryFeeListReq, orgIdArray);</span>
+<span class="nc" id="L897">                request.setAttribute(FILE_NAME, &quot;部门资源使用情况查询报表&quot;);</span>
+<span class="nc" id="L898">                break;</span>
+            default:
+<span class="nc" id="L900">                throw new JRException(&quot;业务类型无法识别&quot;);</span>
+        }
+
+<span class="nc" id="L903">        beginDate = formatRequestToValue(BEGIN_DATE, request);</span>
+
+<span class="nc bnc" id="L905" title="All 2 branches missed.">        if (StringUtils.isNotEmpty(beginDate)) {</span>
+<span class="nc" id="L906">            importMonth = beginDate.substring(0, 4) + &quot;年&quot; + beginDate.substring(4) + &quot;月&quot;;</span>
+        }
+
+<span class="nc" id="L909">        request.setAttribute(IMPORT_MONTH, importMonth);</span>
+<span class="nc" id="L910">        return feeList;</span>
+    }
+
+    private JasperPrint getPrint(List&lt;QueryReportList&gt; feeList, String businessType) throws JRException, IOException {
+
+<span class="nc" id="L915">        String jasperPath = &quot;&quot;;</span>
+<span class="nc" id="L916">        WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();</span>
+<span class="nc" id="L917">        ServletContext servletContext = webApplicationContext.getServletContext();</span>
+
+<span class="nc" id="L919">        URL url = servletContext.getResource(&quot;/&quot;);</span>
+<span class="nc" id="L920">        String weblogicPath = url.getPath().replaceAll(&quot;%20&quot;, &quot; &quot;);</span>
+
+<span class="nc bnc" id="L922" title="All 2 branches missed.">        if (businessType.equals(&quot;5&quot;)) {</span>
+<span class="nc" id="L923">            jasperPath = weblogicPath + JASPER_PATH1;</span>
+        } else {
+<span class="nc" id="L925">            jasperPath = weblogicPath + JASPER_PATH;</span>
+        }
+
+<span class="nc bnc" id="L928" title="All 2 branches missed.">        if (!new File(jasperPath).exists()) {</span>
+<span class="nc" id="L929">            jasperPath = jasperPath.replaceFirst(&quot;/&quot;, &quot;&quot;);</span>
+        }
+
+<span class="nc" id="L932">        JRDataSource dataSource = new JRBeanCollectionDataSource(feeList, true);</span>
+<span class="nc" id="L933">        Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();</span>
+<span class="nc" id="L934">        params.put(TITLE, &quot;资源使用情况查询&quot;);</span>
+<span class="nc" id="L935">        params.put(OPERATOR_NAME, appSession.getUser().getOperatorName());</span>
+<span class="nc" id="L936">        return JasperFillManager.fillReport(jasperPath, params, dataSource);</span>
+    }
+
+    /**
+     * 去除集合重复元素
+     *
+     * @param list
+     * @return
+     */
+    public List removeDuplicate(List list) {
+<span class="nc bnc" id="L946" title="All 2 branches missed.">        if (!list.isEmpty()) {</span>
+<span class="nc bnc" id="L947" title="All 2 branches missed.">            for (int i = 0; i &lt; list.size() - 1; i++) {</span>
+<span class="nc bnc" id="L948" title="All 2 branches missed.">                for (int j = list.size() - 1; j &gt; i; j--) {</span>
+<span class="nc bnc" id="L949" title="All 2 branches missed.">                    if (list.get(j).toString().equals(list.get(i).toString())) {</span>
+<span class="nc" id="L950">                        list.remove(j);</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L955">        return list;</span>
+    }
+
+    /**
+     * 批量查询
+     *
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = &quot;/batchQuery&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String batchQuery(@RequestParam(value = &quot;file&quot;, required = true) MultipartFile file) {
+<span class="fc" id="L967">        String fileName = file.getOriginalFilename();</span>
+<span class="fc" id="L968">        Map&lt;String, String&gt; responseMap = new HashMap&lt;String, String&gt;();</span>
+<span class="fc" id="L969">        String newFileName = String.valueOf(System.currentTimeMillis()) + fileName.substring(fileName.lastIndexOf(&quot;.&quot;));</span>
+
+        // 创建文件
+<span class="fc" id="L972">        String dir = System.getProperty(&quot;java.io.tmpdir&quot;);</span>
+<span class="fc" id="L973">        File dest = new File(dir, newFileName);</span>
+        // 判断文件的目录是否存在，不存在则创建
+<span class="pc bpc" id="L975" title="1 of 2 branches missed.">        if (!dest.getParentFile().exists()) {</span>
+<span class="nc" id="L976">            dest.getParentFile().mkdirs();</span>
+        }
+
+<span class="fc" id="L979">        List&lt;QueryFeeListResp&gt; usrFeeList = new ArrayList&lt;&gt;();</span>
+
+        // 上传到指定目录
+        try {
+<span class="fc" id="L983">            file.transferTo(dest);</span>
+<span class="nc" id="L984">            List&lt;String[]&gt; dataList = JxlTool.importExcel(dest.getAbsolutePath(), 0);</span>
+
+<span class="nc bnc" id="L986" title="All 2 branches missed.">            if (!dest.delete()) {</span>
+<span class="nc" id="L987">                LOGGER.info(dest + &quot; is delete fail&quot;);</span>
+            }
+<span class="nc" id="L989">            SimpleXlsxReportConfiguration conf = new SimpleXlsxReportConfiguration();</span>
+<span class="nc" id="L990">            conf.setWhitePageBackground(false);</span>
+<span class="nc" id="L991">            conf.setDetectCellType(true);</span>
+<span class="nc" id="L992">            conf.setOnePagePerSheet(true);</span>
+
+<span class="nc" id="L994">            JRXlsxExporter exporter = new JRXlsxExporter();</span>
+<span class="nc" id="L995">            exporter.setConfiguration(conf);</span>
+
+<span class="nc" id="L997">            List&lt;ExporterInputItem&gt; listItems = new ArrayList&lt;ExporterInputItem&gt;();</span>
+<span class="nc bnc" id="L998" title="All 2 branches missed.">            for (String[] data : dataList) {</span>
+
+<span class="nc bnc" id="L1000" title="All 6 branches missed.">                if (&quot;单位名称&quot;.equals(data[0].trim()) &amp;&amp; &quot;notesID&quot;.equals(data[1].trim()) &amp;&amp; &quot;用户名&quot;.equals(data[2].trim())</span>
+<span class="nc bnc" id="L1001" title="All 2 branches missed.">                        &amp;&amp; &quot;资费类型&quot;.equals(data[3])) {</span>
+<span class="nc" id="L1002">                    continue;</span>
+                }
+<span class="nc" id="L1004">                QueryFeeListReq req = new QueryFeeListReq();</span>
+<span class="nc" id="L1005">                req.setUnitName(data[0]);</span>
+<span class="nc" id="L1006">                req.setNotesId(data[1]);</span>
+<span class="nc" id="L1007">                req.setUserName(data[2]);</span>
+<span class="nc" id="L1008">                req.setFeeTypeName(data[3]);</span>
+
+<span class="nc" id="L1010">                SimpleDateFormat format = new SimpleDateFormat(&quot;yyyyMM&quot;);</span>
+<span class="nc" id="L1011">                String defaultDate = String.valueOf(Integer.parseInt(format.format(new Date())) - 1);</span>
+
+<span class="nc bnc" id="L1013" title="All 2 branches missed.">                req.setBeginDate(&quot;&quot;.equals(data[4]) ? defaultDate : data[4]);</span>
+<span class="nc bnc" id="L1014" title="All 2 branches missed.">                req.setEndDate(&quot;&quot;.equals(data[5]) ? defaultDate : data[5]);</span>
+
+<span class="nc" id="L1016">                List&lt;QueryFeeListResp&gt; feeList = queryFeeListService.batchQueryFeeListResult(req);</span>
+<span class="nc" id="L1017">                feeList = listToRespList(feeList);</span>
+<span class="nc" id="L1018">                usrFeeList.addAll(feeList);</span>
+<span class="nc" id="L1019">            }</span>
+
+<span class="nc" id="L1021">            usrFeeList = removeDuplicate(usrFeeList);</span>
+<span class="nc" id="L1022">            List&lt;QueryReportList&gt; usrReportList = toReportList(usrFeeList);</span>
+<span class="nc" id="L1023">            JasperPrint print = getPrint(usrReportList, &quot;1&quot;);</span>
+<span class="nc" id="L1024">            listItems.add(new SimpleExporterInputItem(print));</span>
+
+<span class="nc" id="L1026">            ExporterInput exporterInput = new SimpleExporterInput(listItems);</span>
+<span class="nc" id="L1027">            exporter.setExporterInput(exporterInput);</span>
+
+            // 输出
+<span class="nc" id="L1030">            File exportFile = new File(dir, &quot;批量查询结果.xlsx&quot;);</span>
+<span class="nc" id="L1031">            OutputStreamExporterOutput exporterOutput = new SimpleOutputStreamExporterOutput(</span>
+                    new FileOutputStream(exportFile));
+<span class="nc" id="L1033">            exporter.setExporterOutput(exporterOutput);</span>
+            // 导出报表
+<span class="nc" id="L1035">            exporter.exportReport();</span>
+<span class="nc" id="L1036">            exporterOutput.close();</span>
+
+<span class="nc" id="L1038">            responseMap.put(ERR_CODE, &quot;0000&quot;);</span>
+<span class="nc" id="L1039">            responseMap.put(ERR_MSG, &quot;success&quot;);</span>
+<span class="nc" id="L1040">            responseMap.put(&quot;fileDir&quot;, exportFile.getAbsolutePath());</span>
+<span class="fc" id="L1041">        } catch (Exception e) {</span>
+<span class="fc" id="L1042">            LOGGER.error(e);</span>
+<span class="pc bpc" id="L1043" title="1 of 2 branches missed.">            if (e instanceof org.springframework.dao.DataIntegrityViolationException) {</span>
+<span class="nc" id="L1044">                responseMap.put(ERR_CODE, &quot;1001&quot;);</span>
+<span class="nc" id="L1045">                responseMap.put(ERR_MSG, &quot;输入条件有误，请依次检查是否按\&quot;单位名称|用户名|资费类型|开始时间|结束时间\&quot;输入！&quot;);</span>
+<span class="pc bpc" id="L1046" title="1 of 2 branches missed.">            } else if (e instanceof java.lang.IndexOutOfBoundsException) {</span>
+<span class="nc" id="L1047">                responseMap.put(ERR_CODE, &quot;1002&quot;);</span>
+<span class="nc" id="L1048">                responseMap.put(ERR_MSG, &quot;空文件！&quot;);</span>
+            } else {
+<span class="fc" id="L1050">                responseMap.put(ERR_CODE, &quot;9999&quot;);</span>
+<span class="fc" id="L1051">                responseMap.put(ERR_MSG, &quot;系统异常！&quot;);</span>
+            }
+<span class="nc" id="L1053">        }</span>
+
+<span class="fc" id="L1055">        return JSONArray.toJSONString(responseMap);</span>
+
+    }
+
+    /**
+     * 下载批量查询结果
+     *
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = &quot;/downloadBatchResult&quot;, method = RequestMethod.POST)
+    public void downloadExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+<span class="fc" id="L1068">        request.setCharacterEncoding(&quot;UTF-8&quot;);</span>
+<span class="fc" id="L1069">        String absoluteFileName = request.getParameter(&quot;fileDir&quot;);</span>
+<span class="fc" id="L1070">        boolean isTemplate = false;</span>
+<span class="nc bnc" id="L1071" title="All 2 branches missed.">        if (!new File(absoluteFileName).exists()) {</span>
+<span class="nc" id="L1072">            isTemplate = true;</span>
+<span class="nc" id="L1073">            WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();</span>
+<span class="nc" id="L1074">            ServletContext servletContext = webApplicationContext.getServletContext();</span>
+<span class="nc" id="L1075">            URL url = servletContext.getResource(&quot;/&quot;);</span>
+<span class="nc" id="L1076">            String weblogicPath = url.getPath().replaceAll(&quot;%20&quot;, &quot; &quot;);</span>
+<span class="nc" id="L1077">            absoluteFileName = weblogicPath + servletContext.getRealPath(absoluteFileName);</span>
+        }
+<span class="nc" id="L1079">        File downloadFile = new File(absoluteFileName);</span>
+<span class="nc" id="L1080">        OutputStream out = null;</span>
+        try {
+<span class="nc" id="L1082">            out = response.getOutputStream();</span>
+<span class="nc" id="L1083">            response.setHeader(&quot;Pragma&quot;, NO_CACHE);</span>
+<span class="nc" id="L1084">            response.setHeader(&quot;Cache-Control&quot;, NO_CACHE);</span>
+<span class="nc" id="L1085">            response.setDateHeader(&quot;Expires&quot;, -1);</span>
+<span class="nc" id="L1086">            response.setHeader(&quot;content-disposition&quot;,</span>
+<span class="nc" id="L1087">                    &quot;attachment;filename=&quot; + java.net.URLEncoder.encode(downloadFile.getName(), &quot;utf-8&quot;));</span>
+<span class="nc" id="L1088">            byte[] buf = FileUtils.readFileToByteArray(downloadFile);</span>
+<span class="nc" id="L1089">            out.write(buf);</span>
+<span class="nc" id="L1090">            out.flush();</span>
+<span class="nc" id="L1091">            out.close();</span>
+        } finally {
+<span class="nc bnc" id="L1093" title="All 2 branches missed.">            if (out != null) {</span>
+<span class="nc" id="L1094">                out.close();</span>
+<span class="nc" id="L1095">                out = null;</span>
+            }
+        }
+<span class="nc bnc" id="L1098" title="All 2 branches missed.">        if (!isTemplate) {</span>
+            // 下载完成删除文件
+<span class="nc" id="L1100">            Path path = Paths.get(absoluteFileName);</span>
+<span class="nc" id="L1101">            Files.delete(path);</span>
+        }
+<span class="nc" id="L1103">    }</span>
+
+    /**
+     * 显示个人详情
+     */
+    @RequestMapping(value = &quot;/showDetailUsrList&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String showDetailUsrList(@RequestBody String reqJson) {
+
+<span class="nc" id="L1111">        Gson gson = new Gson();</span>
+<span class="nc" id="L1112">        String cdrType = formatJsonToValue(CDR_TYPE, reqJson);</span>
+<span class="nc" id="L1113">        String beginDate = formatJsonToValue(BEGIN_DATE, reqJson);</span>
+<span class="nc" id="L1114">        String notesId = formatJsonToValue(NOTES_ID, reqJson);</span>
+<span class="nc" id="L1115">        String feeType = formatJsonToValue(FEE_TYPE, reqJson);</span>
+<span class="nc" id="L1116">        String unitName = formatJsonToValue(UNIT_NAME, reqJson);</span>
+<span class="nc" id="L1117">        String operatorId = formatJsonToValue(OPERATOR_ID, reqJson);</span>
+
+<span class="nc" id="L1119">        QueryCallListReq req = new QueryCallListReq();</span>
+<span class="nc" id="L1120">        req.setLoginName(notesId);</span>
+<span class="nc" id="L1121">        req.setBillMonth(beginDate);</span>
+<span class="nc" id="L1122">        req.setFeeType(feeType);</span>
+<span class="nc" id="L1123">        req.setOperatorId(operatorId);</span>
+
+        // 传入机构参数
+<span class="nc" id="L1126">        Map&lt;String, Object&gt; searchMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L1127">        searchMap.put(&quot;orgNameFull&quot;, unitName);</span>
+<span class="nc" id="L1128">        List&lt;String&gt; orgIdList = new ArrayList&lt;&gt;();</span>
+        // 判断是否黑户
+<span class="nc bnc" id="L1130" title="All 2 branches missed.">        if (organizationDao.fuzzySearchOrganization(searchMap).isEmpty()) {</span>
+<span class="nc" id="L1131">            orgIdList.add(&quot;0&quot;);</span>
+        } else {
+<span class="nc" id="L1133">            Integer orgId = organizationDao.fuzzySearchOrganization(searchMap).get(0).getOrgId();</span>
+<span class="nc" id="L1134">            orgIdList.add(orgId.toString());</span>
+        }
+<span class="nc" id="L1136">        req.setUnitName(orgIdList);</span>
+
+<span class="nc bnc" id="L1138" title="All 4 branches missed.">        if (cdrType.equals(&quot;1&quot;) || cdrType.equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L1139">            req.setResourceType(&quot;1&quot;);</span>
+<span class="nc bnc" id="L1140" title="All 2 branches missed.">        } else if (cdrType.equals(&quot;3&quot;)) {</span>
+<span class="nc" id="L1141">            req.setResourceType(&quot;2&quot;);</span>
+        } else {
+<span class="nc" id="L1143">            req.setResourceType(&quot;3&quot;);</span>
+        }
+
+        // 黑户处理
+<span class="nc bnc" id="L1147" title="All 2 branches missed.">        if (req.getLoginName().equals(&quot;黑户&quot;)) {</span>
+<span class="nc" id="L1148">            req.setLoginName(null);</span>
+<span class="nc bnc" id="L1149" title="All 4 branches missed.">            if (cdrType.equals(&quot;1&quot;) || cdrType.equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L1150">                req.setOperatorId(&quot;0&quot;);</span>
+            } else {
+<span class="nc" id="L1152">                req.setOperatorId(&quot;-1&quot;);</span>
+            }
+
+        }
+<span class="nc" id="L1156">        req.setLoginName(null);</span>
+
+        // 分页展示
+<span class="nc" id="L1159">        int currentPage = Integer.parseInt(formatJsonToValue(PAGE_NO, reqJson));</span>
+<span class="nc" id="L1160">        int pageSize = Integer.parseInt(formatJsonToValue(PAGE_SIZE, reqJson));</span>
+<span class="nc" id="L1161">        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L1162">        Map&lt;String, Object&gt; map = queryCallListService.queryCallListResult(req, currentPage, pageSize);</span>
+
+<span class="nc" id="L1164">        resultMap.put(&quot;total&quot;, map.get(&quot;cnt&quot;));</span>
+<span class="nc" id="L1165">        resultMap.put(&quot;list&quot;, map.get(&quot;list&quot;));</span>
+
+<span class="nc" id="L1167">        return JSONObject.toJSONString(resultMap);</span>
+    }
+
+    /**
+     * 显示部门详情
+     *
+     * @param reqJson
+     * @return
+     */
+    @RequestMapping(value = &quot;/showDetailOrgList&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String showDetailOrgList(@RequestBody String reqJson) {
+
+<span class="nc" id="L1179">        String cdrType = formatJsonToValue(CDR_TYPE, reqJson);</span>
+<span class="nc" id="L1180">        String beginDate = formatJsonToValue(BEGIN_DATE, reqJson);</span>
+<span class="nc" id="L1181">        String unitName = formatJsonToValue(UNIT_NAME, reqJson);</span>
+<span class="nc" id="L1182">        String feeType = formatJsonToValue(FEE_TYPE, reqJson);</span>
+
+<span class="nc" id="L1184">        QueryCallListReq req = new QueryCallListReq();</span>
+<span class="nc" id="L1185">        Map&lt;String, Object&gt; searchMap = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L1187">        searchMap.put(&quot;orgNameFull&quot;, unitName);</span>
+<span class="nc" id="L1188">        List&lt;String&gt; orgIdList = new ArrayList&lt;&gt;();</span>
+
+        // 判断是否黑户
+        /**
+         * 垂直越权 漏洞修复 直接取session机构id
+         */
+//        if (organizationDao.fuzzySearchOrganization(searchMap).isEmpty()) {
+//            orgIdList.add(&quot;0&quot;);
+//        } else {
+//            Integer orgId = organizationDao.fuzzySearchOrganization(searchMap).get(0).getOrgId();
+//            orgIdList.add(orgId.toString());
+//        }
+<span class="nc bnc" id="L1200" title="All 2 branches missed.">        if (appSession.getUser().getOrgId() == null){</span>
+<span class="nc" id="L1201">            orgIdList.add(&quot;0&quot;);</span>
+        }else {
+<span class="nc" id="L1203">            orgIdList.add(appSession.getUser().getOrgId().toString());</span>
+        }
+<span class="nc" id="L1205">        req.setOrgId(appSession.getUser().getOrgId());</span>
+<span class="nc" id="L1206">        req.setBillMonth(beginDate);</span>
+<span class="nc" id="L1207">        req.setUnitName(orgIdList);</span>
+<span class="nc" id="L1208">        req.setCdrType(cdrType);</span>
+<span class="nc" id="L1209">        req.setFeeType(feeType);</span>
+
+<span class="nc bnc" id="L1211" title="All 4 branches missed.">        if (cdrType.equals(&quot;1&quot;) || cdrType.equals(&quot;2&quot;)) {</span>
+<span class="nc" id="L1212">            req.setResourceType(&quot;1&quot;);</span>
+<span class="nc bnc" id="L1213" title="All 2 branches missed.">        } else if (cdrType.equals(&quot;3&quot;)) {</span>
+<span class="nc" id="L1214">            req.setResourceType(&quot;2&quot;);</span>
+        } else {
+<span class="nc" id="L1216">            req.setResourceType(&quot;3&quot;);</span>
+        }
+
+        // 分页展示
+<span class="nc" id="L1220">        int currentPage = Integer.parseInt(formatJsonToValue(PAGE_NO, reqJson));</span>
+<span class="nc" id="L1221">        int pageSize = Integer.parseInt(formatJsonToValue(PAGE_SIZE, reqJson));</span>
+<span class="nc" id="L1222">        Map&lt;String, Object&gt; resultMap = new HashMap&lt;&gt;();</span>
+
+        // 判断是否月租费
+<span class="nc bnc" id="L1225" title="All 2 branches missed.">        if (cdrType.equals(&quot;1&quot;)</span>
+<span class="nc bnc" id="L1226" title="All 8 branches missed.">                &amp;&amp; (feeType.equals(&quot;8&quot;) || feeType.equals(&quot;10&quot;) || feeType.equals(&quot;3&quot;) || feeType.equals(&quot;6&quot;))) {</span>
+
+<span class="nc" id="L1228">            List&lt;RatedCdr&gt; cdrList = queryFeeListService.queryOrgMonFeeDetail(req, currentPage, pageSize);</span>
+<span class="nc bnc" id="L1229" title="All 2 branches missed.">            for (int i = 0; i &lt; cdrList.size(); i++) {</span>
+<span class="nc" id="L1230">                String totalFee = String.format(&quot;%.1f&quot;, Double.parseDouble(cdrList.get(i).getTotalFee()) / 1000);</span>
+<span class="nc" id="L1231">                cdrList.get(i).setTotalFee(totalFee);</span>
+            }
+<span class="nc" id="L1233">            resultMap.put(&quot;total&quot;, queryFeeListService.queryOrgMonFeeDetailCount(req));</span>
+<span class="nc" id="L1234">            resultMap.put(&quot;list&quot;, cdrList);</span>
+
+<span class="nc" id="L1236">        } else {</span>
+
+<span class="nc" id="L1238">            Map&lt;String, Object&gt; map = queryCallListService.queryCallListResult(req, currentPage, pageSize);</span>
+
+<span class="nc" id="L1240">            resultMap.put(&quot;total&quot;, map.get(&quot;cnt&quot;));</span>
+<span class="nc" id="L1241">            resultMap.put(&quot;list&quot;, map.get(&quot;list&quot;));</span>
+        }
+
+<span class="nc" id="L1244">        return JSONObject.toJSONString(resultMap);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

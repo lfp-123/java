@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Organization.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-server</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.entity</a> &gt; <span class="el_source">Organization.java</span></div><h1>Organization.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.entity;
+
+import java.util.List;
+
+public class Organization {
+	
+	private Integer orgId;
+	private Integer superOrgId;
+	private String orgName;
+	private Integer orgStatus;
+	private String orgDesc;
+	private String createTime;
+	private String modifyTime;
+	private Integer modifyOperatorId;
+	private String orgNameFull;
+	private Integer isSync;
+	private List&lt;Organization&gt; childOrgList;
+	
+	public List&lt;Organization&gt; getChildOrgList() {
+<span class="nc" id="L20">		return childOrgList;</span>
+	}
+
+	public void setChildOrgList(List&lt;Organization&gt; childOrgList) {
+<span class="nc" id="L24">		this.childOrgList = childOrgList;</span>
+<span class="nc" id="L25">	}</span>
+
+	public Organization() {
+<span class="nc" id="L28">		super();</span>
+<span class="nc" id="L29">	}</span>
+
+	public Integer getOrgId() {
+<span class="nc" id="L32">		return orgId;</span>
+	}
+
+	public void setOrgId(Integer orgId) {
+<span class="nc" id="L36">		this.orgId = orgId;</span>
+<span class="nc" id="L37">	}</span>
+
+	public Integer getSuperOrgId() {
+<span class="nc" id="L40">		return superOrgId;</span>
+	}
+
+	public void setSuperOrgId(Integer superOrgId) {
+<span class="nc" id="L44">		this.superOrgId = superOrgId;</span>
+<span class="nc" id="L45">	}</span>
+
+	public String getOrgName() {
+<span class="nc" id="L48">		return orgName;</span>
+	}
+
+	public void setOrgName(String orgName) {
+<span class="nc" id="L52">		this.orgName = orgName;</span>
+<span class="nc" id="L53">	}</span>
+
+	public Integer getOrgStatus() {
+<span class="nc" id="L56">		return orgStatus;</span>
+	}
+
+	public void setOrgStatus(Integer orgStatus) {
+<span class="nc" id="L60">		this.orgStatus = orgStatus;</span>
+<span class="nc" id="L61">	}</span>
+
+	public String getOrgDesc() {
+<span class="nc" id="L64">		return orgDesc;</span>
+	}
+
+	public void setOrgDesc(String orgDesc) {
+<span class="nc" id="L68">		this.orgDesc = orgDesc;</span>
+<span class="nc" id="L69">	}</span>
+
+	public String getCreateTime() {
+<span class="nc" id="L72">		return createTime;</span>
+	}
+
+	public void setCreateTime(String createTime) {
+<span class="nc" id="L76">		this.createTime = createTime;</span>
+<span class="nc" id="L77">	}</span>
+
+	public String getModifyTime() {
+<span class="nc" id="L80">		return modifyTime;</span>
+	}
+
+	public void setModifyTime(String modifyTime) {
+<span class="nc" id="L84">		this.modifyTime = modifyTime;</span>
+<span class="nc" id="L85">	}</span>
+
+	public Integer getModifyOperatorId() {
+<span class="nc" id="L88">		return modifyOperatorId;</span>
+	}
+
+	public void setModifyOperatorId(Integer modifyOperatorId) {
+<span class="nc" id="L92">		this.modifyOperatorId = modifyOperatorId;</span>
+<span class="nc" id="L93">	}</span>
+
+	public String getOrgNameFull() {
+<span class="nc" id="L96">		return orgNameFull;</span>
+	}
+
+	public void setOrgNameFull(String orgNameFull) {
+<span class="nc" id="L100">		this.orgNameFull = orgNameFull;</span>
+<span class="nc" id="L101">	}</span>
+
+	public Integer getIsSync() {
+<span class="nc" id="L104">		return isSync;</span>
+	}
+
+	public void setIsSync(Integer isSync) {
+<span class="nc" id="L108">		this.isSync = isSync;</span>
+<span class="nc" id="L109">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L113">		return &quot;Organization [orgId=&quot; + orgId + &quot;, superOrgId=&quot; + superOrgId + &quot;, orgName=&quot; + orgName + &quot;, orgStatus=&quot;</span>
+				+ orgStatus + &quot;, orgDesc=&quot; + orgDesc + &quot;, createTime=&quot; + createTime + &quot;, modifyTime=&quot; + modifyTime
+				+ &quot;, modifyOperatorId=&quot; + modifyOperatorId + &quot;]&quot;;
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

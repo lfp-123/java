@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.dao.DictDefDao">
+	<resultMap type="com.newland.boss.kpi.entity.DictDef" id="dictDefResultMap">
+		<result column="DICT_CLASS" property="dictClass" jdbcType="INTEGER" />
+		<result column="DICT_NAME" property="dictName" jdbcType="VARCHAR" />
+		<result column="ENTRY_ID" property="entryId" jdbcType="INTEGER" />
+		<result column="ENTRY_NAME" property="entryName" jdbcType="VARCHAR" />
+		<result column="ENTRY_DESC" property="entryDesc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectAllDictDef" resultMap="dictDefResultMap">
+		SELECT DICT_CLASS,DICT_NAME,ENTRY_ID,ENTRY_NAME,ENTRY_DESC
+			FROM T_DICT_DEF ORDER BY DICT_CLASS,ENTRY_ID
+	</select>
+</mapper>

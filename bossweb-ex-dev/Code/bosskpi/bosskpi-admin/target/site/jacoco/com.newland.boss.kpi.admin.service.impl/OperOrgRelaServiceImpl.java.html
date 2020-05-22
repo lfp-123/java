@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperOrgRelaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.service.impl</a> &gt; <span class="el_source">OperOrgRelaServiceImpl.java</span></div><h1>OperOrgRelaServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.kpi.admin.dao.OperOrgRelaDao;
+import com.newland.boss.kpi.admin.dao.OperatorDao;
+import com.newland.boss.kpi.admin.dao.OrganizationDao;
+import com.newland.boss.kpi.admin.model.OperOrgRela;
+import com.newland.boss.kpi.admin.model.Operator;
+import com.newland.boss.kpi.admin.service.OperOrgRelaService;
+import com.newland.boss.kpi.entity.Organization;
+
+@Component
+<span class="fc" id="L23">public class OperOrgRelaServiceImpl implements OperOrgRelaService {</span>
+	
+	@Autowired
+	private OperOrgRelaDao operOrgRelaDao;
+	
+	@Autowired
+	private OperatorDao operatorDao;
+	
+	@Autowired
+	private OrganizationDao organizationDao;
+	
+	@Override
+	public void editOperOrgRela(String operOrgJson) {
+		
+		//取传过来的操作员ID和机构ID数组
+<span class="nc" id="L38">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L39">		JsonElement jsonEl = jsonParser.parse(operOrgJson);</span>
+<span class="nc" id="L40">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L41">		Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();     //选中的操作员</span>
+<span class="nc" id="L42">		JsonArray orgArray = jsonObj.get(&quot;orgNameArray&quot;).getAsJsonArray(); //选中的机构名</span>
+<span class="nc" id="L43">		Integer modifyOperatorId = jsonObj.get(&quot;modifyOperatorId&quot;).getAsInt();</span>
+		
+<span class="nc bnc" id="L45" title="All 2 branches missed.">		if (operOrgRelaDao.selectOperOrgRelaByOperId(operatorId) != null) {</span>
+			
+<span class="nc" id="L47">			operOrgRelaDao.deleteOperOrgRelaByOperId(operatorId);</span>
+			
+			//循环插入操作员机构管理关系表
+<span class="nc bnc" id="L50" title="All 2 branches missed.">			for(int i = 0;i &lt; orgArray.size();i++) {</span>
+<span class="nc" id="L51">				String orgName = orgArray.get(i).getAsString();</span>
+<span class="nc" id="L52">				Integer orgId = organizationDao.selectOrganizationByOrgName(orgName).getOrgId();</span>
+<span class="nc" id="L53">				OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L54">				operOrgRela.setOperatorId(operatorId);</span>
+<span class="nc" id="L55">				operOrgRela.setOrgId(orgId);</span>
+<span class="nc" id="L56">				operOrgRela.setRelaStatus(0);</span>
+<span class="nc" id="L57">				operOrgRela.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L58">				operOrgRelaDao.insertOperOrgRela(operOrgRela);</span>
+			}
+			
+		}else {
+			
+			//循环插入操作员机构管理关系表
+<span class="nc bnc" id="L64" title="All 2 branches missed.">			for(int i = 0;i &lt; orgArray.size();i++) {</span>
+<span class="nc" id="L65">				String orgName = orgArray.get(i).getAsString();</span>
+<span class="nc" id="L66">				Integer orgId = organizationDao.selectOrganizationByOrgName(orgName).getOrgId();</span>
+<span class="nc" id="L67">				OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L68">				operOrgRela.setOperatorId(operatorId);</span>
+<span class="nc" id="L69">				operOrgRela.setOrgId(orgId);</span>
+<span class="nc" id="L70">				operOrgRela.setRelaStatus(0);</span>
+<span class="nc" id="L71">				operOrgRela.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L72">				operOrgRelaDao.insertOperOrgRela(operOrgRela);</span>
+			}
+		}
+		
+<span class="nc" id="L76">	}</span>
+
+	@Override
+	public List&lt;OperOrgRela&gt; findOrgOfOper(OperOrgRela operOrgRela) {
+<span class="nc" id="L80">		return operOrgRelaDao.selectOperOrgRelaByOperId(operOrgRela.getOperatorId());</span>
+	}
+
+	@Override
+	public OperOrgRela findAnOperOrgRela(OperOrgRela operOrgRela) {
+		
+<span class="nc" id="L86">		Map&lt;String, Integer&gt; operOrgRelaMap = new HashMap&lt;String, Integer&gt;();</span>
+<span class="nc" id="L87">		operOrgRelaMap.put(&quot;operatorId&quot;, operOrgRela.getOperatorId());</span>
+<span class="nc" id="L88">		operOrgRelaMap.put(&quot;orgId&quot;, operOrgRela.getOrgId());</span>
+		
+<span class="nc" id="L90">		return operOrgRelaDao.selectAnOperOrgRela(operOrgRelaMap);</span>
+	}
+
+	@Override
+	public void removeOperOrgRela(String operOrgJson) {
+		
+<span class="nc" id="L96">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L97">		JsonElement jsonEl = jsonParser.parse(operOrgJson);</span>
+<span class="nc" id="L98">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L99">		JsonArray orgArray = jsonObj.get(&quot;orgIdArray&quot;).getAsJsonArray(); //选中的机构</span>
+<span class="nc" id="L100">		Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+		
+		//循环删除操作员
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		for (int i = 0;i &lt; orgArray.size();i++) {</span>
+<span class="nc" id="L104">			Map&lt;String, Integer&gt; operOrgRelaMap = new HashMap&lt;String, Integer&gt;();</span>
+<span class="nc" id="L105">			operOrgRelaMap.put(&quot;operatorId&quot;, operatorId);</span>
+<span class="nc" id="L106">			operOrgRelaMap.put(&quot;orgId&quot;, orgArray.get(i).getAsInt());</span>
+<span class="nc" id="L107">			operOrgRelaDao.deleteOperOrgRela(operOrgRelaMap);</span>
+		}
+		
+<span class="nc" id="L110">	}</span>
+
+	@Override
+	public void addOrgForOper(String orgNameArrayJson) {
+		
+<span class="nc" id="L115">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L116">		JsonElement jsonEl = jsonParser.parse(orgNameArrayJson);</span>
+<span class="nc" id="L117">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L118">		JsonArray orgArray = jsonObj.get(&quot;orgNameArray&quot;).getAsJsonArray(); //选中的机构</span>
+<span class="nc" id="L119">		Integer modifyOperatorId = jsonObj.get(&quot;modifyOperatorId&quot;).getAsInt();</span>
+		
+<span class="nc" id="L121">		int operatorId = operatorDao.selectLastOperator().getOperatorId();</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">		for(int i = 0;i &lt; orgArray.size();i++) {</span>
+<span class="nc" id="L124">			String orgName = orgArray.get(i).getAsString();</span>
+<span class="nc" id="L125">			Integer orgId = organizationDao.selectOrganizationByOrgName(orgName).getOrgId();</span>
+<span class="nc" id="L126">			OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L127">			operOrgRela.setOperatorId(operatorId);</span>
+<span class="nc" id="L128">			operOrgRela.setOrgId(orgId);</span>
+<span class="nc" id="L129">			operOrgRela.setRelaStatus(0);</span>
+<span class="nc" id="L130">			operOrgRela.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L131">			operOrgRelaDao.insertOperOrgRela(operOrgRela);</span>
+		}
+		
+<span class="nc" id="L134">	}</span>
+
+	@Override
+	public void addOrgForOper(Operator operator, List&lt;Organization&gt; orgList) {
+<span class="nc bnc" id="L138" title="All 4 branches missed.">		if(orgList == null || orgList.isEmpty()) {</span>
+<span class="nc" id="L139">			return;</span>
+		}
+<span class="nc bnc" id="L141" title="All 2 branches missed.">		for (Organization organization : orgList) {</span>
+<span class="nc" id="L142">			String fullName = organization.getOrgNameFull();</span>
+<span class="nc" id="L143">            Organization org = organizationDao.findByFullName(fullName);</span>
+<span class="nc" id="L144">            OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L145">            operOrgRela.setOperatorId(operator.getOperatorId());</span>
+<span class="nc" id="L146">            operOrgRela.setOrgId(org.getOrgId());</span>
+<span class="nc" id="L147">            operOrgRela.setRelaStatus(0);</span>
+<span class="nc" id="L148">            operOrgRela.setModifyOperatorId(operator.getModifyOperatorId());</span>
+<span class="nc" id="L149">            operOrgRelaDao.insertOperOrgRela(operOrgRela);</span>
+
+<span class="nc" id="L151">		}</span>
+<span class="nc" id="L152">	}</span>
+
+	@Override
+	public void editOperOrgRela(Operator operator, List&lt;Organization&gt; orgList) {
+<span class="nc bnc" id="L156" title="All 4 branches missed.">		if(orgList == null || orgList.isEmpty()) {</span>
+<span class="nc" id="L157">			return;</span>
+		}
+		
+<span class="nc" id="L160">		OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L161">		operOrgRela.setOperatorId(operator.getOperatorId());</span>
+<span class="nc" id="L162">		operOrgRela.setModifyOperatorId(operator.getModifyOperatorId());</span>
+<span class="nc" id="L163">		operOrgRelaDao.updateStatusOperOrgRelaByOperId(operOrgRela);</span>
+		//循环插入操作员机构管理关系表
+<span class="nc bnc" id="L165" title="All 2 branches missed.">		for (Organization organization : orgList) {</span>
+<span class="nc" id="L166">			operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L167">			operOrgRela.setOperatorId(operator.getOperatorId());</span>
+<span class="nc" id="L168">			operOrgRela.setOrgId(organization.getOrgId());</span>
+<span class="nc" id="L169">			operOrgRela.setRelaStatus(0);</span>
+<span class="nc" id="L170">			operOrgRela.setModifyOperatorId(operator.getModifyOperatorId());</span>
+<span class="nc" id="L171">			operOrgRelaDao.insertOperOrgRela(operOrgRela);</span>
+<span class="nc" id="L172">		}</span>
+<span class="nc" id="L173">	}</span>
+
+	@Override
+	public void removeOperOrgRela(List&lt;Operator&gt; opers, Integer modifyOperatorId) {
+<span class="nc bnc" id="L177" title="All 4 branches missed.">		if(opers == null || opers.isEmpty()) {</span>
+<span class="nc" id="L178">			return;</span>
+		}
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		for (Operator operator : opers) {</span>
+<span class="nc" id="L181">			OperOrgRela operOrgRela = new OperOrgRela();</span>
+<span class="nc" id="L182">			operOrgRela.setOperatorId(operator.getOperatorId());</span>
+<span class="nc" id="L183">			operOrgRela.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L184">			operOrgRelaDao.updateStatusOperOrgRelaByOperId(operOrgRela);</span>
+//			operOrgRelaDao.deleteOperOrgRelaByOperId(operator.getOperatorId())
+<span class="nc" id="L186">		}</span>
+<span class="nc" id="L187">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

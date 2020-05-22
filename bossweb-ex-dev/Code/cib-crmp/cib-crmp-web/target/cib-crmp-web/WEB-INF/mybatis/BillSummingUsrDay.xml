@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.settle.dao.BillSummingUsrDayDao">
+	<resultMap type="com.newland.boss.cib.crmp.domain.BillSummingUsrDay" id="billSummingOrgDayMap">
+		<id column="CDR_TYPE" property="cdrType" jdbcType="INTEGER" />
+		<id column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+		<id column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<id column="BILL_MONTH" property="billMonth" jdbcType="INTEGER" />
+		<id column="BILL_DAY" property="billDay" jdbcType="INTEGER" />
+		<result column="TOTAL_NUMBER" property="totalNumber" jdbcType="BIGINT" />
+		<result column="TOTAL_MINUTES" property="totalMinutes" jdbcType="BIGINT" />
+		<result column="TOTAL_FEE" property="totalFee" jdbcType="BIGINT" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectBarResult" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.OPERATOR_ID, sum(a.total_fee) as total_fee
+		  from bill_summing_usr_day a
+		 where a.OPERATOR_ID = #{operatorId} 
+		 	<choose>
+                <when test="startDate != null and startDate !=''">
+                    and a.bill_day &gt;= #{startDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &gt;= to_number(to_char(trunc(sysdate,'yy'), 'yyyymmdd'))
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="endDate != null and endDate !=''">
+					and a.bill_day &lt;= #{endDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &lt;= to_number(to_char(trunc(sysdate,'dd'), 'yyyymmdd'))
+                </otherwise>
+            </choose>
+		   	<if test="cdrType != null and cdrType != -1">
+				and a.cdr_type = #{cdrType}
+		   	</if>
+		 group by a.OPERATOR_ID
+	</select>
+	
+	<select id="selecPieResultByOperId" resultMap="billSummingOrgDayMap" parameterType="java.util.Map">
+		select a.cdr_type, sum(a.total_fee) total_fee
+		  from bill_summing_usr_day a
+		 where a.OPERATOR_ID = #{operatorId}
+		   <choose>
+                <when test="startDate != null and startDate !=''">
+                    and a.bill_day &gt;= #{startDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &gt;= to_number(to_char(trunc(sysdate,'yy'), 'yyyymmdd'))
+                </otherwise>
+           </choose>
+           <choose>
+                <when test="endDate != null and endDate !=''">
+					and a.bill_day &lt;= #{endDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &lt;= to_number(to_char(trunc(sysdate,'dd'), 'yyyymmdd'))
+                </otherwise>
+           </choose>
+		 group by a.cdr_type
+	</select>
+	
+	<select id="selecLineResultByOperId" resultType="java.util.Map" parameterType="java.util.Map">
+		select * from (
+		select a.cdr_type, sum(a.total_fee) total_fee, substr(a.bill_day, 0, 6) bill_day
+		  from bill_summing_usr_day a
+		 where a.OPERATOR_ID = #{operatorId}
+		   <choose>
+                <when test="startDate != null and startDate !=''">
+                    and a.bill_day &gt;= #{startDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &gt;= to_number(to_char(trunc(sysdate,'yy'), 'yyyymmdd'))
+                </otherwise>
+           </choose>
+           <choose>
+                <when test="endDate != null and endDate !=''">
+					and a.bill_day &lt;= #{endDate}
+                </when>
+                <otherwise>
+                    and a.bill_day &lt;= to_number(to_char(trunc(sysdate,'dd'), 'yyyymmdd'))
+                </otherwise>
+           </choose>
+		 group by a.cdr_type, substr(a.bill_day, 0, 6)
+		 ) pivot (sum(total_fee) for bill_day in 
+		<foreach item="item" index="index" collection="dates" open="(" separator="," close=")">
+        	${item}
+  		</foreach>
+  		)
+	</select>
+</mapper>

@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <meta charset='utf-8'>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-Surefire_suite">
+              <span class="suite-name border-passed">Surefire suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-Surefire_suite">
+                    <span>[unset file name]</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-Surefire_suite">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-Surefire_suite">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-Surefire_suite">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-Surefire_suite">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-Surefire_suite">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-Surefire_suite">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">45 methods,   45 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods passed suite-Surefire_suite"> (hide)</a> <!-- hide-methods passed suite-Surefire_suite -->
+                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods passed suite-Surefire_suite"> (show)</a> <!-- show-methods passed suite-Surefire_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Surefire_suite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="batchQueryTest">batchQueryTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="billSummingUsrDayServiceTest">billSummingUsrDayServiceTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="downloadExcelTest">downloadExcelTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="jsonToIntegerArrayTest">jsonToIntegerArrayTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="queryDeptFeeListTest">queryDeptFeeListTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="queryDeptFeeListTest1">queryDeptFeeListTest1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="stringToIntegerArrTest">stringToIntegerArrTest</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testBillSummingOrgDay">testBillSummingOrgDay</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testBillSummingUsrDay">testBillSummingUsrDay</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel">testExportExcel</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel1">testExportExcel1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel2">testExportExcel2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel3">testExportExcel3</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel4">testExportExcel4</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel5">testExportExcel5</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testExportExcel6">testExportExcel6</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisBar">testGetFeeAnalysisBar</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisBar1">testGetFeeAnalysisBar1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisBar2">testGetFeeAnalysisBar2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisLine">testGetFeeAnalysisLine</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisLine1">testGetFeeAnalysisLine1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisLine2">testGetFeeAnalysisLine2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisPie">testGetFeeAnalysisPie</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisPie1">testGetFeeAnalysisPie1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.AnalysisControllerTest" hash-for-method="testGetFeeAnalysisPie2">testGetFeeAnalysisPie2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport">testPreviewReport</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport1">testPreviewReport1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport2">testPreviewReport2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport3">testPreviewReport3</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport4">testPreviewReport4</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport5">testPreviewReport5</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport6">testPreviewReport6</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport7">testPreviewReport7</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testPreviewReport8">testPreviewReport8</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.CallListControllerTest" hash-for-method="testQueryCallList">testQueryCallList</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryFeeList">testQueryFeeList</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryFeeList1">testQueryFeeList1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryFeeList2">testQueryFeeList2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryFeeList3">testQueryFeeList3</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryNotActiveUserList">testQueryNotActiveUserList</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryNotActiveUserList1">testQueryNotActiveUserList1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryThresholdList">testQueryThresholdList</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryThresholdList1">testQueryThresholdList1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryTopNList">testQueryTopNList</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Surefire_suite" title="com.newland.boss.cib.crmp.settle.ReportControllerTest" hash-for-method="testQueryTopNList1">testQueryTopNList1</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Surefire_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Surefire_suite" class="panel Surefire_suite">
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.newland.boss.cib.crmp.settle.CallListControllerTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryCallList">
+                  </a> <!-- testQueryCallList -->
+                  <span class="method-name">testQueryCallList</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.newland.boss.cib.crmp.settle.ReportControllerTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="batchQueryTest">
+                  </a> <!-- batchQueryTest -->
+                  <span class="method-name">batchQueryTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="downloadExcelTest">
+                  </a> <!-- downloadExcelTest -->
+                  <span class="method-name">downloadExcelTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="jsonToIntegerArrayTest">
+                  </a> <!-- jsonToIntegerArrayTest -->
+                  <span class="method-name">jsonToIntegerArrayTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="queryDeptFeeListTest">
+                  </a> <!-- queryDeptFeeListTest -->
+                  <span class="method-name">queryDeptFeeListTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="queryDeptFeeListTest1">
+                  </a> <!-- queryDeptFeeListTest1 -->
+                  <span class="method-name">queryDeptFeeListTest1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="stringToIntegerArrTest">
+                  </a> <!-- stringToIntegerArrTest -->
+                  <span class="method-name">stringToIntegerArrTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel">
+                  </a> <!-- testExportExcel -->
+                  <span class="method-name">testExportExcel</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel1">
+                  </a> <!-- testExportExcel1 -->
+                  <span class="method-name">testExportExcel1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel2">
+                  </a> <!-- testExportExcel2 -->
+                  <span class="method-name">testExportExcel2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel3">
+                  </a> <!-- testExportExcel3 -->
+                  <span class="method-name">testExportExcel3</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel4">
+                  </a> <!-- testExportExcel4 -->
+                  <span class="method-name">testExportExcel4</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel5">
+                  </a> <!-- testExportExcel5 -->
+                  <span class="method-name">testExportExcel5</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testExportExcel6">
+                  </a> <!-- testExportExcel6 -->
+                  <span class="method-name">testExportExcel6</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport">
+                  </a> <!-- testPreviewReport -->
+                  <span class="method-name">testPreviewReport</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport1">
+                  </a> <!-- testPreviewReport1 -->
+                  <span class="method-name">testPreviewReport1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport2">
+                  </a> <!-- testPreviewReport2 -->
+                  <span class="method-name">testPreviewReport2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport3">
+                  </a> <!-- testPreviewReport3 -->
+                  <span class="method-name">testPreviewReport3</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport4">
+                  </a> <!-- testPreviewReport4 -->
+                  <span class="method-name">testPreviewReport4</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport5">
+                  </a> <!-- testPreviewReport5 -->
+                  <span class="method-name">testPreviewReport5</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport6">
+                  </a> <!-- testPreviewReport6 -->
+                  <span class="method-name">testPreviewReport6</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport7">
+                  </a> <!-- testPreviewReport7 -->
+                  <span class="method-name">testPreviewReport7</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testPreviewReport8">
+                  </a> <!-- testPreviewReport8 -->
+                  <span class="method-name">testPreviewReport8</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryFeeList">
+                  </a> <!-- testQueryFeeList -->
+                  <span class="method-name">testQueryFeeList</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryFeeList1">
+                  </a> <!-- testQueryFeeList1 -->
+                  <span class="method-name">testQueryFeeList1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryFeeList2">
+                  </a> <!-- testQueryFeeList2 -->
+                  <span class="method-name">testQueryFeeList2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryFeeList3">
+                  </a> <!-- testQueryFeeList3 -->
+                  <span class="method-name">testQueryFeeList3</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryNotActiveUserList">
+                  </a> <!-- testQueryNotActiveUserList -->
+                  <span class="method-name">testQueryNotActiveUserList</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryNotActiveUserList1">
+                  </a> <!-- testQueryNotActiveUserList1 -->
+                  <span class="method-name">testQueryNotActiveUserList1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryThresholdList">
+                  </a> <!-- testQueryThresholdList -->
+                  <span class="method-name">testQueryThresholdList</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryThresholdList1">
+                  </a> <!-- testQueryThresholdList1 -->
+                  <span class="method-name">testQueryThresholdList1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryTopNList">
+                  </a> <!-- testQueryTopNList -->
+                  <span class="method-name">testQueryTopNList</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testQueryTopNList1">
+                  </a> <!-- testQueryTopNList1 -->
+                  <span class="method-name">testQueryTopNList1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.newland.boss.cib.crmp.settle.AnalysisControllerTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="billSummingUsrDayServiceTest">
+                  </a> <!-- billSummingUsrDayServiceTest -->
+                  <span class="method-name">billSummingUsrDayServiceTest</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testBillSummingOrgDay">
+                  </a> <!-- testBillSummingOrgDay -->
+                  <span class="method-name">testBillSummingOrgDay</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testBillSummingUsrDay">
+                  </a> <!-- testBillSummingUsrDay -->
+                  <span class="method-name">testBillSummingUsrDay</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisBar">
+                  </a> <!-- testGetFeeAnalysisBar -->
+                  <span class="method-name">testGetFeeAnalysisBar</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisBar1">
+                  </a> <!-- testGetFeeAnalysisBar1 -->
+                  <span class="method-name">testGetFeeAnalysisBar1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisBar2">
+                  </a> <!-- testGetFeeAnalysisBar2 -->
+                  <span class="method-name">testGetFeeAnalysisBar2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisLine">
+                  </a> <!-- testGetFeeAnalysisLine -->
+                  <span class="method-name">testGetFeeAnalysisLine</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisLine1">
+                  </a> <!-- testGetFeeAnalysisLine1 -->
+                  <span class="method-name">testGetFeeAnalysisLine1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisLine2">
+                  </a> <!-- testGetFeeAnalysisLine2 -->
+                  <span class="method-name">testGetFeeAnalysisLine2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisPie">
+                  </a> <!-- testGetFeeAnalysisPie -->
+                  <span class="method-name">testGetFeeAnalysisPie</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisPie1">
+                  </a> <!-- testGetFeeAnalysisPie1 -->
+                  <span class="method-name">testGetFeeAnalysisPie1</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testGetFeeAnalysisPie2">
+                  </a> <!-- testGetFeeAnalysisPie2 -->
+                  <span class="method-name">testGetFeeAnalysisPie2</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
+        </div> <!-- panel Surefire_suite -->
+        <div panel-name="test-xml-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite thread-count=&quot;1&quot; verbose=&quot;0&quot; name=&quot;Surefire suite&quot;&gt;
+  &lt;test name=&quot;Surefire test&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.newland.boss.cib.crmp.settle.AnalysisControllerTest&quot;/&gt;
+      &lt;class name=&quot;com.newland.boss.cib.crmp.settle.CallListControllerTest&quot;/&gt;
+      &lt;class name=&quot;com.newland.boss.cib.crmp.settle.common.AbstractControllerTestNGTest&quot;/&gt;
+      &lt;class name=&quot;com.newland.boss.cib.crmp.settle.common.AbstractTestNGTest&quot;/&gt;
+      &lt;class name=&quot;com.newland.boss.cib.crmp.settle.ReportControllerTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Surefire test --&gt;
+&lt;/suite&gt; &lt;!-- Surefire suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Surefire test (5 classes)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Surefire_suite');
+function tableData_Surefire_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(45);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testQueryCallList')
+data.setCell(0, 2, 'com.newland.boss.cib.crmp.settle.CallListControllerTest')
+data.setCell(0, 3, 1459);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testGetFeeAnalysisBar')
+data.setCell(1, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(1, 3, 474);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'batchQueryTest')
+data.setCell(2, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(2, 3, 179);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'jsonToIntegerArrayTest')
+data.setCell(3, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(3, 3, 141);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'queryDeptFeeListTest')
+data.setCell(4, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(4, 3, 67);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'billSummingUsrDayServiceTest')
+data.setCell(5, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(5, 3, 63);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testGetFeeAnalysisBar1')
+data.setCell(6, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(6, 3, 38);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'testPreviewReport3')
+data.setCell(7, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(7, 3, 18);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'stringToIntegerArrTest')
+data.setCell(8, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(8, 3, 17);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testGetFeeAnalysisLine2')
+data.setCell(9, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(9, 3, 13);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testQueryNotActiveUserList1')
+data.setCell(10, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(10, 3, 10);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testPreviewReport1')
+data.setCell(11, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(11, 3, 9);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'testQueryThresholdList1')
+data.setCell(12, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(12, 3, 9);
+data.setCell(13, 0, 13)
+data.setCell(13, 1, 'testExportExcel')
+data.setCell(13, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(13, 3, 9);
+data.setCell(14, 0, 14)
+data.setCell(14, 1, 'testGetFeeAnalysisLine1')
+data.setCell(14, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(14, 3, 8);
+data.setCell(15, 0, 15)
+data.setCell(15, 1, 'testQueryTopNList')
+data.setCell(15, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(15, 3, 7);
+data.setCell(16, 0, 16)
+data.setCell(16, 1, 'testQueryTopNList1')
+data.setCell(16, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(16, 3, 7);
+data.setCell(17, 0, 17)
+data.setCell(17, 1, 'testPreviewReport5')
+data.setCell(17, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(17, 3, 7);
+data.setCell(18, 0, 18)
+data.setCell(18, 1, 'testPreviewReport2')
+data.setCell(18, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(18, 3, 6);
+data.setCell(19, 0, 19)
+data.setCell(19, 1, 'testPreviewReport6')
+data.setCell(19, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(19, 3, 5);
+data.setCell(20, 0, 20)
+data.setCell(20, 1, 'testQueryNotActiveUserList')
+data.setCell(20, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(20, 3, 5);
+data.setCell(21, 0, 21)
+data.setCell(21, 1, 'testQueryFeeList3')
+data.setCell(21, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(21, 3, 5);
+data.setCell(22, 0, 22)
+data.setCell(22, 1, 'testExportExcel6')
+data.setCell(22, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(22, 3, 5);
+data.setCell(23, 0, 23)
+data.setCell(23, 1, 'testGetFeeAnalysisLine')
+data.setCell(23, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(23, 3, 5);
+data.setCell(24, 0, 24)
+data.setCell(24, 1, 'testQueryFeeList1')
+data.setCell(24, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(24, 3, 5);
+data.setCell(25, 0, 25)
+data.setCell(25, 1, 'testGetFeeAnalysisPie1')
+data.setCell(25, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(25, 3, 4);
+data.setCell(26, 0, 26)
+data.setCell(26, 1, 'testPreviewReport7')
+data.setCell(26, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(26, 3, 4);
+data.setCell(27, 0, 27)
+data.setCell(27, 1, 'testQueryFeeList2')
+data.setCell(27, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(27, 3, 4);
+data.setCell(28, 0, 28)
+data.setCell(28, 1, 'testPreviewReport4')
+data.setCell(28, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(28, 3, 4);
+data.setCell(29, 0, 29)
+data.setCell(29, 1, 'testExportExcel4')
+data.setCell(29, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(29, 3, 4);
+data.setCell(30, 0, 30)
+data.setCell(30, 1, 'testQueryThresholdList')
+data.setCell(30, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(30, 3, 4);
+data.setCell(31, 0, 31)
+data.setCell(31, 1, 'testGetFeeAnalysisBar2')
+data.setCell(31, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(31, 3, 4);
+data.setCell(32, 0, 32)
+data.setCell(32, 1, 'testQueryFeeList')
+data.setCell(32, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(32, 3, 4);
+data.setCell(33, 0, 33)
+data.setCell(33, 1, 'queryDeptFeeListTest1')
+data.setCell(33, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(33, 3, 3);
+data.setCell(34, 0, 34)
+data.setCell(34, 1, 'testExportExcel2')
+data.setCell(34, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(34, 3, 3);
+data.setCell(35, 0, 35)
+data.setCell(35, 1, 'testExportExcel1')
+data.setCell(35, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(35, 3, 3);
+data.setCell(36, 0, 36)
+data.setCell(36, 1, 'testExportExcel3')
+data.setCell(36, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(36, 3, 3);
+data.setCell(37, 0, 37)
+data.setCell(37, 1, 'testPreviewReport')
+data.setCell(37, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(37, 3, 2);
+data.setCell(38, 0, 38)
+data.setCell(38, 1, 'downloadExcelTest')
+data.setCell(38, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(38, 3, 2);
+data.setCell(39, 0, 39)
+data.setCell(39, 1, 'testPreviewReport8')
+data.setCell(39, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(39, 3, 2);
+data.setCell(40, 0, 40)
+data.setCell(40, 1, 'testGetFeeAnalysisPie')
+data.setCell(40, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(40, 3, 2);
+data.setCell(41, 0, 41)
+data.setCell(41, 1, 'testExportExcel5')
+data.setCell(41, 2, 'com.newland.boss.cib.crmp.settle.ReportControllerTest')
+data.setCell(41, 3, 2);
+data.setCell(42, 0, 42)
+data.setCell(42, 1, 'testBillSummingOrgDay')
+data.setCell(42, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(42, 3, 2);
+data.setCell(43, 0, 43)
+data.setCell(43, 1, 'testBillSummingUsrDay')
+data.setCell(43, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(43, 3, 1);
+data.setCell(44, 0, 44)
+data.setCell(44, 1, 'testGetFeeAnalysisPie2')
+data.setCell(44, 2, 'com.newland.boss.cib.crmp.settle.AnalysisControllerTest')
+data.setCell(44, 3, 1);
+window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 2 seconds</span>
+              <div id="times-div-Surefire_suite">
+              </div> <!-- times-div-Surefire_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Surefire suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">2 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.newland.boss.cib.crmp.settle.CallListControllerTest</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">init</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">com.newland.boss.cib.crmp.settle.ReportControllerTest</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">init</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Surefire_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.newland.boss.cib.crmp.settle.AnalysisControllerTest</div> <!-- chronological-class-name -->
+              <div class="configuration-suite before">
+                <span class="method-name">init</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-suite before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextBeforeTestClass</span>
+                <span class="method-start">47 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">52 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">setup</span>
+                <span class="method-start">7134 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.billSummingUsrDayServiceTest())</span>
+                <span class="method-start">7674 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">billSummingUsrDayServiceTest</span>
+                <span class="method-start">7681 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.billSummingUsrDayServiceTest())</span>
+                <span class="method-start">7745 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingOrgDay())</span>
+                <span class="method-start">7749 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testBillSummingOrgDay</span>
+                <span class="method-start">7761 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingOrgDay())</span>
+                <span class="method-start">7764 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingUsrDay())</span>
+                <span class="method-start">7771 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testBillSummingUsrDay</span>
+                <span class="method-start">7782 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingUsrDay())</span>
+                <span class="method-start">7784 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar() throws j...)</span>
+                <span class="method-start">7797 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisBar</span>
+                <span class="method-start">7811 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar() throws j...)</span>
+                <span class="method-start">8286 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar1() throws ...)</span>
+                <span class="method-start">8288 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisBar1</span>
+                <span class="method-start">8307 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar1() throws ...)</span>
+                <span class="method-start">8345 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar2() throws ...)</span>
+                <span class="method-start">8348 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisBar2</span>
+                <span class="method-start">8565 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar2() throws ...)</span>
+                <span class="method-start">8570 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine() throws ...)</span>
+                <span class="method-start">8573 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisLine</span>
+                <span class="method-start">8632 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine() throws ...)</span>
+                <span class="method-start">8637 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine1() throws...)</span>
+                <span class="method-start">8640 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisLine1</span>
+                <span class="method-start">8783 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine1() throws...)</span>
+                <span class="method-start">8791 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine2() throws...)</span>
+                <span class="method-start">8793 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisLine2</span>
+                <span class="method-start">8802 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine2() throws...)</span>
+                <span class="method-start">8817 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie() throws j...)</span>
+                <span class="method-start">8819 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisPie</span>
+                <span class="method-start">8852 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie() throws j...)</span>
+                <span class="method-start">8855 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie1() throws ...)</span>
+                <span class="method-start">8857 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisPie1</span>
+                <span class="method-start">8878 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie1() throws ...)</span>
+                <span class="method-start">8886 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie2() throws ...)</span>
+                <span class="method-start">8888 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testGetFeeAnalysisPie2</span>
+                <span class="method-start">8897 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie2() throws ...)</span>
+                <span class="method-start">8899 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">springTestContextAfterTestClass</span>
+                <span class="method-start">8900 ms</span>
+              </div> <!-- configuration-class after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.newland.boss.cib.crmp.settle.ReportControllerTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextBeforeTestClass</span>
+                <span class="method-start">8987 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">8989 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">setup</span>
+                <span class="method-start">9041 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.batchQueryTest())</span>
+                <span class="method-start">9113 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">batchQueryTest</span>
+                <span class="method-start">9114 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.batchQueryTest())</span>
+                <span class="method-start">9294 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.downloadExcelTest() throws java.io...)</span>
+                <span class="method-start">9299 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">downloadExcelTest</span>
+                <span class="method-start">9317 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.downloadExcelTest() throws java.io...)</span>
+                <span class="method-start">9320 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.jsonToIntegerArrayTest())</span>
+                <span class="method-start">9322 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">jsonToIntegerArrayTest</span>
+                <span class="method-start">9352 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.jsonToIntegerArrayTest())</span>
+                <span class="method-start">9497 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest())</span>
+                <span class="method-start">9499 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">queryDeptFeeListTest</span>
+                <span class="method-start">9513 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest())</span>
+                <span class="method-start">9581 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest1())</span>
+                <span class="method-start">9588 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">queryDeptFeeListTest1</span>
+                <span class="method-start">9596 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest1())</span>
+                <span class="method-start">9599 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.stringToIntegerArrTest())</span>
+                <span class="method-start">9602 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">stringToIntegerArrTest</span>
+                <span class="method-start">9611 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.stringToIntegerArrTest())</span>
+                <span class="method-start">9628 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel() throws java.lang...)</span>
+                <span class="method-start">9630 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel</span>
+                <span class="method-start">9639 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel() throws java.lang...)</span>
+                <span class="method-start">9649 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel1() throws java.lan...)</span>
+                <span class="method-start">9652 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel1</span>
+                <span class="method-start">9661 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel1() throws java.lan...)</span>
+                <span class="method-start">9664 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel2() throws java.lan...)</span>
+                <span class="method-start">9666 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel2</span>
+                <span class="method-start">9674 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel2() throws java.lan...)</span>
+                <span class="method-start">9677 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel3() throws java.lan...)</span>
+                <span class="method-start">9679 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel3</span>
+                <span class="method-start">9687 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel3() throws java.lan...)</span>
+                <span class="method-start">9691 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel4() throws java.lan...)</span>
+                <span class="method-start">9692 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel4</span>
+                <span class="method-start">9709 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel4() throws java.lan...)</span>
+                <span class="method-start">9713 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel5() throws java.lan...)</span>
+                <span class="method-start">9715 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel5</span>
+                <span class="method-start">9722 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel5() throws java.lan...)</span>
+                <span class="method-start">9724 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel6() throws java.lan...)</span>
+                <span class="method-start">9727 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testExportExcel6</span>
+                <span class="method-start">9737 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel6() throws java.lan...)</span>
+                <span class="method-start">9744 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport() throws java.la...)</span>
+                <span class="method-start">9746 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport</span>
+                <span class="method-start">9759 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport() throws java.la...)</span>
+                <span class="method-start">9761 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport1() throws java.l...)</span>
+                <span class="method-start">9763 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport1</span>
+                <span class="method-start">9775 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport1() throws java.l...)</span>
+                <span class="method-start">9784 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport2() throws java.l...)</span>
+                <span class="method-start">9786 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport2</span>
+                <span class="method-start">9798 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport2() throws java.l...)</span>
+                <span class="method-start">9804 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport3() throws java.l...)</span>
+                <span class="method-start">9806 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport3</span>
+                <span class="method-start">9828 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport3() throws java.l...)</span>
+                <span class="method-start">9846 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport4() throws java.l...)</span>
+                <span class="method-start">9848 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport4</span>
+                <span class="method-start">9860 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport4() throws java.l...)</span>
+                <span class="method-start">9864 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport5() throws java.l...)</span>
+                <span class="method-start">9865 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport5</span>
+                <span class="method-start">9875 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport5() throws java.l...)</span>
+                <span class="method-start">9882 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport6() throws java.l...)</span>
+                <span class="method-start">9884 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport6</span>
+                <span class="method-start">9892 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport6() throws java.l...)</span>
+                <span class="method-start">9897 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport7() throws java.l...)</span>
+                <span class="method-start">9899 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport7</span>
+                <span class="method-start">9910 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport7() throws java.l...)</span>
+                <span class="method-start">9914 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport8() throws java.l...)</span>
+                <span class="method-start">9916 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testPreviewReport8</span>
+                <span class="method-start">9925 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport8() throws java.l...)</span>
+                <span class="method-start">9927 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList())</span>
+                <span class="method-start">9929 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryFeeList</span>
+                <span class="method-start">9937 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList())</span>
+                <span class="method-start">9942 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList1())</span>
+                <span class="method-start">9943 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryFeeList1</span>
+                <span class="method-start">9954 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList1())</span>
+                <span class="method-start">9959 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList2())</span>
+                <span class="method-start">9961 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryFeeList2</span>
+                <span class="method-start">9973 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList2())</span>
+                <span class="method-start">9980 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList3())</span>
+                <span class="method-start">9988 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryFeeList3</span>
+                <span class="method-start">10016 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList3())</span>
+                <span class="method-start">10021 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList())</span>
+                <span class="method-start">10024 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryNotActiveUserList</span>
+                <span class="method-start">10049 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList())</span>
+                <span class="method-start">10054 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList1())</span>
+                <span class="method-start">10056 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryNotActiveUserList1</span>
+                <span class="method-start">10065 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList1())</span>
+                <span class="method-start">10076 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList())</span>
+                <span class="method-start">10078 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryThresholdList</span>
+                <span class="method-start">10087 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList())</span>
+                <span class="method-start">10091 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList1())</span>
+                <span class="method-start">10113 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryThresholdList1</span>
+                <span class="method-start">10126 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList1())</span>
+                <span class="method-start">10136 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList())</span>
+                <span class="method-start">10139 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryTopNList</span>
+                <span class="method-start">10177 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList())</span>
+                <span class="method-start">10185 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList1())</span>
+                <span class="method-start">10189 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryTopNList1</span>
+                <span class="method-start">10203 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList1())</span>
+                <span class="method-start">10211 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">springTestContextAfterTestClass</span>
+                <span class="method-start">10213 ms</span>
+              </div> <!-- configuration-class after -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.newland.boss.cib.crmp.settle.CallListControllerTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextBeforeTestClass</span>
+                <span class="method-start">10217 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">springTestContextPrepareTestInstance</span>
+                <span class="method-start">10218 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-class before">
+                <span class="method-name">setup</span>
+                <span class="method-start">10257 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="configuration-method before">
+                <span class="method-name">springTestContextBeforeTestMethod(public void com.newland.boss.cib.crmp.settle.CallListControllerTest.testQueryCallList() throws java....)</span>
+                <span class="method-start">10353 ms</span>
+              </div> <!-- configuration-method before -->
+              <div class="test-method">
+                <span class="method-name">testQueryCallList</span>
+                <span class="method-start">10355 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">springTestContextAfterTestMethod(public void com.newland.boss.cib.crmp.settle.CallListControllerTest.testQueryCallList() throws java....)</span>
+                <span class="method-start">11814 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-class after">
+                <span class="method-name">springTestContextAfterTestClass</span>
+                <span class="method-start">11815 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+</html>

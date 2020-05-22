@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperatorServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.service.impl</a> &gt; <span class="el_source">OperatorServiceImpl.java</span></div><h1>OperatorServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.kpi.admin.dao.OperatorDao;
+import com.newland.boss.kpi.admin.model.Operator;
+import com.newland.boss.kpi.admin.service.OperatorService;
+import com.newland.boss.kpi.entity.Organization;
+import com.newland.boss.kpi.util.MD5Util;
+
+@Component
+<span class="fc" id="L21">public class OperatorServiceImpl implements OperatorService {</span>
+	
+	@Autowired
+	private OperatorDao operatorDao;
+	
+	@Override
+	public boolean loginJudge(Operator operator) {
+		
+<span class="nc" id="L29">		Integer operatorId = operator.getOperatorId();</span>
+<span class="nc" id="L30">		String password = MD5Util.Encrypt(operator.getPassword());</span>
+<span class="nc" id="L31">		Map&lt;String,Object&gt; map = new HashMap&lt;String,Object&gt;();</span>
+<span class="nc" id="L32">		map.put(&quot;operatorId&quot;, operatorId);</span>
+<span class="nc" id="L33">		map.put(&quot;password&quot;, password);</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		return operatorDao.selectOpeByIdAndPassword(map) != null;</span>
+	}
+
+	@Override
+	public List&lt;Operator&gt; findAllOperator(Map&lt;String, Object&gt; params) {
+<span class="nc" id="L40">		return operatorDao.selectAllOperator(params);</span>
+	}
+
+	@Override
+	public Operator showOneOperator(Operator operator) {
+<span class="nc" id="L45">		return operatorDao.selectOpeById(operator);</span>
+	}
+
+	@Override
+	public void editOperator(Operator operator) {
+<span class="nc" id="L50">		operatorDao.updateOperator(operator);</span>
+<span class="nc" id="L51">	}</span>
+
+	@Override
+	public void addOperator(Operator operator) {
+<span class="nc" id="L55">		operatorDao.insertOperator(operator);</span>
+<span class="nc" id="L56">	}</span>
+
+	@Override
+	public List&lt;Operator&gt; searchOperator(Map&lt;String, Object&gt; params) {
+<span class="nc" id="L60">		return operatorDao.fuzzySearchOperator(params);</span>
+
+	}
+
+	@Override
+	public void removeOperator(String operJson) {
+<span class="nc" id="L66">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L67">		JsonElement jsonEl = jsonParser.parse(operJson);</span>
+<span class="nc" id="L68">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L69">		JsonArray operArray = jsonObj.get(&quot;operatorIdArray&quot;).getAsJsonArray(); //选中的机构</span>
+		
+		//循环删除操作员
+<span class="nc bnc" id="L72" title="All 2 branches missed.">		for (int i = 0;i &lt; operArray.size();i++) {</span>
+<span class="nc" id="L73">			Integer operatorId = operArray.get(i).getAsInt();</span>
+<span class="nc" id="L74">			operatorDao.deleteOperator(operatorId);</span>
+		}
+<span class="nc" id="L76">	}</span>
+
+	@Override
+	public List&lt;Operator&gt; findIdAndNameByOrgId(Organization organization) {
+<span class="nc" id="L80">		return operatorDao.selectIdAndNameByOrgId(organization.getOrgId());</span>
+	}
+
+	@Override
+	public void removeOperator(List&lt;Operator&gt; opers) {
+<span class="nc bnc" id="L85" title="All 4 branches missed.">		if(opers == null || opers.isEmpty()) {</span>
+<span class="nc" id="L86">			return;</span>
+		}
+		//循环删除操作员
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		for (Operator operator : opers) {</span>
+<span class="nc" id="L90">			operatorDao.insertOperatorHisById(operator.getOperatorId());</span>
+<span class="nc" id="L91">			operatorDao.deleteOperator(operator.getOperatorId());</span>
+<span class="nc" id="L92">		}</span>
+<span class="nc" id="L93">	}</span>
+
+	@Override
+	public List&lt;Operator&gt; searchOperatorWithRole(Map&lt;String, Object&gt; params) {
+<span class="nc" id="L97">		return operatorDao.fuzzySearchOperator(params);</span>
+	}
+
+	@Override
+	public void insertOperatorHisById(int operatorId) {
+<span class="nc" id="L102">		operatorDao.insertOperatorHisById(operatorId);</span>
+<span class="nc" id="L103">	}</span>
+
+	@Override
+	public void resetOpersPwd(List&lt;Operator&gt; opers, int modifyOperatorId) {
+<span class="nc bnc" id="L107" title="All 4 branches missed.">		if(opers == null || opers.isEmpty()) {</span>
+<span class="nc" id="L108">			return;</span>
+		}
+<span class="nc" id="L110">		Map&lt;String, Object&gt; params = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L111">		params.put(&quot;password&quot;, MD5Util.Encrypt(&quot;123456&quot;));</span>
+<span class="nc" id="L112">		params.put(&quot;modifyOperatorId&quot;, modifyOperatorId);</span>
+<span class="nc" id="L113">		params.put(&quot;opers&quot;, opers);</span>
+<span class="nc" id="L114">		operatorDao.resetOpersPwd(params);</span>
+<span class="nc" id="L115">	}</span>
+
+	@Override
+	public void changeOperPwd(Map&lt;String, Object&gt; params) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">		if(params == null) {</span>
+<span class="nc" id="L120">			return;</span>
+		}
+<span class="nc" id="L122">		operatorDao.changeOperPwd(params);</span>
+<span class="nc" id="L123">	}</span>
+
+	@Override
+	public Operator findByLoginName(String loginName) {
+<span class="nc" id="L127">		return operatorDao.findByLoginName(loginName);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

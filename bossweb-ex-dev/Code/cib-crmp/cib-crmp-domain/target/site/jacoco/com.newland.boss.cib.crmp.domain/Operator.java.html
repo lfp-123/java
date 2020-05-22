@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Operator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">Operator.java</span></div><h1>Operator.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.Date;
+
+public class Operator {
+
+    private Integer operatorId;
+    private String loginName;
+    private String operatorName;
+    private String password;
+    private Integer operatorStatus;
+    private Integer operatorLevel;
+
+    private Date createTime;
+    private Date modifyTime;  //修改时间
+    private Integer modifyOperatorId;  //修改的操作员工号
+
+    private String directNumber;
+    private String seatNumber;
+    private String mobileNumber;
+    private Integer isSync;
+
+    private Organization organization;
+
+
+    public Operator() {
+<span class="fc" id="L27">        super();</span>
+<span class="fc" id="L28">    }</span>
+
+    public String getOperatorName() {
+<span class="fc" id="L31">        return operatorName;</span>
+    }
+
+    public void setOperatorName(String operatorName) {
+<span class="fc" id="L35">        this.operatorName = operatorName;</span>
+<span class="fc" id="L36">    }</span>
+
+    public String getLoginName() {
+<span class="fc" id="L39">        return loginName;</span>
+    }
+
+    public void setLoginName(String loginName) {
+<span class="fc" id="L43">        this.loginName = loginName;</span>
+<span class="fc" id="L44">    }</span>
+
+    public Integer getOperatorId() {
+<span class="fc" id="L47">        return operatorId;</span>
+    }
+
+    public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L51">        this.operatorId = operatorId;</span>
+<span class="fc" id="L52">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L55">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L59">        this.password = password;</span>
+<span class="fc" id="L60">    }</span>
+
+    public Integer getOperatorStatus() {
+<span class="fc" id="L63">        return operatorStatus;</span>
+    }
+
+    public void setOperatorStatus(Integer operatorStatus) {
+<span class="fc" id="L67">        this.operatorStatus = operatorStatus;</span>
+<span class="fc" id="L68">    }</span>
+
+    public Integer getOperatorLevel() {
+<span class="fc" id="L71">        return operatorLevel;</span>
+    }
+
+    public void setOperatorLevel(Integer operatorLevel) {
+<span class="fc" id="L75">        this.operatorLevel = operatorLevel;</span>
+<span class="fc" id="L76">    }</span>
+
+    public Date getCreateTime() {
+<span class="fc" id="L79">        return createTime;</span>
+    }
+
+    public void setCreateTime(Date createTime) {
+<span class="fc" id="L83">        this.createTime = createTime;</span>
+<span class="fc" id="L84">    }</span>
+
+    public Date getModifyTime() {
+<span class="fc" id="L87">        return modifyTime;</span>
+    }
+
+    public void setModifyTime(Date modifyTime) {
+<span class="fc" id="L91">        this.modifyTime = modifyTime;</span>
+<span class="fc" id="L92">    }</span>
+
+    public Integer getModifyOperatorId() {
+<span class="fc" id="L95">        return modifyOperatorId;</span>
+    }
+
+    public void setModifyOperatorId(Integer modifyOperatorId) {
+<span class="fc" id="L99">        this.modifyOperatorId = modifyOperatorId;</span>
+<span class="fc" id="L100">    }</span>
+
+
+    /**
+     * Getter for property 'directNumber'.
+     *
+     * @return Value for property 'directNumber'.
+     */
+    public String getDirectNumber() {
+<span class="fc" id="L109">        return directNumber;</span>
+    }
+
+    /**
+     * Setter for property 'directNumber'.
+     *
+     * @param directNumber Value to set for property 'directNumber'.
+     */
+    public void setDirectNumber(String directNumber) {
+<span class="fc" id="L118">        this.directNumber = directNumber;</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Getter for property 'seatNumber'.
+     *
+     * @return Value for property 'seatNumber'.
+     */
+    public String getSeatNumber() {
+<span class="fc" id="L127">        return seatNumber;</span>
+    }
+
+    /**
+     * Setter for property 'seatNumber'.
+     *
+     * @param seatNumber Value to set for property 'seatNumber'.
+     */
+    public void setSeatNumber(String seatNumber) {
+<span class="fc" id="L136">        this.seatNumber = seatNumber;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Getter for property 'mobileNumber'.
+     *
+     * @return Value for property 'mobileNumber'.
+     */
+    public String getMobileNumber() {
+<span class="fc" id="L145">        return mobileNumber;</span>
+    }
+
+    /**
+     * Setter for property 'mobileNumber'.
+     *
+     * @param mobileNumber Value to set for property 'mobileNumber'.
+     */
+    public void setMobileNumber(String mobileNumber) {
+<span class="fc" id="L154">        this.mobileNumber = mobileNumber;</span>
+<span class="fc" id="L155">    }</span>
+
+    /**
+     * Getter for property 'isSync'.
+     *
+     * @return Value for property 'isSync'.
+     */
+    public Integer getIsSync() {
+<span class="fc" id="L163">        return isSync;</span>
+    }
+
+    /**
+     * Setter for property 'isSync'.
+     *
+     * @param isSync Value to set for property 'isSync'.
+     */
+    public void setIsSync(Integer isSync) {
+<span class="fc" id="L172">        this.isSync = isSync;</span>
+<span class="fc" id="L173">    }</span>
+
+    /**
+     * Getter for property 'organization'.
+     *
+     * @return Value for property 'organization'.
+     */
+    public Organization getOrganization() {
+<span class="fc" id="L181">        return organization;</span>
+    }
+
+    /**
+     * Setter for property 'organization'.
+     *
+     * @param organization Value to set for property 'organization'.
+     */
+    public void setOrganization(Organization organization) {
+<span class="fc" id="L190">        this.organization = organization;</span>
+<span class="fc" id="L191">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L195">        return &quot;Operator [operatorId=&quot; + operatorId + &quot;, operatorName=&quot; + operatorName + &quot;, password=&quot; + password</span>
+                + &quot;, operatorStatus=&quot; + operatorStatus + &quot;, operatorLevel=&quot; + operatorLevel + &quot;, createTime=&quot;
+                + createTime + &quot;, modifyTime=&quot; + modifyTime + &quot;, modifyOperatorId=&quot; + modifyOperatorId + &quot;]&quot;;
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

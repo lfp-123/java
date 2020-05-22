@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.admin.dao.RoleDao">
+
+	<resultMap type="com.newland.boss.kpi.admin.model.Role" id="roleResultMap">
+		<id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+		<result column="ROLE_ALIAS" property="roleAlias" jdbcType="VARCHAR" />
+		<result column="ROLE_STATUS" property="roleStatus" jdbcType="INTEGER" />
+		<result column="ROLE_DESC" property="roleDesc" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_OPERATOR_ID" property="modifyOperatorId" jdbcType="INTEGER" />
+		<collection property="resourceList" javaType="java.util.List" ofType="com.newland.boss.kpi.admin.model.Resource">
+			<id column="RESOURCE_ID" property="resourceId" jdbcType="INTEGER" />
+			<result column="SUPER_RESOURCE_ID" property="superResourceId" jdbcType="INTEGER" />
+			<result column="RESOURCE_NAME" property="resourceName" jdbcType="VARCHAR" />
+			<result column="RESOURCE_URL" property="resourceUrl" jdbcType="VARCHAR" />
+			<result column="RESOURCE_TYPE" property="resourceType" jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectAllRole" resultMap="roleResultMap">
+		SELECT ROLE_ID,ROLE_NAME,ROLE_ALIAS,ROLE_STATUS,ROLE_DESC
+	        ,TO_CHAR(CREATE_TIME,'yyyy-mm-dd hh24:mi:ss') CREATE_TIME
+	        ,TO_CHAR(MODIFY_TIME,'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,MODIFY_OPERATOR_ID
+	        FROM T_ROLE 
+	      WHERE ROLE_ID NOT IN (9999, 9998) 
+	      ORDER BY ROLE_ID
+	</select>
+
+	<!-- 添加角色 -->
+    <insert id="insertRole" parameterType="com.newland.boss.kpi.admin.model.Role">
+    	<selectKey keyProperty="roleId" resultType="int" order="BEFORE"> 
+             select seq_role.nextval from dual 
+        </selectKey>
+		INSERT INTO T_ROLE(ROLE_ID,ROLE_NAME,ROLE_ALIAS,ROLE_STATUS,ROLE_DESC,CREATE_TIME,MODIFY_TIME
+			,MODIFY_OPERATOR_ID)
+			values(#{roleId},#{roleName},'ROLE_'||${roleId},#{roleStatus},#{roleDesc,jdbcType=VARCHAR},sysdate
+			,#{modifyTime,jdbcType=VARCHAR},#{modifyOperatorId})
+	</insert>
+    
+    <!-- 通过id查找 -->
+    <select id="selectRoleById" resultMap="roleResultMap">
+		SELECT * FROM T_ROLE WHERE ROLE_ID = #{roleId}
+	</select>
+	
+	<!-- 删除角色 -->
+	<delete id="deleteRole">
+		DELETE FROM T_ROLE WHERE ROLE_ID = #{roleId}
+	</delete>
+	
+	<!-- 更新角色信息 -->
+	<update id="updateRole" parameterType="com.newland.boss.kpi.admin.model.Role">
+    	 UPDATE T_ROLE SET ROLE_NAME = #{roleName},ROLE_ALIAS = #{roleAlias},
+    	 	ROLE_STATUS = #{roleStatus},ROLE_DESC = #{roleDesc},
+    	 	MODIFY_TIME = sysdate, MODIFY_OPERATOR_ID = #{modifyOperatorId}
+    	 	WHERE ROLE_ID = #{roleId}
+    </update>
+    
+    <!-- 模糊搜索 -->
+	<select id="fuzzySearchRole" resultMap="roleResultMap">
+		SELECT ROLE_ID,ROLE_NAME,ROLE_ALIAS,ROLE_STATUS,ROLE_DESC
+	        ,TO_CHAR(CREATE_TIME,'yyyy-mm-dd hh24:mi:ss') CREATE_TIME
+	        ,TO_CHAR(MODIFY_TIME,'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,MODIFY_OPERATOR_ID 
+	        FROM T_ROLE WHERE ROLE_ID NOT IN (9999, 9998)
+		<if test="roleId!=null">
+			AND ROLE_ID = #{roleId} 
+		</if>
+		<if test="roleName!=null">
+			AND ROLE_NAME LIKE '%'||#{roleName}||'%' ESCAPE '/' 
+		</if>
+		<if test="roleStatus!=null and roleStatus!=''">
+			AND a.ROLE_STATUS = #{roleStatus}  
+		</if>
+		ORDER BY ROLE_ID
+	</select>
+	
+	<select id="selectAllRolesWithResource" parameterType="com.newland.boss.kpi.admin.model.Role" resultMap="roleResultMap">
+		SELECT a.ROLE_ID,
+	       ROLE_NAME,
+	       ROLE_ALIAS,
+	       ROLE_STATUS,
+	       ROLE_DESC,
+	       TO_CHAR(a.CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') CREATE_TIME,
+	       TO_CHAR(a.MODIFY_TIME, 'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,
+	       a.MODIFY_OPERATOR_ID,
+	       C.RESOURCE_ID,
+	       C.RESOURCE_NAME,
+	       C.RESOURCE_URL,
+	       C.RESOURCE_TYPE,
+	       C.RESOURCE_ORDER,
+	       C.SUPER_RESOURCE_ID
+	  FROM T_ROLE A
+	  left join T_ROLE_AUTH B on A.ROLE_ID = B.ROLE_ID
+	  left join T_RESOURCE C on B.RESOURCE_ID = C.RESOURCE_ID
+	 WHERE A.ROLE_ID NOT IN (9999, 9998)
+		<if test="roleId!=null and roleId!=''">
+			AND a.ROLE_ID = #{roleId} 
+		</if>
+		<if test="roleName!=null and roleName!=''">
+			AND a.ROLE_NAME LIKE '%'||#{roleName}||'%' ESCAPE '/'
+		</if>
+		<if test="roleStatus!=null">
+			AND a.ROLE_STATUS = #{roleStatus}  
+		</if>
+	 ORDER BY a.ROLE_ID
+	</select>
+	
+	<select id="selectOperatorRole" parameterType="java.util.Map" resultMap="roleResultMap">
+    	SELECT c.role_id,
+		       c.role_name,
+		       c.role_alias,
+		       c.role_desc
+		  FROM t_operator_role b
+		  left join t_role c on b.role_id = c.role_id
+		 where b.OPERATOR_ID  = #{operatorId}  
+    </select>
+</mapper>

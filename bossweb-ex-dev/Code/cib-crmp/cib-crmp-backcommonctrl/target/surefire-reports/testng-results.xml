@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="1" total="3" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="100" started-at="2020-05-13T08:32:01Z" finished-at="2020-05-13T08:32:01Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="100" started-at="2020-05-13T08:32:01Z" finished-at="2020-05-13T08:32:01Z">
+      <class name="com.newland.boss.cib.crmp.common.sm.SM4UtilsTest">
+        <test-method status="PASS" signature="testEncryptDataECB()[pri:0, instance:com.newland.boss.cib.crmp.common.sm.SM4UtilsTest@12abdfb]" name="testEncryptDataECB" duration-ms="13" started-at="2020-05-13T08:32:01Z" finished-at="2020-05-13T08:32:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEncryptDataECB -->
+      </class> <!-- com.newland.boss.cib.crmp.common.sm.SM4UtilsTest -->
+      <class name="com.newland.boss.cib.crmp.common.mq.ConstantMqTest">
+        <test-method status="PASS" signature="testCreate()[pri:0, instance:com.newland.boss.cib.crmp.common.mq.ConstantMqTest@61d34b4]" name="testCreate" duration-ms="26" started-at="2020-05-13T08:32:01Z" finished-at="2020-05-13T08:32:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCreate -->
+      </class> <!-- com.newland.boss.cib.crmp.common.mq.ConstantMqTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

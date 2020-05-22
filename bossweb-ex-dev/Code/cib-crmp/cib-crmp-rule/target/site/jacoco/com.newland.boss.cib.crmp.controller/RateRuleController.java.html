@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RateRuleController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-rule</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.controller</a> &gt; <span class="el_source">RateRuleController.java</span></div><h1>RateRuleController.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.alibaba.fastjson.JSONArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.cib.crmp.domain.RateRule;
+import com.newland.boss.cib.crmp.service.RateRuleService;
+import com.newland.boss.kpi.entity.OperateLog;
+import com.newland.boss.kpi.server.OperateLogService;
+
+@RestController
+<span class="fc" id="L29">public class RateRuleController {</span>
+
+    @Autowired
+    private RateRuleService rateRuleService;
+
+    @Autowired
+    private OperateLogService operateLogService;
+
+<span class="fc" id="L37">    private static final Logger log = LogManager.getLogger(RateRuleController.class);</span>
+
+    // 操作日志
+    private void addOperateLog(Integer operateId, Integer operateModule, Integer operateType, String logInfo) {
+        // 添加操作日志到记录
+<span class="fc" id="L42">        OperateLog operateLog = new OperateLog();</span>
+<span class="fc" id="L43">        operateLog.setOperatorId(operateId);</span>
+<span class="fc" id="L44">        operateLog.setOperateModule(operateModule);</span>
+<span class="fc" id="L45">        operateLog.setOperateType(operateType);</span>
+<span class="fc" id="L46">        operateLog.setOperateDesc(logInfo);</span>
+<span class="fc" id="L47">        operateLogService.addLog(operateLog);</span>
+<span class="fc" id="L48">    }</span>
+
+    // 搜索资费规则
+    @RequestMapping(value = &quot;/selectRateRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String selectRateRule(@RequestBody RateRule rateRule) {
+<span class="fc" id="L53">        List&lt;RateRule&gt; rateRuleList = rateRuleService.searchRateRule(rateRule);</span>
+<span class="fc" id="L54">        return JSONArray.toJSONString(rateRuleList);</span>
+    }
+
+    // 搜索可分配的资费规则
+    @RequestMapping(value = &quot;/selectRateRuleToDistribute&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String selectRateRuleToDistribute(@RequestBody RateRule rateRule) {
+<span class="fc" id="L60">        List&lt;RateRule&gt; rateRuleList = rateRuleService.searchRateRuleToDistribute(rateRule);</span>
+<span class="fc" id="L61">        return JSONArray.toJSONString(rateRuleList);</span>
+    }
+
+    // 添加资费规则
+    @RequestMapping(value = &quot;/addRateRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String addRateRule(@RequestBody RateRule rateRule) {
+<span class="fc" id="L67">        Map&lt;String, String&gt; map = rateRuleService.addRateRule(rateRule);</span>
+<span class="fc" id="L68">        addOperateLog(rateRule.getOperatorId(), 13, 1, &quot;添加资费规则:rateItemId=&quot; + rateRule.getRateItemId());</span>
+<span class="fc" id="L69">        return JSONArray.toJSONString(map);</span>
+    }
+
+    // 更新规则
+    @RequestMapping(value = &quot;/editRateRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String editRateRule(@RequestBody RateRule rateRule) {
+<span class="fc" id="L75">        Map&lt;String, String&gt; map = rateRuleService.editRateRule(rateRule);</span>
+<span class="fc" id="L76">        addOperateLog(rateRule.getOperatorId(), 13, 3, &quot;更新资费规则:rateItemId=&quot; + rateRule.getRateItemId());</span>
+<span class="fc" id="L77">        return JSONArray.toJSONString(map);</span>
+    }
+
+    // 批量删除规则
+    @RequestMapping(value = &quot;/deleteRateRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String deleteRateRule(@RequestBody String rateRuleJson) {
+<span class="fc" id="L83">        rateRuleService.removeRateRule(rateRuleJson);</span>
+<span class="fc" id="L84">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L85">        JsonElement jsonEl = jsonParser.parse(rateRuleJson);</span>
+<span class="fc" id="L86">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L87">        Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+<span class="fc" id="L88">        addOperateLog(operatorId, 13, 2, &quot;批量删除资费规则&quot; + rateRuleJson);</span>
+<span class="fc" id="L89">        return selectRateRule(new RateRule());</span>
+    }
+
+    // 批量修改规则状态
+    @RequestMapping(value = &quot;/updateRateRuleStatus&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String updateRateRuleStatus(@RequestBody String rateRuleJson) {
+<span class="fc" id="L95">        JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L96">        JsonElement jsonEl = jsonParser.parse(rateRuleJson);</span>
+<span class="fc" id="L97">        JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L98">        Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+<span class="fc" id="L99">        Map&lt;String, String&gt; map = rateRuleService.editRateRuleStatus(rateRuleJson);</span>
+<span class="fc" id="L100">        addOperateLog(operatorId, 13, 3, &quot;批量修改资费规则状态&quot; + rateRuleJson);</span>
+<span class="fc" id="L101">        return JSONArray.toJSONString(map);</span>
+    }
+
+    // 导出资费规则
+    @RequestMapping(value = &quot;/exportRateRule&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+    public String exportRateRule(@RequestBody RateRule rateRule) {
+<span class="fc" id="L107">        Map&lt;String, String&gt; resultMap = rateRuleService.exportRateRule(rateRuleService.searchRateRule(rateRule));</span>
+<span class="fc" id="L108">        addOperateLog(rateRule.getOperatorId(), 13, 5, &quot;导出资费规则&quot;);</span>
+<span class="fc" id="L109">        return JSONArray.toJSONString(resultMap);</span>
+    }
+
+    // 导入资费规则
+    @RequestMapping(value = &quot;/importRateRule&quot;)
+    public Map&lt;String, String&gt; importRateRule(@RequestParam(value = &quot;file&quot;, required = true) MultipartFile file,
+            @RequestParam(value = &quot;operatorId&quot;, required = true) Integer operatorId) {
+<span class="nc" id="L116">        Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+        // 进一步判断文件是否为空（即判断其大小是否为0或其名称是否为null）
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (file.getSize() == 0) {</span>
+<span class="nc" id="L119">            map.put(&quot;success&quot;, &quot;文件为空&quot;);</span>
+<span class="nc" id="L120">            return map;</span>
+        }
+<span class="nc" id="L122">        String newFileName = &quot;RateRule&quot; + &quot;.xls&quot;;</span>
+        // 创建文件
+<span class="nc" id="L124">        String dir = System.getProperty(&quot;user.dir&quot;) + &quot;/upload/&quot;;</span>
+<span class="nc" id="L125">        File dest = new File(dir, newFileName);</span>
+        // 判断文件的目录是否存在，不存在则创建
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (!dest.getParentFile().exists()) {</span>
+<span class="nc" id="L128">            dest.getParentFile().mkdirs();</span>
+        }
+        // 上传到指定目录
+        try {
+<span class="nc" id="L132">            file.transferTo(dest);</span>
+<span class="nc" id="L133">            String path = dir + newFileName;</span>
+<span class="nc" id="L134">            map = rateRuleService.importRateRule(path, operatorId);</span>
+<span class="nc" id="L135">            addOperateLog(operatorId, 13, 6, &quot;导入资费规则&quot;);</span>
+<span class="nc" id="L136">        } catch (IOException e) {</span>
+<span class="nc" id="L137">            log.debug(e.getMessage());</span>
+<span class="nc" id="L138">            map.put(&quot;info&quot;, e.getMessage());</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return map;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

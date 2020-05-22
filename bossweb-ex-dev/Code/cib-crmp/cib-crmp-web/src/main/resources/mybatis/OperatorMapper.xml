@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.kpi.admin.dao.OperatorDao">
+
+	<resultMap type="com.newland.boss.kpi.admin.model.Operator" id="operatorResultMap">
+		<id column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<result column="OPERATOR_NAME" property="operatorName" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="OPERATOR_STATUS" property="operatorStatus" jdbcType="INTEGER" />
+		<result column="OPERATOR_LEVEL" property="operatorLevel" jdbcType="INTEGER" />
+		<result column="DIRECT_NUMBER" property="directNumber" jdbcType="VARCHAR" />
+		<result column="SEAT_NUMBER" property="seatNumber" jdbcType="VARCHAR" />
+		<result column="MOBILE_NUMBER" property="mobileNumber" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_OPERATOR_ID" property="modifyOperatorId" jdbcType="INTEGER" />
+		<result column="ORGID" property="orgId" jdbcType="INTEGER" />
+		<result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+		<collection property="orgList" javaType="java.util.List" ofType="com.newland.boss.kpi.entity.Organization">
+			<id column="ORG_ID" property="orgId" jdbcType="INTEGER" />
+			<result column="SUPER_ORG_ID" property="superOrgId" jdbcType="INTEGER" />
+			<result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+			<result column="ORG_STATUS" property="orgStatus" jdbcType="INTEGER" />
+			<result column="ORG_DESC" property="orgDesc" jdbcType="VARCHAR" />
+			<result column="ORG_NAME_FULL" property="orgNameFull" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectOpeByIdAndPassword" resultMap="operatorResultMap">
+		SELECT * FROM
+			T_OPERATOR WHERE OPERATOR_ID = #{operatorId}
+			AND PASSWORD = #{password} AND OPERATOR_STATUS = 0
+	</select>
+
+	<select id="selectAllOperator" resultMap="operatorResultMap">
+		SELECT a.OPERATOR_ID,
+		       OPERATOR_NAME,
+		       PASSWORD,
+		       OPERATOR_STATUS,
+		       OPERATOR_LEVEL,
+		       DIRECT_NUMBER,
+		       SEAT_NUMBER,
+		       MOBILE_NUMBER,
+		       LOGIN_NAME,
+		       TO_CHAR(a.CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') CREATE_TIME,
+		       TO_CHAR(a.MODIFY_TIME, 'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,
+		       a.MODIFY_OPERATOR_ID,
+		       c.org_id ORGID,
+		       c.org_id,
+		       c.org_name,
+		       c.ORG_NAME_FULL
+		  FROM T_OPERATOR a
+		  left join T_OPER_ORG_RELA b on a.operator_id = b.operator_id and b.rela_status = 0
+		  left join t_organization c on b.org_id = c.org_id
+		 ORDER BY OPERATOR_ID
+	</select>
+	
+	<select id="selectOpeById" resultMap="operatorResultMap">
+		SELECT * FROM t_operator WHERE OPERATOR_ID = #{operatorId}
+	</select>
+	
+	<!-- 更新操作员信息 -->
+	<update id="updateOperator" parameterType="com.newland.boss.kpi.admin.model.Operator">
+    	 UPDATE t_operator SET OPERATOR_NAME = #{operatorName},OPERATOR_STATUS = #{operatorStatus}, OPERATOR_LEVEL = #{operatorLevel}, 
+				DIRECT_NUMBER = #{directNumber,jdbcType=VARCHAR},
+				SEAT_NUMBER = #{seatNumber,jdbcType=VARCHAR},
+				MOBILE_NUMBER = #{mobileNumber,jdbcType=VARCHAR},
+    	 	MODIFY_OPERATOR_ID = #{modifyOperatorId}, MODIFY_TIME = sysdate 
+    	 WHERE OPERATOR_ID = #{operatorId}
+    </update>
+    
+    <!-- 添加操作员 -->
+    <insert id="insertOperator" parameterType="com.newland.boss.kpi.admin.model.Operator">
+    	<selectKey keyProperty="operatorId" resultType="int" order="BEFORE"> 
+             select seq_operator.nextval from dual 
+        </selectKey>
+		INSERT INTO t_operator(OPERATOR_ID,OPERATOR_NAME,PASSWORD,OPERATOR_STATUS,OPERATOR_LEVEL,DIRECT_NUMBER, SEAT_NUMBER,
+		       MOBILE_NUMBER,CREATE_TIME,MODIFY_TIME,MODIFY_OPERATOR_ID, LOGIN_NAME)
+			VALUES(#{operatorId},#{operatorName},#{password},#{operatorStatus},#{operatorLevel},#{directNumber,jdbcType=VARCHAR},#{seatNumber,jdbcType=VARCHAR},
+			#{mobileNumber,jdbcType=VARCHAR},sysdate,#{modifyTime,jdbcType=VARCHAR},#{modifyOperatorId}, #{loginName,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 模糊搜索 -->
+	<select id="fuzzySearchOperator" resultMap="operatorResultMap">
+		SELECT a.OPERATOR_ID,
+		       OPERATOR_NAME,
+		       PASSWORD,
+		       OPERATOR_STATUS,
+		       OPERATOR_LEVEL,
+		       DIRECT_NUMBER,
+		       SEAT_NUMBER,
+		       MOBILE_NUMBER,
+		       LOGIN_NAME,
+		       TO_CHAR(a.CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') CREATE_TIME,
+		       TO_CHAR(a.MODIFY_TIME, 'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,
+		       a.MODIFY_OPERATOR_ID,
+		       c.org_id ORGID,
+		       c.ORG_ID,
+		       c.ORG_NAME,
+		       c.ORG_NAME_FULL
+		  FROM T_OPERATOR a
+		  left join T_OPER_ORG_RELA b on a.operator_id = b.operator_id and b.rela_status = 0
+		  left join t_organization c on b.org_id = c.org_id
+		 where 1 = 1 
+			<if test="loginName!=null and loginName!=''">
+			AND a.LOGIN_NAME  = #{loginName}  
+			</if>
+			<if test="operatorName!=null and operatorName!=''">
+			AND a.OPERATOR_NAME LIKE '%'||#{operatorName}||'%' ESCAPE '/' 
+			</if>
+			<if test="operatorStatus!=null and operatorStatus!=''">
+			AND a.OPERATOR_STATUS = #{operatorStatus}
+			</if>
+		 ORDER BY a.OPERATOR_ID
+	</select>
+    
+    <!-- 删除操作员 -->
+    <delete id="deleteOperator">
+    	DELETE FROM T_OPERATOR WHERE OPERATOR_ID = #{operatorId}
+    </delete>
+    
+    <!-- 查找该表的最后一条记录 -->
+    <select id="selectLastOperator" resultMap="operatorResultMap">
+    	SELECT * FROM T_OPERATOR WHERE OPERATOR_ID = (SELECT MAX(OPERATOR_ID) FROM T_OPERATOR)
+    </select>
+    
+    <!-- 根据机构ID查找该机构下的所有操作员工号和姓名 -->
+    <select id="selectIdAndNameByOrgId" resultMap="operatorResultMap">
+    	SELECT O.OPERATOR_ID,O.OPERATOR_NAME,O.LOGIN_NAME
+			FROM  T_OPERATOR O,T_OPER_ORG_RELA R
+			WHERE o.operator_id=r.operator_id and R.ORG_ID = #{orgId} AND OPERATOR_STATUS=0
+    </select>
+	
+    <!-- 插入历史表 -->
+    <insert id="insertOperatorHisById" parameterType="int">
+		INSERT INTO T_OPERATOR_HIS (OPERATOR_ID,OPERATOR_NAME,PASSWORD,OPERATOR_STATUS,OPERATOR_LEVEL,DIRECT_NUMBER, SEAT_NUMBER,
+		       MOBILE_NUMBER,CREATE_TIME,MODIFY_TIME,MODIFY_OPERATOR_ID,LOGIN_NAME)
+		SELECT OPERATOR_ID,OPERATOR_NAME,PASSWORD,OPERATOR_STATUS,OPERATOR_LEVEL,DIRECT_NUMBER, SEAT_NUMBER,
+		       MOBILE_NUMBER,CREATE_TIME,sysdate,MODIFY_OPERATOR_ID,LOGIN_NAME
+		FROM T_OPERATOR WHERE OPERATOR_ID = #{operatorId}
+	</insert>
+	
+	<update id="resetOpersPwd" parameterType="java.util.Map">
+		UPDATE t_operator SET PASSWORD = #{password}, 
+			MODIFY_OPERATOR_ID = #{modifyOperatorId},
+    	 	MODIFY_TIME = sysdate 
+		WHERE OPERATOR_ID in 
+		<foreach item="oper" index="index" collection="opers" open="(" separator="," close=")">
+    			#{oper.operatorId}
+		</foreach>
+    </update>
+    
+    <update id="changeOperPwd"  parameterType="java.util.Map">
+		UPDATE t_operator SET PASSWORD = #{password}, 
+			MODIFY_OPERATOR_ID = #{modifyOperatorId},
+    	 	MODIFY_TIME = sysdate 
+		WHERE OPERATOR_ID = #{operatorId}
+    </update>
+    
+    <select id="findByLoginName" parameterType="java.lang.String" resultMap="operatorResultMap">
+    	SELECT a.OPERATOR_ID,
+		       OPERATOR_NAME,
+		       PASSWORD,
+		       OPERATOR_STATUS,
+		       OPERATOR_LEVEL,
+		       DIRECT_NUMBER,
+		       SEAT_NUMBER,
+		       MOBILE_NUMBER,
+		       LOGIN_NAME,
+		       TO_CHAR(a.CREATE_TIME, 'yyyy-mm-dd hh24:mi:ss') CREATE_TIME,
+		       TO_CHAR(a.MODIFY_TIME, 'yyyy-mm-dd hh24:mi:ss') MODIFY_TIME,
+		       a.MODIFY_OPERATOR_ID
+		 FROM T_OPERATOR a
+		 WHERE LOGIN_NAME = #{loginName}
+    </select>
+</mapper>

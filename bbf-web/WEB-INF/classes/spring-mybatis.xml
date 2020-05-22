@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema">
+
+     <!-- 引入jdbc配置文件 -->
+     <context:property-placeholder location="classpath:/jdbc.properties"/>
+     <!-- 开启注解的扫描 --> 
+     <context:component-scan base-package="com.newland.boss.kpi.*"></context:component-scan>
+     <!-- 启用注解 -->
+     <context:annotation-config></context:annotation-config>
+       
+     <!-- 配置Druid数据源 -->
+	 <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+
+		<property name="filters" value="${jdbc.filters}" />
+		<property name="connectionProperties" value="${jdbc.connectionProperties}" />
+
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<property name="maxWait" value="${jdbc.maxWait}" />
+
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+		<property name="testOnReturn" value="${jdbc.testOnReturn}" />
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+	 </bean>
+     
+	 <!-- 配置sqlSessionFactory -->
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"></property>
+         <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"></property>
+     </bean>
+     
+     <!-- 注册mapper接口 -->
+     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+         <property name="basePackage" value="com.newland.boss.kpi.dao"></property>
+         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+     </bean>
+     
+     <!-- 配置事务管理器 -->
+     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource"></property>
+     </bean>
+     
+     <tx:annotation-driven transaction-manager="transactionManager"/>
+     
+</beans>

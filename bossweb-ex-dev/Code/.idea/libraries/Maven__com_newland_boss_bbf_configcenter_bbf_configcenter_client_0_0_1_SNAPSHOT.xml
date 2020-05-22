@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.newland.boss.bbf.configcenter:bbf-configcenter-client:0.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/newland/boss/bbf/configcenter/bbf-configcenter-client/0.0.1-SNAPSHOT/bbf-configcenter-client-0.0.1-20200508.080853-3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/newland/boss/bbf/configcenter/bbf-configcenter-client/0.0.1-SNAPSHOT/bbf-configcenter-client-0.0.1-20200508.080853-3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/newland/boss/bbf/configcenter/bbf-configcenter-client/0.0.1-SNAPSHOT/bbf-configcenter-client-0.0.1-20200508.080853-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OperatorRoleController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.controller</a> &gt; <span class="el_source">OperatorRoleController.java</span></div><h1>OperatorRoleController.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.kpi.admin.model.Operator;
+import com.newland.boss.kpi.admin.model.OperatorRole;
+import com.newland.boss.kpi.admin.model.Role;
+import com.newland.boss.kpi.admin.service.OperatorRoleService;
+import com.newland.boss.kpi.admin.service.OperatorService;
+import com.newland.boss.kpi.entity.OperateLog;
+import com.newland.boss.kpi.entity.User;
+import com.newland.boss.kpi.server.AppSession;
+import com.newland.boss.kpi.server.OperateLogService;
+import com.newland.boss.kpi.util.MD5Util;
+
+@RestController
+<span class="fc" id="L29">public class OperatorRoleController {</span>
+	
+	@Autowired
+	private OperatorRoleService operatorRoleService;
+	
+	@Autowired
+	private OperateLogService operateLogService;
+	
+	@Autowired
+	private OperatorService operatorService;
+	
+	@Autowired
+	private AppSession appSession;
+	
+	//根据操作员ID查找所有操作员角色关系
+	@RequestMapping(value = &quot;/showOperRoleByOperId&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String showOperRoleByOperId(@RequestBody OperatorRole operatorRole){
+		
+		//查询数据库数据并封装成Json集合发送到前台
+<span class="nc" id="L48">		List&lt;OperatorRole&gt; operRoleList = operatorRoleService.findRoleOfOperator(operatorRole);</span>
+<span class="nc" id="L49">		List&lt;Integer&gt; roleIdList = new ArrayList&lt;&gt;();</span>
+		
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		for (int i = 0;i &lt; operRoleList.size();i++) {</span>
+<span class="nc" id="L52">			roleIdList.add(operRoleList.get(i).getRoleId());</span>
+		}
+		
+<span class="nc" id="L55">		Gson gson = new Gson();</span>
+<span class="nc" id="L56">		return gson.toJson(roleIdList);</span>
+	
+	}
+		
+	@RequestMapping(value = &quot;/showAnOperatorRole&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String showAnOperatorRole(@RequestBody OperatorRole operatorRole){
+		
+<span class="nc" id="L63">		OperatorRole operRole =  operatorRoleService.findAnOperatorRole(operatorRole);</span>
+		
+		String respJson;
+<span class="nc" id="L66">		Gson gson = new Gson();</span>
+<span class="nc" id="L67">		respJson = gson.toJson(operRole);</span>
+<span class="nc" id="L68">		return respJson;</span>
+	}
+	
+	//删除操作员角色关系
+	@RequestMapping(value = &quot;/removeOperatorRole&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String removeOperatorRole(@RequestBody String operRoleJson){
+		
+<span class="nc" id="L75">		operatorRoleService.removeOperRole(operRoleJson);</span>
+		
+<span class="nc" id="L77">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L78">		JsonElement jsonEl = jsonParser.parse(operRoleJson);</span>
+<span class="nc" id="L79">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L80">		Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+		
+<span class="nc" id="L82">		OperatorRole operatorRole = new OperatorRole();</span>
+<span class="nc" id="L83">		operatorRole.setOperatorId(operatorId);</span>
+<span class="nc" id="L84">		List&lt;OperatorRole&gt; operRoleList = operatorRoleService.findRoleOfOperator(operatorRole);</span>
+<span class="nc" id="L85">		Gson gson = new Gson();</span>
+<span class="nc" id="L86">		return gson.toJson(operRoleList);</span>
+	}
+	
+	//编辑操作员角色关系 
+	@RequestMapping(value = &quot;/editOperatorRole&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String editOperatorRole(@RequestBody Operator oper){
+<span class="nc" id="L92">		operatorRoleService.addOperatorRole(oper);</span>
+		
+		//添加操作日志到记录
+<span class="nc" id="L95">		OperateLog operateLog = new OperateLog();</span>
+<span class="nc" id="L96">		operateLog.setOperatorId(oper.getModifyOperatorId());</span>
+<span class="nc" id="L97">		operateLog.setOperateModule(12);</span>
+<span class="nc" id="L98">		operateLog.setOperateType(3);</span>
+<span class="nc" id="L99">		StringBuilder roleIds = new StringBuilder();</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		for (Role role : oper.getRoleList()) {</span>
+<span class="nc" id="L101">			roleIds.append(role.getRoleId()).append(&quot;,&quot;);</span>
+<span class="nc" id="L102">		}</span>
+<span class="nc" id="L103">		operateLog.setOperateDesc(&quot;修改帐号[&quot; + oper.getOperatorId() + &quot;]角色信息：&quot; + roleIds);</span>
+<span class="nc" id="L104">		operateLogService.addLog(operateLog);</span>
+		
+<span class="nc" id="L106">		return &quot;{\&quot;msg\&quot;:\&quot;修改成功\&quot;, \&quot;code:\&quot;:\&quot;0\&quot;}&quot;;</span>
+	}
+	
+	//检查用户角色
+	@RequestMapping(value = &quot;/checkUserRole&quot;, method = RequestMethod.POST, produces = &quot;text/json;charset=UTF-8&quot;)
+	public String checkUserRole(@RequestBody int loginType){
+<span class="nc" id="L112">		User user = appSession.getUser();</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">		if(user == null) {</span>
+<span class="nc" id="L114">			return &quot;{\&quot;msg\&quot;:\&quot;获取登录用户失败！\&quot;, \&quot;code\&quot;:-2}&quot;;</span>
+		}
+		
+<span class="nc" id="L117">		String msg = &quot;正常&quot;;</span>
+<span class="nc" id="L118">		int code = 0;</span>
+<span class="nc" id="L119">		String errMsg = &quot;&quot;;</span>
+		
+<span class="nc" id="L121">		Operator param = new Operator();</span>
+<span class="nc" id="L122">		param.setOperatorId(user.getOperatorId());</span>
+<span class="nc" id="L123">		Operator operator = operatorService.showOneOperator(param);</span>
+<span class="nc bnc" id="L124" title="All 4 branches missed.">		if(MD5Util.Encrypt(&quot;123456&quot;).equals(operator.getPassword()) &amp;&amp; loginType == 0) {</span>
+<span class="nc" id="L125">			code = -1;</span>
+<span class="nc" id="L126">			errMsg += &quot;当前密码为默认，请修改密码!&lt;br/&gt;&quot;;</span>
+		}
+		
+<span class="nc" id="L129">		OperatorRole operRole = new OperatorRole();</span>
+<span class="nc" id="L130">		operRole.setOperatorId(user.getOperatorId());</span>
+		
+<span class="nc" id="L132">		List&lt;OperatorRole&gt; operRoleList = operatorRoleService.findRoleOfOperator(operRole);</span>
+<span class="nc bnc" id="L133" title="All 4 branches missed.">		if(operRoleList == null ||operRoleList.isEmpty()) {</span>
+<span class="nc" id="L134">			code = -1;</span>
+<span class="nc" id="L135">			errMsg += &quot;用户没有分配角色，请通知管理员!&quot;;</span>
+		}
+		
+<span class="nc" id="L138">		JSONObject returnMsg = new JSONObject();</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		returnMsg.put(&quot;msg&quot;, code == 0 ? msg : errMsg);</span>
+<span class="nc" id="L140">		returnMsg.put(&quot;code&quot;, code);</span>
+<span class="nc" id="L141">		return returnMsg.toJSONString();</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

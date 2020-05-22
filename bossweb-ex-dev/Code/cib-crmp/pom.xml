@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.newland.boss.cib.crmp</groupId>
+    <artifactId>cib-crmp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>cib-crmp-web</module>
+        <module>cib-crmp-rule</module>
+        <module>cib-crmp-settle</module>
+        <module>cib-crmp-common</module>
+        <module>cib-crmp-domain</module>
+        <module>cib-crmp-backcommonctrl</module>
+        <module>cib-crmp-code</module>
+
+
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- 平台bundle版本 -->
+        <version.platform.bundle>3.0.0-SNAPSHOT</version.platform.bundle>
+        <version.maven.bundle.plugin>2.3.7</version.maven.bundle.plugin>
+        <version.jcommander>1.48</version.jcommander>
+        <version.junit>4.12</version.junit>
+        <version.testng>6.14.2</version.testng>
+        <version.mockito>2.0.2-beta</version.mockito>
+        <version.spring-mock>2.0.8</version.spring-mock>
+        <version.log4j2>2.10.0</version.log4j2>
+        <version.springframework>5.0.4.RELEASE</version.springframework>
+        <version.spring-security>5.0.3.RELEASE</version.spring-security>
+        <version.mybatis>3.4.5</version.mybatis>
+        <version.mybatis-spring>1.3.1</version.mybatis-spring>
+        <version.oracle.ojdbc6>12.1.0.1-atlassian-hosted</version.oracle.ojdbc6>
+        <version.druid>1.1.8</version.druid>
+        <version.javaee-api>7.0</version.javaee-api>
+        <version.jstl>1.2</version.jstl>
+        <version.mysql>8.0.9-rc</version.mysql>
+        <version.commons-lang>2.6</version.commons-lang>
+
+        <version.jackson-mapper-asl>1.9.13</version.jackson-mapper-asl>
+        <version.fastjson>1.2.46</version.fastjson>
+        <version.jackson>2.9.4</version.jackson>
+        <version.selenium>3.10.0</version.selenium>
+        <version.commons-lang3>3.7</version.commons-lang3>
+        <version.json-lib>2.4</version.json-lib>
+        <version.json>20180130</version.json>
+        <version.commons-beanutils>1.9.3</version.commons-beanutils>
+        <version.commons-collections4>4.1</version.commons-collections4>
+        <version.commons-logging>1.2</version.commons-logging>
+        <version.ezmorph>1.0.6</version.ezmorph>
+        <version.gson>2.8.2</version.gson>
+
+        <version.plugin.checkstyle>3.0.0</version.plugin.checkstyle>
+        <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
+        <version.plugin.jxr>2.5</version.plugin.jxr>
+        <version.plugin.findbugs>3.0.5</version.plugin.findbugs>
+        <version.plugin.pmd>3.9.0</version.plugin.pmd>
+        <version.plugin.sonar>5.1</version.plugin.sonar>
+        <version.plugin.jacoco>0.8.1</version.plugin.jacoco>
+        <version.plugin.surefire>2.21.0</version.plugin.surefire>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- test -->
+            <dependency>
+                <groupId>com.beust</groupId>
+                <artifactId>jcommander</artifactId>
+                <version>${version.jcommander}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${version.testng}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${version.mockito}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-mock</artifactId>
+                <version>${version.spring-mock}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${version.springframework}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- srping-security -->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${version.spring-security}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${version.spring-security}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${version.spring-security}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-taglibs</artifactId>
+                <version>${version.spring-security}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-test</artifactId>
+                <version>${version.spring-security}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- log4j2 -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${version.log4j2}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${version.log4j2}</version>
+            </dependency>
+
+            <!-- spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${version.springframework}</version>
+            </dependency>
+
+            <!-- mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${version.mybatis}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${version.mybatis-spring}</version>
+            </dependency>
+
+            <!-- oracle -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${version.oracle.ojdbc6}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${version.druid}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${version.mysql}</version>
+            </dependency>
+
+            <!-- web -->
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${version.javaee-api}</version>
+            </dependency>
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${version.jstl}</version>
+            </dependency>
+
+            <!-- other -->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${version.commons-lang}</version>
+            </dependency>
+
+
+            <!-- test -->
+            <!-- json -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${version.jackson-mapper-asl}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${version.fastjson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${version.jackson}</version>
+            </dependency>
+
+            <!-- google gson -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${version.gson}</version>
+            </dependency>
+
+            <!-- selenium -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-firefox-driver</artifactId>
+                <version>${version.selenium}</version>
+            </dependency>
+
+            <!-- 平台bundle版本统一定义 -->
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.rtcframework</groupId>
+                <artifactId>frameworkapi</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.rtcframework</groupId>
+                <artifactId>framework</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.rtcframework</groupId>
+                <artifactId>accessprocess</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>common</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>logmgr</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>zk</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>configClient</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>dbsupport</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>dbsupport-api</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>warnmgr</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>warn-api</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.publicmodule</groupId>
+                <artifactId>mq-active</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc</groupId>
+                <artifactId>rtcCsn</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc</groupId>
+                <artifactId>rtcTsn</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc</groupId>
+                <artifactId>flowEngineApi</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc</groupId>
+                <artifactId>flowEngineImpl</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc</groupId>
+                <artifactId>flowProcessorImpl</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.bosscomponent</groupId>
+                <artifactId>bossentity</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.bosscomponent</groupId>
+                <artifactId>sessionudi</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.newland.sri.ccp.rpc</groupId>
+                <artifactId>rpc-api</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rpc</groupId>
+                <artifactId>rpcCluster</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.newland.sri.ccp.rtc.rtcframework</groupId>
+                <artifactId>taskdispatch</artifactId>
+                <version>${version.platform.bundle}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <!-- 发布仓库配置 -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>newland ccp release repository</name>
+            <url>http://10.1.4.161:8085/repository/public/</url>
+        </repository>
+    </distributionManagement>
+    <!-- 私服仓库配置 -->
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>public</name>
+            <url>http://10.1.4.161:8085/repository/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${version.maven.bundle.plugin}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <instructions>
+                            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        </instructions>
+                        <versions>
+                            <karaf.osgi.version>${project.version}</karaf.osgi.version>
+                        </versions>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>${version.plugin.jxr}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${version.plugin.pmd}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.sonar</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${version.plugin.sonar}</version>
+                </plugin>
+                <!-- findbugs扫描插件 -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${version.plugin.findbugs}</version>
+                    <configuration>
+                        <threshold>High</threshold>
+                        <findbugsXmlOutput>true</findbugsXmlOutput>
+                        <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                        <xmlOutput>true</xmlOutput>
+                        <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+                    </configuration>
+                </plugin>
+                <!-- checkstyle扫描插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.plugin.checkstyle}</version>
+                    <configuration>
+                        <consoleOutput>true</consoleOutput>
+                        <outputFileFormat>xml</outputFileFormat>
+                        <!--  <configLocation>checkstyle.xml</configLocation> -->
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                </plugin>
+                <!-- 单元测试覆盖率统计插件 -->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${version.plugin.jacoco}</version>
+                    <configuration>
+                        <destFile>${project.build.directory}/coverage-reports/jacoco.exec</destFile>
+                        <dataFile>${project.build.directory}/coverage-reports/jacoco.exec</dataFile>
+                        <skip>${skipTests}</skip>
+                        <output>file</output>
+                        <append>true</append>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <propertyName>surefireArgLine</propertyName>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>post-unit-test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.plugin.surefire}</version>
+                    <configuration>
+                        <argLine>-Xms512m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m
+                            ${surefireArgLine}
+                        </argLine>
+                        <includes>
+                            <include>**/*Test.java</include>
+                            <include>**/*Testng.java</include>
+                            <include>**/*TestNg.java</include>
+                            <include>**/*TestNG.java</include>
+                        </includes>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                    </configuration>
+                </plugin>
+                <!-- findbugs html转化 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <configuration>
+                        <reportPlugins>
+                            <plugin>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>findbugs-maven-plugin</artifactId>
+                            </plugin>
+                        </reportPlugins>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+    </build>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jdbc.url>
+                    jdbc:mysql://10.1.0.243:3306/sonar?useUnicode=true&amp;characterEncoding=utf8
+
+                </sonar.jdbc.url>
+                <sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+                <sonar.jdbc.username>sonar</sonar.jdbc.username>
+                <sonar.jdbc.password>sonar</sonar.jdbc.password>
+
+                <sonar.projectKey>CRMP_${project.artifactId}</sonar.projectKey>
+                <sonar.projectName>CRMP_${project.artifactId}</sonar.projectName>
+
+                <sonar.host.url>http://10.1.4.82:9000</sonar.host.url>
+                <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+                <sonar.binaries>target/classes</sonar.binaries>
+                <sonar.jacoco.reportPath>${project.basedir}/target/coverage-reports/jacoco.exec
+                </sonar.jacoco.reportPath>
+                <sonar.language>java</sonar.language>
+
+
+            </properties>
+        </profile>
+    </profiles>
+</project>

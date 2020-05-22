@@ -1,0 +1,1998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="2" total="47" passed="45">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="11780" started-at="2020-05-13T08:33:03Z" finished-at="2020-05-13T08:33:15Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="11780" started-at="2020-05-13T08:33:03Z" finished-at="2020-05-13T08:33:15Z">
+      <class name="com.newland.boss.cib.crmp.settle.AnalysisControllerTest">
+        <test-method status="PASS" signature="init()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="init" is-config="true" duration-ms="36" started-at="2020-05-13T16:33:03Z" finished-at="2020-05-13T16:33:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="5" started-at="2020-05-13T16:33:03Z" finished-at="2020-05-13T16:33:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="7082" started-at="2020-05-13T16:33:03Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T16:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="setup" is-config="true" duration-ms="524" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="7" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.billSummingUsrDayServiceTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="billSummingUsrDayServiceTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="billSummingUsrDayServiceTest" duration-ms="63" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- billSummingUsrDayServiceTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="4" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.billSummingUsrDayServiceTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingOrgDay()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testBillSummingOrgDay()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testBillSummingOrgDay" duration-ms="2" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBillSummingOrgDay -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingOrgDay()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingUsrDay()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testBillSummingUsrDay()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testBillSummingUsrDay" duration-ms="1" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBillSummingUsrDay -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T16:33:10Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testBillSummingUsrDay()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisBar()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisBar" duration-ms="474" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisBar -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="19" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisBar1()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisBar1" duration-ms="38" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisBar1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="217" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisBar2()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisBar2" duration-ms="4" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisBar2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisBar2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="59" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisLine()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisLine" duration-ms="5" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisLine -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="143" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisLine1()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisLine1" duration-ms="8" started-at="2020-05-13T16:33:11Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisLine1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisLine2()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisLine2" duration-ms="13" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisLine2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisLine2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="33" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisPie()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisPie" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisPie -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="21" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisPie1()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisPie1" duration-ms="4" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisPie1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testGetFeeAnalysisPie2()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="testGetFeeAnalysisPie2" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetFeeAnalysisPie2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.AnalysisControllerTest.testGetFeeAnalysisPie2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.AnalysisControllerTest@289da1bc]" name="springTestContextAfterTestClass" is-config="true" duration-ms="86" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.settle.AnalysisControllerTest -->
+      <class name="com.newland.boss.cib.crmp.settle.ReportControllerTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="52" started-at="2020-05-13T16:33:12Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="setup" is-config="true" duration-ms="71" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.batchQueryTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="batchQueryTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="batchQueryTest" duration-ms="179" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- batchQueryTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.batchQueryTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="18" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.downloadExcelTest() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="downloadExcelTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="downloadExcelTest" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at java.io.File.<init>(File.java:277)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.downloadExcel(ReportController.java:1071)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.downloadExcelTest(ReportControllerTest.java:679)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- downloadExcelTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.downloadExcelTest() throws java.io.IOException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="30" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.jsonToIntegerArrayTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="jsonToIntegerArrayTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="jsonToIntegerArrayTest" duration-ms="141" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- jsonToIntegerArrayTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.jsonToIntegerArrayTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="queryDeptFeeListTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="queryDeptFeeListTest" duration-ms="67" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- queryDeptFeeListTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="6" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="queryDeptFeeListTest1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="queryDeptFeeListTest1" duration-ms="3" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- queryDeptFeeListTest1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.queryDeptFeeListTest1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.stringToIntegerArrTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="stringToIntegerArrTest()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="stringToIntegerArrTest" duration-ms="17" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stringToIntegerArrTest -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.stringToIntegerArrTest()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "{"beginDate":"2018-06-01""]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "{"beginDate":"2018-06-01""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel(ReportControllerTest.java:559)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel1" duration-ms="3" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "{"beginDate":"2018-06-01""]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "{"beginDate":"2018-06-01""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel1(ReportControllerTest.java:582)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel2()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel2" duration-ms="3" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "a"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "a"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.getFeeList(ReportController.java:838)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.exportExcel(ReportController.java:679)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel2(ReportControllerTest.java:600)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel3() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel3()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel3" duration-ms="3" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "a"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "a"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.getFeeList(ReportController.java:838)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.exportExcel(ReportController.java:679)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel3(ReportControllerTest.java:617)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel3 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel3() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="17" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel4() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel4()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel4" duration-ms="4" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "a"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "a"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.getFeeList(ReportController.java:854)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.exportExcel(ReportController.java:679)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel4(ReportControllerTest.java:636)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel4 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel4() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="7" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel5() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel5()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel5" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "a"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "a"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.getFeeList(ReportController.java:854)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.exportExcel(ReportController.java:679)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel5(ReportControllerTest.java:654)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel5 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel5() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel6() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testExportExcel6()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testExportExcel6" duration-ms="5" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "aa"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "aa"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.getFeeList(ReportController.java:872)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.exportExcel(ReportController.java:679)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel6(ReportControllerTest.java:673)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testExportExcel6 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testExportExcel6() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="13" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NumberFormatException">
+            <message>
+              <![CDATA[For input string: "{"unitName":"[10"]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NumberFormatException: For input string: "{"unitName":"[10"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.stringToIntegerArr(ReportController.java:770)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport(ReportControllerTest.java:377)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NumberFormatException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport1" duration-ms="9" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport1(ReportControllerTest.java:399)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:12Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport1() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T16:33:12Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport2()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport2" duration-ms="6" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport2(ReportControllerTest.java:419)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport2() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="22" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport3() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport3()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport3" duration-ms="18" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport3(ReportControllerTest.java:439)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport3 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport3() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="12" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport4() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport4()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport4" duration-ms="4" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport4(ReportControllerTest.java:460)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport4 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport4() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="10" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport5() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport5()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport5" duration-ms="7" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport5(ReportControllerTest.java:480)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport5 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport5() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport6() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport6()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport6" duration-ms="5" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport6(ReportControllerTest.java:507)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport6 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport6() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport7() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport7()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport7" duration-ms="4" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:634)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport7(ReportControllerTest.java:524)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport7 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport7() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport8() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testPreviewReport8()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testPreviewReport8" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <exception class="net.sf.jasperreports.engine.JRException">
+            <message>
+              <![CDATA[业务类型无法识别]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[net.sf.jasperreports.engine.JRException: 业务类型无法识别
+	at com.newland.boss.cib.crmp.settle.controller.ReportController.previewReport(ReportController.java:630)
+	at com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport8(ReportControllerTest.java:538)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.MethodInvocationHelper$1.runTestMethod(MethodInvocationHelper.java:209)
+	at org.springframework.test.context.testng.AbstractTestNGSpringContextTests.run(AbstractTestNGSpringContextTests.java:180)
+	at org.testng.internal.MethodInvocationHelper.invokeHookable(MethodInvocationHelper.java:221)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:657)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:135)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeMulti(TestNGDirectoryTestSuite.java:193)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:94)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:146)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:379)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:340)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:125)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:413)
+]]>
+            </full-stacktrace>
+          </exception> <!-- net.sf.jasperreports.engine.JRException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPreviewReport8 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testPreviewReport8() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryFeeList()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryFeeList" duration-ms="4" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryFeeList -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryFeeList1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryFeeList1" duration-ms="5" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryFeeList1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="11" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList2()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryFeeList2()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryFeeList2" duration-ms="4" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryFeeList2 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList2()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="28" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList3()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryFeeList3()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryFeeList3" duration-ms="5" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryFeeList3 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryFeeList3()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="24" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryNotActiveUserList()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryNotActiveUserList" duration-ms="5" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryNotActiveUserList -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="9" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryNotActiveUserList1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryNotActiveUserList1" duration-ms="10" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryNotActiveUserList1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryNotActiveUserList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="8" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryThresholdList()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryThresholdList" duration-ms="4" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryThresholdList -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="19" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="13" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryThresholdList1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryThresholdList1" duration-ms="9" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryThresholdList1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryThresholdList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="31" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryTopNList()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryTopNList" duration-ms="7" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryTopNList -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="3" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="14" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryTopNList1()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="testQueryTopNList1" duration-ms="7" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryTopNList1 -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.ReportControllerTest.testQueryTopNList1()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.ReportControllerTest@1aaf73b7]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.settle.ReportControllerTest -->
+      <class name="com.newland.boss.cib.crmp.settle.CallListControllerTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="39" started-at="2020-05-13T16:33:13Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="setup" is-config="true" duration-ms="95" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.CallListControllerTest.testQueryCallList() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="testQueryCallList()[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="testQueryCallList" duration-ms="1459" started-at="2020-05-13T16:33:13Z" finished-at="2020-05-13T16:33:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testQueryCallList -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:15Z" finished-at="2020-05-13T16:33:15Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.newland.boss.cib.crmp.settle.CallListControllerTest.testQueryCallList() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.newland.boss.cib.crmp.settle.CallListControllerTest@e890591]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-05-13T16:33:15Z" finished-at="2020-05-13T16:33:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.newland.boss.cib.crmp.settle.CallListControllerTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SettleApportionRelaServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-rule</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.service.impl</a> &gt; <span class="el_source">SettleApportionRelaServiceImpl.java</span></div><h1>SettleApportionRelaServiceImpl.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.newland.boss.cib.crmp.service.impl;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.transaction.Transactional;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.cib.crmp.common.JxlTool;
+import com.newland.boss.cib.crmp.dao.SettleApportionRelaDao;
+import com.newland.boss.cib.crmp.domain.RuleRela;
+import com.newland.boss.cib.crmp.domain.SettleApportionRela;
+import com.newland.boss.cib.crmp.service.SettleApportionRelaService;
+import com.newland.boss.kpi.entity.DictDef;
+import com.newland.boss.kpi.server.DictDefService;
+import jxl.write.WriteException;
+/**
+ * @author ylc
+ *
+ *         2018-05-11
+ */
+
+@Component
+@Transactional
+<span class="fc" id="L40">public class SettleApportionRelaServiceImpl implements SettleApportionRelaService {</span>
+
+<span class="fc" id="L42">	private SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span>
+	
+<span class="fc" id="L44">    private SimpleDateFormat filesdf = new SimpleDateFormat(&quot;yyyyMMddHHmmss&quot;);</span>
+
+	@Autowired
+	private SettleApportionRelaDao settleApportionRelaDao;
+	@Autowired
+	private DictDefService dictDefService;
+	
+<span class="fc" id="L51">	private static final Logger LOGGER = LogManager.getLogger(SettleApportionRelaService.class);</span>
+	
+	public static final String RESULT= &quot;result&quot;;
+	
+	public static final String FILENAME = &quot;filename&quot;;
+
+	public static final String ERROR = &quot;error&quot;;
+	
+	public static final String TRUE = &quot;true&quot;;
+	
+	public static final String FALSE = &quot;false&quot;;
+
+
+	/**
+	 * 根据ID查询数据字典
+	 * 
+	 * @return Map
+	 */
+	public Map&lt;Integer, String&gt; getDicMap(Integer dicId) {
+<span class="fc" id="L70">		Map&lt;Integer, String&gt; dicMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L71">		List&lt;DictDef&gt; dicList = dictDefService.getDictDefByDictClass(dicId);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		for (DictDef dictDef : dicList) {</span>
+<span class="fc" id="L73">			dicMap.put(dictDef.getEntryId(), dictDef.getEntryName());</span>
+<span class="fc" id="L74">		}</span>
+<span class="fc" id="L75">		return dicMap;</span>
+	}
+
+	/**
+	 * 根据Name查询数据字典Id
+	 * 
+	 * @return Map
+	 */
+	public Map&lt;String, Integer&gt; getDicIdMap(Integer dicId) {
+<span class="nc" id="L84">		Map&lt;String, Integer&gt; dicMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L85">		List&lt;DictDef&gt; dicList = dictDefService.getDictDefByDictClass(dicId);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		for (DictDef dictDef : dicList) {</span>
+<span class="nc" id="L87">			dicMap.put(dictDef.getEntryName(), dictDef.getEntryId());</span>
+<span class="nc" id="L88">		}</span>
+<span class="nc" id="L89">		return dicMap;</span>
+	}
+
+	@Override
+	public void addSettleApportionRela(String relaJson) {
+<span class="fc" id="L94">		SettleApportionRela settleApportionRela = new SettleApportionRela();</span>
+<span class="fc" id="L95">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L96">		JsonElement jsonEl = jsonParser.parse(relaJson);</span>
+<span class="fc" id="L97">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+		// 选择机构的ID
+<span class="fc" id="L99">		Integer objectId = jsonObj.get(&quot;orgId&quot;).getAsInt();</span>
+		// 操作员工号
+<span class="fc" id="L101">		Integer operatorId = jsonObj.get(&quot;operatorId&quot;).getAsInt();</span>
+
+		//新增默认规则为启用
+<span class="fc" id="L104">		settleApportionRela.setStatus(1);</span>
+<span class="fc" id="L105">		settleApportionRela.setObjectType(1);</span>
+<span class="fc" id="L106">		settleApportionRela.setObjectId(objectId);</span>
+<span class="fc" id="L107">		settleApportionRela.setOperatorId(operatorId);</span>
+<span class="fc" id="L108">		settleApportionRela.setCreateDate(new Date());</span>
+
+<span class="fc" id="L110">		JsonArray relaArray = jsonObj.get(&quot;relaLists&quot;).getAsJsonArray();</span>
+
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		for (int i = 0; i &lt; relaArray.size(); i++) {</span>
+<span class="fc" id="L113">			JsonObject obj = relaArray.get(i).getAsJsonObject();</span>
+<span class="fc" id="L114">			settleApportionRela.setApportionItemId(obj.get(&quot;apportionItemId&quot;).getAsInt());</span>
+<span class="fc" id="L115">			settleApportionRela.setInureDate(new Date(Long.parseLong(obj.get(&quot;inureDate&quot;).getAsString())));</span>
+<span class="fc" id="L116">			settleApportionRela.setExpireDate(new Date(Long.parseLong(obj.get(&quot;expireDate&quot;).getAsString())));</span>
+			// 查询某条规则是否存在，存在则更新，不存在则删除
+<span class="fc" id="L118">			SettleApportionRela rela = settleApportionRelaDao</span>
+<span class="fc" id="L119">					.querySettleApportionRelaIsExistence(obj.get(&quot;apportionItemId&quot;).getAsInt(), objectId);</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">			if (rela != null) {</span>
+<span class="nc" id="L121">				settleApportionRela.setApportionRelaId(rela.getApportionRelaId());</span>
+<span class="nc" id="L122">				settleApportionRelaDao.updateSettleApportionRela(settleApportionRela);</span>
+			} else {
+<span class="fc" id="L124">				settleApportionRelaDao.insertSettleApportionRela(settleApportionRela);</span>
+			}
+		}
+<span class="fc" id="L127">	}</span>
+
+	@Override
+	public void removeSettleApportionRela(String relaJson) {
+
+<span class="fc" id="L132">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L133">		JsonElement jsonEl = jsonParser.parse(relaJson);</span>
+<span class="fc" id="L134">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L135">		JsonArray relaArray = jsonObj.get(&quot;relaIdJson&quot;).getAsJsonArray(); // 选中的机构</span>
+
+		// 循环删除角色
+<span class="fc bfc" id="L138" title="All 2 branches covered.">		for (int i = 0; i &lt; relaArray.size(); i++) {</span>
+<span class="fc" id="L139">			Integer relaId = relaArray.get(i).getAsInt();</span>
+<span class="fc" id="L140">			settleApportionRelaDao.deleteSettleApportionRela(relaId);</span>
+		}
+
+<span class="fc" id="L143">	}</span>
+
+	@Override
+	public void editSettleApportionRela(SettleApportionRela settleApportionRelaId) {
+<span class="nc" id="L147">		settleApportionRelaDao.updateSettleApportionRela(settleApportionRelaId);</span>
+<span class="nc" id="L148">	}</span>
+
+	@Override
+	public List&lt;SettleApportionRela&gt; loadAllSettleApportionRela() {
+<span class="nc" id="L152">		return settleApportionRelaDao.queryAllSettleApportionRela();</span>
+	}
+
+	@Override
+	public List&lt;SettleApportionRela&gt; loadSettleApportionRelaByParam(SettleApportionRela settleApportionRela) {
+<span class="nc" id="L157">		return settleApportionRelaDao.querySettleApportionRelaByParam(settleApportionRela);</span>
+	}
+
+	@Override
+	public void modifySettleApportionRelaStatus(String relaJson) {
+
+<span class="fc" id="L163">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L164">		JsonElement jsonEl = jsonParser.parse(relaJson);</span>
+<span class="fc" id="L165">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L166">		JsonArray relaArray = jsonObj.get(&quot;relaIdArray&quot;).getAsJsonArray(); // 选中的rela</span>
+<span class="fc" id="L167">		Integer relaStatus = jsonObj.get(&quot;relaStatus&quot;).getAsInt();// 要改变的规则状态</span>
+<span class="fc" id="L168">		SettleApportionRela settleApportionRela = new SettleApportionRela();</span>
+<span class="fc" id="L169">		settleApportionRela.setStatus(relaStatus);</span>
+		// 循环更新规则状态
+<span class="fc bfc" id="L171" title="All 2 branches covered.">		for (int i = 0; i &lt; relaArray.size(); i++) {</span>
+<span class="fc" id="L172">			Integer relaId = relaArray.get(i).getAsInt();</span>
+<span class="fc" id="L173">			settleApportionRela.setApportionRelaId(relaId);</span>
+<span class="fc" id="L174">			settleApportionRelaDao.updateSettleApportionRela(settleApportionRela);</span>
+		}
+<span class="fc" id="L176">	}</span>
+
+	@Override
+	public List&lt;RuleRela&gt; loadComQueryRelaByParam(RuleRela ruleRela) {
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">		if(ruleRela.getApportionRuleName() != null){</span>
+<span class="fc" id="L181">			ruleRela.setApportionRuleName(ruleRela.getApportionRuleName().replaceAll(&quot;_&quot;, &quot;/_&quot;).replaceAll(&quot;%&quot;, &quot;/%&quot;));</span>
+		}
+<span class="fc" id="L183">		return settleApportionRelaDao.combinQueryRuleRela(ruleRela,null);</span>
+	}
+	
+	@Override
+	public List&lt;RuleRela&gt; loadComQueryRelaByOrgParam(String relaJson) {	
+<span class="fc" id="L188">		JsonParser jsonParser = new JsonParser();</span>
+<span class="fc" id="L189">		JsonElement jsonEl = jsonParser.parse(relaJson);</span>
+<span class="fc" id="L190">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="fc" id="L191">		JsonArray orgIdArray = jsonObj.get(&quot;orgIdList&quot;).getAsJsonArray();</span>
+<span class="fc" id="L192">		List&lt;Integer&gt; orgIdList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L193">		RuleRela ruleRela = new RuleRela();</span>
+		try {
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">			for (int i = 0; i &lt; orgIdArray.size(); i++) {</span>
+<span class="nc" id="L196">				orgIdList.add(orgIdArray.get(i).getAsInt());</span>
+			}
+<span class="pc bpc" id="L198" title="1 of 4 branches missed.">			if (!jsonObj.get(&quot;apportionRuleName&quot;).isJsonNull() &amp;&amp; !&quot;\&quot;\&quot;&quot;.equals(jsonObj.get(&quot;apportionRuleName&quot;).toString())) {</span>
+<span class="fc" id="L199">				ruleRela.setApportionRuleName(jsonObj.get(&quot;apportionRuleName&quot;).getAsString().replaceAll(&quot;_&quot;, &quot;/_&quot;).replaceAll(&quot;%&quot;, &quot;/%&quot;));</span>
+			}
+<span class="pc bpc" id="L201" title="1 of 4 branches missed.">			if (!jsonObj.get(&quot;status&quot;).isJsonNull() &amp;&amp; !&quot;\&quot;\&quot;&quot;.equals(jsonObj.get(&quot;status&quot;).toString())) {</span>
+<span class="fc" id="L202">				ruleRela.setStatus(jsonObj.get(&quot;status&quot;).getAsInt());</span>
+			}
+<span class="pc bpc" id="L204" title="1 of 4 branches missed.">			if(!jsonObj.get(&quot;inureDate&quot;).isJsonNull() &amp;&amp; !&quot;\&quot;\&quot;&quot;.equals(jsonObj.get(&quot;inureDate&quot;).toString())){</span>
+<span class="fc" id="L205">				ruleRela.setInureDate(sdf.parse(jsonObj.get(&quot;inureDate&quot;).getAsString()));</span>
+			}
+<span class="pc bpc" id="L207" title="1 of 4 branches missed.">			if (!jsonObj.get(&quot;expireDate&quot;).isJsonNull() &amp;&amp; !&quot;\&quot;\&quot;&quot;.equals(jsonObj.get(&quot;expireDate&quot;).toString())) {</span>
+<span class="fc" id="L208">				ruleRela.setExpireDate(sdf.parse(jsonObj.get(&quot;expireDate&quot;).getAsString()));</span>
+			}
+<span class="nc" id="L210">		} catch (ParseException e) {</span>
+<span class="nc" id="L211">			LOGGER.debug(&quot;数据转换异常&quot;+e.getMessage());</span>
+<span class="fc" id="L212">		}</span>
+<span class="fc" id="L213">		return settleApportionRelaDao.combinQueryRuleRela(ruleRela, orgIdList);</span>
+	}
+
+	@Override
+	public Map&lt;String, String&gt; exportSettleApportionRela(String relaJson) {
+<span class="fc" id="L218">		Map&lt;String, String&gt; resultMap = new HashMap&lt;&gt;();</span>
+		// 1004规则类型数据字典
+<span class="fc" id="L220">		Map&lt;Integer, String&gt; statusMap = getDicMap(1004);</span>
+<span class="fc" id="L221">		String title = &quot;SettleRuleRelaExport&quot;+ filesdf.format(new Date())+ &quot;.xls&quot;;</span>
+<span class="fc" id="L222">		String path = System.getProperty(&quot;user.dir&quot;) + &quot;/downloadTemp/&quot; + title;     </span>
+<span class="fc" id="L223">		String[] columns = { &quot;关系ID&quot;,&quot;单位ID&quot;, &quot;单位名称&quot;, &quot;摊分规则ID&quot;, &quot;摊分规则名称&quot;, &quot;启用状态&quot;, &quot;生效时间&quot;, &quot;失效时间&quot;, &quot;操作工号ID&quot;, &quot;创建时间&quot; };</span>
+<span class="fc" id="L224">		boolean[] numberFlag = { false, false, false, false, false, false, false, false, false, false };</span>
+<span class="fc" id="L225">		List&lt;String[]&gt; dataList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L226">		List&lt;RuleRela&gt; saRLists = this.loadComQueryRelaByOrgParam(relaJson);</span>
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">		for (RuleRela r : saRLists) {</span>
+<span class="nc" id="L228">			String[] data = { String.valueOf(r.getApportionRelaId()),String.valueOf(r.getObjectId()), String.valueOf(r.getOrgName()),</span>
+<span class="nc" id="L229">					String.valueOf(r.getApportionItemId()), String.valueOf(r.getApportionRuleName()),</span>
+<span class="nc" id="L230">					statusMap.get(r.getStatus()), sdf.format(r.getInureDate()), sdf.format(r.getExpireDate()),</span>
+<span class="nc" id="L231">					String.valueOf(r.getOperatorId()), sdf.format(r.getCreateDate()) };</span>
+<span class="nc" id="L232">			dataList.add(data);</span>
+<span class="nc" id="L233">		}</span>
+		try {
+<span class="fc" id="L235">			JxlTool.exportExcel(path, columns, dataList, numberFlag);</span>
+<span class="fc" id="L236">			resultMap.put(RESULT, TRUE);</span>
+<span class="fc" id="L237">			resultMap.put(FILENAME, URLEncoder.encode(title, &quot;UTF-8&quot;));</span>
+<span class="nc" id="L238">		} catch (WriteException|IOException e) {</span>
+<span class="nc" id="L239">			LOGGER.debug(&quot;文件导出异常&quot; + e.getMessage());</span>
+<span class="nc" id="L240">			resultMap.put(RESULT, FALSE);</span>
+<span class="nc" id="L241">			resultMap.put(ERROR, e.getMessage());</span>
+<span class="fc" id="L242">		} </span>
+<span class="fc" id="L243">		return resultMap;</span>
+	}
+
+	@Override
+	public List&lt;SettleApportionRela&gt; loadSettleApportionRelaByRuleId(Integer apportionItemId) {
+<span class="fc" id="L248">		return settleApportionRelaDao.querySettleApportionRelaByRuleId(apportionItemId);</span>
+	}
+
+	@Override
+	public void addSettleApportionRelaByRuleId(List&lt;SettleApportionRela&gt; settleApportionRelaLists) {
+		
+		//新增之前先删除原有的规则
+<span class="fc" id="L255">		settleApportionRelaDao.deleteSettleApportionRelaByRuleId(settleApportionRelaLists.get(0).getApportionItemId());</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">		if(settleApportionRelaLists.get(0).getObjectId() != null){</span>
+<span class="fc bfc" id="L257" title="All 2 branches covered.">			for (SettleApportionRela settleApportionRela : settleApportionRelaLists) {</span>
+<span class="fc" id="L258">				settleApportionRela.setObjectType(1);</span>
+<span class="fc" id="L259">				settleApportionRela.setCreateDate(new Date());		</span>
+<span class="fc" id="L260">	            settleApportionRelaDao.insertSettleApportionRela(settleApportionRela);</span>
+<span class="fc" id="L261">			}</span>
+		}
+	
+<span class="fc" id="L264">	}</span>
+
+	@Override
+	public List&lt;SettleApportionRela&gt; loadSettleApportionRelaByOrgId(Integer objectId) {
+<span class="fc" id="L268">		return settleApportionRelaDao.querySettleApportionRelaByOrgId(objectId);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

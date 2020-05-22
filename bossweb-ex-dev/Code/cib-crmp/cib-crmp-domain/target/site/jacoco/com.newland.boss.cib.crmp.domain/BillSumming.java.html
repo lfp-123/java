@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BillSumming.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-domain</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.domain</a> &gt; <span class="el_source">BillSumming.java</span></div><h1>BillSumming.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.domain;
+
+import java.util.Date;
+
+/**
+ * Copyright (c) 2017,　新大陆软件工程公司 All rights reserved。
+ *
+ * @author cby
+ * @version V1.0
+ * @Title: billSummingUsrDay
+ * @Package com.newland.boss.cib.crmp.model
+ * @Description:
+ * @date 2018/5/10
+ */
+<span class="fc" id="L15">public class BillSumming {</span>
+    private Integer cdrType;
+    private Integer orgId;
+    private Integer operatorId;
+    private Integer billMonth;
+    private Integer billDay;
+    private Long totalNumber;
+    private Long totalMinutes;
+    private Long totalFee;
+    private Date createTime;
+    private Integer feeType;
+    private Double ratio;
+    private Integer apportionItemId;
+    private Integer directNumber;
+
+    /**
+     * Getter for property 'cdrType'.
+     *
+     * @return Value for property 'cdrType'.
+     */
+    public Integer getCdrType() {
+<span class="fc" id="L36">        return cdrType;</span>
+    }
+
+    /**
+     * Setter for property 'cdrType'.
+     *
+     * @param cdrType Value to set for property 'cdrType'.
+     */
+    public void setCdrType(Integer cdrType) {
+<span class="fc" id="L45">        this.cdrType = cdrType;</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Getter for property 'orgId'.
+     *
+     * @return Value for property 'orgId'.
+     */
+    public Integer getOrgId() {
+<span class="fc" id="L54">        return orgId;</span>
+    }
+
+    /**
+     * Setter for property 'orgId'.
+     *
+     * @param orgId Value to set for property 'orgId'.
+     */
+    public void setOrgId(Integer orgId) {
+<span class="fc" id="L63">        this.orgId = orgId;</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * Getter for property 'operatorId'.
+     *
+     * @return Value for property 'operatorId'.
+     */
+    public Integer getOperatorId() {
+<span class="fc" id="L72">        return operatorId;</span>
+    }
+
+    /**
+     * Setter for property 'operatorId'.
+     *
+     * @param operatorId Value to set for property 'operatorId'.
+     */
+    public void setOperatorId(Integer operatorId) {
+<span class="fc" id="L81">        this.operatorId = operatorId;</span>
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Getter for property 'billMonth'.
+     *
+     * @return Value for property 'billMonth'.
+     */
+    public Integer getBillMonth() {
+<span class="fc" id="L90">        return billMonth;</span>
+    }
+
+    /**
+     * Setter for property 'billMonth'.
+     *
+     * @param billMonth Value to set for property 'billMonth'.
+     */
+    public void setBillMonth(Integer billMonth) {
+<span class="fc" id="L99">        this.billMonth = billMonth;</span>
+<span class="fc" id="L100">    }</span>
+
+    /**
+     * Getter for property 'billDay'.
+     *
+     * @return Value for property 'billDay'.
+     */
+    public Integer getBillDay() {
+<span class="fc" id="L108">        return billDay;</span>
+    }
+
+    /**
+     * Setter for property 'billDay'.
+     *
+     * @param billDay Value to set for property 'billDay'.
+     */
+    public void setBillDay(Integer billDay) {
+<span class="fc" id="L117">        this.billDay = billDay;</span>
+<span class="fc" id="L118">    }</span>
+
+    /**
+     * Getter for property 'totalNumber'.
+     *
+     * @return Value for property 'totalNumber'.
+     */
+    public Long getTotalNumber() {
+<span class="fc" id="L126">        return totalNumber;</span>
+    }
+
+    /**
+     * Setter for property 'totalNumber'.
+     *
+     * @param totalNumber Value to set for property 'totalNumber'.
+     */
+    public void setTotalNumber(Long totalNumber) {
+<span class="fc" id="L135">        this.totalNumber = totalNumber;</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * Getter for property 'totalMinutes'.
+     *
+     * @return Value for property 'totalMinutes'.
+     */
+    public Long getTotalMinutes() {
+<span class="fc" id="L144">        return totalMinutes;</span>
+    }
+
+    /**
+     * Setter for property 'totalMinutes'.
+     *
+     * @param totalMinutes Value to set for property 'totalMinutes'.
+     */
+    public void setTotalMinutes(Long totalMinutes) {
+<span class="fc" id="L153">        this.totalMinutes = totalMinutes;</span>
+<span class="fc" id="L154">    }</span>
+
+    /**
+     * Getter for property 'totalFee'.
+     *
+     * @return Value for property 'totalFee'.
+     */
+    public Long getTotalFee() {
+<span class="fc" id="L162">        return totalFee;</span>
+    }
+
+    /**
+     * Setter for property 'totalFee'.
+     *
+     * @param totalFee Value to set for property 'totalFee'.
+     */
+    public void setTotalFee(Long totalFee) {
+<span class="fc" id="L171">        this.totalFee = totalFee;</span>
+<span class="fc" id="L172">    }</span>
+
+    /**
+     * Getter for property 'createTime'.
+     *
+     * @return Value for property 'createTime'.
+     */
+    public Date getCreateTime() {
+<span class="fc" id="L180">        return createTime;</span>
+    }
+
+    /**
+     * Setter for property 'createTime'.
+     *
+     * @param createTime Value to set for property 'createTime'.
+     */
+    public void setCreateTime(Date createTime) {
+<span class="fc" id="L189">        this.createTime = createTime;</span>
+<span class="fc" id="L190">    }</span>
+
+    /**
+     * Getter for property 'feeType'.
+     *
+     * @return Value for property 'feeType'.
+     */
+    public Integer getFeeType() {
+<span class="fc" id="L198">        return feeType;</span>
+    }
+
+    /**
+     * Setter for property 'feeType'.
+     *
+     * @param feeType Value to set for property 'feeType'.
+     */
+    public void setFeeType(Integer feeType) {
+<span class="fc" id="L207">        this.feeType = feeType;</span>
+<span class="fc" id="L208">    }</span>
+
+    /**
+     * Getter for property 'ratio'.
+     *
+     * @return Value for property 'ratio'.
+     */
+    public Double getRatio() {
+<span class="fc" id="L216">        return ratio;</span>
+    }
+
+    /**
+     * Setter for property 'ratio'.
+     *
+     * @param ratio Value to set for property 'ratio'.
+     */
+    public void setRatio(Double ratio) {
+<span class="fc" id="L225">        this.ratio = ratio;</span>
+<span class="fc" id="L226">    }</span>
+
+    /**
+     * Getter for property 'apportionItemId'.
+     *
+     * @return Value for property 'apportionItemId'.
+     */
+    public Integer getApportionItemId() {
+<span class="fc" id="L234">        return apportionItemId;</span>
+    }
+
+    /**
+     * Setter for property 'apportionItemId'.
+     *
+     * @param apportionItemId Value to set for property 'apportionItemId'.
+     */
+    public void setApportionItemId(Integer apportionItemId) {
+<span class="fc" id="L243">        this.apportionItemId = apportionItemId;</span>
+<span class="fc" id="L244">    }</span>
+
+    /**
+     * Getter for property 'directNumber'.
+     *
+     * @return Value for property 'directNumber'.
+     */
+    public Integer getDirectNumber() {
+<span class="fc" id="L252">        return directNumber;</span>
+    }
+
+    /**
+     * Setter for property 'directNumber'.
+     *
+     * @param directNumber Value to set for property 'directNumber'.
+     */
+    public void setDirectNumber(Integer directNumber) {
+<span class="fc" id="L261">        this.directNumber = directNumber;</span>
+<span class="fc" id="L262">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

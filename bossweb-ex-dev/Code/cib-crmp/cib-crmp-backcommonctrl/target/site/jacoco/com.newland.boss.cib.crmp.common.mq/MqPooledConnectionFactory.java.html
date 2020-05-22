@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MqPooledConnectionFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">cib-crmp-backcommonctrl</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.cib.crmp.common.mq</a> &gt; <span class="el_source">MqPooledConnectionFactory.java</span></div><h1>MqPooledConnectionFactory.java</h1><pre class="source lang-java linenums">package com.newland.boss.cib.crmp.common.mq;
+
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.pool.PooledConnectionFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+/**
+ * 链接工厂管理类
+ * 自己工厂定义成了单例模式，连接池是静态块进行初始化，具体实现自己看着办
+ */
+public class MqPooledConnectionFactory {
+
+<span class="nc" id="L16">    private static final Log log = LogFactory.getLog(MqPooledConnectionFactory.class);</span>
+
+    private MqPooledConnectionFactory() {
+
+    }
+
+    private static String mqAddr;
+    private static PooledConnectionFactory pooledConnectionFactory;
+
+    public static void setMqAddr(String mq) {
+<span class="nc" id="L26">        mqAddr = mq;</span>
+<span class="nc" id="L27">    }</span>
+
+    public static void init() {
+        try {
+            // 需要创建一个链接工厂然后设置到连接池中
+<span class="nc" id="L32">            ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();</span>
+<span class="nc" id="L33">            activeMQConnectionFactory.setUserName(ActiveMQConnection.DEFAULT_USER);</span>
+<span class="nc" id="L34">            activeMQConnectionFactory.setPassword(ActiveMQConnection.DEFAULT_PASSWORD);</span>
+<span class="nc" id="L35">            activeMQConnectionFactory.setBrokerURL(mqAddr);</span>
+<span class="nc" id="L36">            pooledConnectionFactory = new PooledConnectionFactory(activeMQConnectionFactory);</span>
+<span class="nc" id="L37">        } catch (Exception e) {</span>
+<span class="nc" id="L38">            log.error(&quot;MqPooledConnectionFactory init error&quot;, e);</span>
+<span class="nc" id="L39">        }</span>
+<span class="nc" id="L40">    }</span>
+
+
+    /**
+     * 获得链接池工厂
+     */
+    public static PooledConnectionFactory getPooledConnectionFactory() {
+<span class="nc" id="L47">        return pooledConnectionFactory;</span>
+    }
+
+    /**
+     * 停止链接
+     */
+    public static void stop() {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (pooledConnectionFactory != null) {</span>
+<span class="nc" id="L55">            pooledConnectionFactory.stop();</span>
+        }
+<span class="nc" id="L57">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

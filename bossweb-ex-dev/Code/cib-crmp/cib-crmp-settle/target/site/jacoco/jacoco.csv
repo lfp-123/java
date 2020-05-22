@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.service.impl,BillSummingOrgDayServiceImpl,0,33,0,0,0,7,0,7,0,7
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.service.impl,QueryFeeListServiceImpl,71,111,2,4,11,15,10,13,9,11
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.service.impl,BillSummingUsrDayServiceImpl,0,18,0,0,0,4,0,4,0,4
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.service.impl,QueryCallListServiceImpl,203,2183,32,70,47,330,28,44,0,21
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.controller,AnalysisController,0,180,0,12,0,39,0,11,0,5
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.controller,CallListController,67,413,13,7,13,102,9,31,0,30
+cib-crmp-settle,com.newland.boss.cib.crmp.settle.controller,ReportController,2010,1160,174,34,366,286,98,32,4,18
+cib-crmp-settle,com.newland.boss.cib.crmp.util,ArrayToJson,14,0,0,0,4,0,1,0,1,0
+cib-crmp-settle,com.newland.boss.cib.crmp.util,JsonDateValueProcessor,35,0,4,0,8,0,6,0,4,0

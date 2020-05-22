@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoleAuthServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.service.impl</a> &gt; <span class="el_source">RoleAuthServiceImpl.java</span></div><h1>RoleAuthServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.newland.boss.kpi.admin.dao.RoleAuthDao;
+import com.newland.boss.kpi.admin.model.Resource;
+import com.newland.boss.kpi.admin.model.Role;
+import com.newland.boss.kpi.admin.model.RoleAuth;
+import com.newland.boss.kpi.admin.service.RoleAuthService;
+
+@Component
+<span class="fc" id="L19">public class RoleAuthServiceImpl implements RoleAuthService {</span>
+	
+	@Autowired
+	private RoleAuthDao roleAuthDao;
+
+	@Override
+	public void addRoleAuth(String roleAuthJson) {
+		
+		//取传过来的角色ID和资源ID数组
+<span class="nc" id="L28">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L29">		JsonElement jsonEl = jsonParser.parse(roleAuthJson);</span>
+<span class="nc" id="L30">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L31">		Integer roleId = jsonObj.get(&quot;roleId&quot;).getAsInt();     //选中的操作员</span>
+<span class="nc" id="L32">		JsonArray resourceArray = jsonObj.get(&quot;selectedResource&quot;).getAsJsonArray(); //选中的机构</span>
+<span class="nc" id="L33">		Integer modifyOperatorId = jsonObj.get(&quot;modifyOperatorId&quot;).getAsInt();</span>
+		
+<span class="nc bnc" id="L35" title="All 2 branches missed.">		if (roleAuthDao.selectAuthByRoleId(roleId) != null) {</span>
+<span class="nc" id="L36">			roleAuthDao.deleteAuthByRoleId(roleId);</span>
+			//循环插入操作员机构管理关系表
+<span class="nc bnc" id="L38" title="All 2 branches missed.">			for (int i = 0;i &lt; resourceArray.size();i++) {</span>
+				
+<span class="nc" id="L40">				RoleAuth roleAuth = new RoleAuth();</span>
+<span class="nc" id="L41">				roleAuth.setRoleId(roleId);</span>
+<span class="nc" id="L42">				roleAuth.setResourceId(resourceArray.get(i).getAsInt());</span>
+<span class="nc" id="L43">				roleAuth.setStatus(0);</span>
+<span class="nc" id="L44">				roleAuth.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L45">				roleAuthDao.insertRoleAuth(roleAuth);</span>
+			}
+		}else {
+			//循环插入操作员机构管理关系表
+<span class="nc bnc" id="L49" title="All 2 branches missed.">			for (int i = 0;i &lt; resourceArray.size();i++) {</span>
+				
+<span class="nc" id="L51">				RoleAuth roleAuth = new RoleAuth();</span>
+<span class="nc" id="L52">				roleAuth.setRoleId(roleId);</span>
+<span class="nc" id="L53">				roleAuth.setResourceId(resourceArray.get(i).getAsInt());</span>
+<span class="nc" id="L54">				roleAuth.setStatus(0);</span>
+<span class="nc" id="L55">				roleAuth.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L56">				roleAuthDao.insertRoleAuth(roleAuth);</span>
+			}
+		}
+		
+		
+<span class="nc" id="L61">	}</span>
+
+	@Override
+	public RoleAuth findAnRoleAuth(RoleAuth roleAuth) {
+<span class="nc" id="L65">		Map&lt;String, Integer&gt; roleAuthMap = new HashMap&lt;String, Integer&gt;();</span>
+<span class="nc" id="L66">		roleAuthMap.put(&quot;roleId&quot;, roleAuth.getRoleId());</span>
+<span class="nc" id="L67">		roleAuthMap.put(&quot;resourceId&quot;, roleAuth.getResourceId());</span>
+<span class="nc" id="L68">		return roleAuthDao.selectAnRoleAuth(roleAuthMap);</span>
+	}
+
+	@Override
+	public void removeRoleAuth(String roleAuthJson) {
+		
+<span class="nc" id="L74">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L75">		JsonElement jsonEl = jsonParser.parse(roleAuthJson);</span>
+<span class="nc" id="L76">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L77">		JsonArray authArray = jsonObj.get(&quot;resourceIdArray&quot;).getAsJsonArray(); //选中的机构</span>
+<span class="nc" id="L78">		Integer roleId = jsonObj.get(&quot;roleId&quot;).getAsInt();</span>
+		
+		//循环删除操作员
+<span class="nc bnc" id="L81" title="All 2 branches missed.">		for (int i = 0;i &lt; authArray.size();i++) {</span>
+<span class="nc" id="L82">			Map&lt;String, Integer&gt; roleAuthMap = new HashMap&lt;String, Integer&gt;();</span>
+<span class="nc" id="L83">			roleAuthMap.put(&quot;roleId&quot;,roleId);</span>
+<span class="nc" id="L84">			roleAuthMap.put(&quot;resourceId&quot;,authArray.get(i).getAsInt());</span>
+<span class="nc" id="L85">			roleAuthDao.deleteRoleAuth(roleAuthMap);</span>
+		}
+<span class="nc" id="L87">	}</span>
+
+	@Override
+	public void editRoleAuth(String roleAuthJson) {
+		
+<span class="nc" id="L92">		JsonParser jsonParser = new JsonParser();</span>
+<span class="nc" id="L93">		JsonElement jsonEl = jsonParser.parse(roleAuthJson);</span>
+<span class="nc" id="L94">		JsonObject jsonObj = jsonEl.getAsJsonObject();</span>
+<span class="nc" id="L95">		Integer roleId = jsonObj.get(&quot;roleId&quot;).getAsInt();     //选中的角色</span>
+<span class="nc" id="L96">		Integer newResourceId = jsonObj.get(&quot;newResourceId&quot;).getAsInt(); //修改后的资源ID</span>
+<span class="nc" id="L97">		Integer resourceId = jsonObj.get(&quot;resourceId&quot;).getAsInt();  //选中的资源</span>
+<span class="nc" id="L98">		Integer status = jsonObj.get(&quot;status&quot;).getAsInt();  </span>
+<span class="nc" id="L99">		Integer modifyOperatorId = jsonObj.get(&quot;modifyOperatorId&quot;).getAsInt();</span>
+		
+<span class="nc" id="L101">		Map&lt;String, Integer&gt; roleAuthMap = new HashMap&lt;String, Integer&gt;();</span>
+<span class="nc" id="L102">		roleAuthMap.put(&quot;roleId&quot;,roleId);</span>
+<span class="nc" id="L103">		roleAuthMap.put(&quot;newResourceId&quot;,newResourceId);</span>
+<span class="nc" id="L104">		roleAuthMap.put(&quot;resourceId&quot;,resourceId);</span>
+<span class="nc" id="L105">		roleAuthMap.put(&quot;status&quot;,status);</span>
+<span class="nc" id="L106">		roleAuthMap.put(&quot;modifyOperatorId&quot;,modifyOperatorId);</span>
+		
+<span class="nc" id="L108">		roleAuthDao.updateRoleAuth(roleAuthMap);</span>
+<span class="nc" id="L109">	}</span>
+
+	@Override
+	public List&lt;RoleAuth&gt; findAuthOfRole(RoleAuth roleAuth) {
+<span class="nc" id="L113">		return roleAuthDao.selectAuthByRoleId(roleAuth.getRoleId());</span>
+	}
+
+	@Override
+	public void removeAuthByRoleId(Integer roleId) {
+<span class="nc" id="L118">		roleAuthDao.deleteAuthByRoleId(roleId);</span>
+<span class="nc" id="L119">	}</span>
+
+	@Override
+	public void addRoleAuth(Role role) {
+<span class="nc" id="L123">		roleAuthDao.deleteAuthByRoleId(role.getRoleId());</span>
+<span class="nc bnc" id="L124" title="All 4 branches missed.">		if(role.getResourceList() != null &amp;&amp; !role.getResourceList().isEmpty()) {</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">			for (Resource resource : role.getResourceList()) {</span>
+<span class="nc" id="L126">				RoleAuth newRoleAuth = new RoleAuth();</span>
+<span class="nc" id="L127">				newRoleAuth.setRoleId(role.getRoleId());</span>
+<span class="nc" id="L128">				newRoleAuth.setResourceId(resource.getResourceId());</span>
+<span class="nc" id="L129">				newRoleAuth.setStatus(0);</span>
+<span class="nc" id="L130">				newRoleAuth.setModifyOperatorId(role.getModifyOperatorId());</span>
+<span class="nc" id="L131">				roleAuthDao.insertRoleAuth(newRoleAuth);</span>
+<span class="nc" id="L132">			}</span>
+		}
+<span class="nc" id="L134">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

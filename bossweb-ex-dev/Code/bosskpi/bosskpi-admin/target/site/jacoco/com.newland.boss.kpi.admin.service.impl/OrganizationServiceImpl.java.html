@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrganizationServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bosskpi-admin</a> &gt; <a href="index.source.html" class="el_package">com.newland.boss.kpi.admin.service.impl</a> &gt; <span class="el_source">OrganizationServiceImpl.java</span></div><h1>OrganizationServiceImpl.java</h1><pre class="source lang-java linenums">package com.newland.boss.kpi.admin.service.impl;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.newland.boss.kpi.admin.dao.OperOrgRelaDao;
+import com.newland.boss.kpi.admin.dao.OrganizationDao;
+import com.newland.boss.kpi.admin.model.OperOrgRela;
+import com.newland.boss.kpi.admin.service.OrganizationService;
+import com.newland.boss.kpi.entity.Organization;
+
+@Component
+<span class="fc" id="L18">public class OrganizationServiceImpl implements OrganizationService {</span>
+	
+	@Autowired
+	private OrganizationDao organizationDao;
+	
+	@Autowired
+	private OperOrgRelaDao operOrgRelaDao;
+
+	@Override
+	public void addOrg(Organization organization) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">		if(-1 == organization.getSuperOrgId()) {</span>
+<span class="nc" id="L29">			organization.setOrgNameFull(organization.getOrgName());</span>
+		} else {
+<span class="nc" id="L31">			Organization superOrg = organizationDao.selectOrganizationById(organization.getSuperOrgId());</span>
+<span class="nc" id="L32">			organization.setOrgNameFull(superOrg.getOrgNameFull() + &quot;\\&quot; + organization.getOrgName());</span>
+		}
+<span class="nc" id="L34">		organizationDao.insertOrganization(organization);</span>
+<span class="nc" id="L35">	}</span>
+
+	@Override
+	public List&lt;Organization&gt; showAllOrg() {
+<span class="nc" id="L39">		return organizationDao.selectAllOrganization();</span>
+	}
+
+	@Override
+	public Organization findOrgById(Organization organization) {
+<span class="nc" id="L44">		return organizationDao.selectOrganizationById(organization.getOrgId());</span>
+	}
+
+	@Override
+	public void editOrg(Organization organization) {
+<span class="nc" id="L49">		String tmp = organization.getOrgNameFull();</span>
+<span class="nc" id="L50">		int index = tmp.lastIndexOf('\\');</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">		if(index != -1) {</span>
+<span class="nc" id="L52">			tmp = tmp.substring(0, index) + &quot;\\&quot; + organization.getOrgName();</span>
+<span class="nc" id="L53">			organization.setOrgNameFull(tmp);</span>
+		} else {
+<span class="nc" id="L55">			organization.setOrgNameFull(organization.getOrgName());</span>
+		}
+<span class="nc" id="L57">		organizationDao.updateOrganization(organization);</span>
+<span class="nc" id="L58">		editSubOrgFullName(organization, organization.getOrgNameFull());</span>
+<span class="nc" id="L59">	}</span>
+	
+	private void editSubOrgFullName(Organization organization, String newFullName) {
+<span class="nc bnc" id="L62" title="All 4 branches missed.">		if(organization.getChildOrgList() == null || organization.getChildOrgList().isEmpty()) {</span>
+<span class="nc" id="L63">			return;</span>
+		}
+<span class="nc bnc" id="L65" title="All 2 branches missed.">		for (Organization childOrg : organization.getChildOrgList()) {</span>
+<span class="nc" id="L66">			childOrg.setOrgNameFull(newFullName + &quot;\\&quot; + childOrg.getOrgName());</span>
+<span class="nc" id="L67">			childOrg.setModifyOperatorId(organization.getModifyOperatorId());</span>
+<span class="nc" id="L68">			organizationDao.updateOrganization(childOrg);</span>
+<span class="nc" id="L69">			editSubOrgFullName(childOrg, childOrg.getOrgNameFull());</span>
+<span class="nc" id="L70">		}</span>
+<span class="nc" id="L71">	}</span>
+	
+	//递归删除机构和机构下面的所有子机构
+	@Override
+	public void removeOrg(Organization organization, Integer modifyOperatorId) {
+<span class="nc" id="L76">		organizationDao.deleteOrganization(organization.getOrgId());</span>
+<span class="nc" id="L77">		OperOrgRela param = new OperOrgRela();</span>
+<span class="nc" id="L78">		param.setOrgId(organization.getOrgId());</span>
+<span class="nc" id="L79">		param.setModifyOperatorId(modifyOperatorId);</span>
+<span class="nc" id="L80">		operOrgRelaDao.updateStatusOperOrgRelaByOrgId(param);</span>
+		
+<span class="nc bnc" id="L82" title="All 4 branches missed.">		if(organization.getChildOrgList() != null &amp;&amp; !organization.getChildOrgList().isEmpty()) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">			for (Organization tmp : organization.getChildOrgList()) {</span>
+<span class="nc" id="L84">				removeOrg(tmp, modifyOperatorId);</span>
+<span class="nc" id="L85">			}</span>
+		}
+<span class="nc" id="L87">	}</span>
+
+	@Override
+	public List&lt;Organization&gt; searchOrg(Organization organization) {
+<span class="nc" id="L91">		Map&lt;String, Object&gt; searchMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L92">		searchMap.put(&quot;orgId&quot;,organization.getOrgId());</span>
+<span class="nc" id="L93">		searchMap.put(&quot;orgName&quot;,organization.getOrgName());</span>
+<span class="nc" id="L94">		return organizationDao.fuzzySearchOrganization(searchMap);</span>
+	}
+
+	@Override
+	public Organization findByFullName(String fullName) {
+<span class="nc" id="L99">		return organizationDao.findByFullName(fullName);</span>
+	}
+
+	@Override
+	public List&lt;Organization&gt; selectHeadOrgInfos(int orgId) {
+<span class="nc" id="L104">		return organizationDao.selectHeadOrgInfos(orgId);</span>
+	}
+
+	@Override
+	public List&lt;Organization&gt; findOperByOperatorId(int operatorId) {
+<span class="nc" id="L109">		return organizationDao.selectOrgByOperatorId(operatorId);</span>
+	}
+
+	@Override
+	public List&lt;Organization&gt; selectSubLeafBySubRootId(int orgId) {
+<span class="nc" id="L114">		return organizationDao.selectSubLeafBySubRootId(orgId);</span>
+	}
+	
+	@Override
+	public List&lt;Organization&gt; selectAllRootOrgId() {
+<span class="nc" id="L119">		return organizationDao.selectAllRootOrgId();</span>
+	}
+
+	@Override
+	public List&lt;Organization&gt; selectOrgTreeInfos() {
+<span class="nc" id="L124">		Organization headOrg = organizationDao.findByFullName(&quot;总行&quot;);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">		if(headOrg == null) {</span>
+<span class="nc" id="L126">			return Collections.emptyList();</span>
+		}
+<span class="nc" id="L128">		List&lt;Organization&gt; headOrgs = organizationDao.selectHeadOrgInfos(headOrg.getOrgId());</span>
+<span class="nc" id="L129">		List&lt;Organization&gt; orgs = organizationDao.selectAllRootOrgId();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		for (Organization organization : orgs) {</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">			if(&quot;总行&quot;.equals(organization.getOrgName())) {</span>
+<span class="nc" id="L132">				continue;</span>
+			}
+<span class="nc" id="L134">			headOrgs.add(organization);</span>
+<span class="nc" id="L135">		}</span>
+<span class="nc" id="L136">		return headOrgs;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

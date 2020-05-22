@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newland.boss.cib.crmp.dao.SettleApportionRuleDao">
+	<resultMap type="com.newland.boss.cib.crmp.domain.SettleApportionRule"
+		id="sarResultMap">
+		<id column="APPORTION_ITEM_ID" property="apportionItemId" jdbcType="INTEGER" />
+		<result column="APPORTION_RULE_NAME" property="apportionRuleName"
+			jdbcType="VARCHAR" />
+		<result column="CDR_TYPE" property="cdrType" jdbcType="INTEGER" />
+		<result column="RATIO" property="ratio" jdbcType="DOUBLE" />
+		<result column="INURE_DATE" property="inureDate" jdbcType="TIMESTAMP" />
+		<result column="EXPIRE_DATE" property="expireDate" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="INTEGER" />
+		<result column="APPORTION_DESC" property="apportionDesc"
+			jdbcType="VARCHAR" />
+		<result column="OPERATOR_ID" property="operatorId" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="SCOPE" property="scope" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		APPORTION_ITEM_ID, APPORTION_RULE_NAME, CDR_TYPE, RATIO,
+		INURE_DATE, EXPIRE_DATE, STATUS,
+		APPORTION_DESC,OPERATOR_ID,CREATE_TIME,SCOPE
+	</sql>
+
+	<!-- 查询条件 -->
+	<sql id="whereClause">
+		<where>
+			<if test="apportionRuleName!=null">and t.APPORTION_RULE_NAME LIKE
+				'%'||#{apportionRuleName}||'%' ESCAPE '/'</if>
+			<if test="apportionItemId!=null">and t.APPORTION_ITEM_ID LIKE
+				'%'||#{apportionItemId}||'%'
+			</if>
+			<if test="cdrType!=null">and t.CDR_TYPE = #{cdrType}</if>
+			<if test="inureDate!=null">and t.INURE_DATE &gt;= #{inureDate}</if>
+			<if test="expireDate!=null">and t.EXPIRE_DATE &lt;= #{expireDate}</if>
+			<if test="status!=null">
+				<choose>  
+					<when test='scope!=null'>  
+						and (t.STATUS = #{status} OR t.SCOPE = #{scope})
+					</when>  
+					<otherwise>   
+				        and t.STATUS = #{status}
+					</otherwise>  
+				</choose>
+			</if>
+			
+		</where>
+	</sql>
+
+	<select id="getSettleApportionRuleById" resultMap="sarResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SETTLE_APPORTION_RULE
+		WHERE APPORTION_ITEM_ID = #{apportionItemId}
+	</select>
+
+	<select id="judgeRuleDateValidity" resultMap="sarResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SETTLE_APPORTION_RULE t
+		where t.cdr_type = #{cdrType} and t.scope = #{scope} 
+		and (t.inure_date BETWEEN #{inureDate} AND #{expireDate}
+		or t.expire_date BETWEEN #{inureDate} AND #{expireDate}
+		or #{inureDate} &gt; t.inure_date and #{expireDate} &lt; t.expire_date)
+	</select>
+
+	<select id="queryAllSettleApportionRule" resultMap="sarResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SETTLE_APPORTION_RULE T
+	    ORDER BY T.SCOPE DESC,T.APPORTION_ITEM_ID DESC
+	</select>
+
+	<select id="querySettleApportionRuleByParam" resultMap="sarResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SETTLE_APPORTION_RULE T
+		<include refid="whereClause" />
+		ORDER BY T.SCOPE DESC,T.APPORTION_ITEM_ID DESC
+	</select>
+
+	<delete id="deleteSettleApportionRule" parameterType="Integer">
+		DELETE FROM
+		SETTLE_APPORTION_RULE
+		WHERE APPORTION_ITEM_ID = #{APPORTIONITEMID}
+	</delete>
+
+	<insert id="insertSettleApportionRule">
+		<selectKey resultType="int" order="BEFORE" keyProperty="apportionItemId">
+			SELECT SEQ_APPORTION_RULE_ID.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO SETTLE_APPORTION_RULE
+		(APPORTION_ITEM_ID,
+		APPORTION_RULE_NAME, CDR_TYPE, RATIO,INURE_DATE, EXPIRE_DATE,
+		STATUS,
+		<if test="apportionDesc != null">
+			APPORTION_DESC,
+		</if>
+		OPERATOR_ID,CREATE_TIME,SCOPE)
+		VALUES
+		(#{apportionItemId},#{apportionRuleName},#{cdrType},#{ratio},
+		#{inureDate},#{expireDate},#{status},
+		<if test="apportionDesc != null">
+			#{apportionDesc},
+		</if>
+		#{operatorId},#{createTime},#{scope})
+	</insert>
+
+	<update id="updateSettleApportionRule">
+		UPDATE SETTLE_APPORTION_RULE
+		<set>
+			<if test="apportionRuleName != null">
+				APPORTION_RULE_NAME =
+				#{apportionRuleName,jdbcType=VARCHAR},
+			</if>
+			<if test="cdrType != null">
+				CDR_TYPE = #{cdrType,jdbcType=INTEGER},
+			</if>
+			<if test="ratio != null">
+				RATIO = #{ratio,jdbcType=DOUBLE},
+			</if>
+			<if test="inureDate != null">
+				INURE_DATE = #{inureDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expireDate != null">
+				EXPIRE_DATE = #{expireDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="apportionDesc != null">
+				APPORTION_DESC = #{apportionDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				OPERATOR_ID = #{operatorId,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="scope != null">
+				SCOPE = #{scope,jdbcType=INTEGER},
+			</if>
+		</set>
+		WHERE APPORTION_ITEM_ID = #{apportionItemId,jdbcType=INTEGER}
+	</update>
+
+</mapper>
