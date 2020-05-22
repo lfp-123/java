@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="cib-crmp-web:war">
-    <output-path>$PROJECT_DIR$/cib-crmp/cib-crmp-web/target</output-path>
-    <root id="archive" name="cib-crmp-web.war">
-      <element id="artifact" artifact-name="cib-crmp-web:war exploded" />
-    </root>
-  </artifact>
-</component>
