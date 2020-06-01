@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input value="hello" class="bigpig" id="txt" type="text"/>
+<div id="dvd" class="bigpig">
+    <div id="east" style="border: darkorange 1px solid" >
+        东方
+    </div>
+    <div style="border: red 1px solid">西方</div>
+    <div style="border: green 1px solid">南方</div>
+    <div style="border: #2b62ff 1px solid">北方</div>
+
+</div>
+<script>
+    // // 通过ID获取一个节点
+    // document.getElementById();
+    // // 通过class名字获取一组节点
+    // document.getElementsByClassName();
+    // // 通过name名字获取一组节点
+    // document.getElementsByName();
+    // // 通过标签名称获取一组节点
+    // document.getElementsByTagName();
+    // // 通过选择器获取一个节点
+        var nodeS= document.querySelector("#east");
+        nodeS.style.border="10px solid";
+    // // 通过选择器获取一组节点
+    // document.querySelectorAll();
+   // var nodeS = document.querySelectorAll(".bigpig>div");
+
+//    for(var i=0 ;nodeS.length;i++){
+//        nodeS[i].style.border="1px red solid";
+//
+//    }
+</script>
+</body>
+</html>

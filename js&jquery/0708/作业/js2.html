@@ -1,0 +1,25 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>倒三角形</title>
+        <script>
+            var num = prompt("请输入三角形的行数", "1");
+            var line = 100/num;
+            var b = num;
+            for(num; num > 0; num--){
+                document.write("<hr style='width:" +  line * num + "%'>");
+                document.write("<br>");
+            }
+
+            for(var i=1;i < b; i++){
+                document.write("<hr style='width:" +  line * i + "%'>");
+                document.write("<br>");
+            }
+        </script>
+    </head>
+    <body style="text-align: center">
+
+    </body>
+    <ml>

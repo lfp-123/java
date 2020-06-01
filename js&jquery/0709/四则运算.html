@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function add(a,b){
+            var c= a+b;
+            document.write(c);
+        }
+        function jian(a,b){
+            var c= a-b;
+            document.write(c);
+        }
+        function cheng(a,b){
+            var c= a*b;
+            document.write(c);
+        }
+        function chu(a,b){
+            if(0==b){
+                alert("输入错误,除数不能为0")
+                return ;
+            }
+
+            var c= a/b;
+            document.write(c);
+        }
+        function operatotr(a,b,ty) {
+            switch (ty) {
+                case '+':
+                    add(a, b);
+                    break;
+                case '-':
+                    jian(a, b);
+                    break;
+                case  '*':
+                    add(a, b);
+                    break;
+                case  '/':
+                    add(a, b);
+                    break;
+                default :
+                    document.write("输入错误");
+            }
+
+        }
+        var num1=parseFloat( prompt("请输入第一个数："))
+        var num2= parseFloat(prompt("请输入第二个数："))
+        var num3= (prompt("请输入四则运算符"))
+        operatotr(num1,num2,num3)
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

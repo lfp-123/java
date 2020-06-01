@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            border: 1px red solid;
+            list-style-type: none;
+            background-color: red;
+        }
+        li:first-child{
+                border: 1px red solid;
+                background-color: blue;
+        }
+
+    </style>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("li:first").click(function () {
+            //   $(this).next("li").slideToggle();
+             $(this).next("li").fadeToggle();
+//1             $(this).next("li").toggle();
+           // $(this).next("li").fadeOut();
+
+
+            })
+        })
+    </script>
+</head>
+<body>
+<ul>
+    <li>菜单</li>
+    <li>sshjhsjskjskdfjkdsfksdjkfjk dkfjdklsjkldjfklsjfk</li>
+</ul>
+</body>
+</html>

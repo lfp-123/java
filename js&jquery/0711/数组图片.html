@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img id="face" src="../image/th.jpg" height="246" width="255"/>
+<script>
+            var arrimg = ["th (1).jpg","th.jpg","th (2).jpg"];
+
+            function  changeImg() {
+                for(var index=0;index<arrimg.length;index++){
+
+                var nope = document.querySelector("#face")
+                nope.src="../image/"+arrimg[index];
+
+                }
+                setTimeout(changeImg,1000)
+            }
+
+            setTimeout(changeImg,1000)
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin:0px;
+            padding:0px;
+        }
+        li {
+            list-style-type: none;
+            height: 500px;
+        }
+        #win {
+            margin:auto;
+            padding:0px;
+            width:1234px;
+        }
+        #win>li:not(:first-of-type) {
+            display:none;
+        }
+
+        .bg1{background: #fdebd1 url("../image/tmall1.webp") no-repeat center }
+        .bg2{background: #e8e8e8 url("../image/tmall2.jpg") no-repeat center}
+        .bg3{background: #9b050e url("../image/tmall3.jpg")no-repeat center}
+        .bg4{background:#e8e8e8 url("../image/tmall4.jpg")no-repeat center}
+        .bg5{background:#b0ffcc url("../image/tmall5.webp")no-repeat center}
+        .bg6{background: #fdce8e url("../image/tmall6.webp")no-repeat center}
+        #main {
+            position: relative;
+            width: 100%;
+        }
+        #btns>a{
+
+        }
+        #btns {
+            width:194px;
+            position: absolute;
+            z-index: 9999;
+            bottom: 22px;
+            left:calc(50% - 97px);
+        }
+        #btns>a{
+            float:left;
+            width:24px;
+            height: 5px;
+            margin-left:7px;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .choose {
+            background-color: rgba(255,255,255,1) !important;
+        }
+    </style>
+
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var colors = ["#fdebd1","#e8e8e8","#9b050e","#e8e8e8","#b0ffcc","#fdce8e"];
+            var nowIndex = 0;
+            var mytime;
+            $("#btns>a").mouseenter(function() {
+                // 给到其他函数用
+                let mythis = this;
+                // 如果二次移入和当前显示为同一张，不干事情
+                if($(mythis).hasClass("choose")) return;
+                clearTimeout(mytime)
+              mytime=  setTimeout(function(){
+                    // 先无脑清空所有选中白色的按钮
+                    $("#btns>a").removeClass("choose");
+                    // 设置鼠标移入的按钮为白色
+                    $(mythis).addClass("choose");
+                    // 找出移入按钮的索引
+                    var index = $("#btns>a").index(mythis);
+                    // 隐藏所有li
+                    $("#win>li").hide();
+                    // 淡出index这张
+                    $("#win>li").eq(index).fadeIn(500);
+                    // 切换背景色
+                    $("#main").css("backgroundColor", colors[index]);
+                    // 同步自动切换的索引
+                    nowIndex = index;
+                }, 300);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+
+<div id="main">
+    <ul id="win">
+        <li class="bg1">111</li>
+        <li class="bg2"> 222</li>
+        <li class="bg3">333</li>
+        <li class="bg4">444</li>
+        <li class="bg5">555</li>
+        <li class="bg6">666</li>
+
+    </ul>
+    <div id="btns">
+    <a class="choose" href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+    <a href="javascript:;"></a>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

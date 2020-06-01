@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("div p").first().css("background-color","yellow");
+            $("p").eq(1).css("background-color","red");
+            $("div p").last().css("background-color","yellow");
+
+        });
+            $(function () {
+            $("button").click(function () {
+
+             alert(  $("p").hasClass("sty"))
+            })
+        })
+        $(function () {
+            $("div").filter(".ty").css("border","1px,red,solid");
+        })
+
+
+
+        $("p").append( $("input").map(function(){
+            return $(this).val();
+        }).get().join(", ") );
+
+            //has
+        $(function () {
+            $("p").has("span").css("color","red")
+        })
+
+    </script>
+    <style>
+        .sty{
+            color: blue;
+        }
+
+    </style>
+
+</head>
+<body>
+<h1>欢迎来到我的主页</h1>
+<div style="border:1px solid black">
+    <p>这是div中的一个段落。</p>
+    <p>这是div中的一个段落。</p>
+    <p class="sty">这是div中的一个段落。</p>
+    <p >这是div中的一个段落。</p>
+    <button>检测段落是否用了class</button>
+
+</div>
+
+
+<div></div>
+<div class="ty"></div>
+<div></div>
+<div></div>
+
+
+<p><b>Values: </b></p>
+<form>
+    <input type="text" name="name" value="John"/>
+    <input type="text" name="password" value="password"/>
+    <input type="text" name="url" value="http://ejohn.org/"/>
+</form>
+
+<p>一个段落</p>
+<p><span>使用子代span的子代测试has</span></p>
+<p><span>使用子代span的子代测试has</span></p>
+<p>一个段落</p>
+
+<ul>总菜单
+    <li >本田
+        <ul>
+            <li>雅阁</li>
+            <li>思域</li>
+            <li>飞度</li>
+        </ul>
+    </li>
+     <li>大众
+        <ul>
+            <li>迈腾</li>
+            <li>速腾</li>
+            <li>帕瑟特</li>
+        </ul>
+    </li>
+     <li>丰田
+        <ul>
+            <li>凯美瑞</li>
+            <li>汉兰达</li>
+            <li>霸道</li>
+        </ul>
+    </li>
+
+
+</ul>
+</body>
+</html>

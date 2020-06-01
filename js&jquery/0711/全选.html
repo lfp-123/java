@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    label{
+        user-select: none;
+    }
+
+</style>
+<script>
+    window.onload =function (){
+        document.querySelector("#all").onclick=function () {
+                var boxes = document.querySelectorAll("[type=checkbox]:not(#all):not(#reverse)");
+            for(var i=0;i<boxes.length;i++){
+                boxes[i].checked=this.checked;
+            }
+
+        }
+        document.querySelector("#reverse").onclick = function () {
+            var boxes = document.querySelectorAll("[type=checkbox]:not(#all):not(#reverse)");
+            for(var i=0;i<boxes.length;i++){
+                boxes[i].checked=!boxes[i].checked;
+            }
+        }
+    }
+
+</script>
+<body>
+<div>
+    <label for="all">全选全不选</label>
+    <input id="all" type="checkbox">
+    <label for="reverse">反选</label>
+    <input id="reverse" type="checkbox">
+</div>
+
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+<div><input type="checkbox"></div>
+
+
+
+</body>
+</html>

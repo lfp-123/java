@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+    <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+    <property name="connection.username">ADMIN</property>
+    <property name="connection.password">tianxia</property>
+      <!-- 显示hibernate运行的SQL语句 -->
+      <property name="show_sql">true</property>
+      <property name="format_sql">true</property>
+    <!-- 配置二级缓存
+      开启二级缓存
+      提供二级缓存的实现类
+      提供二级缓存的配置文件 -->
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    <property name="hibernate.cache.region.factory_class">
+        org.hibernate.cache.ehcache.internal.EhcacheRegionFactory
+    </property>
+    <property name="hibernate.cache.provider_configuration_file_resource_path">
+      ehcache.xml
+    </property>
+
+
+      <!-- 关联映射文件 只要读取核心配置文件，只要关联之后 只要读取核心配置文件，就会同时读取映射文件 -->
+      <mapping resource="HDept.hbm.xml"/>
+      <mapping resource="HRole.hbm.xml"/>
+      <mapping resource="HUser.hbm.xml"/>
+      <mapping resource="HUserinfo.hbm.xml"/>
+
+      <mapping resource="HClass.hbm.xml"/>
+      <mapping resource="HStudent.hbm.xml"/>
+      <mapping resource="HStudentinfo.hbm.xml"/>
+      <mapping resource="HTeacher.hbm.xml"/>
+      <!-- <property name="connection.username"/> -->
+      <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#one").click(function () {
+                $("li:first").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },2000)
+            })
+            $("#two").click(function () {
+                $("li:eq(1)").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },4000)
+            })
+            $("#three").click(function () {
+                $("li:eq(2)").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },4000)
+            })
+            $("#four").click(function () {
+                $("li:eq(3)").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },4000)
+            })
+            $("#five").click(function () {
+                $("li:eq(4)").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },4000)
+            })
+            $("#six").click(function () {
+                $("li:eq(5)").fadeIn();
+                setTimeout(function () {
+                    $("this").fadeOut();
+                },4000)
+            })
+        })
+
+    </script>
+    <style>
+
+        #win {
+            width: 500px;
+           margin: auto;
+
+        }
+        button{
+            width: 100px;
+            height: 30px;
+            margin: 40px;
+        }
+        #win2{
+            position: absolute;
+            right: 10px;
+          top: 0px;
+        }
+        #win2 li{
+            list-style-type: none;
+            margin: 2px;
+            width: 300px;
+            line-height: 60px;
+            text-align: center;
+            display: none;
+        }
+        #winbig{
+            width: 100%;
+            height: 1000000000px;
+            background-color: #3ffff4;
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="winbig">
+<div id="win">
+<button id="one" style="background-color: green" value="Success">Success</button>
+<button id="two" style="background-color: blue" value="Info">Info</button>
+<button id="three" style="background-color: #ffaf24" value="Warning">Warning</button>
+<button id="four" style="background-color: red" value="Danger">Danger</button>
+<button id="five" style="background-color: #e3ffee" value="Light">Light</button>
+<button id="six" style="background-color: #090409 ;color: white" value="Dark">Dark</button>
+</div>
+</div>
+<div id="win2">
+    <ul>
+        <li style="background-color: green" class="text">这是一个成功信息<a href="">delete</a></li>
+        <li style="background-color: blue "class="text">这是一个信息<a href="">delete</a></li>
+        <li style="background-color: #ffaf24" class="text">这是一个警告<a href="">delete</a></li>
+        <li  style="background-color: red"class="text">这是一个危险信息<a href="">delete</a></li>
+        <li style="background-color: #e3ffee"class="text">这是一个亮信息<a href="">delete</a></li>
+        <li style="background-color: #090409;color: white"class="text" > 这是一个黑色信息<a href="">delete</a></li>
+    </ul>
+</div>
+</body>
+</html>

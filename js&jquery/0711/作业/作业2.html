@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .font{
+            font-size: 15px;
+        }
+    </style>
+    <script>
+        function  toggle(menuId) {
+            var nopes = document.getElementById(menuId);
+            var dl = nopes.children;
+            for (var i = 1; i < dl.length; i++) {
+                if ("" == dl[i].style.display) {
+                    dl[i].style.display = "none";
+                } else {
+                    dl[i].style.display = "";
+                }
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+        <div>
+            <ul class="font">
+                <dl id="menu1">
+                    <dt><img src="image/z-1.jpg" height="16" width="32"/>
+                        <a onclick="toggle('menu1')" href="javasript:;">分类信息</a> </dt>
+                </dl>
+                <dl id="menu2">
+                    <dt><img src="image/z-2.jpg" height="16" width="32"/>
+                        <a href="javasript:;">社会信息</a></dt>
+                </dl>
+                <dl id="menu3">
+                    <dt><img src="image/z-3.jpg" height="16" width="32"/>
+                        <a onclick="toggle('menu3')" href="javasript:;">休闲娱乐</a>
+                    </dt>
+                    <dd><img src="image/z-top.gif" height="18" width="18"/>
+                        全国会馆</dd>
+                    <dd><img src="image/z-top.gif" height="18" width="18"/>
+                        七彩水目</dd>
+                    <dd><img src="image/z-top.gif" height="18" width="18"/>
+                        网友聚会</dd>
+                    <dd><img src="image/z-top.gif" height="18" width="18"/>
+                        醉品人生</dd>
+                    <dd><img src="image/z-top.gif" height="18" width="18"/>
+                        花木园艺</dd>
+                    <dd><img src="image/z-end.gif" height="18" width="18"/>
+                        祝福</dd>
+
+                </dl>
+                <dl id="menu4">
+                    <dt><img src="image/z-4.jpg" height="16" width="32"/>
+                        <a href="javasript:;">电脑技术</a></dt>
+                </dl>
+            </ul>
+        </div>
+</body>
+</html>

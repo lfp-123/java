@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+</head>
+<script>
+    $(function () {
+     $("ul").each(function (i,o) {
+         var r =parseInt(Math.random()*255)
+         var g =parseInt(Math.random()*255)
+         var b =parseInt(Math.random()*255)
+         $(o).find("li").each(function (j,k){
+             $(k).css("backgroundColor","rgb("+r+","+g+","+b+")")
+            r= r+40;
+            g= g+40;
+            b= b+40;
+
+         });
+     });
+     $("ul li:nth-child(1)").click(function () {
+         $(this).nextAll("li").slideToggle();
+     })
+})
+</script>
+<style>
+    ul {
+        border: 1px solid black;
+        list-style-type: none;
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        width: 150px;
+
+    }
+    li{
+        list-style-type: none;
+        border-top:1px solid black;
+    /*display: none;*/
+    }
+</style>
+<body>
+    <ul >
+        <li>文章</li>
+        <li>saml教程</li>
+        <li>Java教程</li>
+        <li>Java教程</li>
+    </ul>
+    <ul>
+        <li>参考</li>
+        <li>saml教程</li>
+        <li>Java教程</li>
+        <li>Java教程</li>
+    </ul>
+    <ul>
+        <li>Blog</li>
+        <li>saml教程</li>
+        <li>Java教程</li>
+        <li>Java教程</li>
+    </ul>
+</body>
+</html>

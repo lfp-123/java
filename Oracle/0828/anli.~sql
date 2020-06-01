@@ -1,0 +1,28 @@
+--转小写
+SELECT LOWER('HELLO'),UPPER('apple') FROM dual
+--字符长度个数
+SELECT LENGTH ('大家好') FROM dual
+--截取字符串个数
+SELECT SUBSTR('helloworld',6,5) FROM dual
+--获取字符串位置，从1开始数
+SELECT INSTR('helloworld','o',1)FROM dual;
+--替换文本
+SELECT REPLACE('helloworld','o','我是老虎') FROM dual;
+--保留两位小数四舍五入
+SELECT ROUND (22.92342,2) FROM dual;
+--trunc 截取数字或日期
+SELECT TRUNC (SYSDATE),TRUNC(123.12994,2)FROM dual
+--取余数
+SELECT MOD(8,3) FROM dual
+--向上取整
+SELECT CEIL(1.000001) FROM dual;
+--向下取整
+SELECT FLOOR(1.99999)FROM dual;
+--绝对值
+SELECT ABS(100-200)FROM dual;
+--当前日期
+SELECT SYSDATE,SYSTIMESTAMP FROM dual;
+--添加月份
+SELECT add_mouths(SYSDATE,2) FROM dual;
+--获取月的最后一天的日期
+SELECT last_day(SYSDATE)FROM dual;

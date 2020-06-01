@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_4.xsd">
+	<welcome-file-list>
+		<welcome-file>/qiantai/default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>admin</servlet-name>
+		<servlet-class>com.action.admin_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>admin</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>gonggao</servlet-name>
+		<servlet-class>com.action.gonggao_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>gonggao</servlet-name>
+		<url-pattern>/gonggao</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>banji</servlet-name>
+		<servlet-class>com.action.banji_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>banji</servlet-name>
+		<url-pattern>/banji</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>tea</servlet-name>
+		<servlet-class>com.action.tea_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>tea</servlet-name>
+		<url-pattern>/tea</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>stu</servlet-name>
+		<servlet-class>com.action.stu_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>stu</servlet-name>
+		<url-pattern>/stu</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>index</servlet-name>
+		<servlet-class>com.action.index_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>index</servlet-name>
+		<url-pattern>/index</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>liuyan</servlet-name>
+		<servlet-class>com.action.liuyan_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>liuyan</servlet-name>
+		<url-pattern>/liuyan</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>doc</servlet-name>
+		<servlet-class>com.action.doc_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doc</servlet-name>
+		<url-pattern>/doc</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<servlet-name>zuoye</servlet-name>
+		<servlet-class>com.action.zuoye_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>zuoye</servlet-name>
+		<url-pattern>/zuoye</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>zuoyestu</servlet-name>
+		<servlet-class>com.action.zuoyestu_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>zuoyestu</servlet-name>
+		<url-pattern>/zuoyestu</url-pattern>
+	</servlet-mapping>
+	
+
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>activeReverseAjaxEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>
+				initApplicationScopeCreatorsAtStartup
+			</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>maxWaitAfterWrite</param-name>
+			<param-value>500</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+
+
+	<filter>
+		<filter-name>SetChartEncoding</filter-name>
+		<filter-class>com.util.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SetChartEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>

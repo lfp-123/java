@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+            <style>
+                html ,body{
+                    margin:0px;
+                    padding:0px;
+                }
+                #face {
+                    position:fixed;
+                    z-index: 9999;
+                }
+            </style>
+        </head>
+<body>
+<img  onmouseover="stopMove();"
+      onmouseout="move();"
+      id="face"
+       src="../image/猫.gif"/>
+<script>
+    var isTop = true;
+    var isLeft = true;
+    function move() {
+        // 获取到face这个标签
+        var node = document.querySelector("#face");
+        // 获取它的left和top的位置，初始为""
+        var left = node.style.left;
+        var top = node.style.top;
+        if(left == "")  left = 0;
+        if(top == "")  top = 0;
+
+        // left和top后续会有px单位，转换后删除单位
+        // 如1px转换后 1+1
+        left = parseInt(left);
+        top = parseInt(top);
+        // 判断是否碰撞到边界
+        if(top >= (window.innerHeight - node.clientHeight)) isTop = false;
+        if(top <= 0)  isTop = true;
+        if(isTop) top++; //向下移动
+        if(!isTop) top--; //向上移动
+        // 刚开始标记量标为正，进入判断++ ，当加到
+        // 》》边框底部，进入判断修改标记量 为负，此时进入不了++
+        // 只能进入-- 当《《顶部时 修改标记量 为false
+        // 于是 进入不了++ 只能进入-- 开始循环。
+        if(left >= (window.innerWidth - node.clientWidth)) isLeft = false;
+        if(left <= 0)  isLeft = true;
+        if(isLeft) left++;
+        if(!isLeft) left--;
+
+// 因为转为int类型所以要加px
+        node.style.left = left + "px";
+        node.style.top = top + "px";
+        // setTimeout的自动版
+        mymove = requestAnimationFrame(move);
+    }
+    function stopMove() {
+        cancelAnimationFrame(mymove);
+    }
+    var mymove = requestAnimationFrame(move);
+</script>
+</body>
+</html>

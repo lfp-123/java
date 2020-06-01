@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sc.spmvc.mapper.SUserMapper">
+    <resultMap id="BaseResultMap" type="com.sc.spmvc.pojo.SUser">
+        <id  column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result property="password" column="password"></result>
+        <result property="head" column="head"></result>
+        <result property="time" column="time"></result>
+    </resultMap>
+    <sql id="BaseSql">
+        id,username,PASSWORD,head,time
+    </sql>
+    <insert id="insertUser" >
+        INSERT into S_USER VALUES (
+        ID_SEQ.nextval,#{u.username},#{u.password},#{u.head},sysdate
+        )
+    </insert>
+    <delete id="delUSer">
+        DELETE FROM
+        S_USER
+        WHERE id = #{u.id}
+    </delete>
+    <select id="checkUser" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql"></include>
+        FROM S_USER
+        WHERE  username=#{username}
+    </select>
+    <select id="selectByUsernamePassword" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSql"></include>
+        FROM S_USER
+        WHERE  username=#{username} and password=#{password}
+    </select>
+    <select id="showListUser" resultType="com.sc.spmvc.pojo.SUser">
+        SELECT
+        <include refid="BaseSql"></include>
+        FROM S_USER
+    </select>
+
+
+</mapper>

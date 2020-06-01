@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $("#one").click(function () {
+            $("p").not("#span").css("color","red")
+
+        })
+    })
+    //not返回不是span的
+    $(function () {
+        $("#two").click(function () {
+            $("p").slice(0,1).css("color","yellow")
+
+        })
+    })
+    //slice找到0到1 不包含1
+    $(function(){
+        $("ul").children().css({"color":"red","border":"2px solid red"});
+    });
+    //后代所有元素
+    $(function(){
+        $("span").closest("li").css({"color":"red","border":"2px solid yellow"});
+    });
+    //返回li的第一个父辈元素
+    $(function(){
+        $("li").find("li").css({"color":"red","border":"2px solid green"});
+    });
+    //找到指定的子代元素
+    $(function(){
+        $("#three").click(function () {
+            $("p.sta").next().css({"color":"red"});
+
+        })
+    });
+    //找到class为sta的下一个P标签
+    $(function(){
+        $("#four").click(function () {
+        $("p.sta").nextAll().css({"color":"green"});
+        })
+    });
+    //找到class为sta的所有的P标签
+    $(function () {
+       $("#five").click(function () {
+         $("p.sta").nextUntil("p.end").css("color","blue");
+       })
+    })
+    //找到class为sta到end的所有的P标签
+</script>
+</head>
+<body>
+<p>一个段落</p>
+<p id="span">使用id=span的子代测试has</p>
+<p>一个段落</p>
+<p>一个段落</p>
+<button id="one">使id不是span的变红</button>
+<button id="two">使第二个P元素变色</button>
+<div style="width:500px;">div (祖先节点)
+    <ul>ul (直接父节点)
+        <li>li (子节点)
+            <span>span (孙节点)</span>
+            <ul>
+                <li>s</li>
+            </ul>
+        </li>
+        <li>li (子节点)
+            <span>span (孙节点)</span>
+        </li>
+    </ul>
+    <p class="sta">1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p class="end">5</p>
+    <button id="three">找到class为sta的下一个P标签</button>
+    <button id="four">找到class为sta的所有的P标签</button>
+    <button id="five">找到class为sta到end的所有的P标签</button>
+</div>
+</body>
+</html>

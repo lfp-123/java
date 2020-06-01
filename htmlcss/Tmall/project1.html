@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>网址导航</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <h1>网址导航</h1>
+  
+  <div class="tools">
+    <button class="btn btn-danger" onclick="batchDel()">批量删除</button>
+    <input type="search" class="form-control" placeholder="请输入关键字" oninput="search(this)">
+  </div>
+
+  <table class="light">
+    <thead>
+      <tr>
+        <th width="10%">
+          <input id="checkall" type="checkbox" onchange="checkAll(this)">
+        </th>
+        <th width="20%">名称</th>
+        <th>网址</th>
+        <th width="15%">评级</th>
+        <th width="20%">操作</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr>
+        <td colspan="5">列表加载中...</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="pager" id="pager">页码加载中...</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <form name="web">
+    <table class="light">
+      <thead>
+        <tr>
+          <th width="10%">序号</th>
+          <th width="20%">名称</th>
+          <th>网址</th>
+          <th width="15%">评级</th>
+          <th width="20%">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#</d>
+          <td>
+            <input name="title" type="text" class="form-control" autofocus>
+          </td>
+          <td>
+            <input name="url"  type="text" class="form-control">
+          </td>
+          <td>
+            <select name="star"  class="form-control">
+              <option value="">请选择</option>
+              <option value="★★★★★">★★★★★</option>
+              <option value="★★★★">★★★★</option>
+              <option value="★★★">★★★</option>
+              <option value="★★">★★</option>
+              <option value="★">★</option>
+            </select>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" onclick="addItem(this)">新增</button>
+            <button type="reset" class="btn">重填</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  <script>
+  //本地静态模拟数据
+  var sites = [
+    { id: 1, title: '网易', url: 'http://www.163.com', star: '★★★' },
+    { id: 2, title: '新浪', url: 'http://www.sina.com', star: '★' },
+    { id: 3, title: '百度', url: 'http://www.baidu.com', star: '★★★★★' },
+    { id: 4, title: '优酷网', url: 'http://www.youku.com', star: '★★★' },
+    { id: 5, title: '凤凰网', url: 'http://www.ifeng.com', star: '★★' },
+    { id: 6, title: '抖音', url: 'http://www.douyin.com', star: '★★★★' },
+    { id: 7, title: 'hao123', url: 'http://www.hao123.com', star: '★' }
+  ]
+
+  var cpage = 1; //当前页 全局变量
+
+  var keyword = ''; //搜索关键字
+
+  //延迟一秒读取数据，模拟异步操作
+  setTimeout(function(){
+    showList(cpage);
+  },300)
+
+  //搜索
+  function search( input ){
+    keyword = input.value.trim();
+    cpage = 1;
+    showList(cpage);
+  }
+
+  //查询
+  function showList( page, id ){
+
+    //搜索结果
+    var searchSites = sites.filter(function(item){
+      return item.title.indexOf(keyword) != -1 || item.url.indexOf(keyword) != -1;
+    })
+
+    //分页四要素
+    var total = searchSites.length; //总记录
+    var perpage = 2; //每页显示几条
+    var totalpage = Math.ceil(total/perpage); //总页数
+
+    //当前页大于总页数
+    if( page > totalpage ) {
+      page = page - 1;
+    }
+
+    //你单击了第几页，然后覆盖给全局变量。
+    cpage = page;
+
+    //列表模板
+    var listTemp = '';
+
+    //没有数据时
+    if(searchSites.length == 0) {
+      listTemp = '<tr>\
+        <td colspan="5">抱歉，暂时没有数据！</td>\
+      </tr>';
+    }
+
+    //分页切割新数组
+    var start = (page - 1) * perpage; //起始位置
+    var end = start + perpage; //结束位置
+    var pageSites = searchSites.slice(start,end);//产生新数组 slice切割数组
+
+    //列表
+    pageSites.forEach(function( item, index ){
+      var num = start + index;//有规律的序号
+      if( item.id == id ){
+        //编辑状态 累积
+        listTemp += '<tr>\
+          <td><input type="checkbox" name="id" value="'+item.id+'" onchange="setChecked(this)"></td>\
+          <td><input name="title" type="text" class="form-control" value="'+item.title+'"></td>\
+          <td><input name="url"  type="text" class="form-control" value="'+item.url+'"></td>\
+          <td><select name="star" class="form-control" >\
+              <option value="">请选择</option>\
+              <option value="★★★★★" '+(item.star=='★★★★★'?'selected':'')+'>★★★★★</option>\
+              <option value="★★★★" '+(item.star=='★★★★'?'selected':'')+'>★★★★</option>\
+              <option value="★★★" '+(item.star=='★★★'?'selected':'')+'>★★★</option>\
+              <option value="★★" '+(item.star=='★★'?'selected':'')+'>★★</option>\
+              <option value="★" '+(item.star=='★'?'selected':'')+'>★</option>\
+            </select></td>\
+          <td>\
+            <button class="btn btn-primary" onclick="editItem(this,'+num+')">保存</button>\
+            <button class="btn btn-danger" onclick="showList('+cpage+')">取消</button>\
+          </td>\
+        </tr>';
+      }else{
+        //只读状态
+        listTemp += '<tr>\
+          <td><input type="checkbox" name="id" value="'+item.id+'" onchange="setChecked(this)"></td>\
+          <td>'+item.title+'</td>\
+          <td>'+item.url+'</td>\
+          <td>'+item.star+'</td>\
+          <td>\
+            <button class="btn btn-primary" onclick="showList('+page+','+item.id+')">修改</button>\
+            <button class="btn btn-danger" onclick="delItem('+num+')">删除</button>\
+          </td>\
+        </tr>';
+      }
+    })
+    document.getElementById('tbody').innerHTML = listTemp;
+
+    //分页
+    
+    //分页模板
+    var pageTemp = '<button '+( page <= 1 ? 'disabled': '' )+' onclick="showList('+(page-1)+')">&lt;</button>';//上一页
+
+    //循环页码
+    for(var p=1;p<=totalpage;p++){
+      var active = p === page ? 'active': '';
+      pageTemp +='<button class="'+active+'" onclick="showList('+p+')">'+p+'</button>'
+    }
+  
+    pageTemp +='<button '+( page >= totalpage ? 'disabled': '' )+' onclick="showList('+(page+1)+')">&gt;</button>';//下一页
+
+    //插入到页面当中
+    document.getElementById('pager').innerHTML = pageTemp;
+
+  }
+  
+  //全选反选
+  function checkAll( input ){
+
+    var ids = document.querySelectorAll('#tbody [name="id"]');//找出来的是数组
+
+    if(input.checked){
+      ids.forEach(function( item ){
+        item.checked = true;
+        item.closest('tr').className='checked';
+      })
+    }else{
+      ids.forEach(function( item ){
+        item.checked = false;
+        item.closest('tr').className='';
+      })
+    }
+
+  }
+
+  //单行选中着色
+  function setChecked( input ){
+    input.closest('tr').className= input.checked?'checked':'';
+  }
+
+  //删除数据
+  function delItem( index ){
+
+    if(confirm('您确定要删除此项吗？')){
+
+      //高阶函数 返回新数组
+      // sites = sites.filter(function(item){
+      //   //排除法删除 
+      //   return item.id != id;
+      // })
+
+      //通过索引值删除
+      sites.splice( index, 1 );
+
+      //删除后立即刷新
+      showList( cpage );
+
+    }
+
+  }
+
+  //批量删除
+  function batchDel(){
+    var ids = document.querySelectorAll('#tbody [name="id"]');
+    var checkedIds = [];
+    ids.forEach(function(input){
+      if( input.checked ) {
+        checkedIds.push( Number( input.value ) );
+      }
+    })
+    if(!checkedIds.length){
+      alert('一个都没有选！');
+    }else if(confirm('您确定要删除所选项吗？')){
+      sites = sites.filter(function(item){
+        return checkedIds.indexOf(item.id) == -1;
+      })
+
+      //删除后刷新
+      showList( cpage );
+
+      //取消选中
+      document.getElementById('checkall').checked = false;
+
+    }
+  }
+
+  //表单验证函数
+  function checkRequire( btn, add ){
+
+    // closest 从btn开始一直往上找父级，找到最近的tr为止。
+    var id = btn.closest('tr').querySelector('[name="id"]');
+    var idVal = id && id.value; //找到第一个td的值 
+    var title = btn.closest('tr').querySelector('[name="title"]');
+    var titleVal = title.value.trim();
+    var url = btn.closest('tr').querySelector('[name="url"]');
+    var urlVal = url.value.trim();
+    var star = btn.closest('tr').querySelector('[name="star"]');
+    var starVal = star.value;
+
+    if(titleVal==''){
+      alert('请输入网站名称！');
+      title.focus();
+      return false;
+    }
+
+    if(urlVal==''){
+      alert('请输入网站地址！');
+      url.focus();
+      return false;
+    }
+
+    if(starVal==''){
+      alert('请输入网站评分！');
+      star.focus();
+      return false;
+    }
+
+    return {
+      id: add == true ? sites.length+1 : idVal, 
+      title: titleVal, 
+      url: urlVal, 
+      star: starVal
+    }
+
+  }
+
+  //添加项目
+  function addItem( btn ){
+
+    //往后追加
+    var form = checkRequire( btn, true );   
+
+    //如果form为真，说明通过表单验证。
+    if( form ){
+
+      sites.unshift( form );
+
+      //刷新
+      cpage = 1;
+      showList( cpage );
+
+      //添加完成之后重置表单
+      document.forms['web'].reset();
+
+    }
+
+  }
+
+  //修改项目
+  function editItem( btn, index ){
+
+    var form = checkRequire( btn, false );
+
+    //如果form为真，说明通过表单验证。
+    if( form ){
+
+      //修改
+      sites.splice( index, 1, form );
+      
+      //刷新
+      showList( cpage );
+    
+    }
+
+  }
+
+  </script>
+
+
+
+
+</body>
+</html>

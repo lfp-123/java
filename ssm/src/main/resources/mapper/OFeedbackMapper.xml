@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seecen.ssm.mapper.OFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.seecen.ssm.pojo.OFeedback">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="JOB" jdbcType="VARCHAR" property="job" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="COMPANY" jdbcType="VARCHAR" property="company" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="DEAL" jdbcType="CHAR" property="deal" />
+    <result column="OPERATOR" jdbcType="DECIMAL" property="operator" />
+    <result column="DEAL_TIME" jdbcType="TIMESTAMP" property="dealTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, JOB, EMAIL, PHONE, COMPANY, ADDRESS, DEAL, OPERATOR, DEAL_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from O_FEEDBACK
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from O_FEEDBACK
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.seecen.ssm.pojo.OFeedback">
+    insert into O_FEEDBACK (ID, NAME, JOB, 
+      EMAIL, PHONE, COMPANY, 
+      ADDRESS, DEAL, OPERATOR, 
+      DEAL_TIME)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{deal,jdbcType=CHAR}, #{operator,jdbcType=DECIMAL}, 
+      #{dealTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.seecen.ssm.pojo.OFeedback">
+    insert into O_FEEDBACK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="job != null">
+        JOB,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="company != null">
+        COMPANY,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="deal != null">
+        DEAL,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="dealTime != null">
+        DEAL_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="deal != null">
+        #{deal,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seecen.ssm.pojo.OFeedback">
+    update O_FEEDBACK
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        JOB = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null">
+        COMPANY = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="deal != null">
+        DEAL = #{deal,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="dealTime != null">
+        DEAL_TIME = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seecen.ssm.pojo.OFeedback">
+    update O_FEEDBACK
+    set NAME = #{name,jdbcType=VARCHAR},
+      JOB = #{job,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      COMPANY = #{company,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      DEAL = #{deal,jdbcType=CHAR},
+      OPERATOR = #{operator,jdbcType=DECIMAL},
+      DEAL_TIME = #{dealTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

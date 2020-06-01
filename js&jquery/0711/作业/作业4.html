@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>鼠标跟随</title>
+            <style>
+                #mouseImg {
+                    position:absolute;
+                    z-index: 9999;
+                    left:100px;
+                }
+
+            </style>
+            <script>
+                function move() {
+                    var x = event.pageX;
+                    var y = event.pageY;
+                    var node = document.querySelector("#mouseImg");
+                    node.style.left = (x - node.clientWidth / 2) +  'px';
+                    node.style.top = (y - node.clientHeight / 2) + 'px';
+                }
+                window.onmousemove = move;
+            </script>
+        </head>
+<body>
+<img id="mouseImg" src="../../image/猫.gif" width="50">
+</body>
+</html></title>
+</head>
+<body>
+
+

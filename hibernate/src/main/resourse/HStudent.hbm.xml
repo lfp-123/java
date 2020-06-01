@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.seecee.sc1911.pojo.HStudent" table="H_STUDENT" schema="ADMIN">
+        <id name="id" column="ID">
+            <generator class="native">
+                <param name="sequence_name">id_seq</param>
+            </generator>
+        </id>
+        <property name="name" column="NAME"/>
+        <!-- 配置多对多
+            name:关联的属性名
+            table:关系表
+            cascade:级联 保证新增的老师和需要 保持和学生之间的给欢喜
+            class：关系属性的类型
+            -->
+        <bag name="listTeacher" table="stu_tea" cascade="save-update">
+            <key column="sid"></key>
+            <many-to-many class="com.seecee.sc1911.pojo.HTeacher" column="tid"></many-to-many>
+        </bag>
+    </class>
+</hibernate-mapping>

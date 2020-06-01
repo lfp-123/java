@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="login" extends="struts-default">
+        <action name="login" method="login" class="com.seecee.sc1911.action.LoginAction">
+            <result type="redirect" name="login">/newspages/admin.jsp</result>
+            <result type="redirect" name="register">/register.jsp</result>
+        </action>
+        <action name="register" method="register" class="com.seecee.sc1911.action.LoginAction">
+            <result name="login">/index.jsp</result>
+            <result name="register">/register.jsp</result>
+        </action>
+    </package>
+</struts>

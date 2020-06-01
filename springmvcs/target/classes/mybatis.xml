@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--引入jdbc.properties配置文件-->
+    <properties resource="jdbc.properties"></properties>
+    <!--配置使用-->
+    <settings>
+        <!--开启日志 可以观察mybatis的运行过程 效果比原来的showSQL formatsql更好-->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!--开启缓存，默认开启-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--设置延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!---->
+    <!--数据库连接池信息-->
+    <environments default="oracledb">
+        <environment id="oracledb">
+            <!--配置事务管理方式，指定为使用jdbc的事务
+                mybatis 是通过连接做事务 hibernate是通过session做事务 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--指定数据源，type pooled必须指定为连接池
+            为什么使用连接池：
+                在一个容器先定义指定数量的数据库连接
+                如果想使用，只能是获取 使用后再放回去 如果使用数量不够 还会自动创建更多的连接，这样节省很多
+                连接数据的时间和资源，相当于以空间换时间的方式提高了程序的效率-->
+
+            <dataSource type="pooled">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!-- 配置mapper.xml文件位置 -->
+    <mappers>
+        <!--<mapper resource="com/seecen/mybatis/mapper/HDeptMapper.xml"/>-->
+        <!--&lt;!&ndash;使用注解时，我们配置mapper 接口&ndash;&gt;-->
+        <!--<mapper class="com.seecen.mybatis.mapper.HClassMapper"/>-->
+        <mapper resource="SUserMapper.xml"></mapper>
+    </mappers>
+</configuration>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+</head>
+<script>
+    //Attr
+    $(function (){
+        $("#text1").click(function(){
+        alert($("img").attr("width"));
+        });
+    });
+    $(function(){
+        $("#text2").click(function () {
+        $("img").attr({"width":"100"})
+        });
+       });
+    //removeAttr
+    $(function () {
+        $("#text3").click(function () {
+            $("img").removeAttr("src","")
+        })
+    })
+
+    //prop
+    $(function () {
+        $("#all").click(function () {
+            $(".x").prop("checked",this.checked);
+        })
+    })
+    //removeprop
+    $(function () {
+        $("#remove").click(function () {
+            $("#s").prop("checked","");
+        })
+    })
+//add class
+</script>
+
+<body >
+
+<div style="margin-left: 500px" >
+<img    onclick="" src="../../image/猫.gif" width="250px" height="150px"/></body><br>
+    <button id="text1">使用attr函数返回图片宽度属性</button><br>
+    <button id="text2">使用attr函数设置图片宽度属性</button><br>
+    <button id="text3">removeattr函数删除图片属性 </button>
+
+
+<p>prop</p>
+    用prop设置其他复选框<input  id="all" type="checkbox">
+<br>
+                <input class="x" type="checkbox">
+                <input  class="x" type="checkbox">
+                <input class="x" type="checkbox">
+<br>
+   用removeprop取消其他复选框<input  id="remove" type="checkbox">
+<br>
+  已被默认选中的<input  id="s" type="checkbox" checked="checked">
+
+</div>
+
+<tyle>
+
+</tyle>
+</html>

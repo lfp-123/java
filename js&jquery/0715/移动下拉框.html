@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #win {
+            width: 500px;
+            margin: auto;
+        }
+
+        select {
+            width: 140px;
+            height: 200px;
+        }
+
+    </style>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#right").click(function(){
+                $("#menu2").append($("#menu1>option:selected"));
+                var menuSort = $("#menu2>option").sort(sortSelect);
+                $("#menu2").empty().append(menuSort);
+            });
+            $("#rightAll").click(function(){
+                $("#menu2").append($("#menu1>option"));
+            });
+            $("#left").click(function(){
+                $("#menu1").append($("#menu2>option:selected"));
+            });
+            $("#leftAll").click(function(){
+                $("#menu1").append($("#menu2>option"));
+            });
+        });
+        function sortSelect(obj1,obj2) {
+            var index= $(obj1).val() > $(obj2).val();
+            return index ? 1:-1;
+        }
+    </script>
+
+
+</head>
+<body>
+<div id="win">
+    <select id="menu1" size="10" multiple>
+        <option value="1">选项一</option>
+        <option value="2">选项二</option>
+        <option value="3">选项三</option>
+        <option value="4">选项四</option>
+        <option value="5">选项五</option>
+        <option value="6">选项六</option>
+        <option value="7">选项七</option>
+        <option value="8">选项八</option>
+    </select>
+    <select id="menu2" size="10" multiple>
+    </select>
+    <br>
+    <input id="right" type="button" value="&gt;">
+    <input id="rightAll" type="button" value="&gt;&gt;&gt;">
+    <input id="left" type="button" value="&lt;">
+    <input id="leftAll" type="button" value="&lt;&lt;&lt;">
+</div>
+
+</body>
+</html>

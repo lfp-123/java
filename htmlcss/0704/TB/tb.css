@@ -1,0 +1,366 @@
+@charset "UTF-8";
+* {
+    margin: 0px;
+    padding: 0px;
+
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.cl {
+    clear: both;
+}
+
+.rtv {
+    position: relative;
+}
+
+#redMenu_content li {
+    float: left;
+    line-height: 35px;
+
+    /*行高的宽高就会垂直居中*/
+
+}
+
+
+
+#tools {
+    width: 35px;
+    height: 100%;
+    background-color: black;
+    padding: 0px;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+
+}
+
+#redMenu {
+    height: 35px;
+    width: calc(100% - 35px);
+    min-width: 1230px;
+   background-color: #F5F5F5;
+
+}
+
+#redMenu_content {
+    width: 1300px;
+    min-width: 1230px;
+    margin: auto;
+
+}
+
+#redMenu_content>ul>li>a {
+    display: block;
+    height: 35px;
+    font-size: 12px;
+    color: black;
+    padding: 0px 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+html {
+    height: 3000px;
+    /*overflow: hidden;!*隐藏滚动条*!*/
+}
+
+
+
+a.hover_red:hover {
+    color: red !important;;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+
+}
+
+#my_tb {
+
+    width: 95px;
+    height: 54px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none;
+}
+
+
+
+#my_tb>a {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    line-height:20px;
+    text-align: center;
+
+}
+#my_tb>a:hover{
+    color: black !important;
+    background:#F5F5F5;
+
+}
+
+
+#my_tb_li:hover>a{
+    color: black;
+    outline: 1px solid #EEE;
+    background-color: white;
+}
+#my_tb_li:hover{
+    color:red !important;
+}
+
+#my_tb_li:hover>#my_tb{
+    display: block;
+}
+#my_tb_li>a:hover{
+    text-decoration: none;
+}
+
+
+#my_sc>a:hover{
+    color: black !important;
+    background:#F5F5F5;
+}
+#my_sc_li:hover>a{
+    color: black;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+}
+#my_sc_li:hover{
+    color:red !important;
+}
+#my_sc_li:hover>#my_sc{
+    display: block;
+}
+#my_sc_li>a:hover{
+
+}
+#my_sc{
+    width: 139px;
+    height: 264px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none;
+}
+#my_sc>a{
+    font-size: 12px;
+    color: #666;
+    display: block;       /*   */
+    line-height:20px;
+    text-align: center;
+}
+#my_qn {
+
+    width: 95px;
+    height: 54px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none;
+}
+
+
+
+#my_qn>a {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    line-height:20px;
+    text-align: center;
+
+}
+#my_qn>a:hover{
+    color: black !important ;
+    background:#F5F5F5;
+}
+
+
+#my_qn_li:hover>a{
+    color: black;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+}
+#my_qn_li:hover{
+    color:red !important;
+}
+#my_qn_li:hover>#my_qn{
+    display: block;
+}
+#my_qn_li>a:hover{
+    text-decoration: none;
+}
+#my_qn {
+
+    width: 95px;
+    height: 54px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none; ////////////
+}
+
+
+
+#my_qn>a {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    line-height:20px;
+    text-align: center;
+
+}
+#my_qn>a:hover{
+    color: red !important;
+    background:#F5F5F5;
+}
+
+
+#my_qn_li:hover>a{
+    color: black ;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+}
+#my_qn_li:hover>#my_qn{
+    display: block;
+}
+#my_qn_li>a:hover{
+    text-decoration: none;
+}
+#my_kf {
+
+    width: 95px;
+    height: 54px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none; ////////////
+}
+
+
+
+#my_kf>a {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    line-height:20px;
+    text-align: center;
+
+}
+#my_kf>a:hover{
+    color: black !important;
+    background:#F5F5F5;
+}
+
+
+#my_kf_li:hover>a{
+    color: black ;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+}
+#my_tb_li:hover{
+    color:red !important;
+}
+#my_kf_li:hover>#my_kf{
+    display: block;
+}
+#my_kf_li>a:hover{
+    text-decoration: none;
+}
+#my_zg {
+
+    width: 333px;
+    height: 362px;
+    border: 1px solid white;
+    border-top: none;
+    position: absolute;
+    top: 35px;
+    left: -5px;
+    background-color: white;
+    padding-top: 10px;
+    box-sizing: border-box;
+    display: none; ////////////
+}
+
+
+
+#my_zg>a {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    line-height:20px;
+    text-align: center;
+
+}
+#my_zg>a:hover{
+    color: black !important;
+    background:#F5F5F5;
+}
+
+
+#my_zg_li:hover>a{
+    color: black ;
+    outline: 1px solid #EEE;
+    background-color: white;
+
+}
+#my_zg_li:hover{
+    color:red !important;
+}
+#my_zg_li:hover>#my_zg{
+    display: block;
+}
+#my_zg_li>a:hover{
+    text-decoration: none;
+}
+.line{
+     width:1px;
+     height: 12px;
+     background-color: black;
+     position: relative;
+     top: 11px;
+ }

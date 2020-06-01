@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+            window.onload= function () {
+                    var nopes=document.querySelectorAll(".obe")
+                for(var i=0;i<nopes.length;i++){
+
+                        alert("第一个多选框的值为："+nopes[i].value)
+
+            }
+
+            }
+    </script>
+
+</head>
+<body>
+<p>顺序获取多选的值</p>
+<div><input  class="obe" type="checkbox" value="1"  ></div>
+<div><input  class="obe" type="checkbox"  value="2"></div>
+<div><input  class="obe" type="checkbox" value="3"></div>
+<div><input  class="obe" type="checkbox" value="4"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #win {
+            width:233px;
+            margin:auto;
+        }
+        .xs {
+            display: block;
+        }
+        .yc {
+            display: none;
+        }
+        #win>div {
+                float:left;
+            }
+    </style>
+    <script>
+        function toggle1() {
+            document.querySelector("#right1").className = "";
+            document.querySelector("#right2").className = "yc";
+            document.querySelector("#left1").className = "";
+            document.querySelector("#left2").className = "yc";
+            document.querySelector("#end1").className = "";
+            document.querySelector("#end2").className = "yc";
+        }
+        function toggle2() {
+            document.querySelector("#right1").className = "yc";
+            document.querySelector("#right2").className = "";
+            document.querySelector("#left1").className = "yc";
+            document.querySelector("#left2").className = "";
+            document.querySelector("#end1").className = "yc";
+            document.querySelector("#end2").className = "";
+        }
+    </script>
+</head>
+<body>
+
+
+<div id="win">
+    <div id="left1">
+        <img src="../image/left1.jpg">
+    </div>
+
+    <div id="left2" onmouseover="toggle1();" class="yc">
+        <img src="../image/left2.jpg">
+    </div>
+    <div id="right1" onmouseover="toggle2();">
+        <img src="../image/right1.jpg">
+    </div>
+        <div id="right2" class="yc"><img src="../image/right2.jpg">
+    </div>
+    <div id="end1">
+        <img src="../image/end1.jpg">
+    </div>
+         <div id="end2" class="yc"><img src="../image/end2.jpg">
+    </div>
+</div>
+</body>
+</html>

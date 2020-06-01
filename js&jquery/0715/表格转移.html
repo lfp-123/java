@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #win{
+            margin: auto;
+            text-align: center;
+            line-height: 40px;
+            width: 600px;
+        }
+        th,td{
+            background-color: white;
+            margin: auto;
+        }
+      table{
+          background-color: black;
+          margin: auto;
+      }
+    </style>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+           $("#tj").click(function () {
+           var nameVal =   $("#name").val()
+           var emailVal=   $("#email").val()
+           var salaryVal =   $("#salary").val()
+               if($.trim(nameVal) && $.trim(emailVal) && $.trim(salaryVal)){
+                   var arr = new Array();
+                   arr.push("<tr>");
+                   arr.push("<td>"+nameVal+"</td>");
+                   arr.push("<td>"+emailVal+"</td>");
+                   arr.push("<td>"+salaryVal+"</td>");
+                   arr.push("<td><a href='javascript:;'>delete</a></td>");
+                   arr.push("</tr>");
+                   $("#tabBody").append(arr.join(""))
+               }
+                $("#name").val("");
+                $("#email").val("");
+                $("#salary").val("");
+           })
+            $(document).on("click","#tabBody a",function () {
+                $(this).parents("tr").remove();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="win">
+<input id="name" type="text">
+<input id="email" type="text">
+<input id="salary" type="text">
+<br>
+<input id="tj" type="button" value="插入">
+
+    <hr>
+    <table id="tab" width="400px">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>salary</th>
+        </tr>
+        </thead>
+        <tbody id="tabBody">
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

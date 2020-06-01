@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function add(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+            c.value=Number(a)+Number(b);
+        }
+        function jian(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+            c.value=Number(a)-Number(b);
+        }
+        function mul(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+            c.value=Number(a)*Number(b);
+        }
+        function div(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+             c.value=Number(a)/Number(b);
+        }
+        function and(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+
+             c.value =a&&b;
+
+        }
+        function or(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+
+            c.value = a||b;
+        }
+        function pow(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+            c.value= a ^ b;
+        }
+        function pos(a,b) {
+            var a=document.getElementById('a').value;
+            var b=document.getElementById('b').value;
+            var c=document.getElementById('c');
+            c.value= a>>b;
+
+        }
+        function  reset() {
+            var a=0;
+            var b=0;
+            var c=0;
+
+        }
+    </script>
+</head>
+<div  style="text-align: center ;
+    background-image: url('u=2139775181,3125942055&fm=26&gp=0.jpg');
+    height: 1000px;
+    width: 100%;
+
+;">
+
+<h2 style="color: white"> 购物简易计算器</h2>
+<p style="color:white;">第一个数</p><input type="text" id="a">
+<p style="color:white;">第二个数</p><input type="text" id="b">
+    <br>
+<input type="button" value="+" onclick="add()">
+<input type="button" value="-" onclick="jian()">
+<input type="button" value="*" onclick="mul()">
+<input type="button" value="/" onclick="div()">
+<input type="button" value="&&" onclick="and()">
+<input type="button" value="||" onclick="or()">
+<input type="button" value="^"  onclick="pow()">
+<input type="button" value=">>" onclick="pos()">
+<!--<input type="button" value="reset" onclick="reset()" >-->
+<br>
+<p style="color:white;">结果是</p><input type="text" id="c">
+</div>
+
+</body>
+</html>

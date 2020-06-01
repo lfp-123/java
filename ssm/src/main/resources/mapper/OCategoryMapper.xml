@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seecen.ssm.mapper.OCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.seecen.ssm.pojo.OCategory">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="LITIMG" jdbcType="VARCHAR" property="litimg" />
+    <result column="PARENTID" jdbcType="DECIMAL" property="parentid" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="CREATE_BY" jdbcType="DECIMAL" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="DECIMAL" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="SORT" jdbcType="DECIMAL" property="sort" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="ISMENU" jdbcType="CHAR" property="ismenu" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, LITIMG, PARENTID, DESCRIPTION, CREATE_BY, CREATE_TIME, UPDATE_BY, UPDATE_TIME, 
+    SORT, STATUS, ISMENU
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from O_CATEGORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from O_CATEGORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.seecen.ssm.pojo.OCategory">
+    insert into O_CATEGORY (ID, NAME, LITIMG, 
+      PARENTID, DESCRIPTION, CREATE_BY, 
+      CREATE_TIME, UPDATE_BY, UPDATE_TIME, 
+      SORT, STATUS, ISMENU)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{litimg,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, #{createBy,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{ismenu,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.seecen.ssm.pojo.OCategory">
+    insert into O_CATEGORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="litimg != null">
+        LITIMG,
+      </if>
+      <if test="parentid != null">
+        PARENTID,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="ismenu != null">
+        ISMENU,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="litimg != null">
+        #{litimg,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="ismenu != null">
+        #{ismenu,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seecen.ssm.pojo.OCategory">
+    update O_CATEGORY
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="litimg != null">
+        LITIMG = #{litimg,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        PARENTID = #{parentid,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="ismenu != null">
+        ISMENU = #{ismenu,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seecen.ssm.pojo.OCategory">
+    update O_CATEGORY
+    set NAME = #{name,jdbcType=VARCHAR},
+      LITIMG = #{litimg,jdbcType=VARCHAR},
+      PARENTID = #{parentid,jdbcType=DECIMAL},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SORT = #{sort,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=CHAR},
+      ISMENU = #{ismenu,jdbcType=CHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

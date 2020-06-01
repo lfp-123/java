@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- spring IOC 容器-->
+    <!-- 配置bean便可以由spring管理对象
+         id为类的唯一标识
+         name：类似于id
+         class：指定类的全类名
+         scope：指定创建方式和作用范围
+            singleton : 单例模式，只有唯一的实例 默认值 容器加载的时候创建 容器关闭时候销毁
+            Prototype: 多实例，每次都会创建新的对象。 使用的受创建使用完就销毁
+            request：一次request之内创建一个对象 一次请求中
+            session：每次会话中会创建一个对象 会话中
+            global session：类似于application 只有一个对象
+         auto wire：自动装载
+        -->
+    <bean id="us" class="com.sc.spring.service.impl.UserServiceImpl">
+        <property name="mapper" ref="um"></property>
+    </bean>
+    <bean id="uc" class="com.sc.spring.controller.UserController">
+        <property name="us2" ref="us"></property>
+    </bean>
+    <!-- 使用set注入 在声明 -->
+    <bean id="um" class="com.sc.spring.mapper.UserMapper"></bean>
+    <bean id="user" class="com.sc.spring.pojo.User">
+        <property name="id" value="100"></property>
+        <property name="username" value="admin"></property>
+        <property name="password" value="123"></property>
+        <property name="money" value="10000"></property>
+        <property name="time">
+            <bean factory-bean="sdf" factory-method="parse">
+                <constructor-arg value="2020-1-12"></constructor-arg>
+            </bean>
+        </property>
+    </bean>
+    <!--构造方法注入 -->
+    <bean id="sdf" class="java.text.SimpleDateFormat">
+        <!--传参-->
+        <constructor-arg value="yyyy-MM-dd"></constructor-arg>
+    </bean>
+</beans>

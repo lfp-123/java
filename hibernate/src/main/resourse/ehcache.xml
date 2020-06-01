@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--缓存配置-->
+<ehcache>
+    <!--指定二级缓存存放在磁盘的位置-->
+    <diskStore path="HUser.dir"></diskStore>
+    <!--默认缓存配置
+       maxElementsInMemory :内存中最大缓存对象个数
+       eternal:是否永久保存缓存
+       overflowToDisk:超出部分的缓存是否存入本地磁盘
+       timeToIdleSeconds:配置缓存最大空闲时间  单位秒
+       timeToLiveSeconds:配置缓存最大存活时间  单位秒
+    -->
+    <defaultCache
+            maxElementsInMemory="1000"
+            eternal="false"
+            overflowToDisk="true"
+            timeToIdleSeconds="1000"
+            timeToLiveSeconds="3000"
+    >
+    </defaultCache>
+</ehcache>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function  getNowtime() {
+
+                var time =   new Date();
+                var year = time.getFullYear();
+                var month = time.getMinutes();
+                var date= time.getDate();
+                var hour= time.getHours();
+                var min =time.getMinutes();
+                var second =time.getSeconds();
+                var day = time.getDay();
+                time_content.innerHTML=(year + "/" + month + "/" + date +
+                    "&nbsp;&nbsp;" + hour + ":" + min + ":" + second + "&nbsp;&nbsp;星期" + day);
+
+        }
+        setInterval(getNowtime,1000);
+
+
+    </script>
+</head>
+<body>
+    <div id ="time_content"></div>
+    <script>
+        getNowtime();
+    </script>
+</body>
+</html>

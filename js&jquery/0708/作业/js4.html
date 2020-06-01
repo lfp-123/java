@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        var line = 11;
+        var column= 6;
+        document.write("<table style='background-color:' border='1px' width='800px'>")
+        document.write("<tr bgcolor='red'>")
+        for(var i=0;i<column;i++){
+            document.write("<th>标题</th>")
+        }
+        document.write("<tr>")
+        for(var j=0;j<line;j++){
+            if(j%2==0)
+            {
+                document.write("<tr style='background-color: white'>")
+            }else {
+                document.write("<tr style='background-color: #fa7ced'>")
+
+            }
+
+            for(var i=0;i<column;i++){
+                document.write("<td STYLE='text-align: center'>内容</td>")
+
+            }
+            document.write("</tr>")
+        }
+
+        document.write("</table>")
+
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function one() {
+            window.open("http://www.4399.com/");
+            var a =document.getElementById('sgg')
+            a.style.display="none";
+        }
+       function two() {
+           var a =document.getElementById('big')
+           a.style.display="none";
+       }
+    </script>
+    <style>
+        #sgg{
+            float: left;
+            position: absolute;
+            top: 141px;
+            left: 95px;
+
+        }
+         #big{
+            float: left;
+         }
+
+
+
+    </style>
+</head>
+<body>
+<div id="big">
+        <img src="../../image/作业1.jpg" height="179" width="135" onclick="two()"/>
+       <div id="sgg">
+           <a href="javascript:;" onclick="one()">关闭</a>
+
+    </div>
+
+</div>
+</body>
+</html>

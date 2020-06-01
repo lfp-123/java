@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+
+</head>
+<body>
+<!--<div class="id">id-id</div>-->
+<!--<div class="is">id=is</div>-->
+<!--<span class="id ">SPAN</span>-->
+
+<!--<div>-->
+<!--<li>1</li>-->
+<!--<li>2</li>-->
+<!--<li>3</li>-->
+<!--<li>4</li>-->
+<!--<li>5</li>-->
+<!--<li>6</li>-->
+<!--</div>-->
+<button id="run">Run</button><div></div>
+<script>
+    $("#run").click(function(){
+        $("div:not(:animated)").animate({ left: "+=20" }, 1000);
+    });
+
+</script>
+</body>
+</html>

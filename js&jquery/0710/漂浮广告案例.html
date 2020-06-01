@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+
+    #face{
+        position: absolute;
+        z-index: 99999;
+    }
+
+</style>
+</head>
+<body>
+<img    onmouseover="stopMove();"
+        onmouseout="move();"
+        id="face"
+        src="../image/猫.gif"/>
+
+<script>
+        var istop =true;
+        var isleft =true;
+    function  move() {
+
+       var nope = document.querySelector("#face");
+        var left = nope.style.left;
+        var top = nope.style.top;
+
+        if (left==""){
+            left =0;
+        }
+        if(top ==""){
+            top = 0;
+        }
+        left =parseInt(left);
+        top =parseInt(top);
+        if(left>=(window.innerWidth-nope.clientWidth)) isleft =false;
+        if(left <= 0) isleft =true;
+        if(isleft) left++;
+        if(!isleft)  left--;
+
+
+        if(top>=(window.innerHeight-nope.clientHeight)) istop =false;
+        if(top <= 0) istop =true;
+        if(istop) top++;
+        if(!istop)  top--;
+
+
+
+       nope.style.top=top+ "px" ;
+       nope.style.left =left+ "px" ;
+
+
+        mymove = requestAnimationFrame(move);
+    }
+    function stopMove() {
+        cancelAnimationFrame(mymove);
+    }
+var mymove =  requestAnimationFrame(move);
+
+
+
+</script>
+</body>
+</html>

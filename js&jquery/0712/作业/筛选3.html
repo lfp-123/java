@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+    $(function () {
+        $("#one").click(function () {
+            $("li.start").prev().css("color","red");
+        })
+
+    })
+    $(function () {
+        $("#two").click(function () {
+            $("li.start").prevAll().css("color","red");
+        })
+
+    })
+    $(function () {
+        $("#three").click(function () {
+            $("li.start").prevUntil("li.action").css("color","yellow");
+        })
+
+    })
+    $(function(){
+        $("h1").add("p").add("span").css("background-color","yellow");
+    });
+
+    </script>
+</head>
+<body>
+<ul>
+    <li class="action">1</li>
+    <li>2</li>
+    <li class="start">id start</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<button id="one"> 使用prev</button>
+<button id="two"> 使用prevAll</button>
+<button id="three"> 使用prevuntil</button>
+<h1>欢迎</h1>
+<p>一个P元素。</p>
+<p>另一个P元素。</p>
+<span>一个span元素。</span>
+<span>一个span元素。</span><br><br>
+<div>本示例为现有的H1元素添加相同的CSS样式为p和span元素。</div>
+</body>
+</html>

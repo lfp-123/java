@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.seecee.sc1911.pojo.HUserinfo" table="H_USERINFO" schema="ADMIN">
+        <id name="id" column="ID">
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <property name="sex" column="SEX"/>
+        <property name="age" column="AGE"/>
+        <property name="mess" column="MESS"/>
+        <!-- 一对一的关系 -->
+        <one-to-one name="user" class="com.seecee.sc1911.pojo.HUser" cascade="all"></one-to-one>
+    </class>
+
+</hibernate-mapping>

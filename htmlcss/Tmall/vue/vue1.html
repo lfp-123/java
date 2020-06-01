@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+
+
+</head>
+<body>
+<div id="app">
+    <div id="mid">
+        <span>
+            <p>编号 <input type="text" v-model="id" v-bind:disabled="flag"></p>
+          <P>书名： <input type="text" v-model="fname"></P>
+            <button @click="addBooks">添加</button>
+        </span>
+        <table>
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr :key="item.id" v-for="item in books">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.date}}</td>
+                <td><a href="" @click.prevent="toEdit(item.id)">修改</a></td>
+                <td><a href="" @click.prevent="toDel(item.id)">删除</a> </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
+<script src="https://cn.vuejs.org/js/vue.min.js"></script>
+<script type="text/javascript"></script>
+<script>
+    var app = new Vue({
+    el:"#app",
+        data: {
+        flag:false,
+            id:'',
+            fname:'',
+            date:'',
+            books: [
+                {id: 1, name: '三国演义', date: 222222},
+                {id: 2, name: '三国演义', date: 222222},
+                {id: 3, name: '三国演义', date: 222222}]
+        },
+        methods:{
+            addBooks:function (){
+                if(this.flag){
+                    this.books.some((item)=>{
+                        if(item.id == this.id){
+                            item.name = this.fname;
+                            return true;
+                        }
+                    })
+                    this.flag =false;
+                }else {
+                    var book = {};
+                    book.id = this.id;
+                    book.name = this.fname;
+                    book.date = '';
+                    this.books.push(book);
+                    this.id = '';
+                    this.fname = '';
+                }
+            },
+            toDel:function (id){
+              this.books=  this.books.filter(function (item) {
+                    return item.id != id
+                })
+            },
+            toEdit:function (id) {
+                this.quer
+                this.flag =true;
+               var book  = this.books.filter(function (item) {
+                    return item.id  == id;
+                })
+                this.id = book[0].id;
+                this.fname = book[0].name;
+            }
+        }
+
+    })
+</script>

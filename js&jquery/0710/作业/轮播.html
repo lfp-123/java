@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<img id="p">
+
+
+<script>
+    function  showPicture() {
+            var ph= document.getElementById("p");
+            var i =parseInt(Math.random()*2);
+            if(i==0){
+              ph.src =("../../image/th.jpg");
+            }
+            if(i==1){
+               ph.src =("../../image/th (1).jpg");}
+            if(i==2){
+                ph.src =("../../image/th (2).jpg");
+            }
+
+                var i=0;
+
+
+
+           setTimeout(showPicture,1000)
+        }
+        showPicture();
+
+        </script>
+
+
+</body>
+</html>

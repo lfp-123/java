@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+        <!--
+            对应的关系映射 name 对应的类 表对应表名
+         -->
+    <class name="com.seecee.sc1911.pojo.HDept" table="H_DEPT" schema="ADMIN">
+        <id name="id" column="ID">
+            <generator class="native">
+                <param name="sequence_name">id_seq</param>
+            </generator>
+        </id>
+        <property name="deptname" column="DEPTNAME"/>
+        <!-- list:关联属性list set关联属性是set
+        bag:新版关联映射的功能 他会动态的识别list set
+            关联属性名 一对多 Column是描述关系的外键
+        cascade:级联操作 其本身的操作 对其关联的属性 也会做同样的操作
+            一方加了级联 多的一定不能加级联
+            否则数据会发生问题
+        inverse:谁来维护级联关系
+            -->
+        <bag name="listUser" lazy="false" cascade="delete" inverse="true">
+            <key column="d_id"></key>
+            <one-to-many class="com.seecee.sc1911.pojo.HUser"></one-to-many>
+        </bag>
+    </class>
+</hibernate-mapping>
+        <!-- 主键生成策略
+              1  increment:主键自动增加策略，最大值加一 int short long 类型
+              2  identity :自动增长 ，适用于MySQL和sql server数据库
+              3 sequence:使用序列 适用于Oracle
+              4 uuid ：随机生成一个永不重复的32位字符串
+              5 native：根据数据库类型自动选择
+              oracle 去找自己定义的序列化名称
+                   -->

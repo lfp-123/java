@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seecen.ssm.mapper.OAdminMapper">
+  <resultMap id="BaseResultMap" type="com.seecen.ssm.pojo.OAdmin">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ACCOUNT" jdbcType="VARCHAR" property="account" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="SEX" jdbcType="CHAR" property="sex" />
+    <result column="ROLEID" jdbcType="DECIMAL" property="roleid" />
+    <result column="HEAD_PIC" jdbcType="VARCHAR" property="headPic" />
+    <result column="OPERATOR" jdbcType="DECIMAL" property="operator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ACCOUNT, PASSWORD, NAME, PHONE, EMAIL, STATUS, CREATETIME, SEX, ROLEID, HEAD_PIC, 
+    OPERATOR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from O_ADMIN
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+    <select id="queryAccountPassword" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+      FROM O_ADMIN
+      where ACCOUNT=#{account} and password=#{password}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from O_ADMIN
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.seecen.ssm.pojo.OAdmin">
+    insert into O_ADMIN (ID, ACCOUNT, PASSWORD,
+      NAME, PHONE, EMAIL,
+      STATUS, CREATETIME, SEX, 
+      ROLEID, HEAD_PIC, OPERATOR
+      )
+    values (seq_O_admin.nextval, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, #{sex,jdbcType=CHAR}, 
+      #{roleid,jdbcType=DECIMAL}, #{headPic,jdbcType=VARCHAR}, #{operator,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.seecen.ssm.pojo.OAdmin">
+    insert into O_ADMIN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="account != null">
+        ACCOUNT,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="roleid != null">
+        ROLEID,
+      </if>
+      <if test="headPic != null">
+        HEAD_PIC,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="roleid != null">
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="headPic != null">
+        #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seecen.ssm.pojo.OAdmin">
+    update O_ADMIN
+    <set>
+      <if test="account != null">
+        ACCOUNT = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="roleid != null">
+        ROLEID = #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="headPic != null">
+        HEAD_PIC = #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seecen.ssm.pojo.OAdmin">
+    update O_ADMIN
+    set ACCOUNT = #{account,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      SEX = #{sex,jdbcType=CHAR},
+      ROLEID = #{roleid,jdbcType=DECIMAL},
+      HEAD_PIC = #{headPic,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

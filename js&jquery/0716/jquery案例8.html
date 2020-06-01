@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#topButn").click(function () {
+                $("html").animate({"scrollTop":"0px"},500);
+            })
+
+        $("#win").hover(function(){
+            $("#tip").css("opacity",0).show()
+                .stop().animate({"opacity":1,"right":20},400);
+        },function(){
+            $("#tip").stop()
+                .animate({"opacity":0.2,"right":60},400,function(){
+                    $(this).hide();
+                });
+
+        });
+        });
+    </script>
+    <style>
+        #topButn{
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+        }
+        #retangle{
+
+        }
+        #win{
+            width: 30px;
+            height: 100%;
+            background-color: black;
+            position: fixed;
+            right: 0px;
+        }
+        #tip{
+            width: 100px;
+            height: 30px;
+            display: none;
+
+            position: absolute;
+            right:60px
+        }
+        #tangle{
+            width: 90px;
+            height: 30px;
+            background-color: #494949;
+            color: white;
+            text-align: center;
+
+        }
+        #retangle{
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-left: 20px solid  #494949;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            right: 2px;
+            top: 4px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="win">
+    <div id="tip">
+        <div id="tangle">sssss</div>
+        <div id="retangle"></div>
+    </div>
+</div>
+
+<a href="javascript:;" id="topButn" style="font-size: 50px">top </a>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+hjshsjjskjskjss<br>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            var provinces=[
+                {"provice":"江西","id":"1"},
+                {"provice":"广州","id":"2"},
+                {"provice":"江苏","id":"3"},
+
+            ];
+            var citys = [
+                {"city":"南昌","cityId":1, "provinceId":1},
+                {"city":"抚州","cityId":2, "provinceId":1},
+                {"city":"鹰潭","cityId":3, "provinceId":1},
+                {"city":"丰城","cityId":4, "provinceId":1},
+                {"city":"广州","cityId":5, "provinceId":2},
+                {"city":"佛山","cityId":6, "provinceId":2},
+                {"city":"中山","cityId":7, "provinceId":2},
+                {"city":"东莞","cityId":8, "provinceId":2},
+                {"city":"珠海","cityId":9, "provinceId":2},
+                {"city":"潮州","cityId":10, "provinceId":2},
+                {"city":"南京","cityId":11, "provinceId":3},
+                {"city":"苏州","cityId":12, "provinceId":3},
+                {"city":"无锡","cityId":13, "provinceId":3},
+                {"city":"徐州","cityId":14, "provinceId":3},
+                {"city":"连云港","cityId":15, "provinceId":3},
+                {"city":"扬州","cityId":16, "provinceId":3},
+                {"city":"南宁","cityId":17, "provinceId":4}
+            ];
+            for(var i=0;i<provinces.length;i++){
+                var provice=provinces[i].provice;
+                var id=provinces[i].id;
+                var str="<option value='"+id+"'>"+provice+"</option>";
+                $("#province").append(str);
+            }
+            $("#province").change(function () {
+                $("#city>option:gt(0)").remove();
+                var obj = $(this).find("option:selected");
+                var provinceID = $(obj).val();
+                for(var i=0;i<citys.length;i++){
+                    if(citys[i].provinceId == provinceID){
+                        var str= "<option value = '"+citys[i].cityId+"'>"+citys[i].city+"</option>";
+                        $("#city").append(str);
+                    }
+
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+<select id="province">
+    <option>----请选择-----</option>
+</select>
+<select id="city">
+    <option>----请选择-----</option>
+</select>
+</body>
+</html>

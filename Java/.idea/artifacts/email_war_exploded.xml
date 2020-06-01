@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="email:war exploded">
+    <output-path>F:/User/sc190701/学员/林锋鹏/Java/artifacts/email_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="email/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="email" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

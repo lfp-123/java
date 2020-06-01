@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<!--根结点-->
+<struts>
+    <!--package用于管理不同请求
+        属性有：extends:继承struts-default 必须编写 否则这个包不能管理请求
+        name ：报名，唯一不重复
+        namespace：-->
+    <package name="test" extends="struts-default" >
+
+        <!--
+            /项目前缀/包的前缀/请求地址.action
+
+            一个action对应一个请求。
+            name:指定请求路径 类似于servlet->url-pattern
+            class:指定请求的实现类。
+            method：指定该请求需要被哪个方法处理。
+            test.action ==> test()
+        -->
+        <action name="test" method="test" class="com.seecee.sc1911.action.TestAction">
+            <!--result name对应action的返回值 type 规定返回方式 默认是request 如果想改重定向 就要将type值改为redirect -->
+            <result name="hh">/show.jsp</result>
+            <!--
+           name ：对应的方法的返回值
+           { success:成功
+            error : 失败
+            input: 请求成功 但是参数有问题
+            login：请求成功跳登陆页面 }
+            type：指定跳转方式，默认是转发，如果想重定向redirect
+            { dispather:  默认值  转发到页面
+              chain:  转发      转发到acTIon
+              redirect: 重定向到url
+              redirectAction: 重定向action
+              freemarker: 使用freemarker 模板引擎
+           -->
+        </action>
+        <action name="register" method="register" class="UserAction">
+
+
+        </action>
+        <action name="emp" class="com.seecee.sc1911.action.EmpAction" method="emp">
+            <result name="success">/show.jsp</result>
+        </action>
+    </package>
+    <package name="teacher" namespace="/tea" extends="struts-default">
+        <default-action-ref name="test"></default-action-ref>
+        <default-class-ref class="com.seecee.sc1911.action.TeacherAction"></default-class-ref>
+        <action name="show" method="show"></action>
+        <action name="add" method="add"></action>
+        <!-- 全局结果 如果没有定义结果 会根据name启用 全局结果 如果定义了结果 会使用自己的结果-->
+        <action name="test" method="test">
+            <result type="redirect" name="error">/error.jsp</result>
+        </action>
+    </package>
+    <!--热部署 开发者模式 如果开启了 则会修改struts.xml 不用重启服务器-->
+    <constant name="struts.devMode" value="true"></constant>
+    <!--开启动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <package name="student" namespace="/stu" extends="struts-default">
+        <default-class-ref class="com.seecee.sc1911.action.StudentAction"></default-class-ref>
+        <!-- 设置那些方法可以被方法调用  regex:.*代表所有方法-->
+    <global-allowed-methods>regex:.*</global-allowed-methods>
+        <!-- 第一种 通过指定的访问路径
+            /abc!register.action   == abc.register == register方法
+            /abc!del.action-->
+        <action name="abc" ></action>
+        <!-- 第二种 通过通配符的方式 * 匹配 任意字符
+        studentAction_show.action
+        -->
+        <action name="*_*" class="com.sc.sc1911.action.{1}" method="{2}"></action>
+    </package>
+</struts>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--扫描IOC-->
+    <context:component-scan base-package="com.sc.spring"></context:component-scan>
+    <!--让AOP注解启用 动态代理-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+
+    <!--声明切面-->
+    <bean id="logger" class="com.sc.spring.aop.Logger"></bean>
+    <!--AOP配置-->
+    <aop:config>
+        <!--用于描述哪些方法需要被切入-->
+        <aop:pointcut id="pc" expression="
+        execution(* com.sc.spring.service.impl.*.*(..))"></aop:pointcut>
+        <!--配置切面-->
+        <aop:aspect id="aspect" ref="logger">
+            <!--&lt;!&ndash;配置前置通知 目标切入的方法运行之前执行&ndash;&gt;-->
+            <!--<aop:before method="beforeAdvice" pointcut-ref="pc"></aop:before>-->
+            <!--&lt;!&ndash;配置后置通知 目标切入的方法运行结束之后执行 return 参数类型&ndash;&gt;-->
+            <!--<aop:after-returning method="afterAdvice" pointcut-ref="pc" returning="result"></aop:after-returning>-->
+            <!--&lt;!&ndash;配置异常通知 目标切入的方法运行的途中出现异常时执行-->
+                <!--throwing表示出现异常的对象&ndash;&gt;-->
+            <!--<aop:after-throwing method="afterThrowing" pointcut-ref="pc"></aop:after-throwing>-->
+            <!--&lt;!&ndash;配置最后通知 ,finally &ndash;&gt;-->
+            <!--<aop:after method="after" pointcut-ref="pc"></aop:after>-->
+
+            <!--配置环绕通知 是上述四种通知的集合-->
+            <!--<aop:around method="around" pointcut-ref="pc"></aop:around>-->
+        </aop:aspect>
+    </aop:config>
+
+</beans>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var num;
+        function  showHello(num) {
+            for(var i=0;i<num;i++){
+                document.write("<h2>hello ,world</h2>");
+
+            }
+
+        }
+
+        function  counts() {
+            num =  prompt("请输入打印的次数")
+            showHello(num)
+
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="请输入打印HELLO的次数" onclick="counts()">
+</body>
+</html>

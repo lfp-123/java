@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="user" extends ="struts-default" >
+        <default-class-ref class="com.seecee.sc1911.action.UserAction"></default-class-ref>
+        <action name="user" method="login">
+            <result name="success" type="redirectAction">showUser</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        <action name="showUser" method="showUser" >
+            <result>/UserShow.jsp</result>
+        </action>
+        <action name="addUser" method="addUser">
+            <result name="success" type="redirectAction">showUser</result>
+            <result name="error">/addUser.jsp</result>
+        </action>
+        <action name="del" method="delUser" >
+            <result name="success" type="redirectAction">showUser</result>
+            <result name="error">showUser.action</result>
+        </action>
+        <action name="delAll" method="delAll">
+            <result name = "success" type="redirectAction">showUser</result>
+        </action>
+        <action name="upUser" method="upUser">
+            <result name = "success" type ="redirectAction">showUser</result>
+        </action>
+        <action name="showOneUser" method="showOneUser">
+            <result name="success" type="redirectAction">showUpDept</result>
+        </action>
+        <action name="showUpDept" method="showUpDept">
+            <result name="success">/upUser.jsp</result>
+        </action>
+    </package>
+    <package name="dept" extends="struts-default">
+        <action name="showDept" method="showDept" class="com.seecee.sc1911.action.DeptAction">
+            <result name="success">/addUser.jsp</result>
+        </action>
+    </package>
+</struts>

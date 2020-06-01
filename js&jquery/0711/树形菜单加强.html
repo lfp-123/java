@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #tree_menu {
+
+            text-indent: 20px;
+        }
+
+        #menu dt {
+            margin-bottom: 20px;
+
+            text-indent: 20px;
+        }
+
+        #menu a {
+            text-decoration: none;
+            color: black;
+        }
+
+
+
+        #menu dd {
+
+            text-indent: 20px;
+        }
+      #menu a:hover{
+          color: red;
+      }
+
+
+    </style>
+    <script>
+            window.onload=function  () {
+                    var nodes = document.querySelectorAll("a");
+
+                     for(var i=0;i<nodes.length;i++){
+                        nodes[i].onclick = function () {
+                        var Dl= this.parentNode.parentNode;
+                        var childrens = Dl.children;
+
+
+
+                        for (var j = 1; j < childrens.length; j++) {
+                            if("" == childrens[j].style.display) {
+                                childrens[j].style.display = "none";
+                            } else {
+                                childrens[j].style.display = "";
+                            }
+                        }
+                    }
+                }
+            }
+
+
+    </script>
+</head>
+<body>
+<div >
+    <h5 id="tree_menu"><a href="javascript:;" >树形菜单</a> </h5>
+    <ul id="menu">
+        <dl>
+            <dt >
+                <a href="javascript:;">文学艺术</a>
+            </dt>
+            <dd>先锋写作</dd>
+            <dd>小说散文</dd>
+            <dd>诗风词韵</dd>
+        </dl>
+        <dl >
+            <dt><a  href="javascript:;">贴图专区</a></dt>
+            <dd>先锋写作</dd>
+            <dd>小说散文</dd>
+            <dd>诗风词韵</dd>
+        </dl>
+        <dl >
+            <dt><a   href="javascript:;">房产论坛</a></dt>
+            <dd>先锋写作</dd>
+            <dd>小说散文</dd>
+            <dd>诗风词韵</dd>
+        </dl>
+        <dl >
+            <dt><a   href="javascript:;">娱乐八卦</a></dt>
+            <dd>先锋写作</dd>
+            <dd>小说散文</dd>
+            <dd>诗风词韵</dd>
+        </dl>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test03</title>
+<style>
+  ul{
+        list-style-type: none;
+    }
+    #m_mian>li{
+        float: left;
+    }
+    li{
+        border: 1px solid white;
+        background-color: greenyellow;
+        text-align: center;
+        height: 30px;
+        width: 120px;
+        line-height: 30px;
+        box-sizing: border-box;
+        color: white;
+    }
+    #m_mian>li>ul{
+      visibility: hidden;
+    }
+</style>
+</head>
+<body>
+    <div id="main">
+        <ul id="m_mian">
+            <li>手机数码
+                <ul>
+                    <li>三星</li>
+                    <li>诺基亚</li>
+                    <li>苹果</li>
+                </ul>
+            </li>
+            <li>品牌商城
+                <ul>
+                    <li>格力</li>
+                    <li>美的</li>
+                    <li>海尔</li>
+                </ul>
+            </li>
+            <li>电子市场
+                <ul>
+                    <li>零件</li>
+                    <li>耳机</li>
+                    <li>相机</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<script>
+    window.onload= function(){
+        var nodes = document.querySelectorAll("li")
+    }
+
+
+</script>
+</body>
+</html>

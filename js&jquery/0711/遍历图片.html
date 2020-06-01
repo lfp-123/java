@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+ <style>
+
+     #red{
+       background-color: red;
+         width: 100px ;
+         height: 100px ;
+         float: left;
+     }
+     #green{
+       background-color: green;
+         width: 100px ;
+         height: 100px ;
+         float: left;
+     }
+
+
+ </style>
+</head>
+<body>
+<script>
+    function  toggle() {
+        var nope = document.querySelector("#red");
+        var dis = nope.style.visibility;
+        if(dis ==""|| dis== "visible" ){
+            nope.style.visibility= "hidden";
+        }else{
+          nope.style.visibility="visible";
+        }
+
+    }
+
+</script>
+
+<div id="red"> </div>
+<div id="green"> </div>
+<a href="javascript:;" onclick="toggle()">点我隐藏图片</a>
+
+
+</body>
+</html>

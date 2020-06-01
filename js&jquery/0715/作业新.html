@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #win,#button_win {
+            clear:left;
+            width:600px;
+            margin:auto;
+            padding:0px;
+            text-align: center;
+        }
+        #win>li {
+            float:left;
+            width:200px;
+            text-align: center;
+            line-height: 30px;
+            list-style-type: none;
+        }
+        #win a{
+            text-decoration: none;
+            color: #5170b1;
+        }
+        .red {
+            color:#ff9b67 !important;
+        }
+        #win>li:nth-of-type(n+7):not(:last-of-type) {
+            display:none;
+        }
+    </style>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                let lis = $("#win>li:gt(5):not(:last)");
+
+                lis.slideToggle(function(){
+                    if(lis.is(":visible")) {
+                        $("#btn").val("显示精简品牌");
+                    } else {
+                        $("#btn").val("显示全部品牌");
+                    }
+                });
+                $("#win>li").filter(function(index,obj){
+                    if(index == 0 || index == 3 || index == 10) return obj;
+                }).find("a").toggleClass("red");
+
+            });
+        });
+    </script>
+
+</head>
+<body>
+<ul id="win">
+    <li><a href="javascript:;">佳能</a><span>(30440)</span></li>
+    <li><a href="javascript:;">索尼</a><span>(30440)</span></li>
+    <li><a href="javascript:;">三星</a><span>(30440)</span></li>
+    <li><a href="javascript:;">尼康</a><span>(30440)</span></li>
+    <li><a href="javascript:;">松下</a><span>(30440)</span></li>
+    <li><a href="javascript:;">卡西欧</a><span>(30440)</span></li>
+    <li><a href="javascript:;">富士</a><span>(30440)</span></li>
+    <li><a href="javascript:;">柯达</a><span>(30440)</span></li>
+    <li><a href="javascript:;">宾得</a><span>(30440)</span></li>
+    <li><a href="javascript:;">理光</a><span>(30440)</span></li>
+    <li><a href="javascript:;">奥林巴斯</a><span>(30440)</span></li>
+    <li><a href="javascript:;">明基</a><span>(30440)</span></li>
+    <li><a href="javascript:;">爱国者</a><span>(30440)</span></li>
+    <li><a href="javascript:;">其他品牌相机</a><span>(30440)</span></li>
+</ul>
+<div id="button_win">
+    <input id="btn" type="button" value="显示全部品牌">
+</div>
+
+</body>
+</html>

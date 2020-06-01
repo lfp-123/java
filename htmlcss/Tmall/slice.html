@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="slice.css">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+</head>
+
+<body>
+<div id="content">
+    <div id="contentTop">
+        <div id="contentTopLeft" class="le">
+            <div id="content_Top_Left" class="contentLeft">云资源管理中心</div>
+        </div>
+        <div id="button">上海中心   </div>
+        <div id="contentMiddle" class="le">
+            <div class="contentMiddle"><a href="">总览</a></div>
+            <div class="contentMiddle"><a href="">工作负载</a></div>
+            <div class="contentMiddle"><a href="">容量风险</a></div>
+            <div class="contentMiddle"><a href="">资源效率</a></div>
+            <div class="contentMiddle"><a href=""> 关系拓扑</a></div>
+        </div>
+        <div id="contentRight" class="ri">
+            <input id="txt"  name="q" type="text" style="width: 300px;height: 30px"  placeholder="输入名称可搜索数据中心,资源区，集群，主机">
+            <a href=""> <img style="margin-top: -0.6px;padding: 0px; float: right;height: 34px;" src="sliceImage/Snipaste_2020-03-02_23-41-08.png" height="40" width="44"/></a></div></div>
+
+    </div>
+</div>
+
+<div id="content_Left">
+<ul class="list">
+    <li>
+   <a href="#"></i>&nbsp;<img src="sliceImage/1.png" height="15" width="15"/>&nbsp;生产系统</a>
+        <div class="con">
+            <p><a href="#"><img src="sliceImage/2.png" height="15" width="15"/>&nbsp;资源区1</a> </p>
+                <div class="cons">
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/3.png" height="15" width="15"/>上海生产_集群1</a></p>
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/3.png" height="15" width="15"/>上海生产_集群2</a></p>
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/3.png" height="15" width="15"/>江苏生产_集群1</a></p>
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/3.png" height="15" width="15"/>江苏生产_集群2</a></p>
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/4.png" height="15" width="15"/>散置的主机</a></p>
+                    <p><a href="">&nbsp;&nbsp;<img src="sliceImage/4.png" height="15" width="15"/>虚拟存储设备</a></p>
+
+                </div>
+
+            <p><a href="#">&nbsp;<img src="sliceImage/2.png" height="15" width="15"/>&nbsp;资源区2</a></p>
+
+        </div>
+    </li>
+
+    <li>
+       <a href="#">&nbsp;<img src="sliceImage/1.png" height="15" width="15"/>&nbsp;运维管理</a>
+        <div class="con">
+            <p><a href="#">vue</a></p>
+            <p><a href="#">springboot</a></p>
+            <p><a href="#">好多呀</a></p>
+            <p><a href="#">加油吧</a></p>
+        </div>
+    </li>
+    <li>
+        <a href="#">&nbsp;<img src="sliceImage/1.png" height="15" width="15"/>&nbsp;开发系统</a>
+        <div class="con">
+            <p><a href="#">vue</a></p>
+            <p><a href="#">springboot</a></p>
+            <p><a href="#">好多呀</a></p>
+            <p><a href="#">加油吧</a></p>
+        </div>
+    </li>
+    <li>
+        <a href="#">&nbsp;<img src="sliceImage/1.png" height="15" width="15"/>&nbsp;测试系统</a>
+        <div class="con">
+            <p><a href="#">vue</a></p>
+            <p><a href="#">springboot</a></p>
+            <p><a href="#">好多呀</a></p>
+            <p><a href="#">加油吧</a></p>
+        </div>
+</ul>
+    </li>
+</div>
+<div id = content_total_middle>
+<div id="content_middle">
+    <div id="resources_total1"><b>“资源区1”负载综述</b></div>
+    <div id="fourTitle">
+        <div class="resources1"><b>负载综述</b></div>
+        <div class="resources1"><b>内存负载</b></div>
+        <div class="resources1"><b>CPU负载</b></div>
+        <div class="resources1"><b>IOWAIT负载</b></div>
+    </div>
+
+</div>
+    <div id="div1"></div>
+</div>
+<div id="information"><b>资源信息</b></div>
+<div id="div2">
+    <div id="one">
+        <p class="lists">数据中心&nbsp;&nbsp;</p>
+        <p class="lists">资源区&nbsp;&nbsp;</p>
+        <p class="lists">集群&nbsp;&nbsp;</p>
+    </div>
+    <div id="one_left">
+        <p class="lists"><b style="font-size: 14px">4</b></p>
+        <p class="lists"><b style="font-size: 14px">16</b></span></p>
+        <p class="lists"><b style="font-size: 14px">192</b></p>
+    </div>
+    <div id="two">
+        <p class="lists">主机&nbsp;&nbsp;</p>
+        <p class="lists">虚拟机&nbsp;&nbsp;</p>
+    </div>
+    <div id="two_right">
+        <p class="lists"><span><b>8048</b></span></p>
+        <p class="lists"><span><b>20140</b></span></p>
+    </div>
+</div>
+<div id="div3">
+    <div class="div3_mid">
+        <div class="div3_mid_one">每核CPU使用率</div>
+        <div class="div3_mid_two">
+            <div class="numbers_one">23台</div>
+            <div class="numbers_two">120台</div>
+            <div class="numbers_three">31台</div>
+            <div class="down">低</div>
+            <div class="green"></div>
+            <div class="yellow"></div>
+            <div class="red"></div>
+            <div class="up">高</div>
+        </div>
+        <div class="div3_mid_three" id="div3_mid_three_two"></div>
+    </div>
+    <div class="div3_mid">
+        <div class="div3_mid_one">CPU负载分布</div>
+        <div class="div3_mid_two">
+            <div class="numbers_one">23台</div>
+            <div class="numbers_two">120台</div>
+            <div class="numbers_three">31台</div>
+            <div class="down">低</div>
+            <div class="green"></div>
+            <div class="yellow"></div>
+            <div class="red"></div>
+            <div class="up">高</div>
+        </div>
+        <div class="div3_mid_three" id="div3_mid_three_twos"></div>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script>
+    $(function(){
+        $('.list li .con').hide();
+        $('.list li a').click(function(){
+            $(this).siblings('.con').toggle();
+        });
+    })
+    $(function (){
+        $('.list li .con .cons').hide();
+        $('.list li .con .cons').eq(0).hide();
+        $('.list li .con p').click(function () {
+            $(this).siblings('.cons').toggle();
+        })
+    })
+var div3 = echarts.init(document.getElementById('div3_mid_three_two'));
+var div3s = echarts.init(document.getElementById('div3_mid_three_twos'));
+
+    option = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            top:'12%',
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['生产系统', '运维系统', '开发系统', '测试系统'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '20%',
+                data: [5, 8, 15, 4]
+            }
+        ]
+    };
+    div3.setOption(option);
+    div3s.setOption(option);
+</script>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<script src="../../jquery/jquery-3.4.1.min.js"></script>
+<script>
+//使用addclass
+    $(function () {
+        $("#change").click(function () {
+            $("p:first").addClass("x");
+        })
+    })
+    $(function () {
+        $("#restore").click(function () {
+            $("p:first").removeClass("x");
+        })
+    })
+    //使用toggle
+    $(function () {
+        $("#thenot").click(function () {
+            $("p").toggleClass("not")
+        })
+    })
+//HTML
+$(document).ready(function(){
+    $(".btn1").click(function(){
+        alert($("h1").html());
+    });
+});
+    $(function () {
+       alert($("#text").text())
+    })
+    $(function () {
+        $("button").click(function () {
+            alert($(":text").val())
+        })
+    })
+
+</script>
+<style>
+    .x{
+        font-size: 40px;
+        color:red;
+    }
+    .not{
+        font-size: 50px;
+        color:green;
+    }
+
+</style>
+<body>
+    <p>这是一个段落</p>
+    <p>这是一个段落</p>
+    <p>这是一个段落</p>
+    使用addclass来添加样式<button id="change">使第一个段落变换</button>
+    使用removeclass来删除样式<button id="restore" >使第一个段落回原样</button>
+    使用toggleClass<button id="thenot">给所有的段落添加样式</button>
+    <h1>一个标题</h1>
+    <button class="btn1">使用HTML获取标题内容</button>
+    <p id="text">使用text函数显示Helloworld</p>
+    <p>获取复选框的value值</p>
+      第一个value值 <input type="text" value="1">
+    <button>获取value</button>
+
+
+
+</body>
+</html>

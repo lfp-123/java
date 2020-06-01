@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var i=0;
+        var mytime;
+        function show() {
+            var div =document.createElement("div");
+            if(i++ %2 == 0){
+                div.innerText="world";
+            }else{
+                div.innerText="hello";
+            }
+
+            document.body.appendChild(div)
+            mytime =setTimeout(show,1000);
+        }
+
+
+        function  overShow() {
+            clearTimeout(mytime);
+            mytime = undefined;
+        }
+        function  startShow() {
+            if(!mytime){
+                mytime=setTimeout(show,1000);
+            }
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <a href="javascript:;" onclick="startShow();">开始</a>
+    <a href="javascript:;" onclick="overShow();">停止</a>
+</body>
+</html>

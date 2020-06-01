@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("p").append(" <b>插入文本</b>.");
+            });
+            $("#btn2").click(function(){
+                $("ol").append("<li>插入项</li>");
+            });
+            $("#btn3").click(function(){
+                $("ol").prepend("<li>插入项</li>");
+            });
+
+            $("#btn4").click(function () {
+                $("<h1>标题1</h1>").appendTo("p");
+            })
+            $("#btn5").click(function () {
+                $("<h1>标题1</h1>").prependTo("p");
+            })
+            $("#btn6").click(function () {
+               $("ol").wrap("<div></div>")
+            })
+            $("#btn7").click(function () {
+                $("ol").unwrap()
+            })
+            $("#btn8").click(function(){
+                $("p").replaceWith("Hello world!");
+            });
+            $("#btn9").click(function(){
+                $("<span>Hello world!</span>").replaceAll("p");
+            });
+            $("#btn10").click(function(){
+                $("p").remove(".hello")
+            });
+        })
+    </script>
+    <style>
+        div{
+            border:1px red solid;
+            width: 200px;
+            height: 100px;
+    }
+    </style>
+</head>
+
+<body>
+
+<p>这是一个段落。</p>
+<p class="hello">这是另一个段落</p>
+<ol>
+    <li>列表项 1</li>
+    <li>列表项 2</li>
+    <li>列表项 3</li>
+</ol>
+<button id="btn1">插入文本</button>
+<button id="btn2">插入列表项</button>
+<button id="btn3">在每个P元素结尾插入h1元素。</button>
+<button id="btn4">在每个插入h1元素。</button>
+<button id="btn5">在每个开头插入h1元素。</button>
+<button id="btn6">给p元素增加div。</button>
+<button id="btn7">给p标签去除div</button>
+<button id="btn8">把第一个p标签替换成helloworld</button>
+<button id="btn9">把第所有p标签替换成helloworld</button>
+<button id="btn10">把class为hello的段落删除</button>
+</body>
+</html>

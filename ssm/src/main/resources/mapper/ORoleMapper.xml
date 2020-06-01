@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seecen.ssm.mapper.ORoleMapper">
+  <resultMap id="BaseResultMap" type="com.seecen.ssm.pojo.ORole">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="EXPLAIN" jdbcType="VARCHAR" property="explain" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="OPERATOR" jdbcType="DECIMAL" property="operator" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ROLENAME, EXPLAIN, STATUS, OPERATOR, CREATETIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from O_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from O_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.seecen.ssm.pojo.ORole">
+    insert into O_ROLE (ID, ROLENAME, EXPLAIN, 
+      STATUS, OPERATOR, CREATETIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{rolename,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{operator,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.seecen.ssm.pojo.ORole">
+    insert into O_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="rolename != null">
+        ROLENAME,
+      </if>
+      <if test="explain != null">
+        EXPLAIN,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null">
+        #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.seecen.ssm.pojo.ORole">
+    update O_ROLE
+    <set>
+      <if test="rolename != null">
+        ROLENAME = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="explain != null">
+        EXPLAIN = #{explain,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="operator != null">
+        OPERATOR = #{operator,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.seecen.ssm.pojo.ORole">
+    update O_ROLE
+    set ROLENAME = #{rolename,jdbcType=VARCHAR},
+      EXPLAIN = #{explain,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      OPERATOR = #{operator,jdbcType=DECIMAL},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

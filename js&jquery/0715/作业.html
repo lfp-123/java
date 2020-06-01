@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#bt").click(function () {
+               $("#win2").slideToggle();
+               $("#win").hide();
+               $(".r").add("p").add("span").css("color","red");
+            })
+        })
+        $(function () {
+            $("#btt").click(function () {
+                $("#win").slideToggle();
+                $("#win2").hide()
+            })
+        })
+    </script>
+    <style>
+        #win{
+            margin: auto;
+            text-align: center;
+            line-height: 30px;
+           width: 600px;  }
+       #win2{
+           position: absolute;
+           top:250px;
+           left: 400px;  line-height: 30px}
+        ul{
+            float: left;
+            height: 200px;  }
+        li{
+            list-style-type: none;
+            color:blue;
+            margin-right: 50px;  }
+        #bt{
+            position: absolute;
+            top:200px ;
+            left:600px ;  }
+       #btt{
+
+            top: 450px;
+            left:600px;  }
+    </style>
+
+</head>
+
+<body>
+<div id="win" >
+<ul>
+    <li>佳能</li>
+    <li>尼康</li>
+    <li>其他相机品牌</li>
+</ul>
+<ul>
+    <li>索尼</li>
+    <li>松下</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <input style="color: blue" id="bt" type="button" value="显示全部品牌">
+</ul>
+<ul>
+    <li>三星</li>
+    <li>卡西欧</li>
+
+</ul>
+
+
+</div>
+<div id="win2" hidden>
+<ul>
+    <li class="r">佳能</li>
+    <li class="r">尼康</li>
+    <li>富士</li>
+    <li>绿光</li>
+    <li>爱国者</li>
+</ul>
+<ul>
+    <li>索尼</li>
+    <li>松下</li>
+    <li>柯达</li>
+    <li class="r" >奥林巴斯</li>
+    <li>其他相机品牌</li>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+
+    <input   style="color: blue" id="btt" type="button" value="显示精简品牌">
+</ul>
+<ul>
+    <li>三星</li>
+    <li>卡西欧</li>
+    <li>宾得</li>
+    <li>明基</li>
+
+</ul>
+
+</div>
+
+
+</body>
+</html>
